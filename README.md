@@ -2,6 +2,18 @@
 
 Repository for the team project of SOEN390 for Winter 2022.
 
+## Prerequisites
+
+- [Python](https://www.python.org/downloads/)
+- [node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+## Setup
+
+```bash
+$ python -m pip install -r requirements.txt
+$ npm install @babel/core @babel/preset-env @babel/preset-react babel-loader react react-dom react-router-dom webpack webpack-cli
+```
+
 ## Requirements
 
 ### Main Features
