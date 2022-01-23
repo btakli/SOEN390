@@ -14,6 +14,20 @@ $ python -m pip install -r requirements.txt
 $ npm install @babel/core @babel/preset-env @babel/preset-react babel-loader react react-dom react-router-dom webpack webpack-cli
 ```
 
+## Running Commands
+
+Backend
+
+```bash
+$ python manage.py runserver
+```
+
+Frontend
+
+```bash
+$ npm start
+```
+
 ## Requirements
 
 ### Main Features
