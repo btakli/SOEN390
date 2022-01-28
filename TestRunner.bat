@@ -7,7 +7,7 @@ coverage run --branch --source='.' manage.py test tests -v 2 >> %BACKENDREPORT% 
 type %BACKENDREPORT%   
 ECHO "~~~~~~~~~~~~~~~~~~~Generating coverage report and placing it in SOEN390/Reports/%BACKENDCOVERAGE%...~~~~~~~~~~~~~~~~~~~"
 
-coverage report -m >> %BACKENDCOVERAGE% 
+coverage report -m  --omit="*/test*" >> %BACKENDCOVERAGE% 
 type %BACKENDCOVERAGE%
 if not exist "./tests/Reports" mkdir "./tests/Reports"
 move /y %BACKENDREPORT% ./tests/Reports

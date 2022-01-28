@@ -31,7 +31,7 @@ test_person_attribute (tests.test_models.PersonTestCase)
 Check that the people are properly stored in the database ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.004s
+Ran 1 test in 0.006s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
