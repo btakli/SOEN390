@@ -1,13 +1,16 @@
 @ECHO OFF
 cd backend
 SET BACKENDREPORT=BackendTestReport.txt
-ECHO "Running backend tests..."
-coverage run --branch --source='.' manage.py test tests 
+SET BACKENDCOVERAGE=BackendTestCoverage.txt
+ECHO "~~~~~~~~~~~~~~~~~~~Running backend tests and placing report in SOEN390/Reports/%BACKENDREPORT%...~~~~~~~~~~~~~~~~~~~"
+coverage run --branch --source='.' manage.py test tests -v 2 >> %BACKENDREPORT% 2>&1
+type %BACKENDREPORT%   
+ECHO "~~~~~~~~~~~~~~~~~~~Generating coverage report and placing it in SOEN390/Reports/%BACKENDCOVERAGE%...~~~~~~~~~~~~~~~~~~~"
 
-ECHO "Generating report and placing it in SOEN390/Reports/BackendTestReport.txt..."
-
-coverage report -m >> %BACKENDREPORT%
+coverage report -m >> %BACKENDCOVERAGE% 
+type %BACKENDCOVERAGE%
 if not exist "./tests/Reports" mkdir "./tests/Reports"
 move /y %BACKENDREPORT% ./tests/Reports
-ECHO "Done!"
+move /y %BACKENDCOVERAGE% ./tests/Reports
+ECHO "~~~~~~~~~~~~~~~~~~~Done!~~~~~~~~~~~~~~~~~~~"
 PAUSE
