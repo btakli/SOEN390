@@ -10,7 +10,7 @@ class PersonTestCase(TestCase):
         Person.objects.create(first_name="Brandon", last_name="Takli", email = "brandon@hotmail.com", date_of_birth = datetime.date(day=20, month=10, year=2000))
         Person.objects.create(first_name="John", last_name="Smith", email = "john@gmail.com", date_of_birth = datetime.date(day=2, month=1, year=2001))
     def test_person_attribute(self):
-        """Animals that can speak are correctly identified"""
+        """Check that the people are properly stored in the database"""
         p1 = Person.objects.get(first_name="Brandon")
         p2 = Person.objects.get(date_of_birth=datetime.date(day=2, month=1, year=2001))
         p3 = Person.objects.get(last_name="Smith")
