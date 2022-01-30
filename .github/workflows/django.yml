@@ -26,6 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install coverage
+        pip install corsheaders
     - name: Run Tests
       run: |
         cd backend
