@@ -8,9 +8,11 @@ type %BACKENDREPORT%
 ECHO "~~~~~~~~~~~~~~~~~~~Generating coverage report and placing it in SOEN390/Reports/%BACKENDCOVERAGE%...~~~~~~~~~~~~~~~~~~~"
 
 coverage report -m  --omit="*/test*" >> %BACKENDCOVERAGE% 
+coverage html --omit="*/test*"
 type %BACKENDCOVERAGE%
 if not exist "./tests/Reports" mkdir "./tests/Reports"
 move /y %BACKENDREPORT% ./tests/Reports
 move /y %BACKENDCOVERAGE% ./tests/Reports
+move /y htmlcov ./tests/Reports
 ECHO "~~~~~~~~~~~~~~~~~~~Done!~~~~~~~~~~~~~~~~~~~"
 PAUSE
