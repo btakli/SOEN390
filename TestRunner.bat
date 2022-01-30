@@ -13,6 +13,7 @@ type %BACKENDCOVERAGE%
 if not exist "./tests/Reports" mkdir "./tests/Reports"
 move /y %BACKENDREPORT% ./tests/Reports
 move /y %BACKENDCOVERAGE% ./tests/Reports
+if exist "./tests/Reports/htmlcov" rmdir /s /q "./tests/Reports/htmlcov"
 move /y htmlcov ./tests/Reports
 ECHO "~~~~~~~~~~~~~~~~~~~Done!~~~~~~~~~~~~~~~~~~~"
 PAUSE
