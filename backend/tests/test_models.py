@@ -17,6 +17,6 @@ class PersonTestCase(TestCase):
         p4 = Person.objects.get(email="brandon@hotmail.com")
         self.assertEqual(p1.last_name, 'Takli')
         self.assertEqual(p2, p3)
-        self.assertEqual(p1.email, "brandon@hotmail.com")
+        self.assertEqual(p1.email, "branndon@hotmail.com")
         self.assertEqual(p1, p4)
         
