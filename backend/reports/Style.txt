@@ -1,0 +1,21 @@
+************* Module companion_api.serializers
+companion_api\serializers.py:9:4: R0903: Too few public methods (0/2) (too-few-public-methods)
+************* Module companion_api.urls
+companion_api\urls.py:4:0: W0401: Wildcard import companion_api.models (wildcard-import)
+companion_api\urls.py:5:0: W0401: Wildcard import companion_api.views (wildcard-import)
+companion_api\urls.py:7:0: C0103: Constant name "app_name" doesn't conform to UPPER_CASE naming style (invalid-name)
+companion_api\urls.py:4:0: W0614: Unused import(s) Person and models from wildcard import of companion_api.models (unused-wildcard-import)
+companion_api\urls.py:5:0: W0614: Unused import(s) CreateListRetrieveDestroyUpdateViewSet, mixins, viewsets, PersonSerializer and serializers from wildcard import of companion_api.views (unused-wildcard-import)
+************* Module companion_api.views
+companion_api\views.py:4:0: W0401: Wildcard import companion_api.models (wildcard-import)
+companion_api\views.py:5:0: W0401: Wildcard import companion_api.serializers (wildcard-import)
+companion_api\views.py:8:0: R0901: Too many ancestors (10/7) (too-many-ancestors)
+companion_api\views.py:18:4: W0107: Unnecessary pass statement (unnecessary-pass)
+companion_api\views.py:21:0: R0901: Too many ancestors (11/7) (too-many-ancestors)
+companion_api\views.py:24:15: E1101: Class 'Person' has no 'objects' member (no-member)
+companion_api\views.py:4:0: W0614: Unused import(s) models from wildcard import of companion_api.models (unused-wildcard-import)
+companion_api\views.py:5:0: W0614: Unused import(s) serializers from wildcard import of companion_api.serializers (unused-wildcard-import)
+
+------------------------------------------------------------------
+Your code has been rated at 5.00/10 (previous run: 5.00/10, +0.00)
+

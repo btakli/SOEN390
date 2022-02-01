@@ -1,8 +1,9 @@
+'''Create your views here'''
+
 from rest_framework import mixins, viewsets
 from companion_api.models import *
 from companion_api.serializers import *
 
-# Create your views here.
 
 class CreateListRetrieveDestroyUpdateViewSet(
     mixins.CreateModelMixin,
@@ -10,11 +11,15 @@ class CreateListRetrieveDestroyUpdateViewSet(
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,
     mixins.UpdateModelMixin,
-    viewsets.GenericViewSet
+    viewsets.GenericViewSet,
 ):
+    '''Inheritance class'''
+
     pass
 
+
 class PersonView(CreateListRetrieveDestroyUpdateViewSet):
+    '''Person View'''
+
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    pass

@@ -1,0 +1,11 @@
+companion_api\apps.py
+    C 6:0 CompanionApiConfig - A
+companion_api\models.py
+    C 9:0 Person - A
+companion_api\serializers.py
+    C 7:0 PersonSerializer - A
+companion_api\views.py
+    C 8:0 CreateListRetrieveDestroyUpdateViewSet - A
+    C 21:0 PersonView - A
+companion_api\migrations\0001_initial.py
+    C 6:0 Migration - A
