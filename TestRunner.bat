@@ -2,10 +2,12 @@
 
 echo ~~~~~~~~~~~~~~~~~~~Backend~~~~~~~~~~~~~~~~~~~
 cd backend
-set BACKENDREPORT=BackendTestReport.txt
-set BACKENDCOVERAGE=BackendTestCoverage.txt
-set BACKENDSTYLE=BackendStyle.txt
-set BACKENDMETRICS=BackendMetrics.txt
+set BACKENDREPORT=Report.txt
+set BACKENDCOVERAGE=Coverage.txt
+set BACKENDSTYLE=Style.txt
+set BACKENDMETRICS_RAW=Raw.txt
+set BACKENDMETRICS_CC=CyclomaticComplexity.txt
+set BACKENDMETRICS_MI=MaintainabilityIndex.txt
 
 echo ~~~~~~~~~~~~~~~~~~~Running tests~~~~~~~~~~~~~~~~~~~
 coverage run --branch --source='.' manage.py test tests -v 2 >> %BACKENDREPORT% 2>&1
@@ -21,36 +23,39 @@ pylint companion_api >> %BACKENDSTYLE%
 type %BACKENDSTYLE%
 
 echo ~~~~~~~~~~~~~~~~~~~Generating metric report~~~~~~~~~~~~~~~~~~~
-echo Raw Metrics >> %BACKENDMETRICS%
-radon raw companion_api >> %BACKENDMETRICS%
-echo; >> %BACKENDMETRICS%
-echo Clomatic Complexity >> %BACKENDMETRICS%
-radon cc companion_api >> %BACKENDMETRICS%
-echo; >> %BACKENDMETRICS%
-echo Maintainability Index >> %BACKENDMETRICS%
-radon mi companion_api >> %BACKENDMETRICS%
-type %BACKENDMETRICS%
+radon raw companion_api >> %BACKENDMETRICS_RAW%
+type %BACKENDMETRICS_RAW%
+radon cc companion_api >> %BACKENDMETRICS_CC%
+type %BACKENDMETRICS_CC%
+radon mi companion_api >> %BACKENDMETRICS_MI%
+type %BACKENDMETRICS_MI%
 
-echo ~~~~~~~~~~~~~~~~~~~Migrating reports to tests/Reports~~~~~~~~~~~~~~~~~~~
-if not exist "./tests/Reports" mkdir "./tests/Reports"
-move /y %BACKENDREPORT% ./tests/Reports
-move /y %BACKENDCOVERAGE% ./tests/Reports
-if exist "./tests/Reports/htmlcov" rmdir /s /q "./tests/Reports/htmlcov"
-move /y htmlcov ./tests/Reports
-move /y %BACKENDSTYLE% ./tests/Reports
-move /y %BACKENDMETRICS% ./tests/Reports
+echo ~~~~~~~~~~~~~~~~~~~Migrating reports to ./reports~~~~~~~~~~~~~~~~~~~
+if not exist "./reports" mkdir "./reports"
+if not exist ".reports/tests" mkdir "./reports/tests"
+move /y %BACKENDREPORT% ./reports/tests
+move /y %BACKENDCOVERAGE% ./reports/tests
+if exist "./reports/htmlcov" rmdir /s /q "./reports/htmlcov"
+move /y htmlcov ./reports
+move /y %BACKENDSTYLE% ./reports
+if not exist "./reports/metrics" mkdir "./reports/metrics"
+move /y %BACKENDMETRICS_RAW% ./reports/Metrics
+move /y %BACKENDMETRICS_CC% ./reports/Metrics
+move /y %BACKENDMETRICS_MI% ./reports/Metrics
 cd ..
 
 echo ~~~~~~~~~~~~~~~~~~~Frontend~~~~~~~~~~~~~~~~~~~
 cd frontend2
-set FRONTENDREPORT=FrontendTestReport.txt
+set FRONTENDREPORT=Report.txt
 
 echo ~~~~~~~~~~~~~~~~~~~Running tests~~~~~~~~~~~~~~~~~~~
-call npx jest -i --ci --coverage >> %FRONTENDREPORT%
+call npm run test:coverage >> %FRONTENDREPORT% 2>&1
+type %FRONTENDREPORT%
 
 echo ~~~~~~~~~~~~~~~~~~~Migrating reports to tests/Reports~~~~~~~~~~~~~~~~~~~
-if not exist "./tests/Reports" mkdir "./tests/Reports"
-move /y %FRONTENDREPORT% ./tests/Reports
+if not exist "./reports" mkdir "./reports"
+if not exist ".reports/tests" mkdir "./reports/tests"
+move /y %FRONTENDREPORT% ./reports/tests
 cd ..
 
 echo ~~~~~~~~~~~~~~~~~~~Done!~~~~~~~~~~~~~~~~~~~

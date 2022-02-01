@@ -17,5 +17,5 @@ companion_api\views.py:4:0: W0614: Unused import(s) models from wildcard import 
 companion_api\views.py:5:0: W0614: Unused import(s) serializers from wildcard import of companion_api.serializers (unused-wildcard-import)
 
 ------------------------------------------------------------------
-Your code has been rated at 5.00/10 (previous run: 4.63/10, +0.37)
+Your code has been rated at 5.00/10 (previous run: 5.00/10, +0.00)
 

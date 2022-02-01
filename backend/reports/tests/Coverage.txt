@@ -1,19 +1,19 @@
 Name                                       Stmts   Miss Branch BrPart  Cover   Missing
 --------------------------------------------------------------------------------------
 companion_api\__init__.py                      0      0      0      0   100%
-companion_api\admin.py                         3      3      2      0     0%   3-6
-companion_api\apps.py                          4      4      2      0     0%   3-10
-companion_api\migrations\0001_initial.py       5      5      2      0     0%   3-13
+companion_api\admin.py                         3      1      2      1    60%   6
+companion_api\apps.py                          4      0      2      0   100%
+companion_api\migrations\0001_initial.py       5      0      2      0   100%
 companion_api\migrations\__init__.py           0      0      0      0   100%
-companion_api\models.py                        6      6      2      0     0%   3-17
-companion_api\serializers.py                   6      6      4      0     0%   3-12
-companion_api\urls.py                          7      7      0      0     0%   3-12
-companion_api\views.py                         8      8      4      0     0%   3-25
+companion_api\models.py                        6      0      2      0   100%
+companion_api\serializers.py                   6      0      4      0   100%
+companion_api\urls.py                          7      0      0      0   100%
+companion_api\views.py                         8      0      4      0   100%
 core\__init__.py                               0      0      0      0   100%
 core\asgi.py                                   4      4      0      0     0%   10-16
 core\settings.py                              19      0      0      0   100%
-core\urls.py                                   3      3      0      0     0%   1-5
+core\urls.py                                   3      0      0      0   100%
 core\wsgi.py                                   4      4      0      0     0%   10-16
 manage.py                                     12      2      2      1    79%   12-13, 21->exit
 --------------------------------------------------------------------------------------
-TOTAL                                         81     52     18      1    30%
+TOTAL                                         81     11     18      2    87%
