@@ -3,3 +3,4 @@ djangorestframework
 coverage
 pylint
 radon
+django-cors-headers
