@@ -1,4 +1,4 @@
-import { GET_PERSONS, DELETE_PERSON } from "../actions/types.js";
+import { GET_PERSONS, DELETE_PERSON, ADD_PERSON } from "../actions/types.js";
 
 const initialState = {
     persons: []
@@ -17,6 +17,11 @@ export default function(state=initialState, action){
             return {
                 ...state,
                 persons: state.persons.filter(person => person.id !== action.payload)
+            };
+        case ADD_PERSON:
+            return {
+                ...state,
+                persons: [...state.persons, action.payload]
             };
         default:
             return state;

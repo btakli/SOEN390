@@ -23,7 +23,7 @@ function Persons(props) {
         <h1>
             Persons
         </h1>
-        <TableContainer component={Paper}  sx={{ width: 2/3 }}>
+        <TableContainer component={Paper}  sx={{ width: 2/3, margin: 'auto'}}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
                 <TableRow>
@@ -65,7 +65,9 @@ Persons.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  persons: state.personReducer.persons
+  persons: state.personReducer.persons,
+  getPersons: PropTypes.func.isRequired,
+  deletePerson: PropTypes.func.isRequired
 });
 
 export default connect(mapStateToProps, { getPersons, deletePerson })(Persons);

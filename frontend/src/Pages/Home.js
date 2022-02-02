@@ -1,15 +1,15 @@
 import Persons from '../components/Persons';
+import PersonForm from '../components/PersonForm';
+import React, { Fragment } from 'react';
 
 function Home() {
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Persons/>
-      </header>
-    </div>
+    <Fragment>
+      <Persons/>
+      <PersonForm/>
+    </Fragment>
   );
 }
-
 
 export default Home;
