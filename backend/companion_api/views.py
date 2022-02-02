@@ -21,8 +21,15 @@ from companion_api.serializers import *
 class PersonView(viewsets.ModelViewSet):
     '''Person View'''
 
-    queryset = Person.objects.all()
+    # only authenticated users can see their patients
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
+
+    def get_queryset(self):
+        return self.request.user.patients.all()
+
     serializer_class = PersonSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

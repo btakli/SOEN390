@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { createMessage } from './messageActions';
-import { GET_PERSONS, DELETE_PERSON, ADD_PERSON, GET_ERRORS } from './types';
+import { createMessage, returnErrors } from './messageActions';
+import { GET_PERSONS, DELETE_PERSON, ADD_PERSON } from './types';
 
 // GET PERSONS API CALL
 export const getPersons = () => dispatch => {
@@ -10,7 +10,7 @@ export const getPersons = () => dispatch => {
                 type: GET_PERSONS,
                 payload: res.data
             });
-        }).catch(err => console.log(err));
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
 // DELETE PERSON API CALL
@@ -38,14 +38,5 @@ export const addPerson = (person) => dispatch => {
                 type: ADD_PERSON,
                 payload: res.data
             });
-        }).catch(err => {
-            const errors = {
-                msg: err.response.data,
-                status: err.response.status
-            }
-            dispatch({
-                type: GET_ERRORS,
-                payload: errors
-            });
-        });
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }

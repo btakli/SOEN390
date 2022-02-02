@@ -7,6 +7,6 @@ from companion_api.views import *
 app_name = 'companion_api'
 
 router = DefaultRouter()
-router.register(r'person', PersonView, basename='person')
+router.register(r'api/person', PersonView, basename='person')
 
 urlpatterns = router.urls
