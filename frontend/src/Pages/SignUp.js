@@ -11,6 +11,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Select from "@mui/material/Select";
+import { MenuItem, InputLabel, FormControl } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright(props) {
@@ -34,14 +36,33 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSignUp = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      dateOfBirth: data.get("date"),
+      gender: data.get("gender"),
+      address: data.get("address"),
+      city: data.get("city"),
+      postalCode: data.get("postalCode"),
       email: data.get("email"),
       password: data.get("password"),
+      confirmPassword: data.get("confirmPassword"),
+      statusType: data.get("statusType"),
     });
+  };
+
+  const [gender, setGender] = React.useState("");
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
+
+  const [statusType, setStatusType] = React.useState("");
+  const handleStatusTypeChange = (event) => {
+    setStatusType(event.target.value);
   };
 
   return (
@@ -62,16 +83,10 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" onSubmit={handleSignUp} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
@@ -88,6 +103,64 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="date"
+                  name="date"
+                  label="Date of birth"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth required>
+                  <InputLabel id="gender">Gender</InputLabel>
+                  <Select
+                    required
+                    fullWidth
+                    id="gender"
+                    name="gender"
+                    value={gender}
+                    label="Gender"
+                    onChange={handleGenderChange}
+                  >
+                    <MenuItem value={"male"}>Male</MenuItem>
+                    <MenuItem value={"female"}>Female</MenuItem>
+                    <MenuItem value={"other"}>Other</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="address"
+                  required
+                  fullWidth
+                  id="address"
+                  label="Address"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="city"
+                  required
+                  fullWidth
+                  id="city"
+                  label="City"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="postalCode"
+                  required
+                  fullWidth
+                  id="postalCode"
+                  label="Postal Code"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -120,6 +193,29 @@ export default function SignUp() {
                   type="password"
                   id="confirmPassword"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth required>
+                  <InputLabel id="statusType">Status Type</InputLabel>
+                  <Select
+                    required
+                    fullWidth
+                    id="statusType"
+                    name="statusType"
+                    value={statusType}
+                    label="statusType"
+                    onChange={handleStatusTypeChange}
+                  >
+                    <MenuItem value={"patient"}>Patient</MenuItem>
+                    <MenuItem value={"medicalDoctor"}>Medical Doctor</MenuItem>
+                    <MenuItem value={"healthOfficial"}>
+                      Health Official
+                    </MenuItem>
+                    <MenuItem value={"immigrationOfficer"}>
+                      Immigration Officer
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
             <Button
