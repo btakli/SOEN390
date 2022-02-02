@@ -18,14 +18,16 @@ const theme = createTheme();
 
 
 function PersonForm(props) {
-  
-    // Store form data in state
-    const [state, setState] = useState({
+
+    const emptyForm = {
         first_name: "",
         last_name: "",
         email: "",
         date_of_birth: ""
-    });
+    }
+  
+    // Store form data in state
+    const [state, setState] = useState(emptyForm);
 
     // Change form data in state at each change
     const onChange = e => 
@@ -37,6 +39,7 @@ function PersonForm(props) {
     const onSubmit = e =>{
         e.preventDefault();
         props.addPerson(state);
+        setState(emptyForm)
     }
 
 
@@ -68,6 +71,7 @@ function PersonForm(props) {
                         id="firstName"
                         label="First Name"
                         autoFocus
+                        value = {state.first_name}
                         onChange = {onChange}
                     />
                     </Grid>
@@ -79,6 +83,7 @@ function PersonForm(props) {
                         label="Last Name"
                         name="last_name"
                         autoComplete="family-name"
+                        value = {state.last_name}
                         onChange = {onChange}
                     />
                     </Grid>
@@ -90,6 +95,7 @@ function PersonForm(props) {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        value = {state.email}
                         onChange = {onChange}
                     />
                     </Grid>
@@ -104,6 +110,7 @@ function PersonForm(props) {
                         InputLabelProps={{
                         shrink: true,
                         }}
+                        value = {state.date_of_birth}
                         onChange = {onChange}
                     />
                     </Grid>

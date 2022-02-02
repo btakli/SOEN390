@@ -5,16 +5,26 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
+
 import { Provider } from "react-redux";
 import store from "./store";
 
+const alertOptions = {
+  timeout: 3000,
+  position: 'top center'  
+}
+
 ReactDOM.render(
   <Provider store = { store }>
-    <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
+    <AlertProvider template = {AlertTemplate} {...alertOptions}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </AlertProvider>
   </Provider>,
   document.getElementById("root")
 );
