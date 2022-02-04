@@ -10,8 +10,8 @@ Repository for the team project of SOEN390 for Winter 2022.
 ## Setup
 
 ```bash
-$ python -m pip install -r requirements.txt
-$ npm install @babel/core @babel/preset-env @babel/preset-react babel-loader react react-dom react-router-dom webpack webpack-cli
+$ python -m pip install -r backend/requirements.txt
+$ TODO npm install ...
 ```
 
 ## Running Commands
