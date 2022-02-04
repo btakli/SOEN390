@@ -1,17 +1,40 @@
 import Persons from '../components/Persons';
 import PersonForm from '../components/PersonForm';
 import React, { Fragment } from 'react';
-import Alerts from '../components/Alerts';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../redux/actions/authActions'
 
-function Home() {
+// MUI
+import Link from "@mui/material/Link";
+
+function Home(props) {
+
+  const handleClick = e =>{
+    props.logout();
+  }
 
   return (
     <Fragment>
-      <Alerts />
+      <Link 
+        onClick={handleClick} 
+        variant="body2">
+        {"LOGOUT"}
+      </Link>
       <Persons />
       <PersonForm />
     </Fragment>
   );
 }
 
-export default Home;
+Home.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.authReducer
+});
+
+
+export default connect(mapStateToProps, { logout })(Home);

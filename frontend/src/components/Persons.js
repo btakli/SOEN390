@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPersons, deletePerson } from '../actions/personActions';
+import { getPersons, deletePerson } from '../redux/actions/personActions';
 import { useEffect, Fragment } from 'react';
 
 import * as React from 'react';

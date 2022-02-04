@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addPerson } from '../actions/personActions';
-
+import { addPerson } from '../redux/actions/personActions';
 import React, { useState } from "react";
+
+// MUI
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -33,7 +34,7 @@ function PersonForm(props) {
     const onChange = e => 
         setState(prevState => ({
             ...prevState,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         }))
 
     const onSubmit = e =>{

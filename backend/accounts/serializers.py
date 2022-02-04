@@ -8,7 +8,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         '''Requires Meta attribute'''
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email') 
+        # out of all the default user attributes we are only showing these three
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
@@ -34,6 +35,7 @@ class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
 
+    # This is where the login auth happens in the whole app!
     def validate(self, data):
         user = authenticate(**data)
         if user and user.is_active:
