@@ -1,25 +1,35 @@
 '''Create your views here'''
 
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets, permissions
 from companion_api.models import *
 from companion_api.serializers import *
 
 
-class CreateListRetrieveDestroyUpdateViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.DestroyModelMixin,
-    mixins.UpdateModelMixin,
-    viewsets.GenericViewSet,
-):
-    '''Inheritance class'''
+# class CreateListRetrieveDestroyUpdateViewSet(
+#     mixins.CreateModelMixin,
+#     mixins.ListModelMixin,
+#     mixins.RetrieveModelMixin,
+#     mixins.DestroyModelMixin,
+#     mixins.UpdateModelMixin,
+#     viewsets.GenericViewSet,
+# ):
+#     '''Inheritance class'''
 
-    pass
+#     pass
 
 
-class PersonView(CreateListRetrieveDestroyUpdateViewSet):
+class PersonView(viewsets.ModelViewSet):
     '''Person View'''
 
-    queryset = Person.objects.all()
+    # only authenticated users can see their patients
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def get_queryset(self):
+        return self.request.user.patients.all()
+
     serializer_class = PersonSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

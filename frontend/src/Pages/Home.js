@@ -1,29 +1,40 @@
-function handleSubmit() {
-  //This is a test function, use it as a template for future requests
-  var data = { username: "admin", password: "superuser" };
-  fetch("http://localhost:8000/token-auth/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-    });
-}
+import Persons from '../components/Persons';
+import PersonForm from '../components/PersonForm';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../redux/actions/authActions'
 
-function Home() {
+// MUI
+import Link from "@mui/material/Link";
+
+function Home(props) {
+
+  const handleClick = e =>{
+    props.logout();
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <button type="button" onClick={handleSubmit}>
-          Click me
-        </button>
-      </header>
-    </div>
+    <Fragment>
+      <Link 
+        onClick={handleClick} 
+        variant="body2">
+        {"LOGOUT"}
+      </Link>
+      <Persons />
+      <PersonForm />
+    </Fragment>
   );
 }
 
-export default Home;
+Home.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.authReducer
+});
+
+
+export default connect(mapStateToProps, { logout })(Home);

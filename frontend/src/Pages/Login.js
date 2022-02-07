@@ -1,4 +1,10 @@
-import * as React from "react";
+import React, { useState } from "react";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../redux/actions/authActions';
+import { Navigate } from 'react-router-dom';
+
+// MUI
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -33,15 +39,32 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+function Login(props) {
+  const emptyForm = {
+    username: "",
+    password: ""
+  }
+
+  // Store form data in state
+  const [state, setState] = useState(emptyForm);
+
+  // Change form data in state at each change
+  const handleChange = e => 
+    setState(prevState => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+    }))
+
+  const handleSubmit = e =>{
+    e.preventDefault();
+    props.login(state.username, state.password);
+  }
+  
+  // Big Bug right here
+  // FIxed it! issue in private route (explain another time)
+  if(props.isAuthenticated){
+    return (<Navigate to='/'/>);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,11 +89,12 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="User Name"
+              name="username"
               autoFocus
+              value = {state.username}
+              onChange = {handleChange}
             />
             <TextField
               margin="normal"
@@ -81,6 +105,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value = {state.password}
+              onChange = {handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -101,7 +127,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -113,3 +139,14 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.authReducer.isAuthenticated
+});
+
+export default connect(mapStateToProps, { login })(Login);
