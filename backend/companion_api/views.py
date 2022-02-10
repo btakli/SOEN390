@@ -1,4 +1,4 @@
-'''Create your views here'''
+"""Create your views here"""
 
 from rest_framework import viewsets, permissions
 from companion_api.models import *
@@ -19,12 +19,10 @@ from companion_api.serializers import *
 
 
 class PersonView(viewsets.ModelViewSet):
-    '''Person View'''
+    """Person View"""
 
     # only authenticated users can see their patients
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return self.request.user.patients.all()

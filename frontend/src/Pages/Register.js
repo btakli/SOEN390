@@ -51,7 +51,7 @@ function Register(props) {
   const [state, setState] = useState(emptyForm);
 
   // Change form data in state at each change
-  const handleChange = e => 
+  const handleChange = e =>
     setState(prevState => ({
         ...prevState,
         [e.target.name]: e.target.value

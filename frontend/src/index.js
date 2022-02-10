@@ -17,7 +17,7 @@ import Alerts from './components/Alerts';
 function Root(){
   const alertOptions = {
     timeout: 3000,
-    position: 'top center'  
+    position: 'top center'
   }
 
   useEffect(() => {

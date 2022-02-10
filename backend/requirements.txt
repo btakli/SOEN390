@@ -5,3 +5,4 @@ pylint
 radon
 django-cors-headers
 django-rest-knox
+pre-commit

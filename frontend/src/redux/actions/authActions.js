@@ -39,7 +39,7 @@ export const loadUser = () => (dispatch, getState) => {
             dispatch({
                 type: AUTH_ERROR
             })
-        });       
+        });
 }
 
 // REGISTER USER
@@ -64,7 +64,7 @@ export const register = ({ username, email, password }) => dispatch => {
             dispatch({
                 type: REGISTER_FAIL
             })
-        });       
+        });
 }
 
 // LOGIN USER
@@ -89,12 +89,12 @@ export const login = (username, password) => dispatch => {
             dispatch({
                 type: LOGIN_FAIL
             })
-        });       
+        });
 }
 
 // LOGOUT USER
 export const logout = () => (dispatch, getState) => {
-    
+
     const config = tokenConfig(getState);
 
     axios.post('http://localhost:8000/api/auth/logout', null, config)
@@ -104,5 +104,5 @@ export const logout = () => (dispatch, getState) => {
             });
         }).catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status));
-        });       
+        });
 }

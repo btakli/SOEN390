@@ -16,8 +16,8 @@ function Home(props) {
 
   return (
     <Fragment>
-      <Link 
-        onClick={handleClick} 
+      <Link
+        onClick={handleClick}
         variant="body2">
         {"LOGOUT"}
       </Link>

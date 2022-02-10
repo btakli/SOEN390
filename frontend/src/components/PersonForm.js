@@ -26,12 +26,12 @@ function PersonForm(props) {
         email: "",
         date_of_birth: ""
     }
-  
+
     // Store form data in state
     const [state, setState] = useState(emptyForm);
 
     // Change form data in state at each change
-    const onChange = e => 
+    const onChange = e =>
         setState(prevState => ({
             ...prevState,
             [e.target.name]: e.target.value
