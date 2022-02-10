@@ -18,4 +18,3 @@ companion_api\views.py:5:0: W0614: Unused import(s) serializers from wildcard im
 
 ------------------------------------------------------------------
 Your code has been rated at 5.00/10 (previous run: 5.00/10, +0.00)
-

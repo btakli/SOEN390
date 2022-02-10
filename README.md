@@ -11,7 +11,8 @@ Repository for the team project of SOEN390 for Winter 2022.
 
 ```bash
 $ python -m pip install -r backend/requirements.txt
-$ TODO npm install ...
+$ cd frontend
+$ npm install
 ```
 
 ## Running Commands
@@ -19,12 +20,15 @@ $ TODO npm install ...
 Backend
 
 ```bash
+$ cd backend
+$ python manage.py migrate
 $ python manage.py runserver
 ```
 
 Frontend
 
 ```bash
+$ cd frontend
 $ npm start
 ```
 

@@ -49,7 +49,7 @@ function Login(props) {
   const [state, setState] = useState(emptyForm);
 
   // Change form data in state at each change
-  const handleChange = e => 
+  const handleChange = e =>
     setState(prevState => ({
         ...prevState,
         [e.target.name]: e.target.value
@@ -59,7 +59,7 @@ function Login(props) {
     e.preventDefault();
     props.login(state.username, state.password);
   }
-  
+
   // Big Bug right here
   // FIxed it! issue in private route (explain another time)
   if(props.isAuthenticated){

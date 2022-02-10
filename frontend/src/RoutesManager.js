@@ -15,7 +15,7 @@ export default function RoutesManager() {
       <Route path="/login" element={<Login />}/>
       <Route path="/signup" element={<SignUp />}/>
       <Route path="/register" element={<Register />}/>
-      
+
     </Routes>
   );
 }
