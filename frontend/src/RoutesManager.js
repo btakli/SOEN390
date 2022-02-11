@@ -10,12 +10,11 @@ export default function RoutesManager() {
   return (
     <Routes>
       <Route path="/" element={<PrivateRoute />}>
-        <Route path="/" element={<Home />}/>
+        <Route path="/home" element={<Home />} />
       </Route>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/signup" element={<SignUp />}/>
-      <Route path="/register" element={<Register />}/>
-
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }
