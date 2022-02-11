@@ -1,5 +1,6 @@
 from rest_framework import generics, permissions
 from rest_framework.response import Response
+from rest_framework import status
 from knox.models import AuthToken
 from accounts.serializers import *
 
@@ -19,7 +20,8 @@ class RegisterView(generics.GenericAPIView):
                 "token": AuthToken.objects.create(user)[
                     1
                 ],  # Create token based on user
-            }
+            },
+            status=status.HTTP_201_CREATED
         )
 
 
