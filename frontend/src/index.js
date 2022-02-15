@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import { loadUser } from "./redux/actions/authActions";
-import Alerts from "./Components/Alerts";
+import Alerts from "./components/Alerts";
 
 function Root() {
   const alertOptions = {
