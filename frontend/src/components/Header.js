@@ -77,10 +77,10 @@ function Header(props) {
         sx={{ zIndex: 0 }}
       >
         <Tabs value={0} textColor="inherit">
-          <Tab label="Users" />
-          <Tab label="Sign-in method" />
-          <Tab label="Templates" />
-          <Tab label="Usage" />
+          <Tab label="Users" value="/home" href='/home'/>
+          <Tab label="Template1" value="/t1" href='/t1'/>
+          <Tab label="Template2" value="/t2" href='/t2'/>
+          <Tab label="Template3" value="/t3" href='/t3'/>
         </Tabs>
       </AppBar>
     </React.Fragment>
