@@ -2,11 +2,8 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import HelpIcon from "@mui/icons-material/Help";
 import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Tab from "@mui/material/Tab";
@@ -15,10 +12,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
-const lightColor = "rgba(255, 255, 255, 0.7)";
-
 function Header(props) {
-  const { onDrawerToggle } = props;
+  const { onDrawerToggle, templateValue } = props;
+  const [value, setValue] = React.useState("0");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    props.templateValue(newValue);
+  };
 
   return (
     <React.Fragment>
@@ -64,7 +65,7 @@ function Header(props) {
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                Authentication
+                CovidTracker
               </Typography>
             </Grid>
           </Grid>
@@ -76,11 +77,16 @@ function Header(props) {
         elevation={0}
         sx={{ zIndex: 0 }}
       >
-        <Tabs value={0} textColor="inherit">
-          <Tab label="Users" value="/home" href='/home'/>
-          <Tab label="Template1" value="/t1" href='/t1'/>
-          <Tab label="Template2" value="/t2" href='/t2'/>
-          <Tab label="Template3" value="/t3" href='/t3'/>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          textColor="inherit"
+          indicatorColor="error"
+        >
+          <Tab label="Users" value="0" />
+          <Tab label="Template1" value="1" />
+          <Tab label="Template2" value="2" />
+          <Tab label="Template3" value="3" />
         </Tabs>
       </AppBar>
     </React.Fragment>

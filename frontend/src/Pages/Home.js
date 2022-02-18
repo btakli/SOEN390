@@ -10,6 +10,9 @@ import Link from "@mui/material/Link";
 import Header from "../components/Header";
 import Navigator from "../components/Navigator";
 import { Box, CssBaseline, Typography } from "@mui/material";
+import Template1 from "./Template1";
+import Template2 from "./Template2";
+import Template3 from "./Template3";
 
 function Copyright() {
   return (
@@ -33,8 +36,14 @@ function Home(props) {
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
-    console.log(drawerOpen);
   };
+
+  const [value, setValue] = React.useState("0");
+  function passedTemplateValue(value) {
+    setValue(value);
+    console.log(value);
+  }
+
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       <CssBaseline />
@@ -47,18 +56,26 @@ function Home(props) {
       />
 
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <Header onDrawerToggle={handleDrawerToggle} />
+        <Header
+          onDrawerToggle={handleDrawerToggle}
+          templateValue={passedTemplateValue}
+        />
         <Box
           component="main"
           sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
         >
-          <Fragment>
-            <Link onClick={handleClick} variant="body2">
-              {"LOGOUT"}
-            </Link>
-            <Persons />
-            <PersonForm />
-          </Fragment>
+          {value === "1" && <Template1 />}
+          {value === "2" && <Template2 />}
+          {value === "3" && <Template3 />}
+          {value === "0" && (
+            <Fragment>
+              <Link onClick={handleClick} variant="body2">
+                {"LOGOUT"}
+              </Link>
+              <Persons />
+              <PersonForm />
+            </Fragment>
+          )}
         </Box>
         <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
           <Copyright />

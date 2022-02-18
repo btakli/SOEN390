@@ -23,26 +23,26 @@ const categories = [
     id: "Build",
     children: [
       {
-        id: "Authentication",
-        icon: <PeopleIcon />,
+        id: "Home",
+        icon: <HomeIcon />,
         active: true,
       },
-      { id: "Database", icon: <DnsRoundedIcon /> },
-      { id: "Storage", icon: <PermMediaOutlinedIcon /> },
-      { id: "Hosting", icon: <PublicIcon /> },
-      { id: "Functions", icon: <SettingsEthernetIcon /> },
+      { id: "Template 1", icon: <DnsRoundedIcon /> },
+      { id: "Template 1", icon: <PermMediaOutlinedIcon /> },
+      { id: "Template 1", icon: <PublicIcon /> },
+      { id: "Template 1", icon: <SettingsEthernetIcon /> },
       {
-        id: "Machine learning",
+        id: "Template 1",
         icon: <SettingsInputComponentIcon />,
       },
     ],
   },
   {
-    id: "Quality",
+    id: "More",
     children: [
-      { id: "Analytics", icon: <SettingsIcon /> },
-      { id: "Performance", icon: <TimerIcon /> },
-      { id: "Test Lab", icon: <PhonelinkSetupIcon /> },
+      { id: "Settings", icon: <SettingsIcon /> },
+      { id: "Terms & Conditions", icon: <TimerIcon /> },
+      { id: "About", icon: <PhonelinkSetupIcon /> },
     ],
   },
 ];
@@ -50,10 +50,10 @@ const categories = [
 const item = {
   py: "2px",
   px: 3,
-  color: "rgba(255, 255, 255, 0.7)",
-  "&:hover, &:focus": {
-    bgcolor: "rgba(255, 255, 255, 0.08)",
-  },
+  color: "rgba(255, 255, 255, 1)",
+  // "&:hover, &:focus": {
+  //   bgcolor: "rgba(255, 255, 255, 0.08)",
+  // },
 };
 
 const itemCategory = {
@@ -69,15 +69,15 @@ export default function Navigator(props) {
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
         <ListItem
-          sx={{ ...item, ...itemCategory, fontSize: 22, color: "#000" }}
+          sx={{
+            ...item,
+            ...itemCategory,
+            fontSize: 22,
+            color: "#fff",
+            bgcolor: "#101F33",
+          }}
         >
           CovidTracker
-        </ListItem>
-        <ListItem sx={{ ...item, ...itemCategory }}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText>Project Overview</ListItemText>
         </ListItem>
         {categories.map(({ id, children }) => (
           <Box key={id} sx={{ bgcolor: "#101F33" }}>
@@ -93,7 +93,7 @@ export default function Navigator(props) {
               </ListItem>
             ))}
 
-            <Divider sx={{ mt: 2 }} />
+            <Divider sx={{ mt: 2 }} color="#fff" />
           </Box>
         ))}
       </List>
