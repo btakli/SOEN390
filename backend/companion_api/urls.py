@@ -1,8 +1,8 @@
 """Router registration"""
 
 from rest_framework.routers import DefaultRouter
-from companion_api.models import *
-from companion_api.views import *
+from .models import *
+from .views import *
 
 app_name = "companion_api"
 

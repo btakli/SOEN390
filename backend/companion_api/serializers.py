@@ -1,7 +1,7 @@
 """Serializers"""
 
 from rest_framework import serializers
-from companion_api.models import Person
+from .models import Person
 
 
 class PersonSerializer(serializers.ModelSerializer):
