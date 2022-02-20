@@ -18,7 +18,7 @@ class TestViews(TestSetUp):
         self.assertEqual(res.status_code, 201)
 
     def test_patient_cannot_register_with_no_user(self):
-        """Registration: Patient cannot register with no User (every Doctor contains a User)"""
+        """Registration: Patient cannot register with no User (every Patient contains a User)"""
         res = self.client.post(self.register_patient_url, self.no_user_patient_data, format='json')
 
         self.assertEqual(res.status_code, 400)
