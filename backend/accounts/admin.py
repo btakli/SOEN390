@@ -7,7 +7,7 @@ from .models import User, Doctor, Patient
 class DoctorAdmin(admin.ModelAdmin):
     list_display = ("__str__", "user_", "number_of_patients")
     model = Doctor
-
+    search_fields = ("first_name__startswith", ) #Search field (later can add different attributes?)
     empty_value_display = 'NO VALUE HERE :)'
 
     def user_(self, obj):
@@ -20,7 +20,7 @@ class DoctorAdmin(admin.ModelAdmin):
 class PatientAdmin(admin.ModelAdmin):
     list_display = ("__str__", "user_", "doctor_")
     list_filter = ("doctor",)
-
+    search_fields = ("first_name__startswith", ) #Search field (later can add different attributes?)
     empty_value_display = 'NO VALUE HERE :)'
 
     def user_(self, obj):
