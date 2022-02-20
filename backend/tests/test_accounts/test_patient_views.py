@@ -119,7 +119,7 @@ class TestViews(TestSetUp):
         self.assertEqual(res.status_code, 204)
 
     def test_patient_cannot_logout_with_invalid_token_unauthorized(self):
-        """Logout View: Doctor cannot logout when they do not have a valid token"""
+        """Logout View: Patient cannot logout when they do not have a valid token"""
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + '123')
         res = self.client.post(self.logout_url)
 
