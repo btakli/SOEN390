@@ -6,6 +6,7 @@ from .models import User, Doctor, Patient
 
 class DoctorAdmin(admin.ModelAdmin):
     list_display = ("__str__", "user_", "number_of_patients")
+    list_filter = ("user__is_active", "user__is_pending")
     model = Doctor
     search_fields = ("first_name__startswith", ) #Search field (later can add different attributes?)
     empty_value_display = 'NO VALUE HERE :)'

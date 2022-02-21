@@ -33,6 +33,8 @@ class User(AbstractUser):
     is_doctor = models.BooleanField(default=False)
     is_patient = models.BooleanField(default=False)
 
+    is_pending = models.BooleanField(default=False)
+
     username = None
 
     email = models.EmailField(
