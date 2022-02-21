@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login";
+import PreLogin from "./Pages/PreLogin";
 import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Register from "./Pages/Register";
@@ -22,8 +23,12 @@ export default function RoutesManager() {
           <Route path="/home/t3" element={<Template3 />} />
         </Route>
       </Route>
-      <Route path="/requestapplication" element={<RequestApplicationTemplate />} />
+      <Route
+        path="/requestapplication"
+        element={<RequestApplicationTemplate />}
+      />
       <Route path="/login" element={<Login />} />
+      <Route path="/prelogin" element={<PreLogin />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/register" element={<Register />} />
     </Routes>

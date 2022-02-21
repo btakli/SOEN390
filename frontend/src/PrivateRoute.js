@@ -13,7 +13,7 @@ function PrivateRoute(props) {
       </Backdrop>
     );
   } else if (!props.auth.isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/prelogin" />;
   } else {
     return <Outlet />;
   }
