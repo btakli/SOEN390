@@ -1,21 +1,8 @@
 """Create your views here"""
 
 from rest_framework import viewsets, permissions
-from companion_api.models import *
-from companion_api.serializers import *
-
-
-# class CreateListRetrieveDestroyUpdateViewSet(
-#     mixins.CreateModelMixin,
-#     mixins.ListModelMixin,
-#     mixins.RetrieveModelMixin,
-#     mixins.DestroyModelMixin,
-#     mixins.UpdateModelMixin,
-#     viewsets.GenericViewSet,
-# ):
-#     '''Inheritance class'''
-
-#     pass
+from .models import *
+from .serializers import *
 
 
 class PersonView(viewsets.ModelViewSet):
@@ -25,7 +12,7 @@ class PersonView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return self.request.user.patients.all()
+        return self.request.user.items.all()
 
     serializer_class = PersonSerializer
 
