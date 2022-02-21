@@ -1,9 +1,14 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logout } from "../redux/actions/authActions";
+
+//MUI
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Tab from "@mui/material/Tab";
@@ -15,6 +20,10 @@ import Typography from "@mui/material/Typography";
 function Header(props) {
   const { onDrawerToggle, templateValue } = props;
   const [value, setValue] = React.useState("0");
+
+  const handleLogout = (e) => {
+    props.logout();
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -32,6 +41,7 @@ function Header(props) {
                 aria-label="open drawer"
                 onClick={onDrawerToggle}
                 edge="start"
+                style={{ backgroundColor: "#00bcd4" }}
               >
                 <MenuIcon />
               </IconButton>
@@ -49,6 +59,17 @@ function Header(props) {
                 <IconButton color="inherit" sx={{ p: 0.5 }}>
                   <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
                 </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <Tooltip title="Logout">
+                <Button
+                  variant="contained"
+                  onClick={handleLogout}
+                  style={{ backgroundColor: "#00bcd4" }}
+                >
+                  Logout
+                </Button>
               </Tooltip>
             </Grid>
           </Grid>
@@ -82,6 +103,7 @@ function Header(props) {
           onChange={handleChange}
           textColor="inherit"
           indicatorColor="error"
+          style={{ backgroundColor: "#00bcd4" }}
         >
           <Tab label="Users" value="0" />
           <Tab label="Requests" value="1" />
@@ -95,6 +117,12 @@ function Header(props) {
 
 Header.propTypes = {
   onDrawerToggle: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps, { logout })(Header);

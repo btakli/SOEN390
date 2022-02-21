@@ -69,9 +69,6 @@ function Home(props) {
           {value === "3" && <Template3 />}
           {value === "0" && (
             <Fragment>
-              <Link onClick={handleClick} variant="body2">
-                {"LOGOUT"}
-              </Link>
               <Persons />
               <PersonForm />
             </Fragment>
