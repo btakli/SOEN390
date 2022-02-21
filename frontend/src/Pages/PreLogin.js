@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -31,14 +32,19 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function PreLogin() {
+
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      isPatient: data.get("patient"),
-      isDoctor: data.get("doctor"),
-    });
+    if(data.get("patient") === "patient"){
+      return navigate("/userlogin");
+    } else if(data.get("doctor") === "doctor"){
+      return navigate("/doctorlogin");
+    } else if(data.get("immigrationOfficer")){
+      return navigate("/doctorlogin");
+    }
   };
 
   return (
@@ -93,13 +99,24 @@ export default function PreLogin() {
                 >
                   <FormControlLabel
                     value="doctor"
+                    id="doctor"
+                    name="doctor"
                     control={<Radio />}
                     label="Doctor"
                   />
                   <FormControlLabel
                     value="patient"
+                    id="patient"
+                    name="patient"
                     control={<Radio />}
                     label="Patient"
+                  />
+                  <FormControlLabel
+                    value="immigrationOfficer"
+                    id="immigrationOfficer"
+                    name="immigrationOfficer"
+                    control={<Radio />}
+                    label="Immigration Officer"
                   />
                 </RadioGroup>
               </FormControl>

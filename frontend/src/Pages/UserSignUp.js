@@ -81,7 +81,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign up as a Patient
           </Typography>
           <Box component="form" onSubmit={handleSignUp} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -207,10 +207,6 @@ export default function SignUp() {
                     onChange={handleStatusTypeChange}
                   >
                     <MenuItem value={"patient"}>Patient</MenuItem>
-                    <MenuItem value={"medicalDoctor"}>Medical Doctor</MenuItem>
-                    <MenuItem value={"healthOfficial"}>
-                      Health Official
-                    </MenuItem>
                     <MenuItem value={"immigrationOfficer"}>
                       Immigration Officer
                     </MenuItem>
@@ -228,7 +224,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <Link href="/userlogin" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

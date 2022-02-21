@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "./Pages/Login";
+import UserLogin from "./Pages/UserLogin";
+import DoctorLogin from "./Pages/DoctorLogin";
 import PreLogin from "./Pages/PreLogin";
 import Home from "./Pages/Home";
-import SignUp from "./Pages/SignUp";
+import UserSignUp from "./Pages/UserSignUp";
 import Register from "./Pages/Register";
 
 import Requests from "./Pages/Requests";
@@ -27,9 +28,10 @@ export default function RoutesManager() {
         path="/requestapplication"
         element={<RequestApplicationTemplate />}
       />
-      <Route path="/login" element={<Login />} />
+      <Route path="/userlogin" element={<UserLogin />} />
+      <Route path="/doctorlogin" element={<DoctorLogin />} />
       <Route path="/prelogin" element={<PreLogin />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/usersignup" element={<UserSignUp />} />
       <Route path="/register" element={<Register />} />
     </Routes>
   );
