@@ -23,8 +23,8 @@
     --header-bg: var(--secondary);
     --header-link-color: var(--primary-fg);
 
-    --breadcrumbs-fg: #c4dce8;
-    --breadcrumbs-link-fg: var(--body-bg);
+    --breadcrumbs-fg: #ffffff;
+    --breadcrumbs-link-fg: #ffffff;
     --breadcrumbs-bg: var(--primary);
 
     --link-fg: #447e9b;
@@ -72,7 +72,7 @@
     --breadcrumbs-bg: var(--primary);
 
     --link-fg: #000000;
-    --link-hover-color: #4ac1f7;
+    --link-hover-color: var(--body-bg);
     --link-selected-fg: #6f94c6;
 
     --hairline-color: #272727;
@@ -384,6 +384,7 @@ background: var(--darkened-bg);
 tr:nth-child(odd),
 .row-form-errors {
 background: var(--body-bg);
+--link-hover-color: var(--secondary);
 }
 
 tr:nth-child(even),
