@@ -3,12 +3,14 @@ from django.utils.html import format_html
 from django.urls import reverse
 from .models import User, Doctor, Patient
 
+from django.template.response import TemplateResponse
 from django.utils.translation import gettext_lazy
 
 ADMIN_NAME = "CovidTracker"
 
 
 class DoctorAdmin(admin.ModelAdmin):
+    """Doctor Admin Model"""
     list_display = ("__str__", "user_", "number_of_patients")
     model = Doctor
     search_fields = (
@@ -27,6 +29,7 @@ class DoctorAdmin(admin.ModelAdmin):
 
 
 class PatientAdmin(admin.ModelAdmin):
+    """Patient Admin Model"""
     list_display = ("__str__", "user_", "doctor_")
     list_filter = ("doctor",)
     search_fields = (
@@ -52,6 +55,7 @@ class PatientAdmin(admin.ModelAdmin):
     # view_on_site = False
 
 
+# Set custom admin page titles
 # Text to put at the end of each page's <title>.
 admin.site.site_title = gettext_lazy(f'{ADMIN_NAME} site admin')
 # Text to put in each page's <h1>.
