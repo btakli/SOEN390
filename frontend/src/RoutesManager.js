@@ -5,7 +5,7 @@ import DoctorLogin from "./Pages/DoctorLogin";
 import PreLogin from "./Pages/PreLogin";
 import Home from "./Pages/Home";
 import UserSignUp from "./Pages/UserSignUp";
-import Register from "./Pages/Register";
+import DoctorSignUp from "./Pages/DoctorSignUp";
 
 import Requests from "./Pages/Requests";
 import RequestApplicationTemplate from "./Pages/RequestApplicationTemplate";
@@ -32,7 +32,7 @@ export default function RoutesManager() {
       <Route path="/doctorlogin" element={<DoctorLogin />} />
       <Route path="/prelogin" element={<PreLogin />} />
       <Route path="/usersignup" element={<UserSignUp />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/doctorsignup" element={<DoctorSignUp />} />
     </Routes>
   );
 }
