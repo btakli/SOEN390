@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Register from "./Pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import ContactForm from "./Pages/ContactForm"
 
 export default function RoutesManager() {
   return (
@@ -15,7 +16,7 @@ export default function RoutesManager() {
       <Route path="/login" element={<Login />}/>
       <Route path="/signup" element={<SignUp />}/>
       <Route path="/register" element={<Register />}/>
-
+      <Route path="/contact" element={<ContactForm />}/>
     </Routes>
   );
 }
