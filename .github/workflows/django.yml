@@ -32,7 +32,7 @@ jobs:
     - name: Generate UML Diagram
       run: |
         cd backend
-        pyreverse -A -m y -o png './' 
+        pyreverse -m y -o png './' 
     - name: Add & Commit
       uses: EndBug/add-and-commit@v8.0.2
 
