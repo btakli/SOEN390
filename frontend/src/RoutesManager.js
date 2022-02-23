@@ -10,7 +10,7 @@ import RequestApplicationTemplate from "./Pages/RequestApplicationTemplate";
 import Template3 from "./Pages/Template3";
 
 import PrivateRoute from "./PrivateRoute";
-import ContactForm from "./Pages/ContactForm";
+import ContactForm from "./components/ContactForm";
 import PatientStatus from "./Pages/PatientStatus";
 
 export default function RoutesManager() {

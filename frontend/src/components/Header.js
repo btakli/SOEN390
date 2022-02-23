@@ -18,6 +18,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { Badge, Menu, MenuItem } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
+import ContactForm from "./ContactForm";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -25,6 +26,15 @@ function Header(props) {
   const { onDrawerToggle, templateValue } = props;
   const [value, setValue] = React.useState("0");
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleDialogOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setIsOpen(false);
+  };
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -45,6 +55,7 @@ function Header(props) {
 
   return (
     <React.Fragment>
+      <ContactForm isOpen={isOpen} handleClose={handleDialogClose} />
       <AppBar color="primary" position="sticky" elevation={4}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
@@ -75,6 +86,7 @@ function Header(props) {
                   size="large"
                   aria-label="show 4 new mails"
                   color="inherit"
+                  onClick={handleDialogOpen}
                 >
                   <Badge badgeContent={4} color="error">
                     <MailIcon />

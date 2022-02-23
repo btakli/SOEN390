@@ -12,9 +12,9 @@ function PrivateRoute(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
     );
-  } else if (!props.auth.isAuthenticated) {
+  } /*else if (!props.auth.isAuthenticated) {
     return <Navigate to="/login" />;
-  } else {
+  } */ else {
     return <Outlet />;
   }
 }
