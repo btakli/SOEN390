@@ -103,9 +103,10 @@ function Header(props) {
           onChange={handleChange}
           textColor="inherit"
           indicatorColor="error"
+          centered
           style={{ backgroundColor: "#00bcd4" }}
         >
-          <Tab label="Users" value="0" />
+          <Tab label="Dashboard" value="0" />
           <Tab label="Requests" value="1" />
           <Tab label="Template2" value="2" />
           <Tab label="Template3" value="3" />

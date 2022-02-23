@@ -22,7 +22,10 @@ export default function RoutesManager() {
           <Route path="/home/t3" element={<Template3 />} />
         </Route>
       </Route>
-      <Route path="/requestapplication" element={<RequestApplicationTemplate />} />
+      <Route
+        path="/requestapplication"
+        element={<RequestApplicationTemplate />}
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/register" element={<Register />} />
