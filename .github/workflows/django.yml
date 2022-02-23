@@ -28,3 +28,6 @@ jobs:
         cd backend
         coverage run --branch --source='.' manage.py test tests -v 2
         coverage report -m  --omit="*/test*,*/core*"
+
+    
+      
