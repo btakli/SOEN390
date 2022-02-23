@@ -33,7 +33,8 @@ class User(AbstractUser):
     is_doctor = models.BooleanField(default=False)
     is_patient = models.BooleanField(default=False)
 
-    is_pending = models.BooleanField(default=False)
+    is_pending_approval = models.BooleanField(default=False)
+    is_email_verified = models.BooleanField(default=False)
 
     username = None
 
@@ -64,7 +65,7 @@ class Doctor(models.Model):
     # postal_code = models.CharField(max_length=20)
 
     def __str__(self):
-        return f'Dr. {self.first_name} ({self.user.id})'
+        return f'Dr. {self.first_name}'
 
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

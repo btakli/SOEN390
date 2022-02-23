@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
 from django.urls import reverse
 from .models import User, Doctor, Patient
@@ -9,11 +8,14 @@ from django.utils.translation import gettext_lazy
 
 ADMIN_NAME = "CovidTracker"
 
+# TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+# class UserAdmin(admin.ModelAdmin):
+#     list_filter = ("is_email_verified",)
 
 class DoctorAdmin(admin.ModelAdmin):
     """Doctor Admin Model"""
     list_display = ("__str__", "user_", "number_of_patients")
-    list_filter = ("user__is_active", "user__is_pending")
+    list_filter = ("user__is_active", "user__is_pending_approval")
     model = Doctor
     search_fields = (
         "first_name__startswith",
@@ -69,8 +71,4 @@ admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(User) # At the moment you cannot register users correctly in the Admin UI
                             # since you need to override the UserAdmin class in Django
                             # Not a priority at the moment, use current API instead. 
-<<<<<<< Updated upstream
 admin.site.register(Patient, PatientAdmin)
-=======
-admin.site.register(Patient, PatientAdmin)
->>>>>>> Stashed changes

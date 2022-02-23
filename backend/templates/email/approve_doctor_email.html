@@ -1,0 +1,15 @@
+{% autoescape off %}
+
+Hello {{admin}},
+
+
+{{doctor}} would like their account approved.
+
+Their user account is under {{doctor_email}}.
+
+Please click on the following link to approve their account.
+
+http://{{domain}}{% url 'accounts:approve_doctor' user_id=user_id %}
+
+
+{% endautoescape %}

@@ -20,6 +20,9 @@ urlpatterns = [
     path("api/auth/users/patient", PatientView.as_view(), name='users_patient'),
     path("api/auth/user", UserView.as_view(), name='user'),
     path("api/auth/logout", knox_views.LogoutView.as_view(), name="knox_logout"),
+    path("api/approve-doctor/<user_id>", ApproveDoctorView.as_view(), name='approve_doctor'),
+    # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+    # path("api/activate-email/<user_id>/<token>", ActivateEmailView.as_view(), name='activate_email'),
 ]
 
 urlpatterns += router.urls

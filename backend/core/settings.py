@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -121,6 +122,14 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+# EMAIL CONFIG
+EMAIL_FROM_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = 'qmpjifzkryajfdmq'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 
 
 # Static files (CSS, JavaScript, Images)

@@ -48,8 +48,9 @@ class RegisterDoctorSerializer(serializers.ModelSerializer):
             user_data['password']
         )
         user.is_doctor = True
-        user.is_pending = True
+        user.is_pending_approval = True
         user.is_active = False # DOCTOR USERS MUST BE APPROVED FIRST
+        user.is_email_verified = False
         user.save() # update user change 
 
         doctor = Doctor.objects.create(
@@ -79,6 +80,11 @@ class RegisterPatientSerializer(serializers.ModelSerializer):
             user_data['password']
         )
         user.is_patient = True
+        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+        # user.is_pending = True
+        # user.is_active = False # DOCTOR USERS MUST BE APPROVED FIRST
+        # user.is_email_verified = False
+
         user.save() # update user change 
 
         patient = Patient.objects.create(
@@ -99,11 +105,16 @@ class LoginSerializer(serializers.Serializer):
     # This is where the login auth happens in the whole app!
     def validate(self, data):
         user = authenticate(**data)
+
+        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+        # if not user.is_email_verified:
+        #     raise serializers.ValidationError("Email is not verified, please check your inbox")
+
         if user:
             if user.is_active:
                 return user
             else:
                 raise serializers.ValidationError("User is not Active!")
-        else:
-            # Display this as error response if bad login
-            raise serializers.ValidationError("Invalid Credentials")
+        
+        # Display this as error response if bad login
+        raise serializers.ValidationError("Invalid Credentials")
