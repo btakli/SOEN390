@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
 from django.urls import reverse
 from .models import User, Doctor, Patient
@@ -65,5 +66,7 @@ admin.site.site_header = gettext_lazy(f'{ADMIN_NAME} Administration')
 admin.site.index_title = gettext_lazy(f'{ADMIN_NAME} Administration')
 
 admin.site.register(Doctor, DoctorAdmin)
-admin.site.register(User)
+admin.site.register(User) # At the moment you cannot register users correctly in the Admin UI
+                            # since you need to override the UserAdmin class in Django
+                            # Not a priority at the moment, use current API instead. 
 admin.site.register(Patient, PatientAdmin)
