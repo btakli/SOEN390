@@ -9,10 +9,20 @@ import { logout } from "../redux/actions/authActions";
 import Link from "@mui/material/Link";
 import Header from "../components/Header";
 import Navigator from "../components/Navigator";
-import { Box, CssBaseline, Typography } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  Divider,
+} from "@mui/material";
 import Requests from "./Requests";
 import Template3 from "./Template3";
 import PatientStatus from "./PatientStatus";
+import InfectionsPerWeekGraph from "../components/graphs/InfectionsPerWeekGraph";
+import InfectionsPerTypeGraph from "../components/graphs/InfectionsPerTypeGraph";
 
 function Copyright() {
   return (
@@ -68,10 +78,33 @@ function Home(props) {
           {value === "2" && <PatientStatus />}
           {value === "3" && <Template3 />}
           {value === "0" && (
-            <Fragment>
+            <Card>
+              <CardContent>
+                <Box sx={{ width: "100%" }} pb={2}>
+                  <Typography
+                    variant="h5"
+                    align="left"
+                    gutterBottom
+                    component="div"
+                  >
+                    Welcome User!
+                  </Typography>
+                  <Divider />
+                </Box>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={8} md={8}>
+                    <InfectionsPerWeekGraph />
+                  </Grid>
+                  <Grid item xs={12} sm={4} md={4}>
+                    <InfectionsPerTypeGraph />
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+            /*<Fragment>
               <Persons />
               <PersonForm />
-            </Fragment>
+            </Fragment>*/
           )}
         </Box>
         <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
