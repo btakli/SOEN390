@@ -18,7 +18,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Divider } from "@mui/material";
+import {
+  Divider,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -70,17 +76,21 @@ function Register(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const { firstname, lastname, email, password, confirmPassword, proofFile } =
-      state;
+    const {
+      firstname,
+      lastname,
+      date,
+      gender,
+      address,
+      city,
+      postalCode,
+      email,
+      password,
+      confirmPassword,
+      proofFile,
+    } = state;
+    state.proofFile = data.get("proofFile");
     console.log(state);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      confirmPassword: data.get("confirmPassword"),
-      proofFile: data.get("proofFile"),
-    });
     // if (password !== confirmPassword) {
     //   props.createMessage({ passwordsDoNotMatch: "Passwords do not match" });
     // } else {
@@ -120,22 +130,92 @@ function Register(props) {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
                   autoFocus
+                  value={state.firstname}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lastname"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   autoComplete="family-name"
+                  value={state.lastname}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  id="date"
+                  name="date"
+                  label="Date of birth"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={state.date}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl fullWidth required>
+                  <InputLabel id="gender">Gender</InputLabel>
+                  <Select
+                    required
+                    fullWidth
+                    id="gender"
+                    name="gender"
+                    label="Gender"
+                    value={state.gender}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={"male"}>Male</MenuItem>
+                    <MenuItem value={"female"}>Female</MenuItem>
+                    <MenuItem value={"other"}>Other</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="address"
+                  required
+                  fullWidth
+                  id="address"
+                  label="Address"
+                  value={state.address}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="city"
+                  required
+                  fullWidth
+                  id="city"
+                  label="City"
+                  value={state.city}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  name="postalCode"
+                  required
+                  fullWidth
+                  id="postalCode"
+                  label="Postal Code"
+                  value={state.postalCode}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>

@@ -1,6 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { Backdrop, CircularProgress } from "@mui/material";
 
 function PrivateRoute(props) {
