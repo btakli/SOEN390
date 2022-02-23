@@ -45,11 +45,11 @@ move /y %BACKENDMETRICS_MI% ./reports/Metrics
 cd ..
 
 echo ~~~~~~~~~~~~~~~~~~~Frontend~~~~~~~~~~~~~~~~~~~
-cd frontend2
+cd frontend
 set FRONTENDREPORT=Report.txt
 
 echo ~~~~~~~~~~~~~~~~~~~Running tests~~~~~~~~~~~~~~~~~~~
-call npm run test:coverage >> %FRONTENDREPORT% 2>&1
+call npm test -- --coverage --watchAll=false >> %FRONTENDREPORT% 2>&1
 type %FRONTENDREPORT%
 
 echo ~~~~~~~~~~~~~~~~~~~Migrating reports to tests/Reports~~~~~~~~~~~~~~~~~~~
