@@ -25,4 +25,8 @@ urlpatterns = [
     # path("api/activate-email/<user_id>/<token>", ActivateEmailView.as_view(), name='activate_email'),
 ]
 
+urlpatterns += [
+    path("api/auth/register/doctor/test", RegisterDoctorTestView.as_view(), name='register_doctor_test'),
+]
+
 urlpatterns += router.urls

@@ -23,12 +23,6 @@ class TestViews(TestSetUp):
 
         self.assertEqual(res.status_code, 400)
 
-    def test_doctor_cannot_register_with_no_first_name(self):
-        """Registration: Doctor cannot register with no first_name attribute"""
-        res = self.client.post(self.register_doctor_url, self.no_first_name_doctor_data, format='json')
-
-        self.assertEqual(res.status_code, 400)
-
     def test_doctor_cannot_register_with_no_email(self):
         """Registration: Doctor cannot register with no email attribute"""
         res = self.client.post(self.register_doctor_url, self.no_email_doctor_data, format='json')

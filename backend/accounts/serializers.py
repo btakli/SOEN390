@@ -35,7 +35,7 @@ class RegisterDoctorSerializer(serializers.ModelSerializer):
         """Requires Meta attribute"""
 
         model = Doctor
-        fields = ('first_name', 'user')
+        fields = "__all__"
         
     # only real reason this is needed is cause we need to know for sure
     # that the user data is a user and not some random dict of data.
@@ -60,6 +60,40 @@ class RegisterDoctorSerializer(serializers.ModelSerializer):
 
         return doctor
 
+# Did not want to deal with this case so I made this ser without
+# email verif for testing purposes
+class RegisterDoctorTestSerializer(serializers.ModelSerializer):
+    """Register Serializer"""
+
+    user = UserSerializer()    
+
+    class Meta:
+        """Requires Meta attribute"""
+
+        model = Doctor
+        fields = "__all__"
+        
+    # only real reason this is needed is cause we need to know for sure
+    # that the user data is a user and not some random dict of data.
+    # this would not need to be here if we were directly passing user objects
+    # to the serializer in the view (we are just using json instead)
+    def create(self, validated_data):
+        user_data = validated_data.pop("user")
+        user = User.objects.create_user(
+            user_data['email'],
+            user_data['password']
+        )
+        user.is_doctor = True
+        user.is_email_verified = False
+        user.save() # update user change 
+
+        doctor = Doctor.objects.create(
+            user = user,
+            **validated_data
+        )
+
+        return doctor
+
 # Register Patient Serializer
 class RegisterPatientSerializer(serializers.ModelSerializer):
     """Register Serializer"""
@@ -71,7 +105,7 @@ class RegisterPatientSerializer(serializers.ModelSerializer):
         """Requires Meta attribute"""
 
         model = Patient
-        fields = ('first_name', 'user')
+        fields = "__all__"
 
     def create(self, validated_data):
         user_data = validated_data.pop("user")

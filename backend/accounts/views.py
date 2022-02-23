@@ -67,6 +67,7 @@ def send_admin_approval_email(admin, doctor, request):
         'admin': str(admin),
         'doctor': str(doctor),
         'doctor_email': str(doctor.user.email),
+        'doctor_proof': str(doctor.proof),
         'domain': current_site,
         'user_id': urlsafe_base64_encode(force_bytes(doctor.user_id))
     })
@@ -115,6 +116,30 @@ class RegisterDoctorView(generics.GenericAPIView):
             doctor=doctor,
             request=request
             )
+
+        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+        # send_verif_email(user_type=doctor, request=request)
+
+        return Response(
+            {
+                "doctor": DoctorSerializer(
+                    doctor, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
+            },
+            status=status.HTTP_201_CREATED
+        )
+
+# Did not want to deal with this case so I made this view without
+# email for testing purposes
+class RegisterDoctorTestView(generics.GenericAPIView):
+    serializer_class = RegisterDoctorTestSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        doctor = serializer.save()
+        token = AuthToken.objects.create(doctor.user)[1]
 
         # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
         # send_verif_email(user_type=doctor, request=request)
