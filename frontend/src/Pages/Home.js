@@ -11,8 +11,8 @@ import Header from "../components/Header";
 import Navigator from "../components/Navigator";
 import { Box, CssBaseline, Typography } from "@mui/material";
 import Requests from "./Requests";
-import Template2 from "./Template2";
 import Template3 from "./Template3";
+import PatientStatus from "./PatientStatus";
 
 function Copyright() {
   return (
@@ -65,7 +65,7 @@ function Home(props) {
           sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}
         >
           {value === "1" && <Requests />}
-          {value === "2" && <Template2 />}
+          {value === "2" && <PatientStatus />}
           {value === "3" && <Template3 />}
           {value === "0" && (
             <Fragment>
