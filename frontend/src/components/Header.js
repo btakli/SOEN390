@@ -16,10 +16,23 @@ import Tabs from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import { Badge, Menu, MenuItem } from "@mui/material";
+import MailIcon from "@mui/icons-material/Mail";
+
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header(props) {
   const { onDrawerToggle, templateValue } = props;
   const [value, setValue] = React.useState("0");
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const handleLogout = (e) => {
     props.logout();
@@ -32,7 +45,7 @@ function Header(props) {
 
   return (
     <React.Fragment>
-      <AppBar color="primary" position="sticky" elevation={0}>
+      <AppBar color="primary" position="sticky" elevation={4}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Grid sx={{ display: { sm: "block", xs: "block" } }} item>
@@ -46,20 +59,66 @@ function Header(props) {
                 <MenuIcon />
               </IconButton>
             </Grid>
-            <Grid item xs />
+            <Grid item xs>
+              <Typography
+                color="inherit"
+                variant="h5"
+                align="left"
+                component="h1"
+              >
+                CovidTracker
+              </Typography>
+            </Grid>
             <Grid item>
-              <Tooltip title="See Notifications">
+              <Tooltip title="Mails">
+                <IconButton
+                  size="large"
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                >
+                  <Badge badgeContent={4} color="error">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Notifications">
                 <IconButton color="inherit">
                   <NotificationsIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
             <Grid item>
-              <Tooltip title="See Profile">
-                <IconButton color="inherit" sx={{ p: 0.5 }}>
+              <Tooltip title="Account">
+                <IconButton
+                  color="inherit"
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0.5 }}
+                >
                   <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
                 </IconButton>
               </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
             </Grid>
             <Grid item>
               <Tooltip title="Logout">
@@ -81,17 +140,7 @@ function Header(props) {
         position="static"
         elevation={0}
         sx={{ zIndex: 0 }}
-      >
-        <Toolbar>
-          <Grid container alignItems="center" spacing={1}>
-            <Grid item xs>
-              <Typography color="inherit" variant="h5" component="h1">
-                CovidTracker
-              </Typography>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
+      ></AppBar>
       <AppBar
         component="div"
         position="static"
