@@ -1,6 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { Backdrop, CircularProgress } from "@mui/material";
 
 function PrivateRoute(props) {
@@ -13,7 +12,7 @@ function PrivateRoute(props) {
       </Backdrop>
     );
   } else if (!props.auth.isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/prelogin" />;
   } else {
     return <Outlet />;
   }

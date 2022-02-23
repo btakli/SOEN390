@@ -14,7 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -79,10 +79,10 @@ function Login(props) {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+            <LocalHospitalIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Doctor Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
@@ -127,7 +127,7 @@ function Login(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link href="/doctorsignup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

@@ -81,7 +81,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Patient Sign up
           </Typography>
           <Box component="form" onSubmit={handleSignUp} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -194,7 +194,7 @@ export default function SignUp() {
                   id="confirmPassword"
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControl fullWidth required>
                   <InputLabel id="statusType">Status Type</InputLabel>
                   <Select
@@ -207,16 +207,12 @@ export default function SignUp() {
                     onChange={handleStatusTypeChange}
                   >
                     <MenuItem value={"patient"}>Patient</MenuItem>
-                    <MenuItem value={"medicalDoctor"}>Medical Doctor</MenuItem>
-                    <MenuItem value={"healthOfficial"}>
-                      Health Official
-                    </MenuItem>
                     <MenuItem value={"immigrationOfficer"}>
                       Immigration Officer
                     </MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button
               type="submit"
@@ -228,7 +224,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <Link href="/userlogin" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
