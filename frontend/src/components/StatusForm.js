@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   Checkbox,
+  Grid,
   Paper,
   Table,
   TableContainer,
@@ -81,26 +82,25 @@ function StatusForm(props) {
   return (
     <Card>
       <CardContent>
-        <Box
-          component="form"
-          onSubmit={onSubmit}
-          sx={{ minWidth: 120, pb: 10 }}
-        >
-          <InputLabel id="status">Status</InputLabel>
-          <Select
-            labelId="status"
-            id="status"
-            name="status"
-            value={state.status}
-            label="status"
-            onChange={handleChange}
-          >
-            <MenuItem value={"healthy"}>Healthy</MenuItem>
-            <MenuItem value={"infected"}>Infected</MenuItem>
-            <MenuItem value={"recovered"}>Recovered</MenuItem>
-          </Select>
-        </Box>
-
+        <Grid container spacing={2} justifyContent="center">
+          <Grid item xs={12} sm={4}>
+            <Box component="form" onSubmit={onSubmit} sx={{ pb: 10 }}>
+              <InputLabel id="status">Status</InputLabel>
+              <Select
+                fullWidth
+                labelId="status"
+                id="status"
+                name="status"
+                value={state.status}
+                onChange={handleChange}
+              >
+                <MenuItem value={"healthy"}>Healthy</MenuItem>
+                <MenuItem value={"infected"}>Infected</MenuItem>
+                <MenuItem value={"recovered"}>Recovered</MenuItem>
+              </Select>
+            </Box>
+          </Grid>
+        </Grid>
         <Box
           component="form"
           onSubmit={onSubmit}
@@ -112,10 +112,12 @@ function StatusForm(props) {
               size="small"
               aria-label="a dense table"
             >
-              <TableHead sx={{ backgroundColor: "#42a5f5" }}>
+              <TableHead sx={{ bgcolor: "#101F33", color: "#fff" }}>
                 <TableRow>
-                  <TableCell>Symptoms</TableCell>
-                  <TableCell>Select If You Have</TableCell>
+                  <TableCell sx={{ color: "#fff" }}>Symptoms</TableCell>
+                  <TableCell sx={{ color: "#fff" }}>
+                    Select If You Have
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

@@ -12,6 +12,7 @@ import RequestApplicationTemplate from "./Pages/RequestApplicationTemplate";
 import Template3 from "./Pages/Template3";
 
 import PrivateRoute from "./PrivateRoute";
+import ContactForm from "./components/ContactForm";
 import PatientStatus from "./Pages/PatientStatus";
 
 export default function RoutesManager() {
@@ -24,6 +25,7 @@ export default function RoutesManager() {
           <Route path="/home/t3" element={<Template3 />} />
         </Route>
       </Route>
+      <Route path="/contact" element={<ContactForm />} />
       <Route
         path="/requestapplication"
         element={<RequestApplicationTemplate />}
