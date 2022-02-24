@@ -9,6 +9,15 @@ Repository for the team project of SOEN390 for Winter 2022.
 
 ## Setup
 
+Virtualenv
+
+```bash
+$ cd backend
+$ pip install virtualenv
+$ virtualenv venv
+$ venv\\Scripts\\activate
+```
+
 ```bash
 $ python -m pip install -r backend/requirements.txt
 $ cd frontend
