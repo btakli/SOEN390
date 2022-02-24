@@ -1,6 +1,5 @@
 """Create your views here"""
 
-from msilib.schema import Error
 from urllib import request
 from rest_framework import viewsets, permissions, generics
 from .models import *
