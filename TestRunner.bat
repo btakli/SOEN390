@@ -14,8 +14,8 @@ coverage run --branch --source='.' manage.py test tests -v 2 >> %BACKENDREPORT% 
 type %BACKENDREPORT%
 
 echo ~~~~~~~~~~~~~~~~~~~Generating coverage report~~~~~~~~~~~~~~~~~~~
-coverage report -m  --omit="*/test*" >> %BACKENDCOVERAGE%
-coverage html --omit="*/test*"
+coverage report -m  --omit="*/test*,*/core*" >> %BACKENDCOVERAGE%
+coverage html --omit="*/test*,*/core*"
 type %BACKENDCOVERAGE%
 
 echo ~~~~~~~~~~~~~~~~~~~Generating linting report~~~~~~~~~~~~~~~~~~~
@@ -45,11 +45,11 @@ move /y %BACKENDMETRICS_MI% ./reports/Metrics
 cd ..
 
 echo ~~~~~~~~~~~~~~~~~~~Frontend~~~~~~~~~~~~~~~~~~~
-cd frontend2
+cd frontend
 set FRONTENDREPORT=Report.txt
 
 echo ~~~~~~~~~~~~~~~~~~~Running tests~~~~~~~~~~~~~~~~~~~
-call npm run test:coverage >> %FRONTENDREPORT% 2>&1
+call npm test -- --coverage --watchAll=false >> %FRONTENDREPORT% 2>&1
 type %FRONTENDREPORT%
 
 echo ~~~~~~~~~~~~~~~~~~~Migrating reports to tests/Reports~~~~~~~~~~~~~~~~~~~

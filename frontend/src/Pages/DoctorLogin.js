@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { login } from '../redux/actions/authActions';
-import { Navigate } from 'react-router-dom';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../redux/actions/authActions";
+import { Navigate } from "react-router-dom";
 
 // MUI
 import Avatar from "@mui/material/Avatar";
@@ -14,7 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -42,28 +42,28 @@ const theme = createTheme();
 function Login(props) {
   const emptyForm = {
     username: "",
-    password: ""
-  }
+    password: "",
+  };
 
   // Store form data in state
   const [state, setState] = useState(emptyForm);
 
   // Change form data in state at each change
-  const handleChange = e =>
-    setState(prevState => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-    }))
+  const handleChange = (e) =>
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
 
-  const handleSubmit = e =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     props.login(state.username, state.password);
-  }
+  };
 
   // Big Bug right here
   // FIxed it! issue in private route (explain another time)
-  if(props.isAuthenticated){
-    return (<Navigate to='/'/>);
+  if (props.isAuthenticated) {
+    return <Navigate to="/home" />;
   }
 
   return (
@@ -79,10 +79,10 @@ function Login(props) {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+            <LocalHospitalIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Doctor Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
@@ -93,8 +93,8 @@ function Login(props) {
               label="User Name"
               name="username"
               autoFocus
-              value = {state.username}
-              onChange = {handleChange}
+              value={state.username}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -105,8 +105,8 @@ function Login(props) {
               type="password"
               id="password"
               autoComplete="current-password"
-              value = {state.password}
-              onChange = {handleChange}
+              value={state.password}
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -127,7 +127,7 @@ function Login(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
+                <Link href="/doctorsignup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -142,11 +142,11 @@ function Login(props) {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
-}
+  isAuthenticated: PropTypes.bool,
+};
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.authReducer.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { login })(Login);

@@ -1,0 +1,124 @@
+
+> frontend@0.1.0 test
+> react-scripts test "--coverage" "--watchAll=false"
+
+PASS src/__tests__/Alerts.test.js
+  ● Console
+
+    console.error
+      Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'current')]
+          at reportException (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+          at innerInvokeEventListeners (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:341:9)
+          at invokeEventListeners (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:274:3)
+          at HTMLUnknownElementImpl._dispatch (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:221:9)
+          at HTMLUnknownElementImpl.dispatchEvent (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:94:17)
+          at HTMLUnknownElement.dispatchEvent (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:231:34)
+          at Object.invokeGuardedCallbackDev (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+          at invokeGuardedCallback (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+          at beginWork$1 (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
+          at performUnitOfWork (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:22779:12) TypeError: Cannot read properties of undefined (reading 'current')
+          at D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-alert\dist\cjs\react-alert.js:518:28
+          at updateContextConsumer (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:18747:19)
+          at beginWork (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:19114:14)
+          at HTMLUnknownElement.callCallback (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+          at HTMLUnknownElement.callTheUserObjectsOperation (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+          at innerInvokeEventListeners (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:338:25)
+          at invokeEventListeners (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:274:3)
+          at HTMLUnknownElementImpl._dispatch (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:221:9)
+          at HTMLUnknownElementImpl.dispatchEvent (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:94:17)
+          at HTMLUnknownElement.dispatchEvent (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:231:34)
+          at Object.invokeGuardedCallbackDev (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+          at invokeGuardedCallback (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+          at beginWork$1 (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
+          at performUnitOfWork (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
+          at workLoopSync (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
+          at renderRootSync (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
+          at performSyncWorkOnRoot (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
+          at scheduleUpdateOnFiber (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
+          at updateContainer (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
+          at D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:26021:7
+          at unbatchedUpdates (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
+          at legacyRenderSubtreeIntoContainer (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
+          at Object.render (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
+          at D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\@testing-library\react\dist\pure.js:101:25
+          at batchedUpdates$1 (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
+          at act (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
+          at render (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\@testing-library\react\dist\pure.js:97:26)
+          at customRender (D:\Documents\School\s6\soen_390\SOEN390\frontend\src\test-utils.jsx:6:10)
+          at Object.<anonymous> (D:\Documents\School\s6\soen_390\SOEN390\frontend\src\__tests__\Alerts.test.js:9:5)
+          at Promise.then.completed (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\utils.js:391:28)
+          at new Promise (<anonymous>)
+          at callAsyncCircusFn (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\utils.js:316:10)
+          at _callCircusTest (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\run.js:218:40)
+          at processTicksAndRejections (node:internal/process/task_queues:96:5)
+          at _runTest (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\run.js:155:3)
+          at _runTestsForDescribeBlock (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\run.js:66:9)
+          at run (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\run.js:25:3)
+          at runAndTransformResultsToJestFormat (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:170:21)
+          at jestAdapter (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:82:19)
+          at runTestInternal (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-runner\build\runTest.js:389:16)
+          at runTest (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-runner\build\runTest.js:475:34)
+          at Object.worker (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\jest-runner\build\testWorker.js:133:12)
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+      at reportException (node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:70:28)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:341:9)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:274:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:221:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:94:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:231:34)
+
+    console.error
+      The above error occurred in the <Context.Consumer> component:
+      
+          at WithAlert(Alerts)
+          at ConnectFunction (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-redux\lib\components\connectAdvanced.js:235:41)
+          at Provider (D:\Documents\School\s6\soen_390\SOEN390\frontend\node_modules\react-redux\lib\components\Provider.js:21:20)
+          at Router (D:\Documents\School\s6\soen_390\SOEN390\packages\react-router\index.tsx:256:13)
+          at MemoryRouter (D:\Documents\School\s6\soen_390\SOEN390\packages\react-router\index.tsx:116:3)
+      
+      Consider adding an error boundary to your tree to customize error handling behavior.
+      Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+      at logCapturedError (node_modules/react-dom/cjs/react-dom.development.js:20085:23)
+      at update.callback (node_modules/react-dom/cjs/react-dom.development.js:20118:5)
+      at callCallback (node_modules/react-dom/cjs/react-dom.development.js:12318:12)
+      at commitUpdateQueue (node_modules/react-dom/cjs/react-dom.development.js:12339:9)
+      at commitLifeCycles (node_modules/react-dom/cjs/react-dom.development.js:20736:11)
+      at commitLayoutEffects (node_modules/react-dom/cjs/react-dom.development.js:23426:7)
+      at HTMLUnknownElement.callCallback (node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+
+PASS src/__tests__/Register.test.js
+PASS src/__tests__/PersonForm.test.js
+PASS src/__tests__/Login.test.js
+PASS src/__tests__/Home.test.js
+PASS src/__tests__/App.test.js
+PASS src/__tests__/SignUp.test.js
+PASS src/__tests__/RoutesManager.test.js
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   52.54 |     9.37 |   51.28 |   52.83 |                   
+ src               |   78.57 |       25 |     100 |   76.92 |                   
+  App.js           |     100 |      100 |     100 |     100 |                   
+  PrivateRoute.js  |   57.14 |       25 |     100 |      50 | 8-11              
+  RoutesManager.js |     100 |      100 |     100 |     100 |                   
+  store.js         |     100 |      100 |     100 |     100 |                   
+  test-utils.jsx   |     100 |      100 |     100 |     100 |                   
+ src/Pages         |   63.63 |    33.33 |      50 |      64 |                   
+  Home.js          |   83.33 |      100 |   66.66 |      80 | 14                
+  Login.js         |   68.75 |       50 |      50 |   71.42 | 53,59-60,66       
+  Register.js      |      55 |       25 |      50 |   55.55 | 55,61-72,77       
+  SignUp.js        |   61.53 |      100 |      40 |   61.53 | 40-43,60,65       
+ src/components    |   32.65 |        0 |   35.71 |   32.55 |                   
+  Alerts.js        |   10.34 |        0 |      20 |       8 | 8-61              
+  PersonForm.js    |   58.33 |      100 |      25 |   63.63 | 35,41-43          
+  Persons.js       |      75 |      100 |      60 |   71.42 | 40-50             
+-------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 8 passed, 8 total
+Tests:       12 passed, 12 total
+Snapshots:   0 total
+Time:        4.48 s
+Ran all test suites.

@@ -2,7 +2,6 @@ companion_api\admin.py - A
 companion_api\apps.py - A
 companion_api\models.py - A
 companion_api\serializers.py - A
-companion_api\tests.py - A
 companion_api\urls.py - A
 companion_api\views.py - A
 companion_api\__init__.py - A

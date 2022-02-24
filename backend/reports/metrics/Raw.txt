@@ -1,11 +1,11 @@
 companion_api\admin.py
-    LOC: 6
-    LLOC: 4
-    SLOC: 3
+    LOC: 9
+    LLOC: 6
+    SLOC: 5
     Comments: 0
     Single comments: 1
     Multi: 0
-    Blank: 2
+    Blank: 3
     - Comment Stats
         (C % L): 0%
         (C % S): 0%
@@ -23,37 +23,25 @@ companion_api\apps.py
         (C % S): 0%
         (C + M % L): 0%
 companion_api\models.py
-    LOC: 17
-    LLOC: 8
-    SLOC: 6
-    Comments: 2
-    Single comments: 3
+    LOC: 21
+    LLOC: 10
+    SLOC: 10
+    Comments: 3
+    Single comments: 4
     Multi: 3
-    Blank: 5
+    Blank: 4
     - Comment Stats
-        (C % L): 12%
-        (C % S): 33%
+        (C % L): 14%
+        (C % S): 30%
         (C + M % L): 29%
 companion_api\serializers.py
-    LOC: 12
+    LOC: 14
     LLOC: 9
     SLOC: 6
     Comments: 0
     Single comments: 3
     Multi: 0
-    Blank: 3
-    - Comment Stats
-        (C % L): 0%
-        (C % S): 0%
-        (C + M % L): 0%
-companion_api\tests.py
-    LOC: 5
-    LLOC: 3
-    SLOC: 2
-    Comments: 0
-    Single comments: 1
-    Multi: 0
-    Blank: 2
+    Blank: 5
     - Comment Stats
         (C % L): 0%
         (C % S): 0%
@@ -71,17 +59,17 @@ companion_api\urls.py
         (C % S): 0%
         (C + M % L): 0%
 companion_api\views.py
-    LOC: 25
-    LLOC: 11
-    SLOC: 15
-    Comments: 0
+    LOC: 20
+    LLOC: 12
+    SLOC: 10
+    Comments: 1
     Single comments: 3
     Multi: 0
     Blank: 7
     - Comment Stats
-        (C % L): 0%
-        (C % S): 0%
-        (C + M % L): 0%
+        (C % L): 5%
+        (C % S): 10%
+        (C + M % L): 5%
 companion_api\__init__.py
     LOC: 0
     LLOC: 0
@@ -95,16 +83,16 @@ companion_api\__init__.py
         (C % S): 0%
         (C + M % L): 0%
 companion_api\migrations\0001_initial.py
-    LOC: 24
-    LLOC: 5
-    SLOC: 17
+    LOC: 28
+    LLOC: 7
+    SLOC: 21
     Comments: 1
     Single comments: 1
     Multi: 0
     Blank: 6
     - Comment Stats
         (C % L): 4%
-        (C % S): 6%
+        (C % S): 5%
         (C + M % L): 4%
 companion_api\migrations\__init__.py
     LOC: 0
