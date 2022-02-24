@@ -39,7 +39,7 @@ class PatientAdmin(admin.ModelAdmin):
     search_fields = (
         "first_name__startswith",
     )  # Search field (later can add different attributes?)
-    empty_value_display = 'NO VALUE HERE :)'
+    empty_value_display = 'No Doctor'
 
     def user_(self, obj):
         link = reverse(

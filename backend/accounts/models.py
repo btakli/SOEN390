@@ -74,7 +74,7 @@ class Doctor(models.Model):
     proof = models.ImageField(null=True, blank=True, upload_to=upload_path)
 
     def __str__(self):
-        return f'Dr. {self.first_name}'
+        return f'Dr. {self.first_name} {self.last_name} ({self.user.id})'
 
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -97,7 +97,7 @@ class Patient(models.Model):
     )
 
     def __str__(self):
-        return f'{self.first_name} ({self.user.id})'
+        return f'{self.first_name} {self.last_name} ({self.user.id})'
 
 
     

@@ -15,7 +15,11 @@ class PersonSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class StatusSerializer(serializers.ModelSerializer):
+    """Status Serializer"""
+
     class Meta:
+        """Requires Meta attribute"""
+        
         model = Status
         fields = "__all__"
         extra_kwargs = {'date':{'read_only':True}}

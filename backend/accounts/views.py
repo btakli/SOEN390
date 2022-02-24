@@ -126,6 +126,7 @@ class RegisterDoctorView(generics.GenericAPIView):
                     doctor, context=self.get_serializer_context()
                 ).data,
                 "token": token,  # Create token based on user
+                "msg": 'An Email has been sent to an Admin to approve your request'
             },
             status=status.HTTP_201_CREATED
         )
@@ -249,15 +250,3 @@ class PatientView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user.patient
-
-# Get Patients of Doctor View
-class DoctorPatientsView(viewsets.ModelViewSet):
-    # only authenticated users can get access
-    permission_classes = [
-        permissions.IsAuthenticated,
-    ]
-
-    serializer_class = PatientSerializer
-
-    def get_queryset(self):
-        return self.request.user.doctor.patients.all()

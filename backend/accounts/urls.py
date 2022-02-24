@@ -1,14 +1,10 @@
 """Router registration"""
 
-from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from knox import views as knox_views
 from .views import *
 
 app_name = "accounts"
-
-router = DefaultRouter()
-router.register(r"api/patients", DoctorPatientsView, basename="patients_of_doctor")
 
 urlpatterns = [
     path("api/auth", include("knox.urls")),
@@ -28,5 +24,3 @@ urlpatterns = [
 urlpatterns += [
     path("api/auth/register/doctor/test", RegisterDoctorTestView.as_view(), name='register_doctor_test'),
 ]
-
-urlpatterns += router.urls
