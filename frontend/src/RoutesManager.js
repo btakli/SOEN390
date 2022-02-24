@@ -9,7 +9,7 @@ import DoctorSignUp from "./Pages/DoctorSignUp";
 
 import Requests from "./Pages/Requests";
 import RequestApplicationTemplate from "./Pages/RequestApplicationTemplate";
-import Template3 from "./Pages/Template3";
+import PatientsList from "./Pages/PatientsList";
 
 import PrivateRoute from "./PrivateRoute";
 import ContactForm from "./components/ContactForm";
@@ -22,7 +22,7 @@ export default function RoutesManager() {
         <Route path="/home" element={<Home />}>
           <Route path="/home/requests" element={<Requests />} />
           <Route path="/home/t2" element={<PatientStatus />} />
-          <Route path="/home/t3" element={<Template3 />} />
+          <Route path="/home/t3" element={<PatientsList />} />
         </Route>
       </Route>
       <Route path="/contact" element={<ContactForm />} />

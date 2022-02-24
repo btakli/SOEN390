@@ -14,6 +14,8 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Typography,
+  Divider,
   Button,
 } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
@@ -82,9 +84,22 @@ function StatusForm(props) {
   return (
     <Card>
       <CardContent>
-        <Grid container spacing={2} justifyContent="center">
+        <Typography
+          variant="h5"
+          align="left"
+          gutterBottom
+          component="div"   
+
+        >    
+         {/*Would be nice to insert patient's name*/} 
+          My Status
+        </Typography>
+        <Divider/>
+        <Grid pt={5} container spacing={2} justifyContent="center">
           <Grid item xs={12} sm={4}>
+            
             <Box component="form" onSubmit={onSubmit} sx={{ pb: 10 }}>
+            
               <InputLabel id="status">Status</InputLabel>
               <Select
                 fullWidth

@@ -19,7 +19,7 @@ import {
   Divider,
 } from "@mui/material";
 import Requests from "./Requests";
-import Template3 from "./Template3";
+import PatientsList from "./PatientsList";
 import PatientStatus from "./PatientStatus";
 import InfectionsPerWeekGraph from "../components/graphs/InfectionsPerWeekGraph";
 import InfectionsPerTypeGraph from "../components/graphs/InfectionsPerTypeGraph";
@@ -76,7 +76,7 @@ function Home(props) {
         >
           {value === "1" && <Requests />}
           {value === "2" && <PatientStatus />}
-          {value === "3" && <Template3 />}
+          {value === "3" && <PatientsList />}
           {value === "0" && (
             <Card>
               <CardContent>

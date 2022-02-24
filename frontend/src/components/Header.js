@@ -170,7 +170,7 @@ function Header(props) {
           <Tab label="Dashboard" value="0" />
           <Tab label="Requests" value="1" />
           <Tab label="Status" value="2" />
-          <Tab label="Template3" value="3" />
+          <Tab label="Patients List" value="3" />
         </Tabs>
       </AppBar>
     </React.Fragment>
