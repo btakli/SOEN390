@@ -57,19 +57,9 @@ function Home(props) {
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       <CssBaseline />
-      {/* Drawer toggled when navigation button clicked */}
-      <Navigator
-        PaperProps={{ style: { width: drawerWidth } }}
-        variant="temporary"
-        open={drawerOpen}
-        onClose={handleDrawerToggle}
-      />
 
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        <Header
-          onDrawerToggle={handleDrawerToggle}
-          templateValue={passedTemplateValue}
-        />
+        <Header />
         <Box
           component="main"
           sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}

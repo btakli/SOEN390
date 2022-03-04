@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../redux/actions/authActions";
+import { loginPatient } from "../redux/actions/authActions";
 import { Navigate } from "react-router-dom";
 
 // MUI
@@ -39,9 +39,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function Login(props) {
+function PatientLogin(props) {
   const emptyForm = {
-    username: "",
+    email: "",
     password: "",
   };
 
@@ -57,13 +57,13 @@ function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.login(state.username, state.password);
+    props.loginPatient(state.email, state.password);
   };
 
   // Big Bug right here
   // FIxed it! issue in private route (explain another time)
   if (props.isAuthenticated) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -89,11 +89,11 @@ function Login(props) {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="User Name"
-              name="username"
+              id="email"
+              label="Email Address"
+              name="email"
               autoFocus
-              value={state.username}
+              value={state.email}
               onChange={handleChange}
             />
             <TextField
@@ -127,7 +127,7 @@ function Login(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/usersignup" variant="body2">
+                <Link href="/patient/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -140,8 +140,8 @@ function Login(props) {
   );
 }
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
+PatientLogin.propTypes = {
+  loginPatient: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -149,4 +149,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.authReducer.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { loginPatient })(PatientLogin);

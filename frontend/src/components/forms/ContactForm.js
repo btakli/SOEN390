@@ -1,6 +1,6 @@
 // Proof of concept for sending emails to
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -47,9 +46,8 @@ const marks = [
 ];
 
 const ContactForm = (props) => {
-  const { isOpen, handleClose } = props;
-  const [formState, setFormState] = useState({
-    values: {
+  const { open, onClose } = props;
+  const [emailData, setEmailData] = useState({
       subject: "",
       urgency: 0,
       email: "",
@@ -57,8 +55,7 @@ const ContactForm = (props) => {
       // TODO Redux : Should be populated by Redux
       patient_name: "Patient Name",
       patient_id: "Patient ID",
-      reply_to: "patient.email@client.com",
-    },
+      reply_to: "patient.email@client.com"
   });
 
   const sendEmail = (e) => {
@@ -74,31 +71,22 @@ const ContactForm = (props) => {
         console.log("Email Sent Successfully", result.status, result.text)
       )
       .catch((error) => console.log("Email Send Failed...", error));
-    setFormState({
+    setEmailData({
       values: { subject: "", urgency: 0, email: "", message: "" },
     });
-    props.handleClose();
+    onClose();
   };
 
-  useEffect(() => {
-    setFormState((formState) => ({
-      ...formState,
-    }));
-  }, [formState.values]);
-
   const onChange = (e) => {
-    setFormState((formState) => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [e.target.name]: e.target.value,
-      },
+    setEmailData(prevEmailData => ({
+        ...prevEmailData,
+        [e.target.name]: e.target.value
     }));
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Dialog fullWidth maxWidth="md" open={isOpen} onClose={handleClose}>
+      <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
         <DialogTitle sx={{ bgcolor: "#101F33", color: "#fff" }}>
           Send an Email
           <IconButton
@@ -109,14 +97,14 @@ const ContactForm = (props) => {
               right: 8,
               top: 8,
             }}
-            onClick={handleClose}
+            onClick={onClose}
             aria-label="close"
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <form name="contact-form" onSubmit={sendEmail}>
+          <Box component="form" onSubmit={sendEmail}>
             <Container component="main" maxWidth="sm">
               <CssBaseline />
               <Box
@@ -137,15 +125,15 @@ const ContactForm = (props) => {
                 <Box sx={{ display: "none" }}>
                   <TextField
                     name="patient_name"
-                    value={formState.values.patient_name}
+                    value={emailData.patient_name}
                   />
                   <TextField
                     name="patient_id"
-                    value={formState.values.patient_id}
+                    value={emailData.patient_id}
                   />
                   <TextField
                     name="reply_to"
-                    value={formState.values.reply_to}
+                    value={emailData.reply_to}
                   />
                 </Box>
                 <TextField
@@ -155,7 +143,7 @@ const ContactForm = (props) => {
                   name="subject"
                   autoFocus
                   fullWidth
-                  value={formState.values.subject}
+                  value={emailData.subject}
                   onChange={onChange}
                 />
                 <InputLabel>Urgency Scale</InputLabel>
@@ -167,7 +155,7 @@ const ContactForm = (props) => {
                   max={10}
                   valueLabelDisplay="auto"
                   marks={marks}
-                  value={formState.values.urgency}
+                  value={emailData.urgency}
                   onChange={onChange}
                   sx={{ mt: 3, mb: 2 }}
                 />
@@ -176,12 +164,12 @@ const ContactForm = (props) => {
                   name="email"
                   label="Doctor"
                   fullWidth
-                  value={formState.values.email}
+                  value={emailData.email}
                   onChange={onChange}
                   sx={{ mt: 3, mb: 2 }}
                 >
                   {/* TODO Redux : Populate with available doctors for patient */}
-                  <MenuItem value={"danimacicasan@gmail.com"}>
+                  <MenuItem value={"delispeter19@gmail.com"}>
                     Doctor 1
                   </MenuItem>
                   <MenuItem value={"matteo.gisondi@yahoo.com"}>
@@ -196,7 +184,7 @@ const ContactForm = (props) => {
                   maxRows={4}
                   variant="standard"
                   fullWidth
-                  value={formState.values.message}
+                  value={emailData.message}
                   onChange={onChange}
                 />
                 <Button
@@ -209,7 +197,7 @@ const ContactForm = (props) => {
                 </Button>
               </Box>
             </Container>
-          </form>
+          </Box>
         </DialogContent>
       </Dialog>
     </ThemeProvider>

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter as Router } from "react-router-dom";
 
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -29,10 +28,7 @@ function Root() {
       <AlertProvider template={AlertTemplate} {...alertOptions}>
         <React.StrictMode>
           <Alerts />
-          <Router>
-            {/* App is just the RouterManager at the moment */}
             <App />
-          </Router>
           {/* <Footer /> */}
         </React.StrictMode>
       </AlertProvider>

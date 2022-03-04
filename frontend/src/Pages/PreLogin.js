@@ -11,6 +11,8 @@ import Typography from "@mui/material/Typography";
 import { Divider, FormControl, Radio, RadioGroup } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import Image from '../media/preLoginImage.jpg';
+
 function Copyright(props) {
   return (
     <Typography
@@ -39,11 +41,11 @@ export default function PreLogin() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if(data.get("patient") === "patient"){
-      return navigate("/userlogin");
+      navigate("/patient/login");
     } else if(data.get("doctor") === "doctor"){
-      return navigate("/doctorlogin");
+      navigate("/doctor/login");
     } else if(data.get("immigrationOfficer")){
-      return navigate("/doctorlogin");
+      navigate("/doctor/login");
     }
   };
 
@@ -57,7 +59,7 @@ export default function PreLogin() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(preLoginImage.jpg)",
+            backgroundImage: `url(${Image})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

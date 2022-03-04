@@ -1,40 +1,45 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import UserLogin from "./Pages/UserLogin";
-import DoctorLogin from "./Pages/DoctorLogin";
-import PreLogin from "./Pages/PreLogin";
-import Home from "./Pages/Home";
-import UserSignUp from "./Pages/UserSignUp";
-import DoctorSignUp from "./Pages/DoctorSignUp";
+import PatientLogin from "./pages/PatientLogin";
+import DoctorLogin from "./pages/DoctorLogin";
+import PreLogin from "./pages/PreLogin";
+import Home from "./pages/Home";
+import PatientSignUp from "./pages/PatientSignUp";
+import DoctorSignUp from "./pages/DoctorSignUp";
 
-import Requests from "./Pages/Requests";
-import RequestApplicationTemplate from "./Pages/RequestApplicationTemplate";
-import PatientsList from "./Pages/PatientsList";
+import Requests from "./pages/Requests";
+import RequestApplicationTemplate from "./pages/RequestApplicationTemplate";
+import PatientsList from "./pages/PatientsList";
 
 import PrivateRoute from "./PrivateRoute";
-import ContactForm from "./components/ContactForm";
-import PatientStatus from "./Pages/PatientStatus";
+import PatientStatus from "./pages/PatientStatus";
 
 export default function RoutesManager() {
   return (
     <Routes>
       <Route path="/" element={<PrivateRoute />}>
-        <Route path="/home" element={<Home />}>
-          <Route path="/home/requests" element={<Requests />} />
-          <Route path="/home/t2" element={<PatientStatus />} />
-          <Route path="/home/t3" element={<PatientsList />} />
-        </Route>
+        <Route path="/" element={<Home />} />
       </Route>
-      <Route path="/contact" element={<ContactForm />} />
-      <Route
-        path="/requestapplication"
-        element={<RequestApplicationTemplate />}
-      />
-      <Route path="/userlogin" element={<UserLogin />} />
-      <Route path="/doctorlogin" element={<DoctorLogin />} />
-      <Route path="/prelogin" element={<PreLogin />} />
-      <Route path="/usersignup" element={<UserSignUp />} />
-      <Route path="/doctorsignup" element={<DoctorSignUp />} />
+      <Route path="/requests" element={<PrivateRoute />}>
+        <Route path="/requests" element={<Requests />} />
+      </Route>
+      <Route path="/t2" element={<PrivateRoute />}>
+        <Route path="/t2" element={<PatientStatus />} />
+      </Route>
+      <Route path="/t3" element={<PrivateRoute />}>
+        <Route path="/t3" element={<PatientsList />} />
+      </Route>
+
+      {/* <Route path="/contact" element={<ContactForm />} /> */}
+      <Route path="/requestapplication"
+        element={<RequestApplicationTemplate />} />
+
+      {/* Login and Register Pages */}
+      <Route path="/pre/login" element={<PreLogin />} />
+      <Route path="/patient/login" element={<PatientLogin />} />
+      <Route path="/doctor/login" element={<DoctorLogin />} />
+      <Route path="/patient/signup" element={<PatientSignUp />} />
+      <Route path="/doctor/signup" element={<DoctorSignUp />} />
     </Routes>
   );
 }

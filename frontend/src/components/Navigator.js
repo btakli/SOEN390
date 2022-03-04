@@ -1,14 +1,16 @@
-import * as React from "react";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Box from "@mui/material/Box";
-import ListItem from "@mui/material/ListItem";
+import { React, useState } from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
+import Tooltip from "@mui/material/Tooltip";
+import List from '@mui/material/List';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ListItem from '@mui/material/ListItem';
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from "@mui/icons-material/Home";
-import PeopleIcon from "@mui/icons-material/People";
 import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
 import PermMediaOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import PublicIcon from "@mui/icons-material/Public";
@@ -18,85 +20,121 @@ import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
 
+import { backgroundColor,
+    drawerStyle,
+    itemStyle,
+    itemTitleStyle,
+    drawerTitleStyle } from "../styles/NavigatorStyles";
+
+// To add links to other pages
+// https://www.youtube.com/watch?v=CjFWbEOcq-Y
+
 const categories = [
   {
-    id: "Build",
+    text: "Build",
     children: [
       {
-        id: "Home",
+        text: "Home",
         icon: <HomeIcon />,
         active: true,
       },
-      { id: "Template 1", icon: <DnsRoundedIcon /> },
-      { id: "Template 1", icon: <PermMediaOutlinedIcon /> },
-      { id: "Template 1", icon: <PublicIcon /> },
-      { id: "Template 1", icon: <SettingsEthernetIcon /> },
+      { text: "Template 1", icon: <DnsRoundedIcon /> },
+      { text: "Template 2", icon: <PermMediaOutlinedIcon /> },
+      { text: "Template 3", icon: <PublicIcon /> },
+      { text: "Template 4", icon: <SettingsEthernetIcon /> },
       {
-        id: "Template 1",
+        text: "Template 5",
         icon: <SettingsInputComponentIcon />,
       },
     ],
   },
   {
-    id: "More",
+    text: "More",
     children: [
-      { id: "Settings", icon: <SettingsIcon /> },
-      { id: "Terms & Conditions", icon: <TimerIcon /> },
-      { id: "About", icon: <PhonelinkSetupIcon /> },
+      { text: "Settings", icon: <SettingsIcon /> },
+      { text: "Terms & Conditions", icon: <TimerIcon /> },
+      { text: "About", icon: <PhonelinkSetupIcon /> },
     ],
   },
 ];
 
-const item = {
-  py: "2px",
-  px: 3,
-  color: "rgba(255, 255, 255, 1)",
-  // "&:hover, &:focus": {
-  //   bgcolor: "rgba(255, 255, 255, 0.08)",
-  // },
-};
+function Navigator() {
 
-const itemCategory = {
-  boxShadow: "0 -1px 0 rgb(255,255,255,0.1) inset",
-  py: 1.5,
-  px: 3,
-};
+  const [open, setOpen] = useState(false);
 
-export default function Navigator(props) {
-  const { ...other } = props;
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <Drawer variant="permanent" {...other}>
-      <List disablePadding>
-        <ListItem
-          sx={{
-            ...item,
-            ...itemCategory,
-            fontSize: 22,
-            color: "#fff",
-            bgcolor: "#101F33",
-          }}
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <Tooltip title="Navigation">
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          // sx={{ mr: 2,
+          //     // to make the button disapear when not open
+          //     //  ...(open && { display: 'none' })
+          //      }}
         >
-          CovidTracker
-        </ListItem>
-        {categories.map(({ id, children }) => (
-          <Box key={id} sx={{ bgcolor: "#101F33" }}>
-            <ListItem sx={{ py: 2, px: 3 }}>
-              <ListItemText sx={{ color: "#fff" }}>{id}</ListItemText>
+          <MenuIcon />
+        </IconButton>
+      </Tooltip>
+        
+        
+      <Drawer
+          variant="temporary"
+          anchor="left"
+          open={open}
+          onClose={handleDrawerClose}
+          PaperProps={{
+              sx: {
+              background: backgroundColor
+              }
+          }}
+      >
+        <Box
+            sx={ drawerStyle }
+            onClick={handleDrawerClose}
+            onKeyDown={handleDrawerClose}
+        >
+          <List disablePadding >
+            <ListItem sx={drawerTitleStyle}>
+                CovidTracker
             </ListItem>
-            {children.map(({ id: childId, icon, active }) => (
-              <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>{childId}</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))}
 
-            <Divider sx={{ mt: 2 }} color="#fff" />
-          </Box>
-        ))}
-      </List>
-    </Drawer>
+            {categories.map(({ text, children }) => (
+              <Box key={text} >
+
+                  <ListItem sx={ itemTitleStyle }>
+                      <ListItemText>{text}</ListItemText>
+                  </ListItem>
+
+                  {children.map(({ text, icon, active }) => (
+                  <ListItem disablePadding key={text} sx={ itemStyle } >
+                      <ListItemButton selected={active} >
+                          <ListItemIcon>{icon}</ListItemIcon>
+                          <ListItemText>{text}</ListItemText>
+                      </ListItemButton>
+                  </ListItem>
+
+                  ))}
+
+                  {/* <Divider sx={{ mt: 3 }} color="#fff" /> */}
+              </Box>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+    </Box>
   );
 }
+
+export default Navigator;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { register } from "../redux/actions/authActions";
+import { registerDoctor } from "../redux/actions/authActions";
 import { createMessage } from "../redux/actions/messageActions";
 import { Navigate } from "react-router-dom";
 
@@ -46,25 +46,29 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function Register(props) {
+function DoctorSignUp(props) {
   const emptyForm = {
-    firstname: "",
-    lastname: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    proofFile: null,
+    confirm_password: "",
+    first_name: "",
+    last_name: "",
+    date_of_birth: "",
+    gender: "",
+    address: "",
+    city: "",
+    postal_code: "",
+    proof: ""
   };
 
   // Store form data in state
   const [state, setState] = useState(emptyForm);
-  const [file, setFile] = useState("");
 
-  const handleFileChange = (event) => {
-    setFile({
-      selectedFile: event.target.files[0],
-      selectedFileName: event.target.files[0].name,
-    });
+  const handleFileChange = (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      proof: e.target.files[0],
+    }));
   };
   // Change form data in state at each change
   const handleChange = (e) =>
@@ -75,33 +79,62 @@ function Register(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+
     const {
-      firstname,
-      lastname,
-      date,
+      email,
+      password,
+      confirm_password,
+      first_name,
+      last_name,
+      date_of_birth,
       gender,
       address,
       city,
-      postalCode,
-      email,
-      password,
-      confirmPassword,
-      proofFile,
+      postal_code,
+      proof
     } = state;
-    state.proofFile = data.get("proofFile");
-    console.log(state);
-    // if (password !== confirmPassword) {
-    //   props.createMessage({ passwordsDoNotMatch: "Passwords do not match" });
-    // } else {
-    //   const newUser = {
-    //     username,
-    //     email,
-    //     password,
-    //     proofFile,
-    //   };
-    //   props.register(newUser);
-    // }
+
+    if (password !== confirm_password) {
+      props.createMessage({ passwordsDoNotMatch: "Passwords do not match" });
+    } else {
+      // let user = new FormData();
+      // user.append('email', email);
+      // user.append('password', password);
+
+      // let new_user = new FormData();
+      // // new_user.append('user', user);
+      // new_user.append('first_name', first_name);
+      // new_user.append('last_name', last_name);
+      // new_user.append('date_of_birth', date_of_birth);
+      // new_user.append('gender', gender);
+      // new_user.append('address', address);
+      // new_user.append('city', city);
+      // new_user.append('postal_code', postal_code);
+      // new_user.append('proof', proof);
+
+      // var object1 = {};
+      // user.forEach((value, key) => object1[key] = value);
+
+      // var object = {
+      //   'user': object1
+      // };
+      // new_user.forEach((value, key) => object[key] = value);
+      // var json = JSON.stringify(object);
+
+      const newUser = {
+        email,
+        password,
+        first_name,
+        last_name,
+        date_of_birth,
+        gender,
+        address,
+        city,
+        postal_code
+      };
+
+      props.registerDoctor(newUser);
+    }
   };
 
   if (props.isAuthenticated) {
@@ -130,13 +163,13 @@ function Register(props) {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  name="firstname"
+                  name="first_name"
                   required
                   fullWidth
-                  id="firstname"
+                  id="first_name"
                   label="First Name"
                   autoFocus
-                  value={state.firstname}
+                  value={state.first_name}
                   onChange={handleChange}
                 />
               </Grid>
@@ -144,18 +177,18 @@ function Register(props) {
                 <TextField
                   required
                   fullWidth
-                  id="lastname"
+                  id="last_name"
                   label="Last Name"
-                  name="lastname"
+                  name="last_name"
                   autoComplete="family-name"
-                  value={state.lastname}
+                  value={state.last_name}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  id="date"
-                  name="date"
+                  id="date_of_birth"
+                  name="date_of_birth"
                   label="Date of birth"
                   type="date"
                   required
@@ -163,7 +196,7 @@ function Register(props) {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  value={state.date}
+                  value={state.date_of_birth}
                   onChange={handleChange}
                 />
               </Grid>
@@ -179,9 +212,8 @@ function Register(props) {
                     value={state.gender}
                     onChange={handleChange}
                   >
-                    <MenuItem value={"male"}>Male</MenuItem>
-                    <MenuItem value={"female"}>Female</MenuItem>
-                    <MenuItem value={"other"}>Other</MenuItem>
+                    <MenuItem value={"M"}>Male</MenuItem>
+                    <MenuItem value={"F"}>Female</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -209,12 +241,12 @@ function Register(props) {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  name="postalCode"
+                  name="postal_code"
                   required
                   fullWidth
-                  id="postalCode"
+                  id="postal_code"
                   label="Postal Code"
-                  value={state.postalCode}
+                  value={state.postal_code}
                   onChange={handleChange}
                 />
               </Grid>
@@ -247,22 +279,21 @@ function Register(props) {
                 <TextField
                   required
                   fullWidth
-                  name="confirmPassword"
+                  name="confirm_password"
                   label="Confirm Password"
                   type="password"
-                  id="confirmPassword"
-                  value={state.confirmPassword}
+                  id="confirm_password"
+                  value={state.confirm_password}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
-                <label htmlFor="proofFile">
+                <label htmlFor="proof">
                   <Input
                     accept="image/*"
                     fullWidth
-                    required
-                    id="proofFile"
-                    name="proofFile"
+                    id="proof"
+                    name="proof"
                     onChange={handleFileChange}
                     style={{ display: "none" }}
                     type="file"
@@ -272,7 +303,7 @@ function Register(props) {
                   </Button>
                 </label>
                 <Typography component="h1" variant="body1">
-                  {file.selectedFileName}
+                  {state.proof.name}
                 </Typography>
               </Grid>
             </Grid>
@@ -287,7 +318,7 @@ function Register(props) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/doctorlogin" variant="body2">
+                <Link href="/doctor/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -300,8 +331,8 @@ function Register(props) {
   );
 }
 
-Register.propTypes = {
-  register: PropTypes.func.isRequired,
+DoctorSignUp.propTypes = {
+  registerDoctor: PropTypes.func.isRequired,
   createMessage: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
@@ -310,4 +341,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.authReducer.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { register, createMessage })(Register);
+export default connect(mapStateToProps, { registerDoctor, createMessage })(DoctorSignUp);
