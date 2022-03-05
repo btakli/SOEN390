@@ -163,14 +163,17 @@ class RegisterPatientView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         patient = serializer.save()
+        user = patient.user
+        token = AuthToken.objects.create(user)[1]
         return Response(
             {
-                "patient": PatientSerializer(
+                "user_data": PatientSerializer(
                     patient, context=self.get_serializer_context()
                 ).data,
-                "token": AuthToken.objects.create(patient.user)[
-                    1
-                ],  # Create token based on user
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
             },
             status=status.HTTP_201_CREATED
         )
@@ -184,14 +187,16 @@ class LoginDoctorView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = User.objects.get(email=serializer.validated_data) 
         doctor = Doctor.objects.get(user_id=user.id)
+        token = AuthToken.objects.create(user)[1]
         return Response(
             {
-                "doctor": DoctorSerializer(
+                "user_data": DoctorSerializer(
                     doctor, context=self.get_serializer_context()
                 ).data,
-                "token": AuthToken.objects.create(user)[
-                    1
-                ],  # Create token based on user
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
             }
         )
 
@@ -204,14 +209,16 @@ class LoginPatientView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = User.objects.get(email=serializer.validated_data) 
         patient = Patient.objects.get(user_id=user.id)
+        token = AuthToken.objects.create(user)[1]
         return Response(
             {
-                "patient": PatientSerializer(
+                "user_data": PatientSerializer(
                     patient, context=self.get_serializer_context()
                 ).data,
-                "token": AuthToken.objects.create(user)[
-                    1
-                ],  # Create token based on user
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
             }
         )
 
@@ -226,7 +233,7 @@ class UserView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
-
+        
 # Get Doctor View
 class DoctorView(generics.RetrieveAPIView):
     # only authenticated users can get access

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { returnErrors } from './messageActions';
-import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL } from './types';
+import { USER_LOADED, USER_DATA_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL } from './types';
 
 // HELPER FUNCTION FOR API TOKEN SETUP
 export const tokenConfig = (getState) => {
@@ -34,12 +34,27 @@ export const loadUser = () => (dispatch, getState) => {
                 type: USER_LOADED,
                 payload: res.data
             });
+            const userRole = res.data;
+            let userType = userRole.is_doctor && "doctor" || userRole.is_patient && "patient";
+
+            axios.get(`http://localhost:8000/api/auth/users/${userType}`, config)
+                .then(res => {
+                    dispatch({
+                        type: USER_DATA_LOADED,
+                        payload: res.data
+                    });
+                }).catch(err => {
+                    dispatch(returnErrors(err.response.data, err.response.status));
+                    dispatch({
+                        type: AUTH_ERROR
+                    })
+                });
         }).catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status));
             dispatch({
                 type: AUTH_ERROR
             })
-        });
+        });    
 }
 
 // REGISTER DOCTOR

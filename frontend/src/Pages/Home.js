@@ -37,16 +37,6 @@ function Copyright() {
 }
 
 function Home(props) {
-  const handleClick = (e) => {
-    props.logout();
-  };
-
-  const drawerWidth = 256;
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setDrawerOpen(!drawerOpen);
-  };
 
   const [value, setValue] = React.useState("0");
   function passedTemplateValue(value) {
@@ -106,7 +96,6 @@ function Home(props) {
 }
 
 Home.propTypes = {
-  logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
 
@@ -114,4 +103,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps, { logout })(Home);
+export default connect(mapStateToProps)(Home);

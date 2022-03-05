@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         """Requires Meta attribute"""
 
         model = User
-        fields = ("id", "email", "password")
+        fields = ("id", "email", "is_doctor", "is_patient", "password")
         extra_kwargs = {"password": {"write_only": True}}
 
 # Doctor Serializer
