@@ -6,11 +6,11 @@ import RequestApplicationTemplate from "./pages/RequestApplicationTemplate";
 import PrivateRoute from "./PrivateRoute";
 
 // AUTH
-import PreLogin from "./pages/PreLogin";
-import PatientLogin from "./pages/PatientLogin";
-import DoctorLogin from "./pages/DoctorLogin";
-import PatientSignUp from "./pages/PatientSignUp";
-import DoctorSignUp from "./pages/DoctorSignUp";
+import PreLogin from "./pages/auth/PreLogin";
+import PatientLogin from "./pages/auth/PatientLogin";
+import DoctorLogin from "./pages/auth/DoctorLogin";
+import PatientSignUp from "./pages/auth/PatientSignUp";
+import DoctorSignUp from "./pages/auth/DoctorSignUp";
 
 // HOME
 import Home from "./pages/Home";

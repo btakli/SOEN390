@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { Divider, FormControl, Radio, RadioGroup } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import Image from '../media/preLoginImage.jpg';
+import Image from '../../media/preLoginImage.jpg';
 
 function Copyright(props) {
   return (

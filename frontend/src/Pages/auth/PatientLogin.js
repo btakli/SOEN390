@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { loginPatient } from "../redux/actions/authActions";
+import { loginPatient } from "../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 
 // MUI
