@@ -25,7 +25,7 @@ function Header(props){
       <Toolbar>
         <Grid container spacing={1} alignItems="center">
           <Grid item>
-            <Navigator />
+            <Navigator home={props.home}/>
           </Grid>
           <Grid item xs>
             <Typography

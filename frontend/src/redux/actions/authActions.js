@@ -35,7 +35,7 @@ export const loadUser = () => (dispatch, getState) => {
                 payload: res.data
             });
             const userRole = res.data;
-            let userType = userRole.is_doctor && "doctor" || userRole.is_patient && "patient";
+            let userType = (userRole.is_doctor) ? "doctor" : ((userRole.is_patient) ? "patient" : null);
 
             axios.get(`http://localhost:8000/api/auth/users/${userType}`, config)
                 .then(res => {

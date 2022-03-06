@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginDoctor } from "../redux/actions/authActions";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // MUI
 import Avatar from "@mui/material/Avatar";
@@ -39,7 +39,11 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function DoctorLogin(props) {
+function DoctorLogin(props) {  
+  const { redirect } = props;
+
+  let navigate = useNavigate();
+   
   const emptyForm = {
     email: "",
     password: "",
@@ -63,7 +67,7 @@ function DoctorLogin(props) {
   // Big Bug right here
   // FIxed it! issue in private route (explain another time)
   if (props.isAuthenticated) {
-    return <Navigate to="/" />;
+    navigate(`${redirect}`);
   }
 
   return (

@@ -1,14 +1,18 @@
 import { React, Fragment, useState } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+// MUI
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { Menu, MenuItem } from "@mui/material";
-import { deepPurple } from '@mui/material/colors';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 const menu = ["Profile", "Account", "Dashboard", "Logout"];
 
-function ProfileMenu(){
+function ProfileMenu(props){
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -20,6 +24,8 @@ function ProfileMenu(){
         setAnchorEl(null);
     };
 
+    let color = (props.auth.user.is_patient) ? deepPurple[500] : deepOrange[500] ;
+
     return (
         <Fragment>
             <Tooltip title="Account">
@@ -28,9 +34,8 @@ function ProfileMenu(){
                   onClick={handleOpenMenu}
                   sx={{ p: 0.5 }}
                 >
-                  <Avatar sx={{ bgcolor: deepPurple[500] }}>
-                      {/* REDUX FOR NAME HERE */}
-                      {"G"}
+                  <Avatar sx={{ bgcolor: color }}>
+                      {props.auth.userData.first_name.charAt(0)}
                   </Avatar>
                 </IconButton>
             </Tooltip>
@@ -61,6 +66,14 @@ function ProfileMenu(){
     )
 }
 
-export default ProfileMenu;
+ProfileMenu.propTypes = {
+    auth: PropTypes.object.isRequired,
+  };
+  
+const mapStateToProps = (state) => ({
+    auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(ProfileMenu);
 
 

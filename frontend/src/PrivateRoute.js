@@ -1,10 +1,13 @@
 import { React } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Backdrop, CircularProgress } from "@mui/material";
 
 function PrivateRoute(props) {
+  const { redirect } = props;
+
+  let navigate = useNavigate();
 
   if (props.auth.isLoading) {
     return (
@@ -16,7 +19,8 @@ function PrivateRoute(props) {
       </Backdrop>
     );
   } else if (!props.auth.isAuthenticated) {
-    return <Navigate to="/pre/login" />;
+    navigate(`${redirect}`);
+    return null;
   } else {
     return <Outlet />;
   }

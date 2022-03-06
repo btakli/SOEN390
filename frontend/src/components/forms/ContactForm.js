@@ -1,6 +1,7 @@
 // Proof of concept for sending emails to
-
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -47,16 +48,18 @@ const marks = [
 
 const ContactForm = (props) => {
   const { open, onClose } = props;
-  const [emailData, setEmailData] = useState({
-      subject: "",
-      urgency: 0,
-      email: "",
-      message: "",
-      // TODO Redux : Should be populated by Redux
-      patient_name: "Patient Name",
-      patient_id: "Patient ID",
-      reply_to: "patient.email@client.com"
-  });
+
+  const emptyEmail = {
+    subject: "",
+    urgency: 0,
+    email: "",
+    message: "",
+    patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    patient_id: props.auth.userData.user,
+    reply_to: props.auth.user.email
+  };
+
+  const [emailData, setEmailData] = useState(emptyEmail);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -71,9 +74,7 @@ const ContactForm = (props) => {
         console.log("Email Sent Successfully", result.status, result.text)
       )
       .catch((error) => console.log("Email Send Failed...", error));
-    setEmailData({
-      values: { subject: "", urgency: 0, email: "", message: "" },
-    });
+    setEmailData(emptyEmail);
     onClose();
   };
 
@@ -204,4 +205,12 @@ const ContactForm = (props) => {
   );
 };
 
-export default ContactForm;
+ContactForm.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(ContactForm);

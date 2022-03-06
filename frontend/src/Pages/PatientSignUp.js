@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { registerPatient } from "../redux/actions/authActions";
 import { createMessage } from "../redux/actions/messageActions";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // MUI
 import Avatar from "@mui/material/Avatar";
@@ -41,6 +41,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 function PatientSignUp(props) {
+  const { redirect } = props;
+
+  let navigate = useNavigate();
 
   const emptyForm = {
     email: "",
@@ -100,7 +103,7 @@ function PatientSignUp(props) {
   };
 
   if (props.isAuthenticated) {
-    return <Navigate to="/" />;
+    navigate(`${redirect}`);
   }
 
   return (

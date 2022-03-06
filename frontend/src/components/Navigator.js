@@ -1,4 +1,9 @@
 import { React, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+// MUI
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,36 +34,46 @@ import { backgroundColor,
 // To add links to other pages
 // https://www.youtube.com/watch?v=CjFWbEOcq-Y
 
-const categories = [
+const common = {
+  text: "More",
+  children: [
+    { text: "Settings", icon: <SettingsIcon /> },
+    { text: "Terms & Conditions", icon: <TimerIcon /> },
+    { text: "About", icon: <PhonelinkSetupIcon /> },
+  ],
+};
+
+let categories = [
   {
-    text: "Build",
-    children: [
-      {
-        text: "Home",
-        icon: <HomeIcon />,
-        active: true,
-      },
-      { text: "Template 1", icon: <DnsRoundedIcon /> },
-      { text: "Template 2", icon: <PermMediaOutlinedIcon /> },
-      { text: "Template 3", icon: <PublicIcon /> },
-      { text: "Template 4", icon: <SettingsEthernetIcon /> },
-      {
-        text: "Template 5",
-        icon: <SettingsInputComponentIcon />,
-      },
-    ],
+    text: "Pages",
+    children: [],
   },
-  {
-    text: "More",
-    children: [
-      { text: "Settings", icon: <SettingsIcon /> },
-      { text: "Terms & Conditions", icon: <TimerIcon /> },
-      { text: "About", icon: <PhonelinkSetupIcon /> },
-    ],
-  },
+  common
 ];
 
-function Navigator() {
+function Navigator(props) {
+  let navigate = useNavigate();
+  const home = (props.home === "/") ? "" : props.home;
+
+  const doctor_pages = [
+    { text: "Home", icon: <HomeIcon /> },
+    { text: "Patients", icon: <DnsRoundedIcon />, onClick: () => navigate(`${home}/patients`) },
+    { text: "Dashboard", icon: <PermMediaOutlinedIcon />, onClick: () => navigate(`${home}/dashboard`) },
+    { text: "Template 3", icon: <PublicIcon /> },
+    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
+  ];
+  
+  const patient_pages = [
+    { text: "Home", icon: <HomeIcon />, onClick: () => navigate(`${home}`) },
+    { text: "Status", icon: <DnsRoundedIcon />, onClick: () => navigate(`${home}/status`) },
+    { text: "Dashboard", icon: <PermMediaOutlinedIcon />, onClick: () => navigate(`${home}/dashboard`) },
+    { text: "Template 3", icon: <PublicIcon /> },
+    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
+  ];
+
+  categories[0]["children"] = (props.auth.user.is_doctor) ? doctor_pages : patient_pages;
 
   const [open, setOpen] = useState(false);
 
@@ -117,9 +132,9 @@ function Navigator() {
                       <ListItemText>{text}</ListItemText>
                   </ListItem>
 
-                  {children.map(({ text, icon, active }) => (
+                  {children.map(({ text, icon, onClick }) => (
                   <ListItem disablePadding key={text} sx={ itemStyle } >
-                      <ListItemButton selected={active} >
+                      <ListItemButton onClick={onClick} >
                           <ListItemIcon>{icon}</ListItemIcon>
                           <ListItemText>{text}</ListItemText>
                       </ListItemButton>
@@ -137,4 +152,12 @@ function Navigator() {
   );
 }
 
-export default Navigator;
+Navigator.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(Navigator);

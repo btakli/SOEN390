@@ -21,12 +21,13 @@ export default function(state=initialState, action){
             return {
                 ...state,
                 isAuthenticated: true,
-                isLoading: false,
+                isLoading: true,
                 user: action.payload
             };
         case USER_DATA_LOADED:
             return {
                 ...state,
+                isLoading: false,
                 userData: action.payload
             };
         case LOGIN_SUCCESS:
