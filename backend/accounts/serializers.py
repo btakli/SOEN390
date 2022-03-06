@@ -11,7 +11,11 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = User
         fields = ("id", "email", "is_doctor", "is_patient", "password")
-        extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {
+            "password": {"write_only": True},
+            'is_doctor':{'read_only':True},
+            'is_patient':{'read_only':True}
+            }
 
 # Doctor Serializer
 class DoctorSerializer(serializers.ModelSerializer):

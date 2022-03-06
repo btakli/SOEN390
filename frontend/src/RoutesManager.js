@@ -16,7 +16,7 @@ import DoctorSignUp from "./pages/auth/DoctorSignUp";
 import Home from "./pages/Home";
 import Dashboard from './pages/Dashboard';
 import Requests from "./pages/Requests";
-import PatientsList from "./pages/PatientsList";
+import Patients from "./pages/Patients";
 import PatientStatus from "./pages/PatientStatus";
 
 function RoutesManager() {
@@ -32,7 +32,7 @@ function RoutesManager() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="requests" element={<Requests />} />
           <Route path="status" element={<PatientStatus />} />
-          <Route path="patients" element={<PatientsList />} />
+          <Route path="patients" element={<Patients />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Route>

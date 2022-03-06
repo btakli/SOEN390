@@ -4,7 +4,7 @@ import { tokenConfig } from './authActions';
 import { GET_PATIENTS } from './types';
 
 // GET PERSONS API CALL
-export const getPersons = () => (dispatch, getState) => {
+export const getPatients = () => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
