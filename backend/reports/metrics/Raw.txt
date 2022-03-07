@@ -106,3 +106,291 @@ companion_api\migrations\__init__.py
         (C % L): 0%
         (C % S): 0%
         (C + M % L): 0%
+companion_api\admin.py
+    LOC: 9
+    LLOC: 6
+    SLOC: 5
+    Comments: 0
+    Single comments: 1
+    Multi: 0
+    Blank: 3
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\apps.py
+    LOC: 10
+    LLOC: 6
+    SLOC: 4
+    Comments: 0
+    Single comments: 2
+    Multi: 0
+    Blank: 4
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\models.py
+    LOC: 21
+    LLOC: 10
+    SLOC: 10
+    Comments: 3
+    Single comments: 4
+    Multi: 3
+    Blank: 4
+    - Comment Stats
+        (C % L): 14%
+        (C % S): 30%
+        (C + M % L): 29%
+companion_api\serializers.py
+    LOC: 14
+    LLOC: 9
+    SLOC: 6
+    Comments: 0
+    Single comments: 3
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\urls.py
+    LOC: 12
+    LLOC: 8
+    SLOC: 7
+    Comments: 0
+    Single comments: 1
+    Multi: 0
+    Blank: 4
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\views.py
+    LOC: 20
+    LLOC: 12
+    SLOC: 10
+    Comments: 1
+    Single comments: 3
+    Multi: 0
+    Blank: 7
+    - Comment Stats
+        (C % L): 5%
+        (C % S): 10%
+        (C + M % L): 5%
+companion_api\__init__.py
+    LOC: 0
+    LLOC: 0
+    SLOC: 0
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 0
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\migrations\0001_initial.py
+    LOC: 28
+    LLOC: 7
+    SLOC: 21
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 6
+    - Comment Stats
+        (C % L): 4%
+        (C % S): 5%
+        (C + M % L): 4%
+companion_api\migrations\__init__.py
+    LOC: 0
+    LLOC: 0
+    SLOC: 0
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 0
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+accounts\admin.py
+    LOC: 68
+    LLOC: 39
+    SLOC: 47
+    Comments: 10
+    Single comments: 7
+    Multi: 0
+    Blank: 14
+    - Comment Stats
+        (C % L): 15%
+        (C % S): 21%
+        (C + M % L): 15%
+accounts\apps.py
+    LOC: 6
+    LLOC: 4
+    SLOC: 4
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 2
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+accounts\models.py
+    LOC: 78
+    LLOC: 41
+    SLOC: 47
+    Comments: 10
+    Single comments: 10
+    Multi: 0
+    Blank: 21
+    - Comment Stats
+        (C % L): 13%
+        (C % S): 21%
+        (C + M % L): 13%
+accounts\serializers.py
+    LOC: 103
+    LLOC: 56
+    SLOC: 60
+    Comments: 16
+    Single comments: 21
+    Multi: 0
+    Blank: 22
+    - Comment Stats
+        (C % L): 16%
+        (C % S): 27%
+        (C + M % L): 16%
+accounts\urls.py
+    LOC: 25
+    LLOC: 10
+    SLOC: 19
+    Comments: 0
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+accounts\views.py
+    LOC: 133
+    LLOC: 59
+    SLOC: 101
+    Comments: 16
+    Single comments: 12
+    Multi: 0
+    Blank: 20
+    - Comment Stats
+        (C % L): 12%
+        (C % S): 16%
+        (C + M % L): 12%
+accounts\__init__.py
+    LOC: 0
+    LLOC: 0
+    SLOC: 0
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 0
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+accounts\migrations\0001_initial.py
+    LOC: 57
+    LLOC: 9
+    SLOC: 50
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 6
+    - Comment Stats
+        (C % L): 2%
+        (C % S): 2%
+        (C + M % L): 2%
+accounts\migrations\__init__.py
+    LOC: 0
+    LLOC: 0
+    SLOC: 0
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 0
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+accounts\templatetags\frontend_site_url.py
+    LOC: 13
+    LLOC: 8
+    SLOC: 6
+    Comments: 0
+    Single comments: 1
+    Multi: 2
+    Blank: 4
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 15%
+core\asgi.py
+    LOC: 16
+    LLOC: 5
+    SLOC: 4
+    Comments: 0
+    Single comments: 0
+    Multi: 6
+    Blank: 6
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 38%
+core\settings.py
+    LOC: 143
+    LLOC: 27
+    SLOC: 80
+    Comments: 16
+    Single comments: 16
+    Multi: 8
+    Blank: 39
+    - Comment Stats
+        (C % L): 11%
+        (C % S): 20%
+        (C + M % L): 17%
+core\urls.py
+    LOC: 8
+    LLOC: 3
+    SLOC: 7
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 1
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+core\wsgi.py
+    LOC: 16
+    LLOC: 5
+    SLOC: 4
+    Comments: 0
+    Single comments: 0
+    Multi: 6
+    Blank: 6
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 38%
+core\__init__.py
+    LOC: 0
+    LLOC: 0
+    SLOC: 0
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 0
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%

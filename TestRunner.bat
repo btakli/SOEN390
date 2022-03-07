@@ -23,11 +23,11 @@ pylint companion_api >> %BACKENDSTYLE%
 type %BACKENDSTYLE%
 
 echo ~~~~~~~~~~~~~~~~~~~Generating metric report~~~~~~~~~~~~~~~~~~~
-radon raw companion_api >> %BACKENDMETRICS_RAW%
+radon raw companion_api accounts core >> %BACKENDMETRICS_RAW%
 type %BACKENDMETRICS_RAW%
-radon cc companion_api >> %BACKENDMETRICS_CC%
+radon cc companion_api accounts core >> %BACKENDMETRICS_CC%
 type %BACKENDMETRICS_CC%
-radon mi companion_api >> %BACKENDMETRICS_MI%
+radon mi companion_api accounts core >> %BACKENDMETRICS_MI%
 type %BACKENDMETRICS_MI%
 
 echo ~~~~~~~~~~~~~~~~~~~Migrating reports to ./reports~~~~~~~~~~~~~~~~~~~

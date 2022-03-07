@@ -13,6 +13,6 @@ companion_api\views.py:8:0: R0901: Too many ancestors (11/7) (too-many-ancestors
 companion_api\views.py:4:0: W0614: Unused import(s) Person, models and User from wildcard import of models (unused-wildcard-import)
 companion_api\views.py:5:0: W0614: Unused import(s) serializers from wildcard import of serializers (unused-wildcard-import)
 
-------------------------------------------------------------------
-Your code has been rated at 7.25/10 (previous run: 7.25/10, +0.00)
+-------------------------------------------------------------------
+Your code has been rated at 7.25/10 (previous run: -1.25/10, +8.50)
 

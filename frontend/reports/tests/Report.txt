@@ -90,8 +90,8 @@ PASS src/__tests__/Alerts.test.js
       at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
 
 PASS src/__tests__/Register.test.js
-PASS src/__tests__/PersonForm.test.js
 PASS src/__tests__/Login.test.js
+PASS src/__tests__/PersonForm.test.js
 PASS src/__tests__/Home.test.js
 PASS src/__tests__/App.test.js
 PASS src/__tests__/SignUp.test.js
@@ -120,5 +120,5 @@ All files          |   52.54 |     9.37 |   51.28 |   52.83 |
 Test Suites: 8 passed, 8 total
 Tests:       12 passed, 12 total
 Snapshots:   0 total
-Time:        4.48 s
+Time:        4.624 s
 Ran all test suites.

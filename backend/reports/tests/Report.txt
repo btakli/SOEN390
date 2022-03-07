@@ -100,7 +100,7 @@ test_person_attribute (tests.test_companion_api.test_models.PersonTestCase)
 Check that the people are properly stored in the database ... ok
 
 ----------------------------------------------------------------------
-Ran 31 tests in 2.420s
+Ran 31 tests in 2.448s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

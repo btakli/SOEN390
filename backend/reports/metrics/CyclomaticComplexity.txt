@@ -10,3 +10,64 @@ companion_api\views.py
     M 19:4 PersonView.perform_create - A
 companion_api\migrations\0001_initial.py
     C 8:0 Migration - A
+companion_api\apps.py
+    C 6:0 CompanionApiConfig - A
+companion_api\models.py
+    C 10:0 Person - A
+companion_api\serializers.py
+    C 7:0 PersonSerializer - A
+companion_api\views.py
+    C 8:0 PersonView - A
+    M 14:4 PersonView.get_queryset - A
+    M 19:4 PersonView.perform_create - A
+companion_api\migrations\0001_initial.py
+    C 8:0 Migration - A
+accounts\admin.py
+    C 31:0 PatientAdmin - A
+    C 12:0 DoctorAdmin - A
+    M 46:4 PatientAdmin.doctor_ - A
+    M 21:4 DoctorAdmin.user_ - A
+    M 27:4 DoctorAdmin.number_of_patients - A
+    M 40:4 PatientAdmin.user_ - A
+accounts\apps.py
+    C 4:0 AccountsConfig - A
+accounts\models.py
+    C 6:0 UserManager - A
+    M 21:4 UserManager.create_superuser - A
+    M 8:4 UserManager.create_user - A
+    C 50:0 Doctor - A
+    C 67:0 Patient - A
+    C 32:0 User - A
+    M 64:4 Doctor.__str__ - A
+    M 74:4 Patient.__str__ - A
+accounts\serializers.py
+    C 91:0 LoginSerializer - A
+    M 98:4 LoginSerializer.validate - A
+    C 29:0 RegisterDoctorSerializer - A
+    C 61:0 RegisterPatientSerializer - A
+    C 6:0 UserSerializer - A
+    C 17:0 DoctorSerializer - A
+    C 23:0 PatientSerializer - A
+    M 44:4 RegisterDoctorSerializer.create - A
+    M 73:4 RegisterPatientSerializer.create - A
+accounts\views.py
+    C 8:0 RegisterDoctorView - A
+    C 28:0 RegisterPatientView - A
+    C 48:0 LoginDoctorView - A
+    C 68:0 LoginPatientView - A
+    C 88:0 UserView - A
+    C 100:0 DoctorView - A
+    C 112:0 PatientView - A
+    C 124:0 DoctorPatientsView - A
+    M 11:4 RegisterDoctorView.post - A
+    M 31:4 RegisterPatientView.post - A
+    M 51:4 LoginDoctorView.post - A
+    M 71:4 LoginPatientView.post - A
+    M 96:4 UserView.get_object - A
+    M 108:4 DoctorView.get_object - A
+    M 120:4 PatientView.get_object - A
+    M 132:4 DoctorPatientsView.get_queryset - A
+accounts\migrations\0001_initial.py
+    C 9:0 Migration - A
+accounts\templatetags\frontend_site_url.py
+    F 9:0 frontend_site_url - A
