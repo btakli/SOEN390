@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginDoctor } from "../../redux/actions/authActions";
@@ -43,6 +43,12 @@ function DoctorLogin(props) {
   const { redirect } = props;
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      navigate(`${redirect}`);
+    }
+  });
    
   const emptyForm = {
     email: "",
@@ -63,12 +69,6 @@ function DoctorLogin(props) {
     e.preventDefault();
     props.loginDoctor(state.email, state.password);
   };
-
-  // Big Bug right here
-  // FIxed it! issue in private route (explain another time)
-  if (props.isAuthenticated) {
-    navigate(`${redirect}`);
-  }
 
   return (
     <ThemeProvider theme={theme}>

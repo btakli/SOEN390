@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { registerPatient } from "../../redux/actions/authActions";
@@ -44,6 +44,12 @@ function PatientSignUp(props) {
   const { redirect } = props;
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      navigate(`${redirect}`);
+    }
+  });
 
   const emptyForm = {
     email: "",
@@ -101,10 +107,6 @@ function PatientSignUp(props) {
       props.registerPatient(newUser);
     }
   };
-
-  if (props.isAuthenticated) {
-    navigate(`${redirect}`);
-  }
 
   return (
     <ThemeProvider theme={theme}>

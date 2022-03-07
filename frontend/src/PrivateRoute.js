@@ -6,14 +6,16 @@ import { Backdrop, CircularProgress } from "@mui/material";
 
 function PrivateRoute(props) {
 
-  useEffect(() => {
-
-  }, []);
-  
   const { redirect } = props;
 
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if (props.auth.isAuthenticated !== null && !props.auth.isAuthenticated) {
+      navigate(`${redirect}`);
+    }
+  });
+  
   if (props.auth.isLoading) {
     return (
       <Backdrop
@@ -23,8 +25,7 @@ function PrivateRoute(props) {
         <CircularProgress color="inherit" />
       </Backdrop>
     );
-  } else if (!props.auth.isAuthenticated) {
-    navigate(`${redirect}`);
+  } else if (!props.auth.isAuthenticated) {    
     return null;
   } else {
     return <Outlet />;

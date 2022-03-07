@@ -1,8 +1,6 @@
-import "./App.css";
-import { BrowserRouter as Router } from "react-router-dom";
-
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
 
 import NoMatch from "./pages/NoMatch";
 import RequestApplicationTemplate from "./pages/RequestApplicationTemplate";
