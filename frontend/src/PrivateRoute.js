@@ -1,10 +1,15 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Backdrop, CircularProgress } from "@mui/material";
 
 function PrivateRoute(props) {
+
+  useEffect(() => {
+
+  }, []);
+  
   const { redirect } = props;
 
   let navigate = useNavigate();
