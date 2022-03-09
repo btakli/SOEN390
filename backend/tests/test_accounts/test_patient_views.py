@@ -14,7 +14,7 @@ class TestViews(TestSetUp):
         res = self.client.post(self.register_patient_url, self.correct_patient_data, format='json')
 
         self.assertTrue(User.objects.filter(email = self.correct_patient_data['user']['email']).exists())
-        self.assertEqual(res.data['user']['first_name'], self.correct_patient_data['first_name'])
+        self.assertEqual(res.data['patient']['first_name'], self.correct_patient_data['first_name'])
         self.assertEqual(res.status_code, 201)
 
     def test_patient_cannot_register_with_no_user(self):
