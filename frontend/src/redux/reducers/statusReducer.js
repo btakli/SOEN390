@@ -1,7 +1,7 @@
 import { GET_STATUS, GET_LATEST_STATUS, GET_PATIENT_LATEST_STATUS, ADD_STATUS } from "../actions/types.js";
 
 const initialState = {
-    latestStatus: null,
+    latest: [],
     allStatus: []
 };
 
@@ -12,7 +12,7 @@ export default function(state=initialState, action){
         case GET_LATEST_STATUS:
             return {
                 ...state,
-                latestStatus: action.payload
+                latest: action.payload
             };
         case ADD_STATUS:
             return {

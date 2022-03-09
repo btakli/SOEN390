@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import StatusForm from "../components/forms/StatusForm";
+import StatusTable from "../components/tables/StatusTable";
 
 // MUI
 import {
@@ -10,6 +11,7 @@ import {
   Typography,
   Divider
 } from "@mui/material";
+import PersonTable from "../components/tables/PersonTable";
 
 function PatientStatus(props) {
   
@@ -25,6 +27,12 @@ function PatientStatus(props) {
         >
           {props.auth.userData.first_name}'s Update Status Form
         </Typography>
+
+        <Divider/>
+
+        {/* <PersonTable /> */}
+
+        <StatusTable />
 
         <Divider/>
 
