@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='status',
-            name='caugh',
+            name='cough',
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
