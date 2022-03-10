@@ -11,7 +11,6 @@ import {
   Typography,
   Divider
 } from "@mui/material";
-import PersonTable from "../components/tables/PersonTable";
 
 function PatientStatus(props) {
   
@@ -29,8 +28,6 @@ function PatientStatus(props) {
         </Typography>
 
         <Divider/>
-
-        {/* <PersonTable /> */}
 
         <StatusTable />
 

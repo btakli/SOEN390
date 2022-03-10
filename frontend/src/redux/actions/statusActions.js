@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messageActions';
 import { tokenConfig } from './authActions';
-import { GET_STATUS, GET_LATEST_STATUS, GET_PATIENT_LATEST_STATUS, ADD_STATUS } from './types';
+import { GET_ALL_STATUS, GET_LATEST_STATUS, GET_PATIENT_LATEST_STATUS, ADD_STATUS } from './types';
 
 // // GET STATUS API CALL
 // export const getStatus = () => (dispatch, getState) => {
@@ -19,7 +19,6 @@ import { GET_STATUS, GET_LATEST_STATUS, GET_PATIENT_LATEST_STATUS, ADD_STATUS } 
 
 // GET LATEST STATUS API CALL
 export const getLatestStatus = () => (dispatch, getState) => {
-
     const config = tokenConfig(getState);
 
     axios.get(`http://localhost:8000/api/patient/status/latest/`, config)
@@ -31,7 +30,7 @@ export const getLatestStatus = () => (dispatch, getState) => {
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
-// POST PERSON API CALL
+// POST STATUS API CALL
 export const addStatus = (status) => (dispatch, getState) => {
 
     const config = tokenConfig(getState);

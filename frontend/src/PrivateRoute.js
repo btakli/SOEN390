@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Backdrop, CircularProgress } from "@mui/material";
+import Spinner from "./components/Spinner";
 
 function PrivateRoute(props) {
 
@@ -17,14 +17,7 @@ function PrivateRoute(props) {
   });
   
   if (props.auth.isLoading) {
-    return (
-      <Backdrop
-        open={true}
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    );
+    return <Spinner />;
   } else if (!props.auth.isAuthenticated) {    
     return null;
   } else {

@@ -11,57 +11,78 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+  
+const statusFields = [
+    "Status",
+    "Sore Throat",
+    "Runny Nose",
+    "Sneezing",
+    "Cough",
+    "Difficulty Breathing",
+    "High Temperature",
+    "Fever",
+    "Chills",
+    "Fatigue",
+    "Muscle Ache",
+    "Smell Or Taste Loss",
+    "Headache",
+    "Stomach Pain"
+];
+
+function extractStatus(latestStatus){
+    let arr = [];
+    for(const key in latestStatus){
+        if(!(key === "id" || key === "date" || key === "patient")){
+            const val = latestStatus[key];
+            arr.push({key, val});
+        }
+    }
+    return arr;
+}
 
 function StatusTable(props) {
-  useEffect(() => {
-    console.log("HEEEREREEE");
-    props.getLatestStatus();
-    
-  }, []);
+    useEffect(() => {
+        props.getLatestStatus();
+    }, []);
 
-  return (
-    <Fragment>
-        <h1>
-            Latest Status
-        </h1>
-        <TableContainer component={Paper}  sx={{ width: 2/3, margin: 'auto'}}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-                <TableRow>
-                <TableCell>Status</TableCell>
-                <TableCell>First</TableCell>
-                <TableCell>Last</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>DOB</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {props.status.latest.map((row) => (
-                <TableRow
-                    key={row.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                    <TableCell>{row.id}</TableCell>
-                    <TableCell>{row.first_name}</TableCell>
-                    <TableCell>{row.last_name}</TableCell>
-                    <TableCell>{row.email}</TableCell>
-                    <TableCell>{row.date_of_birth}</TableCell>
-                </TableRow>
-                ))}
-            </TableBody>
-            </Table>
-        </TableContainer>
-    </Fragment>
-  );
+    const statusResults = extractStatus(props.latestStatus);
+
+    return (
+        <Fragment>
+            <h1>
+                Latest Status
+            </h1>
+            <TableContainer component={Paper}  sx={{ width: 2/3, margin: 'auto', my: 6}}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        {statusFields.map((field) => (
+                            <TableCell key={field}>{field}</TableCell>
+                        ))}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow
+                        key={props.latestStatus.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                        {statusResults.map(({key,val}) => (
+                            <TableCell key={key}>{val}</TableCell>
+                        ))}
+                    </TableRow>
+                </TableBody>
+                </Table>
+            </TableContainer>
+        </Fragment>
+    );
 }
 
 StatusTable.propTypes = {
-    status: PropTypes.object.isRequired,
-    getLatestStatus: PropTypes.func.isRequired
+    latestStatus: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    status: state.statusReducer
+    latestStatus: state.statusReducer.latestStatus
   });
 
 export default connect(mapStateToProps, { getLatestStatus })(StatusTable);
