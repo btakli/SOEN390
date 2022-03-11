@@ -14,11 +14,11 @@ import PatientSignUp from "./pages/auth/PatientSignUp";
 import DoctorSignUp from "./pages/auth/DoctorSignUp";
 
 // HOME
-import Home from "./pages/Home";
-import Dashboard from './pages/Dashboard';
+import Home from "./pages/home/Home";
+import Dashboard from './pages/home/Dashboard';
+import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
-import PatientStatus from "./pages/PatientStatus";
 
 function App() {
 
