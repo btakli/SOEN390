@@ -1,10 +1,10 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logout } from "../redux/actions/authActions";
-import Navigator from './Navigator';
-import Mail from './Mail';
-import ProfileMenu from "./ProfileMenu";
+import { logout } from "../../redux/actions/authActions";
+import Navigator from './headerComponents/Navigator';
+import Mail from './headerComponents/Mail';
+import ProfileMenu from "./headerComponents/ProfileMenu";
 
 // MUI
 import Toolbar from "@mui/material/Toolbar";

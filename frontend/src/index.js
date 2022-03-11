@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import { loadUser } from "./redux/actions/authActions";
-import Alerts from "./components/Alerts";
+import Alerts from "./components/layout/Alerts";
 
 function Root() {
   const alertOptions = {
