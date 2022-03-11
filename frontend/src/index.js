@@ -8,7 +8,7 @@ import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./redux/store";
 
 import { loadUser } from "./redux/actions/authActions";
 import Alerts from "./components/layout/Alerts";

@@ -4,7 +4,7 @@ import "./App.css";
 
 import NoMatch from "./pages/NoMatch";
 import RequestApplicationTemplate from "./pages/RequestApplicationTemplate";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 // AUTH
 import PreLogin from "./pages/auth/PreLogin";

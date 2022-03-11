@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Spinner from "./components/Spinner";
+import Spinner from "./Spinner";
 
 function PrivateRoute(props) {
 
