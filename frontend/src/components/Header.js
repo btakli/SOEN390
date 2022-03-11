@@ -21,7 +21,7 @@ function Header(props){
   };
 
   return (
-    <AppBar color="primary" position="sticky" elevation={6}>
+    <AppBar color="primary" position="sticky" elevation={6} sx={{zIndex: 100}} >
       <Toolbar>
         <Grid container spacing={1} alignItems="center">
           <Grid item>

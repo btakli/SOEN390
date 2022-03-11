@@ -16,8 +16,7 @@ import Alerts from "./components/Alerts";
 function Root() {
   const alertOptions = {
     timeout: 3000,
-    position: "top center",
-    zindex: 1000
+    position: "top center"
   };
 
   useEffect(() => {
@@ -29,7 +28,7 @@ function Root() {
       <AlertProvider template={AlertTemplate} {...alertOptions}>
         <React.StrictMode>
           {/* For the alerts... have different alerts for here and then inside Home */}
-          <Alerts />
+          {/* <Alerts /> */}
           <App />
         </React.StrictMode>
       </AlertProvider>
