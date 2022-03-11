@@ -6,14 +6,14 @@ import PropTypes from 'prop-types';
 function Alerts(props) {
 
     const mountRef = useRef(false);
-    const updateRef = useRef(false);
+    const updateRef = useRef(true);
 
-    useEffect(() => {
-        // Avoid initial mount with this if stment
-        if (!mountRef.current){
-            updateRef.current = true;
-        }
-    }, []);
+    // useEffect(() => {
+    //     // Avoid initial mount with this if stment
+    //     if (!mountRef.current){
+    //         updateRef.current = true;
+    //     }
+    // }, []);
 
     useEffect(() => {
 
@@ -53,6 +53,7 @@ function Alerts(props) {
             if (props.message.deletePerson) props.alert.success(props.message.deletePerson);
             if (props.message.addPerson) props.alert.success(props.message.addPerson);
             if (props.message.passwordsDoNotMatch) props.alert.error(props.message.passwordsDoNotMatch);
+            if (props.message.addStatus) props.alert.success(props.message.addStatus);
         }
 
     }, [props.message]);

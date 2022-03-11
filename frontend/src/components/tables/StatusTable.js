@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getLatestStatus } from '../../redux/actions/statusActions';
-import { useEffect, Fragment } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

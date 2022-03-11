@@ -17,6 +17,7 @@ function Root() {
   const alertOptions = {
     timeout: 3000,
     position: "top center",
+    zindex: 1000
   };
 
   useEffect(() => {
@@ -27,9 +28,9 @@ function Root() {
     <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...alertOptions}>
         <React.StrictMode>
+          {/* For the alerts... have different alerts for here and then inside Home */}
           <Alerts />
-            <App />
-          {/* <Footer /> */}
+          <App />
         </React.StrictMode>
       </AlertProvider>
     </Provider>

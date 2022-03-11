@@ -29,10 +29,6 @@ function PatientStatus(props) {
 
         <Divider/>
 
-        <StatusTable />
-
-        <Divider/>
-
         <StatusForm />
 
       </CardContent>

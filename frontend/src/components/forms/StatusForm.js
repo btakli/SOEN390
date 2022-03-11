@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { addStatus } from '../../redux/actions/statusActions';
+import { addStatus, getAllStatus } from '../../redux/actions/statusActions';
 
 // MUI
 import Box from "@mui/material/Box";
@@ -20,6 +20,29 @@ import {
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+
+function getLatestStatus(statusArr) {
+  let latestDate = new Date('2000');
+  let latestStatus = {};
+
+  statusArr.forEach( status => {
+    const date = new Date(status.date);
+    if(date > latestDate){
+      latestDate = date;
+      latestStatus = status;
+    }
+  });
+
+  return latestStatus;
+}
+
+function isEmpty(obj) {
+  for(var prop in obj) {
+      if(obj.hasOwnProperty(prop))
+          return false;
+  }
+  return true;
+}
 
 function createData(name, value) {
   return { name, value };
@@ -62,6 +85,19 @@ function StatusForm(props) {
   // Store form data in state
   const [state, setState] = useState(emptyForm);
 
+  // When page loads get all the Status from backend
+  useEffect(() => {
+    props.getAllStatus();
+  }, []);
+
+  // When latest status is loaded in, update the form to latest status
+  useEffect(() => {
+    if (props.allStatus.length != 0){
+      const latestStatus = getLatestStatus(props.allStatus);
+      setState((!isEmpty(latestStatus)) ? latestStatus : emptyForm);
+    }
+  }, [props.allStatus]);
+
   // Change form data in state at each change
   const handleChange = (e) => {
     //in order for the checkbox value to be recognized, this line is mandatory
@@ -76,7 +112,7 @@ function StatusForm(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     props.addStatus(state);
-    setState(emptyForm)
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -165,6 +201,11 @@ function StatusForm(props) {
 
 StatusForm.propTypes = {
   addStatus: PropTypes.func.isRequired,
+  allStatus: PropTypes.array.isRequired
 };
 
-export default connect(null, { addStatus })(StatusForm);
+const mapStateToProps = state => ({
+  allStatus: state.statusReducer.allStatus
+});
+
+export default connect(mapStateToProps, { addStatus, getAllStatus })(StatusForm);

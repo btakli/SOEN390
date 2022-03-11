@@ -2,12 +2,14 @@ import React from 'react';
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Alerts from '../components/Alerts';
 
 // MUI
 import {
   Box,
   CssBaseline
 } from "@mui/material";
+
 
 function Home(props) {
 
@@ -16,6 +18,7 @@ function Home(props) {
       <CssBaseline />
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <Header home={props.home} />
+        <Alerts />
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: "#eaeff1" }}>
           <Outlet />
         </Box>
