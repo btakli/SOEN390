@@ -17,12 +17,11 @@ export const getAllStatus = () => (dispatch, getState) => {
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
-// Might not be needed anymore...
 // GET LATEST STATUS API CALL
-export const getLatestStatus = () => (dispatch, getState) => {
+export const getLatestStatus = (id) => (dispatch, getState) => {
     const config = tokenConfig(getState);
 
-    axios.get(`http://localhost:8000/api/patient/status/latest/`, config)
+    axios.get(`http://localhost:8000/api/patient/status/latest/${id}/`, config)
         .then(res => {
             dispatch({
                 type: GET_LATEST_STATUS,

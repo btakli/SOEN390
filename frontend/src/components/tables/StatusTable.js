@@ -1,7 +1,6 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getLatestStatus } from '../../redux/actions/statusActions';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +9,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Typography from "@mui/material/Typography";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
   
+const zip = (a1, a2) => a1.map((x, i) => [x, a2[i]]); 
+
 const statusFields = [
     "Status",
     "Sore Throat",
@@ -40,40 +44,61 @@ function extractStatus(latestStatus){
 }
 
 function StatusTable(props) {
+
+    const [statusData, setStatusData] = useState(extractStatus(props.latestStatus));
+
     useEffect(() => {
-        props.getLatestStatus();
-    }, []);
+        setStatusData(extractStatus(props.latestStatus));
+    }, [props.latestStatus]);
 
-    const statusResults = extractStatus(props.latestStatus);
+    console.log(zip(statusFields, statusData));
 
-    return (
-        <Fragment>
-            <h1>
-                Latest Status
-            </h1>
-            <TableContainer component={Paper}  sx={{ width: 2/3, margin: 'auto', my: 6}}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        {statusFields.map((field) => (
-                            <TableCell key={field}>{field}</TableCell>
+    if(!props.latestStatus.patient){
+        return (
+            <Typography variant="h3" component="div" align="center" sx={{ my: 3}}>
+                No Status Available!
+            </Typography>
+        );
+    } else {
+        return (
+            <Fragment>
+                <Typography variant="h3" component="div" align="center" sx={{ my: 3}}>
+                    Latest Status
+                </Typography>
+                <TableContainer component={Paper}  sx={{ width: "100%", margin: 'auto', my: 6}}>
+                    <Table sx={{ minWidth: "sm" }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Fields</TableCell>
+                            <TableCell>Data</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {zip(statusFields, statusData).map((item, i) => (
+                            <TableRow
+                                key={i+"0"}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell key={i+"1"}>{item[0]}</TableCell>
+                                <TableCell key={i+"2"}>{
+                                    (item[1]) ?
+                                        ((typeof item[1].val === 'string') ?
+                                            item[1].val 
+                                            : ((item[1].val) ? <CheckCircleOutlineIcon color='success'/>
+                                                : <HighlightOffIcon color='error'/> ))
+                                        : ""
+                                    }
+                                </TableCell>
+                            </TableRow>
                         ))}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow
-                        key={props.latestStatus.id}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                        {statusResults.map(({key,val}) => (
-                            <TableCell key={key}>{val}</TableCell>
-                        ))}
-                    </TableRow>
-                </TableBody>
-                </Table>
-            </TableContainer>
-        </Fragment>
-    );
+                    </TableBody>
+                    </Table>
+                </TableContainer>
+            </Fragment>
+        );
+    }
+
+    
 }
 
 StatusTable.propTypes = {
@@ -82,6 +107,6 @@ StatusTable.propTypes = {
 
 const mapStateToProps = state => ({
     latestStatus: state.statusReducer.latestStatus
-  });
+});
 
-export default connect(mapStateToProps, { getLatestStatus })(StatusTable);
+export default connect(mapStateToProps)(StatusTable);
