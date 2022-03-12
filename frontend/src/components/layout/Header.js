@@ -2,9 +2,10 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
-import Navigator from './headerComponents/Navigator';
-import Mail from './headerComponents/Mail';
+import Navigator from "./headerComponents/Navigator";
+import Mail from "./headerComponents/Mail";
 import ProfileMenu from "./headerComponents/ProfileMenu";
+import Notification from "./headerComponents/Notification";
 
 // MUI
 import Toolbar from "@mui/material/Toolbar";
@@ -14,50 +15,57 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 
-function Header(props){
-
+function Header(props) {
   const handleLogout = (e) => {
     props.logout();
   };
 
   return (
-    <AppBar color="primary" position="sticky" elevation={6} sx={{zIndex: 100}} >
+    <AppBar
+      color="primary"
+      position="sticky"
+      elevation={6}
+      sx={{ zIndex: 100 }}
+    >
       <Toolbar>
         <Grid container spacing={1} alignItems="center">
           <Grid item>
-            <Navigator home={props.home}/>
+            <Navigator home={props.home} />
           </Grid>
           <Grid item xs>
             <Typography
-                color="inherit"
-                variant="h5"
-                align="left"
-                component="h1"
+              color="inherit"
+              variant="h5"
+              align="left"
+              component="h1"
             >
-                CovidTracker
+              CovidTracker
             </Typography>
           </Grid>
           <Grid item>
-            <Mail /> 
+            <Mail />
+          </Grid>
+          <Grid item>
+            <Notification />
           </Grid>
           <Grid item>
             <ProfileMenu />
           </Grid>
           <Grid item>
             <Tooltip title="Logout">
-                <Button
+              <Button
                 variant="contained"
                 onClick={handleLogout}
                 style={{ backgroundColor: "#00bcd4" }}
-                >
+              >
                 Logout
-                </Button>
-            </Tooltip> 
+              </Button>
+            </Tooltip>
           </Grid>
         </Grid>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
 Header.propTypes = {
