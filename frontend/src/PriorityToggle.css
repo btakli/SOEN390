@@ -1,0 +1,39 @@
+.toggle-container {
+    width: 60px;
+    background-color: #c4c4c4;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+    padding: 2px;
+    height: 25px;
+    position: relative;
+  }
+  
+  .dialog-button {
+    font-size: 12px;
+    line-height: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #2e8b57;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.623);
+    min-width: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    min-width: unset;
+    border-radius: 3px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.623);
+    position: absolute;
+    left: 33px;
+    transition: all 0.3s ease;
+  }
+  
+  .disabled {
+    background-color: #707070;
+    left: 2px;
+  }
