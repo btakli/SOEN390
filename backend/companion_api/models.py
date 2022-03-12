@@ -35,7 +35,7 @@ class Status(models.Model):
     soreThroat = models.BooleanField(default=False)
     runnyNose = models.BooleanField(default=False)
     sneezing = models.BooleanField(default=False)
-    caugh = models.BooleanField(default=False)
+    cough = models.BooleanField(default=False)
     diffBreathing = models.BooleanField(default=False)
     highTemp = models.BooleanField(default=False)
     fever = models.BooleanField(default=False)
