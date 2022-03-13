@@ -8,15 +8,15 @@ import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./redux/store";
 
 import { loadUser } from "./redux/actions/authActions";
-import Alerts from "./components/Alerts";
+import Alerts from "./components/layout/Alerts";
 
 function Root() {
   const alertOptions = {
     timeout: 3000,
-    position: "top center",
+    position: "top center"
   };
 
   useEffect(() => {
@@ -27,9 +27,9 @@ function Root() {
     <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...alertOptions}>
         <React.StrictMode>
-          <Alerts />
-            <App />
-          {/* <Footer /> */}
+          {/* For the alerts... have different alerts for here and then inside Home */}
+          {/* <Alerts /> */}
+          <App />
         </React.StrictMode>
       </AlertProvider>
     </Provider>

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addPerson } from '../redux/actions/personActions';
+import { addPerson } from '../../redux/actions/personActions';
 import React, { useState } from "react";
 
 // MUI

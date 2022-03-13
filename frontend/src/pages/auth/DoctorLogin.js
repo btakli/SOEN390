@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { loginPatient } from "../../redux/actions/authActions";
+import { loginDoctor } from "../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 
 // MUI
@@ -14,7 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -39,11 +39,17 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function PatientLogin(props) {
+function DoctorLogin(props) {  
   const { redirect } = props;
-  
+
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      navigate(`${redirect}`);
+    }
+  });
+   
   const emptyForm = {
     email: "",
     password: "",
@@ -61,14 +67,8 @@ function PatientLogin(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.loginPatient(state.email, state.password);
+    props.loginDoctor(state.email, state.password);
   };
-
-  // Big Bug right here
-  // FIxed it! issue in private route (explain another time)
-  if (props.isAuthenticated) {
-    navigate(`${redirect}`);
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -83,10 +83,10 @@ function PatientLogin(props) {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <AccountCircleIcon />
+            <LocalHospitalIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Patient Sign in
+            Doctor Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
@@ -131,7 +131,7 @@ function PatientLogin(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/patient/signup" variant="body2">
+                <Link href="/doctor/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -144,8 +144,8 @@ function PatientLogin(props) {
   );
 }
 
-PatientLogin.propTypes = {
-  loginPatient: PropTypes.func.isRequired,
+DoctorLogin.propTypes = {
+  loginDoctor: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -153,4 +153,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.authReducer.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { loginPatient })(PatientLogin);
+export default connect(mapStateToProps, { loginDoctor })(DoctorLogin);

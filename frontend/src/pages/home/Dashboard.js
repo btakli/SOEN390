@@ -2,8 +2,8 @@ import { React } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import InfectionsPerWeekGraph from "../components/graphs/InfectionsPerWeekGraph";
-import InfectionsPerTypeGraph from "../components/graphs/InfectionsPerTypeGraph";
+import InfectionsPerWeekGraph from "../../components/graphs/InfectionsPerWeekGraph";
+import InfectionsPerTypeGraph from "../../components/graphs/InfectionsPerTypeGraph";
 
 import {
     Box,

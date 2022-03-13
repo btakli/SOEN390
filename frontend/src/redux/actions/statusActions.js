@@ -1,28 +1,27 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messageActions';
 import { tokenConfig } from './authActions';
-import { GET_STATUS, GET_LATEST_STATUS, GET_PATIENT_LATEST_STATUS, ADD_STATUS } from './types';
+import { GET_ALL_STATUS, GET_LATEST_STATUS, GET_PATIENT_LATEST_STATUS, ADD_STATUS } from './types';
 
 // // GET STATUS API CALL
-// export const getStatus = () => (dispatch, getState) => {
-
-//     const config = tokenConfig(getState);
-
-//     axios.get('http://localhost:8000/api/patient/status/', config)
-//         .then(res => {
-//             dispatch({
-//                 type: GET_STATUS,
-//                 payload: res.data
-//             });
-//         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
-// }
-
-// GET LATEST STATUS API CALL
-export const getLatestStatus = () => (dispatch, getState) => {
+export const getAllStatus = () => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
-    axios.get(`http://localhost:8000/api/patient/status/latest/`, config)
+    axios.get('http://localhost:8000/api/patient/status/', config)
+        .then(res => {
+            dispatch({
+                type: GET_ALL_STATUS,
+                payload: res.data
+            });
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+// GET LATEST STATUS API CALL
+export const getLatestStatus = (id) => (dispatch, getState) => {
+    const config = tokenConfig(getState);
+
+    axios.get(`http://localhost:8000/api/patient/status/latest/${id}/`, config)
         .then(res => {
             dispatch({
                 type: GET_LATEST_STATUS,
@@ -31,7 +30,7 @@ export const getLatestStatus = () => (dispatch, getState) => {
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
-// POST PERSON API CALL
+// POST STATUS API CALL
 export const addStatus = (status) => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
@@ -39,7 +38,7 @@ export const addStatus = (status) => (dispatch, getState) => {
     axios.post('http://localhost:8000/api/patient/status/', status, config)
         .then(res => {
             dispatch(createMessage({
-                addStatus: 'Latest Status Updated'
+                addStatus: 'Status Updated'
             }));
             dispatch({
                 type: ADD_STATUS,
