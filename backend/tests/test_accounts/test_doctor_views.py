@@ -14,7 +14,7 @@ class TestDoctorViews(TestSetUp):
         res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
 
         self.assertTrue(User.objects.filter(email = self.correct_doctor_data['user']['email']).exists())
-        self.assertEqual(res.data['doctor']['first_name'], self.correct_doctor_data['first_name'])
+        self.assertEqual(res.data['user_data']['first_name'], self.correct_doctor_data['first_name'])
         self.assertEqual(res.status_code, 201)
 
     def test_doctor_cannot_register_with_no_user(self):

@@ -3,6 +3,10 @@ from django.urls import reverse
 from faker import Faker
 
 class TestSetUp(APITestCase):
+
+    def patient_latest_status_url(self, pk):
+        return f'/api/doctor/patient/status/latest/{pk}/'
+
     def setUp(self):
         self.register_doctor_url = reverse("accounts:register_doctor_test")
         self.register_patient_url = reverse("accounts:register_patient")
@@ -10,14 +14,47 @@ class TestSetUp(APITestCase):
         self.login_patient_url = reverse("accounts:login_patient")
         self.list_status_url = reverse("companion_api:status-list")
         self.create_status_url = reverse("companion_api:status-list")
-        # self.latest_status_url = reverse("companion_api:latest_status")
-
         self.fake = Faker()
 
         # STATUS DATA
 
-        self.status_data = {
+        self.status_data_null = {
+            "status": None,
+            "soreThroat": False,
+            "runnyNose": False,
+            "sneezing": False,
+            "cough": False,
+            "diffBreathing": False,
+            "highTemp": False,
+            "fever": False,
+            "chills": False,
+            "fatigue": False,
+            "muscleAche": False,
+            "smellOrTasteLoss": False,
+            "headache": False,
+            "stomachPain": False,
+            "patient": None
+        }
+
+        self.status_data_1 = {
             "status": "Infected",
+            "soreThroat": False,
+            "runnyNose": False,
+            "sneezing": False,
+            "caugh": False,
+            "diffBreathing": False,
+            "highTemp": False,
+            "fever": False,
+            "chills": False,
+            "fatigue": False,
+            "muscleAche": False,
+            "smellOrTasteLoss": False,
+            "headache": False,
+            "stomachPain": False
+        }
+
+        self.status_data_2 = {
+            "status": "Healthy",
             "soreThroat": False,
             "runnyNose": False,
             "sneezing": False,
