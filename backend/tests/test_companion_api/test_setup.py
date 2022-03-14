@@ -14,6 +14,7 @@ class TestSetUp(APITestCase):
         self.login_patient_url = reverse("accounts:login_patient")
         self.list_status_url = reverse("companion_api:status-list")
         self.create_status_url = reverse("companion_api:status-list")
+        self.patients_url = reverse("companion_api:doctor_patients")
         self.fake = Faker()
 
         # STATUS DATA
@@ -90,6 +91,22 @@ class TestSetUp(APITestCase):
         # PATIENT DATA
 
         self.correct_patient_data = {
+            'first_name': self.fake.first_name(),
+            'user': {
+               'email': self.fake.email(),
+                'password': self.fake.password() 
+            }
+        }
+
+        self.correct_patient_data_2 = {
+            'first_name': self.fake.first_name(),
+            'user': {
+               'email': self.fake.email(),
+                'password': self.fake.password() 
+            }
+        }
+
+        self.correct_patient_data_3 = {
             'first_name': self.fake.first_name(),
             'user': {
                'email': self.fake.email(),

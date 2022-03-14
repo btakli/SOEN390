@@ -1,6 +1,5 @@
 from .test_setup import TestSetUp
 from accounts.models import Patient, Doctor
-from companion_api.models import Status
 
 class TestStatusViews(TestSetUp):
     """Test suite for views related to Status"""
