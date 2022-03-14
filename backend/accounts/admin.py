@@ -67,8 +67,11 @@ admin.site.site_header = gettext_lazy(f'{ADMIN_NAME} Administration')
 # Text to put at the top of the admin index page.
 admin.site.index_title = gettext_lazy(f'{ADMIN_NAME} Administration')
 
+# Hardcoded - issues with 127.0.0.1 vs. localhost
+admin.site.site_url = 'localhost:3000/'
+
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(User) # At the moment you cannot register users correctly in the Admin UI
                             # since you need to override the UserAdmin class in Django
-                            # Not a priority at the moment, use current API instead. 
+                            # Not a priority at the moment, use current API instead.
 admin.site.register(Patient, PatientAdmin)
