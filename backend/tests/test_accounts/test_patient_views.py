@@ -1,7 +1,7 @@
 from .test_setup import TestSetUp
 from accounts.models import User
 
-class TestViews(TestSetUp):
+class TestPatientViews(TestSetUp):
     """Test suite for views related to the Patient"""
     # REGISTER TESTS
     def test_patient_cannot_register_with_no_data(self):
