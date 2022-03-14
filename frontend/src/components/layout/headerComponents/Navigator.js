@@ -29,7 +29,7 @@ import { backgroundColor,
     drawerStyle,
     itemStyle,
     itemTitleStyle,
-    drawerTitleStyle } from "../styles/NavigatorStyles";
+    drawerTitleStyle } from "../../../styles/NavigatorStyles";
 
 // To add links to other pages
 // https://www.youtube.com/watch?v=CjFWbEOcq-Y

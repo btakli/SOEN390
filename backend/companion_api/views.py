@@ -77,8 +77,12 @@ class LatestStatusView(generics.RetrieveAPIView):
 
     serializer_class = StatusSerializer
 
+    # Try to get latest, if DNE, return null Status Model
     def get_object(self):
-        return self.request.user.patient.statuses.latest('date')
+        try:
+            return self.request.user.patient.statuses.latest('date')
+        except:
+            pass
 
 class SpecificLatestStatusView(generics.RetrieveAPIView):
     permission_classes = [
@@ -87,6 +91,7 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
 
     serializer_class = StatusSerializer
 
+    # Try to get latest, if DNE, return null Status Model
     def get_object(self):
         pid = self.kwargs['pk']
 

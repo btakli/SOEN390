@@ -5,7 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { Badge } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 
-import ContactForm from "./forms/ContactForm";
+import ContactForm from "../../forms/ContactForm";
 
 
 function Mail(){
