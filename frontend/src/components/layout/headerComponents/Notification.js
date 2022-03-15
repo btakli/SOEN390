@@ -22,6 +22,7 @@ function NotifMenu(props) {
 
   const handleOpenNotif = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(props.notif);
   };
 
   const handleCloseNotif = () => {
@@ -76,11 +77,11 @@ function NotifMenu(props) {
 }
 
 NotifMenu.propTypes = {
-  auth: PropTypes.object.isRequired,
+  notif: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.authReducer,
+  notif: state.notifReducer,
 });
 
 export default connect(mapStateToProps)(NotifMenu);
