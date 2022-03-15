@@ -1,7 +1,7 @@
 """Serializers"""
 
 from rest_framework import serializers
-from .models import Person, Status
+from .models import Person, Status, Notification
 from accounts.models import Patient
 
 
@@ -21,5 +21,15 @@ class StatusSerializer(serializers.ModelSerializer):
         """Requires Meta attribute"""
         
         model = Status
+        fields = "__all__"
+        extra_kwargs = {'date':{'read_only':True}}
+        
+class NotificationSerializer(serializers.ModelSerializer):
+    """Notification Serializer"""
+
+    class Meta:
+        """Requires Meta attribute"""
+        
+        model = Notification
         fields = "__all__"
         extra_kwargs = {'date':{'read_only':True}}

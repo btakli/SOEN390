@@ -21,7 +21,7 @@ export const getAllStatus = () => (dispatch, getState) => {
 export const getLatestStatus = (id) => (dispatch, getState) => {
     const config = tokenConfig(getState);
 
-    axios.get(`http://localhost:8000/api/patient/status/latest/${id}/`, config)
+    axios.get(`http://localhost:8000/api/doctor/patient/status/latest/${id}/`, config)
         .then(res => {
             dispatch({
                 type: GET_LATEST_STATUS,
