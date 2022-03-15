@@ -19,4 +19,8 @@ export const ADD_STATUS = "ADD_STATUS";
 export const GET_LATEST_STATUS = "GET_LATEST_STATUS";
 export const GET_PATIENT_LATEST_STATUS = "GET_PATIENT_LATEST_STATUS";
 
+export const GET_NOTIFS = "GET_NOTIFS";
+export const DELETE_NOTIF = "DELETE_NOTIF";
+export const ADD_NOTIF = "ADD_NOTIF";
+
 
