@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import ReportIcon from "@mui/icons-material/Report";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,7 +15,6 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import Slider from "@mui/material/Slider";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
@@ -27,13 +26,14 @@ const ReportForm = (props) => {
   const { open, onClose } = props;
 
   const emptyEmail = {
-    subject: "",
-    urgency: 0,
-    email: "",
+    // TODO : REDUX replace with random admin email
+    admin_email: "matteo.gisondi@gmail.com",
+    doctor: "",
+    // doctor_id: "",
     message: "",
     patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     patient_id: props.auth.userData.user,
-    reply_to: props.auth.user.email
+    patient_email: props.auth.user.email,
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -43,7 +43,7 @@ const ReportForm = (props) => {
     emailjs
       .sendForm(
         "service_o5sf8uk",
-        "template_v5kh4dw",
+        "template_x4t73lb",
         e.target,
         "user_vnRqkOKsChMYAMYL7GxKC"
       )
@@ -56,9 +56,9 @@ const ReportForm = (props) => {
   };
 
   const onChange = (e) => {
-    setEmailData(prevEmailData => ({
-        ...prevEmailData,
-        [e.target.name]: e.target.value
+    setEmailData((prevEmailData) => ({
+      ...prevEmailData,
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -66,7 +66,7 @@ const ReportForm = (props) => {
     <ThemeProvider theme={theme}>
       <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
         <DialogTitle sx={{ bgcolor: "#101F33", color: "#fff" }}>
-          Report a Doctor
+          File a Report
           <IconButton
             edge="start"
             color="inherit"
@@ -94,71 +94,81 @@ const ReportForm = (props) => {
                 }}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <DraftsIcon />
+                  <ReportIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                   Report Form
                 </Typography>
                 {/* Must provide fields in form */}
                 <Box sx={{ display: "none" }}>
-                  <TextField
-                    name="patient_name"
-                    value={emailData.patient_name}
-                  />
-                  <TextField
-                    name="patient_id"
-                    value={emailData.patient_id}
-                  />
-                  <TextField
-                    name="reply_to"
-                    value={emailData.reply_to}
-                  />
+                  <TextField name="patient_name" value={emailData.patient_name} />
+                  <TextField name="patient_id" value={emailData.patient_id} />
+                  <TextField name="reply_to" value={emailData.reply_to} />
+                  <TextField name="admin_email" value={emailData.admin_email} />
                 </Box>
-                <TextField
-                  margin="normal"
-                  required
-                  placeholder="Subject"
-                  name="subject"
-                  autoFocus
-                  fullWidth
-                  value={emailData.subject}
-                  onChange={onChange}
-                />
+                <InputLabel id="doctor-label">Doctor Involved in Incedent</InputLabel>
                 <Select
                   required
-                  name="email"
+                  labelId="doctor-label"
+                  name="doctor"
                   label="Doctor"
                   fullWidth
-                  value={emailData.email}
+                  value={emailData.doctor}
                   onChange={onChange}
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ m: 2 }}
                 >
-                  {/* TODO Redux : Populate with available doctors for patient */}
-                  <MenuItem value={"delispeter19@gmail.com"}>
+                  {/* TODO Redux : Populate with doctor objects/id/... */}
+                  <MenuItem value={"Doctor 1"}>
                     Doctor 1
                   </MenuItem>
-                  <MenuItem value={"matteo.gisondi@yahoo.com"}>
+                  <MenuItem value={"Doctor 2"}>
                     Doctor 2
                   </MenuItem>
+                  <MenuItem value={"Doctor 3"}>
+                    Doctor 3
+                  </MenuItem>
+                </Select>
+                <InputLabel id="reason-label">Reason for Report</InputLabel>
+                <Select
+                  required
+                  labelId="reason-label"
+                  name="reason"
+                  label="Reason"
+                  fullWidth
+                  value={emailData.reason}
+                  onChange={onChange}
+                  sx={{ m: 2 }}
+                >
+                  <MenuItem value={"misconduct"}>Misconduct</MenuItem>
+                  <MenuItem value={"harassment"}>Harassment</MenuItem>
+                  <MenuItem value={"procedural"}>Procedural Error</MenuItem>
+                  <MenuItem value={"misinformation"}>Misinformation</MenuItem>
+                  <MenuItem value={"prescription"}>Harmful Prescription</MenuItem>
+                  <MenuItem value={"professionalism"}>Professionalism</MenuItem>
+                  <MenuItem value={"negligence"}>Negligence</MenuItem>
+                  <MenuItem value={"misc"}>Other</MenuItem>
                 </Select>
                 <TextField
                   name="message"
                   margin="normal"
                   required
-                  placeholder="Message Text"
+                  placeholder="Please provide any relevant additional information"
                   maxRows={4}
                   variant="standard"
                   fullWidth
                   value={emailData.message}
                   onChange={onChange}
+                  inputProps={{
+                    minLength: 20,
+                  }}
                 />
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ m: 2 }}
                 >
-                  Send
+                  File Report With Administrator
                 </Button>
               </Box>
             </Container>
