@@ -5,6 +5,9 @@ import { getNotifications } from "../../../redux/actions/notifActions";
 
 // MUI
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import EmailIcon from '@mui/icons-material/Email';
+import PersonIcon from '@mui/icons-material/Person';
+import EventIcon from '@mui/icons-material/Event';
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -23,7 +26,7 @@ function NotifMenu(props) {
 
   const handleOpenNotif = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(props.notif);
+    console.log(props.notifs);
   };
 
   const handleCloseNotif = () => {
@@ -68,7 +71,7 @@ function NotifMenu(props) {
         </Typography>
         {props.notifs.map((item, i) => (
           <MenuItem key={i} onClick={handleCloseNotif} divider>
-            <NotificationsIcon /> {item.subject}
+            {item.type = 'Email' ? <EmailIcon /> : (item.type = 'Assignment' ? <PersonIcon /> : <EventIcon />)} {item.subject}
             <Typography textAlign="center" noWrap>
               {item.message}
             </Typography>
