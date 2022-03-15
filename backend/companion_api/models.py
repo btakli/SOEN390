@@ -22,6 +22,9 @@ class Person(models.Model):
     )
 
 class Status(models.Model):
+    class Meta:
+        verbose_name = "status"
+        verbose_name_plural = "statuses"
     STATUS_OPTIONS = [
         ('Healthy', 'Healthy'),
         ('Infected', 'Infected'),
