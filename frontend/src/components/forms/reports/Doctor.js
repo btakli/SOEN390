@@ -1,4 +1,3 @@
-// Proof of concept for sending emails to
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -22,18 +21,18 @@ import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
 
-const ReportForm = (props) => {
+const DoctorReportForm = (props) => {
   const { open, onClose } = props;
 
   const emptyEmail = {
     // TODO : REDUX replace with random admin email
     admin_email: "matteo.gisondi@gmail.com",
-    doctor: "",
-    // doctor_id: "",
+    patient: "",
+    // patient_id: "",
     message: "",
-    patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
-    patient_id: props.auth.userData.user,
-    patient_email: props.auth.user.email,
+    doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    doctor_id: props.auth.userData.user,
+    doctor_email: props.auth.user.email,
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -42,10 +41,10 @@ const ReportForm = (props) => {
     e.preventDefault();
     emailjs
       .sendForm(
-        "service_o5sf8uk",
-        "template_x4t73lb",
+        "service_yn5erhm",
+        "template_wzxbpkm",
         e.target,
-        "user_vnRqkOKsChMYAMYL7GxKC"
+        "OcJwqmp4t2RtcSozF"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
@@ -66,7 +65,7 @@ const ReportForm = (props) => {
     <ThemeProvider theme={theme}>
       <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
         <DialogTitle sx={{ bgcolor: "#101F33", color: "#fff" }}>
-          File a Report
+          File a Report Against a Patient
           <IconButton
             edge="start"
             color="inherit"
@@ -93,7 +92,7 @@ const ReportForm = (props) => {
                   alignItems: "center",
                 }}
               >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <Avatar sx={{ mt: 0, mb: 3, bgcolor: "secondary.main" }}>
                   <ReportIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
@@ -101,32 +100,32 @@ const ReportForm = (props) => {
                 </Typography>
                 {/* Must provide fields in form */}
                 <Box sx={{ display: "none" }}>
-                  <TextField name="patient_name" value={emailData.patient_name} />
-                  <TextField name="patient_id" value={emailData.patient_id} />
+                  <TextField name="doctor_name" value={emailData.doctor_name} />
+                  <TextField name="doctor_id" value={emailData.doctor_id} />
+                  <TextField
+                    name="doctor_email"
+                    value={emailData.doctor_email}
+                  />
                   <TextField name="reply_to" value={emailData.reply_to} />
                   <TextField name="admin_email" value={emailData.admin_email} />
                 </Box>
-                <InputLabel id="doctor-label">Doctor Involved in Incedent</InputLabel>
+                <InputLabel id="patient-label">
+                  Patient Involved in Incedent
+                </InputLabel>
                 <Select
                   required
-                  labelId="doctor-label"
-                  name="doctor"
-                  label="Doctor"
+                  labelId="patient-label"
+                  name="patient"
+                  label="Patient"
                   fullWidth
-                  value={emailData.doctor}
+                  value={emailData.patient}
                   onChange={onChange}
-                  sx={{ m: 2 }}
+                  sx={{ mt: 0, mb: 3 }}
                 >
-                  {/* TODO Redux : Populate with doctor objects/id/... */}
-                  <MenuItem value={"Doctor 1"}>
-                    Doctor 1
-                  </MenuItem>
-                  <MenuItem value={"Doctor 2"}>
-                    Doctor 2
-                  </MenuItem>
-                  <MenuItem value={"Doctor 3"}>
-                    Doctor 3
-                  </MenuItem>
+                  {/* TODO Redux : Populate with patient objects/id/... */}
+                  <MenuItem value={"Patient 1"}>Patient 1</MenuItem>
+                  <MenuItem value={"Patient 2"}>Patient 2</MenuItem>
+                  <MenuItem value={"Patient 3"}>Patient 3</MenuItem>
                 </Select>
                 <InputLabel id="reason-label">Reason for Report</InputLabel>
                 <Select
@@ -137,15 +136,13 @@ const ReportForm = (props) => {
                   fullWidth
                   value={emailData.reason}
                   onChange={onChange}
-                  sx={{ m: 2 }}
+                  sx={{ mt: 0, mb: 3 }}
                 >
                   <MenuItem value={"misconduct"}>Misconduct</MenuItem>
                   <MenuItem value={"harassment"}>Harassment</MenuItem>
-                  <MenuItem value={"procedural"}>Procedural Error</MenuItem>
-                  <MenuItem value={"misinformation"}>Misinformation</MenuItem>
-                  <MenuItem value={"prescription"}>Harmful Prescription</MenuItem>
                   <MenuItem value={"professionalism"}>Professionalism</MenuItem>
-                  <MenuItem value={"negligence"}>Negligence</MenuItem>
+                  <MenuItem value={"drug_abuse"}>Drug Abuse</MenuItem>
+                  <MenuItem value={"defamation"}>Defamation</MenuItem>
                   <MenuItem value={"misc"}>Other</MenuItem>
                 </Select>
                 <TextField
@@ -158,15 +155,12 @@ const ReportForm = (props) => {
                   fullWidth
                   value={emailData.message}
                   onChange={onChange}
-                  inputProps={{
-                    minLength: 20,
-                  }}
                 />
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ m: 2 }}
+                  sx={{ mt: 0, mb: 3 }}
                 >
                   File Report With Administrator
                 </Button>
@@ -179,7 +173,7 @@ const ReportForm = (props) => {
   );
 };
 
-ReportForm.propTypes = {
+DoctorReportForm.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -187,4 +181,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps)(ReportForm);
+export default connect(mapStateToProps)(DoctorReportForm);

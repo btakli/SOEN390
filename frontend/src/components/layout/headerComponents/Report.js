@@ -1,12 +1,15 @@
 import { React, Fragment, useState } from "react";
+import { connect } from "react-redux";
+
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { Badge } from "@mui/material";
 import ReportIcon from "@mui/icons-material/Report";
 
-import ReportForm from "../../forms/ReportForm";
+import DoctorReportForm from "../../forms/reports/Doctor";
+import PatientReportForm from "../../forms/reports/Patient";
 
-function Report() {
+const Report = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleDialogOpen = () => {
@@ -17,9 +20,23 @@ function Report() {
     setOpen(false);
   };
 
+  const ReportForm = () => {
+    if (props.auth.user.is_patient) {
+      return (
+        <PatientReportForm open={open} onClose={handleDialogClose} />
+      );
+    } else if (props.auth.user.is_doctor) {
+      return (
+        <DoctorReportForm open={open} onClose={handleDialogClose} />
+      );
+    } else {
+      return (null);  // Is this implicit?
+    }
+  };
+
   return (
     <Fragment>
-      <ReportForm open={open} onClose={handleDialogClose} />
+      <ReportForm />
       <Tooltip title="File an Issue Report">
         <IconButton
           size="large"
@@ -34,6 +51,10 @@ function Report() {
       </Tooltip>
     </Fragment>
   );
-}
+};
 
-export default Report;
+const mapStateToProps = (state) => ({
+  auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(Report);
