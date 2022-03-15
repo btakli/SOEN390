@@ -113,4 +113,4 @@ class NotificationView(viewsets.ModelViewSet):
         return self.request.user.notifications.all()
 
     def perform_create(self, serializer):
-        serializer.save(patient=self.request.user)
+        serializer.save(user=self.request.user)
