@@ -1,6 +1,7 @@
-import { React, Fragment, useState } from "react";
+import { React, Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { getNotifications } from "../../../redux/actions/notifActions";
 
 // MUI
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -28,6 +29,10 @@ function NotifMenu(props) {
   const handleCloseNotif = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    props.getNotifications();
+  }, []);
 
   return (
     <Fragment>
@@ -61,13 +66,11 @@ function NotifMenu(props) {
         >
           Notifications
         </Typography>
-        {menu.map((item) => (
-          <MenuItem key={item} onClick={handleCloseNotif} divider>
-            <Typography textAlign="left" noWrap>
-              <NotificationsIcon /> {item}
-              <Typography textAlign="center" noWrap>
-                Blablablablabalbalblablalbalblablalbalblalbalbfdsfsdfsdfsdfsd
-              </Typography>
+        {props.notifs.map((item, i) => (
+          <MenuItem key={i} onClick={handleCloseNotif} divider>
+            <NotificationsIcon /> {item.subject}
+            <Typography textAlign="center" noWrap>
+              {item.message}
             </Typography>
           </MenuItem>
         ))}
@@ -77,11 +80,11 @@ function NotifMenu(props) {
 }
 
 NotifMenu.propTypes = {
-  notif: PropTypes.object.isRequired,
+  notifs: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  notif: state.notifReducer,
+  notifs: state.notifReducer.notifications,
 });
 
-export default connect(mapStateToProps)(NotifMenu);
+export default connect(mapStateToProps, { getNotifications })(NotifMenu);
