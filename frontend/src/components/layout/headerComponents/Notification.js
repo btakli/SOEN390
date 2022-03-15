@@ -5,13 +5,20 @@ import { getNotifications } from "../../../redux/actions/notifActions";
 
 // MUI
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import EmailIcon from '@mui/icons-material/Email';
-import PersonIcon from '@mui/icons-material/Person';
-import EventIcon from '@mui/icons-material/Event';
+import EmailIcon from "@mui/icons-material/Email";
+import PersonIcon from "@mui/icons-material/Person";
+import EventIcon from "@mui/icons-material/Event";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { Menu, MenuItem, Divider } from "@mui/material";
+import {
+  Menu,
+  MenuItem,
+  Divider,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 
 const menu = [
@@ -46,7 +53,7 @@ function NotifMenu(props) {
       </Tooltip>
 
       <Menu
-        sx={{ mt: "45px", width: "400px" }}
+        sx={{ mt: "45px", maxHeight: 400 }}
         id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{
@@ -62,7 +69,7 @@ function NotifMenu(props) {
         onClose={handleCloseNotif}
       >
         <Typography
-          sx={{ pl: "20px", bgcolor: "#101F33", color: "#fff" }}
+          sx={{ px: "20px", bgcolor: "#101F33", color: "#fff" }}
           textAlign="left"
           variant="h6"
           component="div"
@@ -70,12 +77,32 @@ function NotifMenu(props) {
           Notifications
         </Typography>
         {props.notifs.map((item, i) => (
-          <MenuItem key={i} onClick={handleCloseNotif} divider>
-            {item.type = 'Email' ? <EmailIcon /> : (item.type = 'Assignment' ? <PersonIcon /> : <EventIcon />)} {item.subject}
-            <Typography textAlign="center" noWrap>
-              {item.message}
-            </Typography>
-          </MenuItem>
+          <ListItem
+            key={i}
+            onClick={handleCloseNotif}
+            divider
+            disablePadding
+            sx={{ minWidth: "400px", maxWidth: "400px" }}
+          >
+            <ListItemButton>
+              {
+                (item.type = "Email" ? (
+                  <EmailIcon />
+                ) : (
+                  (item.type = "Assignment" ? <PersonIcon /> : <EventIcon />)
+                ))
+              }{" "}
+              <ListItemText
+                primary={item.subject}
+                secondary={item.message}
+                sx={{ pl: "20px" }}
+              />
+              {/* {item.subject}
+              <Typography textAlign="center" noWrap>
+                {item.message}
+              </Typography> */}
+            </ListItemButton>
+          </ListItem>
         ))}
       </Menu>
     </Fragment>

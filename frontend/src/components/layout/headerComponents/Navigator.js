@@ -1,20 +1,20 @@
-import { React, useState } from 'react';
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 // MUI
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
 import Tooltip from "@mui/material/Tooltip";
-import List from '@mui/material/List';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ListItem from '@mui/material/ListItem';
+import List from "@mui/material/List";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
 import PermMediaOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActual";
@@ -25,11 +25,13 @@ import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
 
-import { backgroundColor,
-    drawerStyle,
-    itemStyle,
-    itemTitleStyle,
-    drawerTitleStyle } from "../../../styles/NavigatorStyles";
+import {
+  backgroundColor,
+  drawerStyle,
+  itemStyle,
+  itemTitleStyle,
+  drawerTitleStyle,
+} from "../../../styles/NavigatorStyles";
 
 // To add links to other pages
 // https://www.youtube.com/watch?v=CjFWbEOcq-Y
@@ -48,32 +50,50 @@ let categories = [
     text: "Pages",
     children: [],
   },
-  common
+  common,
 ];
 
 function Navigator(props) {
   let navigate = useNavigate();
-  const home = (props.home === "/") ? "" : props.home;
+  const home = props.home === "/" ? "" : props.home;
 
   const doctor_pages = [
     { text: "Home", icon: <HomeIcon /> },
-    { text: "Patients", icon: <DnsRoundedIcon />, onClick: () => navigate(`${home}/patients`) },
-    { text: "Dashboard", icon: <PermMediaOutlinedIcon />, onClick: () => navigate(`${home}/dashboard`) },
-    { text: "Template 3", icon: <PublicIcon /> },
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
-  ];
-  
-  const patient_pages = [
-    { text: "Home", icon: <HomeIcon />, onClick: () => navigate(`${home}`) },
-    { text: "Status", icon: <DnsRoundedIcon />, onClick: () => navigate(`${home}/status`) },
-    { text: "Dashboard", icon: <PermMediaOutlinedIcon />, onClick: () => navigate(`${home}/dashboard`) },
+    {
+      text: "Patients",
+      icon: <DnsRoundedIcon />,
+      onClick: () => navigate(`${home}/patients`),
+    },
+    {
+      text: "Dashboard",
+      icon: <PermMediaOutlinedIcon />,
+      onClick: () => navigate(`${home}/dashboard`),
+    },
     { text: "Template 3", icon: <PublicIcon /> },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
-  categories[0]["children"] = (props.auth.user.is_doctor) ? doctor_pages : patient_pages;
+  const patient_pages = [
+    { text: "Home", icon: <HomeIcon />, onClick: () => navigate(`${home}`) },
+    {
+      text: "Status",
+      icon: <DnsRoundedIcon />,
+      onClick: () => navigate(`${home}/status`),
+    },
+    {
+      text: "Dashboard",
+      icon: <PermMediaOutlinedIcon />,
+      onClick: () => navigate(`${home}/dashboard`),
+    },
+    { text: "Template 3", icon: <PublicIcon /> },
+    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
+  ];
+
+  categories[0]["children"] = props.auth.user.is_doctor
+    ? doctor_pages
+    : patient_pages;
 
   const [open, setOpen] = useState(false);
 
@@ -86,7 +106,7 @@ function Navigator(props) {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Tooltip title="Navigation">
         <IconButton
@@ -102,47 +122,42 @@ function Navigator(props) {
           <MenuIcon />
         </IconButton>
       </Tooltip>
-        
-        
+
       <Drawer
-          variant="temporary"
-          anchor="left"
-          open={open}
-          onClose={handleDrawerClose}
-          PaperProps={{
-              sx: {
-              background: backgroundColor
-              }
-          }}
+        variant="temporary"
+        anchor="left"
+        open={open}
+        onClose={handleDrawerClose}
+        PaperProps={{
+          sx: {
+            background: backgroundColor,
+          },
+        }}
       >
         <Box
-            sx={ drawerStyle }
-            onClick={handleDrawerClose}
-            onKeyDown={handleDrawerClose}
+          sx={drawerStyle}
+          onClick={handleDrawerClose}
+          onKeyDown={handleDrawerClose}
         >
-          <List disablePadding >
-            <ListItem sx={drawerTitleStyle}>
-                CovidTracker
-            </ListItem>
+          <List disablePadding>
+            <ListItem sx={drawerTitleStyle}>CovidTracker</ListItem>
 
             {categories.map(({ text, children }) => (
-              <Box key={text} >
+              <Box key={text}>
+                <ListItem sx={itemTitleStyle}>
+                  <ListItemText>{text}</ListItemText>
+                </ListItem>
 
-                  <ListItem sx={ itemTitleStyle }>
+                {children.map(({ text, icon, onClick }) => (
+                  <ListItem disablePadding key={text} sx={itemStyle}>
+                    <ListItemButton onClick={onClick}>
+                      <ListItemIcon sx={{ color: "#fff" }}>{icon}</ListItemIcon>
                       <ListItemText>{text}</ListItemText>
+                    </ListItemButton>
                   </ListItem>
+                ))}
 
-                  {children.map(({ text, icon, onClick }) => (
-                  <ListItem disablePadding key={text} sx={ itemStyle } >
-                      <ListItemButton onClick={onClick} >
-                          <ListItemIcon>{icon}</ListItemIcon>
-                          <ListItemText>{text}</ListItemText>
-                      </ListItemButton>
-                  </ListItem>
-
-                  ))}
-
-                  {/* <Divider sx={{ mt: 3 }} color="#fff" /> */}
+                {/* <Divider sx={{ mt: 3 }} color="#fff" /> */}
               </Box>
             ))}
           </List>
