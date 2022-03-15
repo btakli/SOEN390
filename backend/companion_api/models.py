@@ -59,18 +59,18 @@ class Status(models.Model):
         return f'{self.status}'
 
 class Notification(models.Model):
-    TYPE = [
+    TYPE_OPTIONS = [
         ('Email', 'Email'),
         ('Assignment', 'Assignment'),
         ('Appointment', 'Appointment')
     ]
     type = models.CharField(
-        choices=TYPE,
+        choices=TYPE_OPTIONS,
         max_length=20,
         default='Email'
     )
     subject = models.CharField(max_length=30)
     message = models.TextField(max_length=250)
     user = models.ForeignKey(
-        User, related_name="notifications", on_delete=models.CASCADE, null=True
+        User, related_name="notifications", on_delete=models.CASCADE, blank=True
     )
