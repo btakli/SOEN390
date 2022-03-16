@@ -67,5 +67,5 @@ companion_api\views.py:6:0: W0614: Unused import(s) serializers from wildcard im
 companion_api\views.py:7:0: C0411: first party import "from accounts.serializers import *" should be placed before "from .models import *" (wrong-import-order)
 
 ------------------------------------------------------------------
-Your code has been rated at 4.39/10 (previous run: 3.06/10, +1.33)
+Your code has been rated at 4.39/10 (previous run: 4.39/10, +0.00)
 
