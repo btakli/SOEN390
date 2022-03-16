@@ -1,0 +1,168 @@
+companion_api\admin.py
+    LOC: 25
+    LLOC: 18
+    SLOC: 19
+    Comments: 3
+    Single comments: 2
+    Multi: 0
+    Blank: 4
+    - Comment Stats
+        (C % L): 12%
+        (C % S): 16%
+        (C + M % L): 12%
+companion_api\apps.py
+    LOC: 10
+    LLOC: 6
+    SLOC: 4
+    Comments: 0
+    Single comments: 2
+    Multi: 0
+    Blank: 4
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\models.py
+    LOC: 76
+    LLOC: 40
+    SLOC: 60
+    Comments: 3
+    Single comments: 4
+    Multi: 3
+    Blank: 9
+    - Comment Stats
+        (C % L): 4%
+        (C % S): 5%
+        (C + M % L): 8%
+companion_api\serializers.py
+    LOC: 35
+    LLOC: 26
+    SLOC: 17
+    Comments: 0
+    Single comments: 7
+    Multi: 0
+    Blank: 11
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\urls.py
+    LOC: 21
+    LLOC: 12
+    SLOC: 15
+    Comments: 2
+    Single comments: 2
+    Multi: 0
+    Blank: 4
+    - Comment Stats
+        (C % L): 10%
+        (C % S): 13%
+        (C + M % L): 10%
+companion_api\views.py
+    LOC: 116
+    LLOC: 56
+    SLOC: 63
+    Comments: 20
+    Single comments: 23
+    Multi: 0
+    Blank: 30
+    - Comment Stats
+        (C % L): 17%
+        (C % S): 32%
+        (C + M % L): 17%
+companion_api\__init__.py
+    LOC: 0
+    LLOC: 0
+    SLOC: 0
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 0
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+companion_api\migrations\0001_initial.py
+    LOC: 52
+    LLOC: 8
+    SLOC: 45
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 6
+    - Comment Stats
+        (C % L): 2%
+        (C % S): 2%
+        (C + M % L): 2%
+companion_api\migrations\0002_status_caugh_status_chills_status_diffbreathing_and_more.py
+    LOC: 84
+    LLOC: 5
+    SLOC: 78
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 1%
+        (C % S): 1%
+        (C + M % L): 1%
+companion_api\migrations\0003_remove_status_caugh_alter_status_date.py
+    LOC: 23
+    LLOC: 5
+    SLOC: 17
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 4%
+        (C % S): 6%
+        (C + M % L): 4%
+companion_api\migrations\0004_alter_status_options_notification.py
+    LOC: 30
+    LLOC: 7
+    SLOC: 24
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 3%
+        (C % S): 4%
+        (C + M % L): 3%
+companion_api\migrations\0005_alter_notification_user.py
+    LOC: 21
+    LLOC: 6
+    SLOC: 15
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 5%
+        (C % S): 7%
+        (C + M % L): 5%
+companion_api\migrations\0006_alter_notification_user.py
+    LOC: 21
+    LLOC: 6
+    SLOC: 15
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 5%
+        (C % S): 7%
+        (C + M % L): 5%
+companion_api\migrations\__init__.py
+    LOC: 0
+    LLOC: 0
+    SLOC: 0
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 0
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
