@@ -6,8 +6,8 @@ import Tooltip from "@mui/material/Tooltip";
 import { Badge } from "@mui/material";
 import ReportIcon from "@mui/icons-material/Report";
 
-import DoctorReportForm from "../../forms/reports/Doctor";
-import PatientReportForm from "../../forms/reports/Patient";
+import DoctorReportForm from "../../forms/reports/DoctorReportForm";
+import PatientReportForm from "../../forms/reports/PatientReportForm";
 
 const Report = (props) => {
   const [open, setOpen] = useState(false);
