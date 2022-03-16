@@ -6,7 +6,7 @@ from faker import Faker
 import datetime
 
 
-class PersonTestCase(TestCase):
+class ModelTestCases(TestCase):
     """This is a test case which tests that the attributes of the Person Model are properly set up."""
 
     def setUp(self):
