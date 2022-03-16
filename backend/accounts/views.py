@@ -109,6 +109,7 @@ class RegisterDoctorView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         doctor = serializer.save()
+        user = doctor.user
         token = AuthToken.objects.create(doctor.user)[1]
 
         send_admin_approval_email(
@@ -122,8 +123,11 @@ class RegisterDoctorView(generics.GenericAPIView):
 
         return Response(
             {
-                "doctor": DoctorSerializer(
+                "user_data": DoctorSerializer(
                     doctor, context=self.get_serializer_context()
+                ).data,
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
                 ).data,
                 "token": token,  # Create token based on user
                 "msg": 'An Email has been sent to an Admin to approve your request'
@@ -140,6 +144,7 @@ class RegisterDoctorTestView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         doctor = serializer.save()
+        user = doctor.user
         token = AuthToken.objects.create(doctor.user)[1]
 
         # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
@@ -147,10 +152,14 @@ class RegisterDoctorTestView(generics.GenericAPIView):
 
         return Response(
             {
-                "doctor": DoctorSerializer(
+                "user_data": DoctorSerializer(
                     doctor, context=self.get_serializer_context()
                 ).data,
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
                 "token": token,  # Create token based on user
+                "msg": 'An Email has been sent to an Admin to approve your request'
             },
             status=status.HTTP_201_CREATED
         )

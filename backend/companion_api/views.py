@@ -99,3 +99,18 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
             return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
         except:
             pass
+        
+# Update the Notification's status view
+class NotificationView(viewsets.ModelViewSet):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = NotificationSerializer
+
+    def get_queryset(self):
+        return self.request.user.notifications.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
