@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Component } from "react";
 import { useState, useEffect} from "react"; 
 
-import "./PriorityToggle.css";
+import "./src/PriorityToggle.css";
 
 export class PriorityToggle extends Component {
   constructor(props) {
