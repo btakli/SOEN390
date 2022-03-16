@@ -1,9 +1,9 @@
 import { React } from "react";
 
-import PatientTogglePage from "./src/components/PatientTogglePage";
+import PatientTogglePage from "./src/pages/PatientTogglePage";
 import Appointment from "./src/pages/Appointment"; 
 import NavigationBar from "./src/components/layout/NavigationBar"; 
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./src/pages/home/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
