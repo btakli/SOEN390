@@ -42,12 +42,3 @@ class AddressSerializer(serializers.ModelSerializer):
         
         model = Address
         fields = "__all__"
-
-class MatchingAddressSerializer(serializers.ModelSerializer):
-    """Address Serializer"""
-
-    class Meta:
-        """Requires Meta attribute"""
-        
-        model = Address
-        fields = ['postalCode']
