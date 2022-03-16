@@ -21,7 +21,7 @@ import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
 
-const DoctorReportForm = (props) => {
+const PatientReportForm = (props) => {
   const { open, onClose } = props;
 
   const emptyEmail = {
@@ -183,7 +183,7 @@ const DoctorReportForm = (props) => {
   );
 };
 
-DoctorReportForm.propTypes = {
+PatientReportForm.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -191,4 +191,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps)(DoctorReportForm);
+export default connect(mapStateToProps)(PatientReportForm);
