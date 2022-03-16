@@ -5,6 +5,7 @@ import { logout } from "../../redux/actions/authActions";
 import Navigator from './headerComponents/Navigator';
 import Mail from './headerComponents/Mail';
 import ProfileMenu from "./headerComponents/ProfileMenu";
+import Report from './headerComponents/Report';
 
 // MUI
 import Toolbar from "@mui/material/Toolbar";
@@ -39,6 +40,9 @@ function Header(props){
           </Grid>
           <Grid item>
             <Mail /> 
+          </Grid>
+          <Grid item>
+            <Report /> 
           </Grid>
           <Grid item>
             <ProfileMenu />
