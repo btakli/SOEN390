@@ -28,12 +28,12 @@ const menu = [
   "Notification 4",
 ];
 
-function NotifMenu(props) {
+function Notification(props) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOpenNotif = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(props.notifs);
+    // console.log(props.notifs);
   };
 
   const handleCloseNotif = () => {
@@ -109,7 +109,7 @@ function NotifMenu(props) {
   );
 }
 
-NotifMenu.propTypes = {
+Notification.propTypes = {
   notifs: PropTypes.array.isRequired,
 };
 
@@ -117,4 +117,4 @@ const mapStateToProps = (state) => ({
   notifs: state.notifReducer.notifications,
 });
 
-export default connect(mapStateToProps, { getNotifications })(NotifMenu);
+export default connect(mapStateToProps, { getNotifications })(Notification);
