@@ -1,3 +1,4 @@
+//needs to be dynamic to incorporate changes from doctor's availabilities
 import React, { Component } from "react";
 
 import { AppointmentPicker } from "react-appointment-picker";
