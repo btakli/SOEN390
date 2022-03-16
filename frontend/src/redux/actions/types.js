@@ -5,9 +5,22 @@ export const GET_ERRORS = "GET_ERRORS";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
+export const USER_DATA_LOADED = "USER_DATA_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
+
+export const GET_PATIENTS = "GET_PATIENTS";
+export const GET_ALL_STATUS = "GET_ALL_STATUS";
+export const ADD_STATUS = "ADD_STATUS";
+export const GET_LATEST_STATUS = "GET_LATEST_STATUS";
+export const GET_PATIENT_LATEST_STATUS = "GET_PATIENT_LATEST_STATUS";
+
+export const GET_NOTIFS = "GET_NOTIFS";
+export const DELETE_NOTIF = "DELETE_NOTIF";
+export const ADD_NOTIF = "ADD_NOTIF";
+
+

@@ -1,7 +1,7 @@
 from .test_setup import TestSetUp
 from accounts.models import User
 
-class TestViews(TestSetUp):
+class TestPatientViews(TestSetUp):
     """Test suite for views related to the Patient"""
     # REGISTER TESTS
     def test_patient_cannot_register_with_no_data(self):
@@ -14,18 +14,12 @@ class TestViews(TestSetUp):
         res = self.client.post(self.register_patient_url, self.correct_patient_data, format='json')
 
         self.assertTrue(User.objects.filter(email = self.correct_patient_data['user']['email']).exists())
-        self.assertEqual(res.data['patient']['first_name'], self.correct_patient_data['first_name'])
+        self.assertEqual(res.data['user_data']['first_name'], self.correct_patient_data['first_name'])
         self.assertEqual(res.status_code, 201)
 
     def test_patient_cannot_register_with_no_user(self):
         """Registration: Patient cannot register with no User (every Patient contains a User)"""
         res = self.client.post(self.register_patient_url, self.no_user_patient_data, format='json')
-
-        self.assertEqual(res.status_code, 400)
-
-    def test_patient_cannot_register_with_no_first_name(self):
-        """Registration: Patient cannot register with no first_name attribute"""
-        res = self.client.post(self.register_patient_url, self.no_first_name_patient_data, format='json')
 
         self.assertEqual(res.status_code, 400)
 

@@ -1,4 +1,4 @@
-Found 31 test(s).
+Found 38 test(s).
 Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
 Operations to perform:
   Synchronize unmigrated apps: corsheaders, messages, rest_framework, staticfiles
@@ -26,6 +26,11 @@ Running migrations:
   Applying admin.0002_logentry_remove_auto_add... OK
   Applying admin.0003_logentry_add_action_flag_choices... OK
   Applying companion_api.0001_initial... OK
+  Applying companion_api.0002_status_caugh_status_chills_status_diffbreathing_and_more... OK
+  Applying companion_api.0003_remove_status_caugh_alter_status_date... OK
+  Applying companion_api.0004_alter_status_options_notification... OK
+  Applying companion_api.0005_alter_notification_user... OK
+  Applying companion_api.0006_alter_notification_user... OK
   Applying knox.0001_initial... OK
   Applying knox.0002_auto_20150916_1425... OK
   Applying knox.0003_auto_20150916_1526... OK
@@ -36,71 +41,85 @@ Running migrations:
   Applying knox.0008_remove_authtoken_salt... OK
   Applying sessions.0001_initial... OK
 System check identified no issues (0 silenced).
-test_doctor_can_login_when_registered (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_can_login_when_registered (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Login: Doctor can login once registered ... ok
-test_doctor_can_logout_with_valid_token_authorized (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_can_logout_with_valid_token_authorized (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Logout View: Doctor can logout when they have a valid token ... ok
-test_doctor_can_register_with_correct_data (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_can_register_with_correct_data (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Registration: Doctor can register with correct data ... ok
-test_doctor_cannot_login_when_not_registered (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_login_when_not_registered (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Login: Doctor cannot login if not registered ... ok
-test_doctor_cannot_logout_with_invalid_token_unauthorized (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_logout_with_invalid_token_unauthorized (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Logout View: Doctor cannot logout when they do not have a valid token ... ok
-test_doctor_cannot_register_with_existing_email (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_register_with_existing_email (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Registration: Doctor cannot register with an existing email (emails are unique) ... ok
-test_doctor_cannot_register_with_invalid_email_format (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_register_with_invalid_email_format (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Registration: Doctor cannot register with an invalid email format ... ok
-test_doctor_cannot_register_with_no_data (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_register_with_no_data (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Registration: Doctor cannot register with no data ... ok
-test_doctor_cannot_register_with_no_email (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_register_with_no_email (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Registration: Doctor cannot register with no email attribute ... ok
-test_doctor_cannot_register_with_no_first_name (tests.test_accounts.test_doctor_views.TestViews)
-Registration: Doctor cannot register with no first_name attribute ... ok
-test_doctor_cannot_register_with_no_password (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_register_with_no_password (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Registration: Doctor cannot register with no password attribute ... ok
-test_doctor_cannot_register_with_no_user (tests.test_accounts.test_doctor_views.TestViews)
+test_doctor_cannot_register_with_no_user (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Registration: Doctor cannot register with no User (every Doctor contains a User) ... ok
-test_return_doctor_invalid_token_unauthorized (tests.test_accounts.test_doctor_views.TestViews)
+test_return_doctor_invalid_token_unauthorized (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 User View: Invalid token means Doctor is unauthorized ... ok
-test_return_doctor_no_token_unauthorized (tests.test_accounts.test_doctor_views.TestViews)
+test_return_doctor_no_token_unauthorized (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 User View: If no token for the Doctor, we are unauthorized ... ok
-test_return_doctor_valid_token_authorized (tests.test_accounts.test_doctor_views.TestViews)
+test_return_doctor_valid_token_authorized (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 User View: Return a valid token for the Doctor when authorized ... ok
-test_patient_can_login_when_registered (tests.test_accounts.test_patient_views.TestViews)
+test_patient_can_login_when_registered (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Login: Patient can login once registered ... ok
-test_patient_can_logout_with_valid_token_authorized (tests.test_accounts.test_patient_views.TestViews)
+test_patient_can_logout_with_valid_token_authorized (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Logout View: Patient can logout when they have a valid token ... ok
-test_patient_can_register_with_correct_data (tests.test_accounts.test_patient_views.TestViews)
+test_patient_can_register_with_correct_data (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Registration: Patient can register with correct data ... ok
-test_patient_cannot_login_when_not_registered (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_login_when_not_registered (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Login: Patient cannot login if not registered ... ok
-test_patient_cannot_logout_with_invalid_token_unauthorized (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_logout_with_invalid_token_unauthorized (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Logout View: Patient cannot logout when they do not have a valid token ... ok
-test_patient_cannot_register_with_existing_email (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_register_with_existing_email (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Registration: Patient cannot register with an existing email (emails are unique) ... ok
-test_patient_cannot_register_with_invalid_email_format (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_register_with_invalid_email_format (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Registration: Patient cannot register with an invalid email format ... ok
-test_patient_cannot_register_with_no_data (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_register_with_no_data (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Registration: Patient cannot register with no data ... ok
-test_patient_cannot_register_with_no_email (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_register_with_no_email (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Registration: Patient cannot register with no email attribute ... ok
-test_patient_cannot_register_with_no_first_name (tests.test_accounts.test_patient_views.TestViews)
-Registration: Patient cannot register with no first_name attribute ... ok
-test_patient_cannot_register_with_no_password (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_register_with_no_password (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Registration: Patient cannot register with no password attribute ... ok
-test_patient_cannot_register_with_no_user (tests.test_accounts.test_patient_views.TestViews)
+test_patient_cannot_register_with_no_user (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 Registration: Patient cannot register with no User (every Patient contains a User) ... ok
-test_return_patient_invalid_token_unauthorized (tests.test_accounts.test_patient_views.TestViews)
+test_return_patient_invalid_token_unauthorized (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 User View: Invalid token means Patient is unauthorized ... ok
-test_return_patient_no_token_unauthorized (tests.test_accounts.test_patient_views.TestViews)
+test_return_patient_no_token_unauthorized (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 User View: If no token for the Patient, we are unauthorized ... ok
-test_return_patient_valid_token_authorized (tests.test_accounts.test_patient_views.TestViews)
+test_return_patient_valid_token_authorized (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 User View: Return a valid token for the Patient when authorized ... ok
-test_person_attribute (tests.test_companion_api.test_models.PersonTestCase)
+test_doctor_can_get_all_patients_when_n_patients (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
+Doctor_Patient: Doctor can get their patients when there are n ... ok
+test_doctor_can_get_all_patients_when_no_patients (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
+Doctor_Patient: Doctor can get their patients when there are none ... ok
+test_doctor_can_get_all_patients_when_one_patient (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
+Doctor_Patient: Doctor can get their patients when there is one ... ok
+test_person_attribute (backend.tests.test_companion_api.test_models.PersonTestCase)
 Check that the people are properly stored in the database ... ok
+test_doctor_can_get_patient_latest_status_when_n_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
+Status: Doctor can get their Patient latest status when there is n ... ok
+test_doctor_can_get_patient_latest_status_when_no_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
+Status: Doctor can get their Patient latest status when there is none ... ok
+test_doctor_can_get_patient_latest_status_when_one_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
+Status: Doctor can get their Patient latest status when there is one ... ok
+test_patient_can_get_all_status_when_n_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
+Status: Patient can get all their status when there is n ... ok
+test_patient_can_get_all_status_when_no_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
+Status: Patient can get their status when there are none ... ok
+test_patient_can_get_all_status_when_one_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
+Status: Patient can get all their status when there is one ... ok
 
 ----------------------------------------------------------------------
-Ran 31 tests in 2.448s
+Ran 38 tests in 11.592s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

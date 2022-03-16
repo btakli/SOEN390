@@ -1,0 +1,23 @@
+{% autoescape off %}
+
+Hello {{admin}},
+
+
+{{doctor}} would like their account approved.
+
+Their user account is under {{doctor_email}}.
+
+This is the proof they provided:
+
+{% if doctor_proof %}
+http://{{domain}}{% url 'media' path=doctor_proof %}
+{% else %}
+http://{{domain}}{% url 'media' path='error/no_proof.jpg' %}
+{% endif %}
+
+Please click on the following link to approve their account if appropriate.
+
+http://{{domain}}{% url 'accounts:approve_doctor' user_id=user_id %}
+
+
+{% endautoescape %}

@@ -1,14 +1,44 @@
+companion_api\admin.py
+    C 8:0 StatusAdmin - A
+    M 15:4 StatusAdmin.patient_ - A
 companion_api\apps.py
     C 6:0 CompanionApiConfig - A
 companion_api\models.py
-    C 10:0 Person - A
+    C 24:0 Status - A
+    C 11:0 Person - A
+    M 58:4 Status.__str__ - A
+    C 61:0 Notification - A
 companion_api\serializers.py
-    C 7:0 PersonSerializer - A
+    C 8:0 PersonSerializer - A
+    C 17:0 StatusSerializer - A
+    C 27:0 NotificationSerializer - A
 companion_api\views.py
-    C 8:0 PersonView - A
-    M 14:4 PersonView.get_queryset - A
-    M 19:4 PersonView.perform_create - A
+    C 38:0 DoctorPatientView - A
+    C 73:0 LatestStatusView - A
+    C 87:0 SpecificLatestStatusView - A
+    C 9:0 PersonView - A
+    M 47:4 DoctorPatientView.get - A
+    C 59:0 PatientStatusView - A
+    M 81:4 LatestStatusView.get_object - A
+    M 95:4 SpecificLatestStatusView.get_object - A
+    C 104:0 NotificationView - A
+    M 15:4 PersonView.get_queryset - A
+    M 20:4 PersonView.perform_create - A
+    M 67:4 PatientStatusView.get_queryset - A
+    M 70:4 PatientStatusView.perform_create - A
+    M 112:4 NotificationView.get_queryset - A
+    M 115:4 NotificationView.perform_create - A
 companion_api\migrations\0001_initial.py
+    C 9:0 Migration - A
+companion_api\migrations\0002_status_caugh_status_chills_status_diffbreathing_and_more.py
+    C 7:0 Migration - A
+companion_api\migrations\0003_remove_status_caugh_alter_status_date.py
+    C 7:0 Migration - A
+companion_api\migrations\0004_alter_status_options_notification.py
+    C 8:0 Migration - A
+companion_api\migrations\0005_alter_notification_user.py
+    C 8:0 Migration - A
+companion_api\migrations\0006_alter_notification_user.py
     C 8:0 Migration - A
 companion_api\apps.py
     C 6:0 CompanionApiConfig - A

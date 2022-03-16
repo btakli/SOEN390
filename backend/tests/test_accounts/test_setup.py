@@ -4,7 +4,7 @@ from faker import Faker
 
 class TestSetUp(APITestCase):
     def setUp(self):
-        self.register_doctor_url = reverse("accounts:register_doctor")
+        self.register_doctor_url = reverse("accounts:register_doctor_test")
         self.register_patient_url = reverse("accounts:register_patient")
         self.login_doctor_url = reverse("accounts:login_doctor")
         self.login_patient_url = reverse("accounts:login_patient")

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPersons, deletePerson } from '../redux/actions/personActions';
+import { getPersons, deletePerson } from '../../redux/actions/personActions';
 import { useEffect, Fragment } from 'react';
 
 import * as React from 'react';
@@ -13,7 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-function Persons(props) {
+function PersonTable(props) {
   useEffect(() => {
     props.getPersons();
   }, []);
@@ -60,7 +60,7 @@ function Persons(props) {
   );
 }
 
-Persons.propTypes = {
+PersonTable.propTypes = {
   persons: PropTypes.array.isRequired
 }
 
@@ -70,4 +70,4 @@ const mapStateToProps = state => ({
   deletePerson: PropTypes.func.isRequired
 });
 
-export default connect(mapStateToProps, { getPersons, deletePerson })(Persons);
+export default connect(mapStateToProps, { getPersons, deletePerson })(PersonTable);

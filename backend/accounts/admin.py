@@ -8,10 +8,14 @@ from django.utils.translation import gettext_lazy
 
 ADMIN_NAME = "CovidTracker"
 
+# TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+# class UserAdmin(admin.ModelAdmin):
+#     list_filter = ("is_email_verified",)
 
 class DoctorAdmin(admin.ModelAdmin):
     """Doctor Admin Model"""
     list_display = ("__str__", "user_", "number_of_patients")
+    list_filter = ("user__is_active", "user__is_pending_approval")
     model = Doctor
     search_fields = (
         "first_name__startswith",
@@ -35,7 +39,7 @@ class PatientAdmin(admin.ModelAdmin):
     search_fields = (
         "first_name__startswith",
     )  # Search field (later can add different attributes?)
-    empty_value_display = 'NO VALUE HERE :)'
+    empty_value_display = 'No Doctor'
 
     def user_(self, obj):
         link = reverse(
@@ -63,6 +67,11 @@ admin.site.site_header = gettext_lazy(f'{ADMIN_NAME} Administration')
 # Text to put at the top of the admin index page.
 admin.site.index_title = gettext_lazy(f'{ADMIN_NAME} Administration')
 
+# Hardcoded - issues with 127.0.0.1 vs. localhost
+admin.site.site_url = 'localhost:3000/'
+
 admin.site.register(Doctor, DoctorAdmin)
-admin.site.register(User)
+admin.site.register(User) # At the moment you cannot register users correctly in the Admin UI
+                            # since you need to override the UserAdmin class in Django
+                            # Not a priority at the moment, use current API instead.
 admin.site.register(Patient, PatientAdmin)

@@ -1,4 +1,9 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { registerPatient } from "../../redux/actions/authActions";
+import { createMessage } from "../../redux/actions/messageActions";
+import { useNavigate } from "react-router-dom";
 
 // MUI
 import Avatar from "@mui/material/Avatar";
@@ -35,34 +40,72 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
-  const handleSignUp = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      dateOfBirth: data.get("date"),
-      gender: data.get("gender"),
-      address: data.get("address"),
-      city: data.get("city"),
-      postalCode: data.get("postalCode"),
-      email: data.get("email"),
-      password: data.get("password"),
-      confirmPassword: data.get("confirmPassword"),
-      statusType: data.get("statusType"),
-    });
+function PatientSignUp(props) {
+  const { redirect } = props;
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      navigate(`${redirect}`);
+    }
+  });
+
+  const emptyForm = {
+    email: "",
+    password: "",
+    confirm_password: "",
+    first_name: "",
+    last_name: "",
+    date_of_birth: "",
+    gender: "",
+    address: "",
+    city: "",
+    postal_code: ""
   };
 
-  const [gender, setGender] = React.useState("");
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
-  };
+  // Store form data in state
+  const [state, setState] = useState(emptyForm);
+  
+  // Change form data in state at each change
+  const handleChange = (e) =>
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
 
-  const [statusType, setStatusType] = React.useState("");
-  const handleStatusTypeChange = (event) => {
-    setStatusType(event.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const {
+      email,
+      password,
+      confirm_password,
+      first_name,
+      last_name,
+      date_of_birth,
+      gender,
+      address,
+      city,
+      postal_code
+    } = state;
+
+    if (password !== confirm_password) {
+      props.createMessage({ passwordsDoNotMatch: "Passwords do not match" });
+    } else {
+      const newUser = {
+        email,
+        password,
+        first_name,
+        last_name,
+        date_of_birth,
+        gender,
+        address,
+        city,
+        postal_code
+      };
+      props.registerPatient(newUser);
+    }
   };
 
   return (
@@ -81,34 +124,38 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Patient Sign up
           </Typography>
-          <Box component="form" onSubmit={handleSignUp} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  name="firstName"
+                  name="first_name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="first_name"
                   label="First Name"
                   autoFocus
+                  value={state.first_name}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="last_name"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
                   autoComplete="family-name"
+                  value={state.last_name}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  id="date"
-                  name="date"
+                  id="date_of_birth"
+                  name="date_of_birth"
                   label="Date of birth"
                   type="date"
                   required
@@ -116,23 +163,24 @@ export default function SignUp() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  value={state.date_of_birth}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth required>
+                <FormControl fullWidth required >
                   <InputLabel id="gender">Gender</InputLabel>
                   <Select
                     required
                     fullWidth
                     id="gender"
                     name="gender"
-                    value={gender}
                     label="Gender"
-                    onChange={handleGenderChange}
+                    value={state.gender}
+                    onChange={handleChange}
                   >
-                    <MenuItem value={"male"}>Male</MenuItem>
-                    <MenuItem value={"female"}>Female</MenuItem>
-                    <MenuItem value={"other"}>Other</MenuItem>
+                    <MenuItem value={"M"}>Male</MenuItem>
+                    <MenuItem value={"F"}>Female</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -143,6 +191,8 @@ export default function SignUp() {
                   fullWidth
                   id="address"
                   label="Address"
+                  value={state.address}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -152,15 +202,19 @@ export default function SignUp() {
                   fullWidth
                   id="city"
                   label="City"
+                  value={state.city}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  name="postalCode"
+                  name="postal_code"
                   required
                   fullWidth
-                  id="postalCode"
+                  id="postal_code"
                   label="Postal Code"
+                  value={state.postal_code}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -171,6 +225,8 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={state.email}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -182,40 +238,21 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={state.password}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="confirmPassword"
+                  name="confirm_password"
                   label="Confirm Password"
                   type="password"
-                  id="confirmPassword"
+                  id="confirm_password"
+                  value={state.confirm_password}
+                  onChange={handleChange}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth required>
-                  <InputLabel id="statusType">Status Type</InputLabel>
-                  <Select
-                    required
-                    fullWidth
-                    id="statusType"
-                    name="statusType"
-                    value={statusType}
-                    label="statusType"
-                    onChange={handleStatusTypeChange}
-                  >
-                    <MenuItem value={"patient"}>Patient</MenuItem>
-                    <MenuItem value={"medicalDoctor"}>Medical Doctor</MenuItem>
-                    <MenuItem value={"healthOfficial"}>
-                      Health Official
-                    </MenuItem>
-                    <MenuItem value={"immigrationOfficer"}>
-                      Immigration Officer
-                    </MenuItem>
-                  </Select>
-                </FormControl>
               </Grid>
             </Grid>
             <Button
@@ -228,7 +265,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <Link href="/patient/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -240,3 +277,15 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+
+PatientSignUp.propTypes = {
+  registerPatient: PropTypes.func.isRequired,
+  createMessage: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { registerPatient, createMessage })(PatientSignUp);
