@@ -6,13 +6,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
 
 
-
-
-
 export default function Calendar() {
   const [value, setValue] = useState(new Date());
-
-
 
 
   return (
