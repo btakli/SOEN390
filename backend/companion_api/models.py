@@ -62,7 +62,8 @@ class Notification(models.Model):
     TYPE_OPTIONS = [
         ('Email', 'Email'),
         ('Assignment', 'Assignment'),
-        ('Appointment', 'Appointment')
+        ('Appointment', 'Appointment'),
+        ('InfectedAlert', 'InfectedAlert')
     ]
     type = models.CharField(
         choices=TYPE_OPTIONS,
@@ -73,4 +74,15 @@ class Notification(models.Model):
     message = models.TextField(max_length=250)
     user = models.ForeignKey(
         User, related_name="notifications", on_delete=models.CASCADE, blank=True
+    )
+
+class Address(models.Model):
+    name = models.CharField(max_length=30)
+    streetNumber = models.IntegerField()
+    streetName = models.CharField(max_length=30)
+    city = models.CharField(max_length=30)
+    province = models.CharField(max_length=30)
+    postalCode = models.CharField(max_length=30)
+    patient = models.ForeignKey(
+        Patient, related_name="addresses", on_delete=models.SET_NULL, null=True, blank=True
     )

@@ -1,5 +1,6 @@
 """Create your views here"""
 
+from email import message
 from rest_framework import viewsets, permissions, generics
 from rest_framework.response import Response
 from .models import *
@@ -114,3 +115,46 @@ class NotificationView(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class AddressView(viewsets.ModelViewSet):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = AddressSerializer
+
+    def get_queryset(self):
+        return self.request.user.patient.addresses.all()
+
+    def perform_create(self, serializer):
+        serializer.save(patient=self.request.user.patient)
+
+#returns all users who have a matching adres with current user
+class PatientsWithMatchingAddressView(viewsets.ModelViewSet):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = PatientSerializer
+
+    def get_queryset(self):
+        postalCodes = self.request.user.patient.addresses.all().values_list('postalCode', flat=True)        
+        addresses =  Address.objects.filter(postalCode__in = postalCodes)
+    
+        patients = []
+        for address in addresses:
+            if (self.request.user.patient != address.patient and address.patient not in patients) :
+                patients.append(address.patient)
+        
+        for patient in patients:
+            n = Notification(
+                    type = "InfectedAlert", 
+                    user = patient.user, 
+                    subject = "Contact tracing", 
+                    message = "Someone who visits spots you frequent has become infected! Please monitor your symptoms"
+                )
+            n.save()
+
+        return patients
