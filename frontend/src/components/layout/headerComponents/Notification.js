@@ -85,13 +85,13 @@ function Notification(props) {
             sx={{ minWidth: "400px", maxWidth: "400px" }}
           >
             <ListItemButton>
-              {
-                (item.type = "Email" ? (
-                  <EmailIcon />
-                ) : (
-                  (item.type = "Assignment" ? <PersonIcon /> : <EventIcon />)
-                ))
-              }{" "}
+              {item.type === "Email" ? (
+                <EmailIcon />
+              ) : item.type === "Assignment" ? (
+                <PersonIcon />
+              ) : (
+                <EventIcon />
+              )}{" "}
               <ListItemText
                 primary={item.subject}
                 secondary={item.message}
