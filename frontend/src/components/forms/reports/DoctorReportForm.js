@@ -110,7 +110,7 @@ const DoctorReportForm = (props) => {
                   <TextField name="admin_email" value={emailData.admin_email} />
                 </Box>
                 <InputLabel id="patient-label">
-                  Patient Involved in Incedent
+                  Patient Involved in Incident
                 </InputLabel>
                 <Select
                   required
