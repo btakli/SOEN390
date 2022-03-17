@@ -92,6 +92,7 @@ function Navigator(props) {
       text: "Address Tracing",
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/addressTracing`),
+    },
     { text: "Appointment", icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
