@@ -13,27 +13,16 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import {
   Menu,
-  MenuItem,
-  Divider,
   ListItem,
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import { deepOrange, deepPurple } from "@mui/material/colors";
-
-const menu = [
-  "Notification 1",
-  "Notification 2",
-  "Notification 3",
-  "Notification 4",
-];
 
 function Notification(props) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleOpenNotif = (event) => {
     setAnchorEl(event.currentTarget);
-    // console.log(props.notifs);
   };
 
   const handleCloseNotif = () => {
@@ -47,7 +36,13 @@ function Notification(props) {
   return (
     <Fragment>
       <Tooltip title="Notifications">
-        <IconButton color="inherit" onClick={handleOpenNotif} sx={{ p: 0.5 }}>
+      
+        <IconButton 
+          size="large"
+          aria-label="notifs"
+          color="inherit"
+          onClick={handleOpenNotif}
+        >
           <NotificationsIcon />
         </IconButton>
       </Tooltip>
@@ -97,10 +92,6 @@ function Notification(props) {
                 secondary={item.message}
                 sx={{ pl: "20px" }}
               />
-              {/* {item.subject}
-              <Typography textAlign="center" noWrap>
-                {item.message}
-              </Typography> */}
             </ListItemButton>
           </ListItem>
         ))}

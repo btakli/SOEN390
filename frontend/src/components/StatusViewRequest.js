@@ -7,17 +7,10 @@ import { getLatestStatus } from '../redux/actions/statusActions';
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
-import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Slider from "@mui/material/Slider";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
@@ -41,9 +34,14 @@ const StatusViewRequest = (props) => {
     }
   }, [patientId]);
 
+  useEffect(() => {
+    setEmailData(defaultStatusRequest);
+  }, [patient]);
+
   const defaultStatusRequest = {
     subject: "Patient Symptom Status Update",
-    email: patient.email,
+    email: "delispeter19@gmail.com", // just for demo
+    // email: patient.email,
     message: `Hi ${patient.first_name}, this is your doctor, please update your status!`,
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,
@@ -65,7 +63,6 @@ const StatusViewRequest = (props) => {
         console.log("Email Sent Successfully", result.status, result.text)
       )
       .catch((error) => console.log("Email Send Failed...", error));
-    setEmailData(defaultStatusRequest);
     onClose();
   };
 

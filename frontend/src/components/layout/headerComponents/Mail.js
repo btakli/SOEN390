@@ -1,6 +1,5 @@
 import { React, Fragment, useState } from "react";
 import IconButton from "@mui/material/IconButton";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import Tooltip from "@mui/material/Tooltip";
 import { Badge } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";

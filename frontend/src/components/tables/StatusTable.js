@@ -51,8 +51,6 @@ function StatusTable(props) {
         setStatusData(extractStatus(props.latestStatus));
     }, [props.latestStatus]);
 
-    console.log(zip(statusFields, statusData));
-
     if(!props.latestStatus.patient){
         return (
             <Typography variant="h3" component="div" align="center" sx={{ my: 3}}>
