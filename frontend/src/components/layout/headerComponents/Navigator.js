@@ -69,7 +69,9 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
-    { text: "Template 3", icon: <PublicIcon /> },
+    { text: "Availabilities", icon: <PublicIcon />,
+      onClick: () => navigate(`${home}/doctor/appointments`),
+    },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
@@ -90,6 +92,8 @@ function Navigator(props) {
       text: "Address Tracing",
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/addressTracing`),
+    { text: "Appointment", icon: <PublicIcon />,
+      onClick: () => navigate(`${home}/patient/appointments`),
     },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
@@ -155,7 +159,7 @@ function Navigator(props) {
                 {children.map(({ text, icon, onClick }) => (
                   <ListItem disablePadding key={text} sx={itemStyle}>
                     <ListItemButton onClick={onClick}>
-                      <ListItemIcon>{icon}</ListItemIcon>
+                      <ListItemIcon sx={{ color: "#fff" }}>{icon}</ListItemIcon>
                       <ListItemText>{text}</ListItemText>
                     </ListItemButton>
                   </ListItem>

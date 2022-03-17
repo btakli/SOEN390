@@ -40,3 +40,61 @@ companion_api\migrations\0005_alter_notification_user.py
     C 8:0 Migration - A
 companion_api\migrations\0006_alter_notification_user.py
     C 8:0 Migration - A
+accounts\admin.py
+    C 35:0 PatientAdmin - A
+    C 15:0 DoctorAdmin - A
+    M 50:4 PatientAdmin.doctor_ - A
+    M 25:4 DoctorAdmin.user_ - A
+    M 31:4 DoctorAdmin.number_of_patients - A
+    M 44:4 PatientAdmin.user_ - A
+accounts\apps.py
+    C 4:0 AccountsConfig - A
+accounts\models.py
+    C 6:0 UserManager - A
+    M 21:4 UserManager.create_superuser - A
+    M 8:4 UserManager.create_user - A
+    C 53:0 Doctor - A
+    C 79:0 Patient - A
+    C 32:0 User - A
+    M 70:4 Doctor.upload_path - A
+    M 76:4 Doctor.__str__ - A
+    M 99:4 Patient.__str__ - A
+accounts\serializers.py
+    C 137:0 LoginSerializer - A
+    M 144:4 LoginSerializer.validate - A
+    C 33:0 RegisterDoctorSerializer - A
+    C 69:0 RegisterDoctorTestSerializer - A
+    C 102:0 RegisterPatientSerializer - A
+    C 6:0 UserSerializer - A
+    C 21:0 DoctorSerializer - A
+    C 27:0 PatientSerializer - A
+    M 48:4 RegisterDoctorSerializer.create - A
+    M 84:4 RegisterDoctorTestSerializer.create - A
+    M 114:4 RegisterPatientSerializer.create - A
+accounts\utils.py
+    C 4:0 TokenGen - A
+    M 5:4 TokenGen._make_hash_value - A
+accounts\views.py
+    C 82:0 ApproveDoctorView - A
+    M 84:4 ApproveDoctorView.get - A
+    C 105:0 RegisterDoctorView - A
+    C 140:0 RegisterDoctorTestView - A
+    C 168:0 RegisterPatientView - A
+    C 191:0 LoginDoctorView - A
+    C 213:0 LoginPatientView - A
+    C 235:0 UserView - A
+    C 247:0 DoctorView - A
+    C 259:0 PatientView - A
+    F 63:0 send_admin_approval_email - A
+    M 108:4 RegisterDoctorView.post - A
+    M 143:4 RegisterDoctorTestView.post - A
+    M 171:4 RegisterPatientView.post - A
+    M 194:4 LoginDoctorView.post - A
+    M 216:4 LoginPatientView.post - A
+    M 243:4 UserView.get_object - A
+    M 255:4 DoctorView.get_object - A
+    M 267:4 PatientView.get_object - A
+accounts\migrations\0001_initial.py
+    C 10:0 Migration - A
+accounts\templatetags\frontend_site_url.py
+    F 9:0 frontend_site_url - A

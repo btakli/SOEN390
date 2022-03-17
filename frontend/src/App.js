@@ -6,6 +6,10 @@ import NoMatch from "./pages/NoMatch";
 import RequestApplicationTemplate from "./pages/RequestApplicationTemplate";
 import PrivateRoute from "./components/PrivateRoute";
 
+// REFACTOR
+import DoctorAppointment from "./refactor/appointment/DoctorAppointment";
+import PatientAppointmentForm from "./refactor/appointment/PatientAppointmentForm";
+
 // AUTH
 import PreLogin from "./pages/auth/PreLogin";
 import PatientLogin from "./pages/auth/PatientLogin";
@@ -21,6 +25,8 @@ import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 import AddressTracing from "./pages/home/AddressTracing";
 
+// import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
+
 function App() {
   const homePath = "/";
 
@@ -28,6 +34,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+
+        {/* <Route path="/r" element={<PatientListDisplay />} /> */}
+
           {/* Home Page and Outlets */}
           <Route
             path={homePath}
@@ -40,6 +49,8 @@ function App() {
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
+              <Route path="doctor/appointments" element={<DoctorAppointment />} />
+              <Route path="patient/appointments" element={<PatientAppointmentForm />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
@@ -67,6 +78,8 @@ function App() {
             path="/doctor/signup"
             element={<DoctorSignUp redirect={homePath} />}
           />
+
+          
 
           <Route path="*" element={<NoMatch />} />
         </Routes>
