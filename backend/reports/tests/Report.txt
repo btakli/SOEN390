@@ -1,4 +1,4 @@
-Found 38 test(s).
+Found 42 test(s).
 Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
 Operations to perform:
   Synchronize unmigrated apps: corsheaders, messages, rest_framework, staticfiles
@@ -103,8 +103,16 @@ test_doctor_can_get_all_patients_when_no_patients (backend.tests.test_companion_
 Doctor_Patient: Doctor can get their patients when there are none ... ok
 test_doctor_can_get_all_patients_when_one_patient (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
 Doctor_Patient: Doctor can get their patients when there is one ... ok
-test_person_attribute (backend.tests.test_companion_api.test_models.PersonTestCase)
+test_person_attribute (backend.tests.test_companion_api.test_models.ModelTestCases)
 Check that the people are properly stored in the database ... ok
+test_superuser_can_be_created (backend.tests.test_companion_api.test_models.ModelTestCases)
+Admin: Ensure superuser (Admin) can properly be created with valid email and a password ... ok
+test_superuser_cant_be_created_with_is_staff_false (backend.tests.test_companion_api.test_models.ModelTestCases)
+Admin: Ensure superuser (Admin) cannot be created when is_staff is set to false ... ok
+test_superuser_cant_be_created_with_is_superuser_false (backend.tests.test_companion_api.test_models.ModelTestCases)
+Admin: Ensure superuser (Admin) cannot be created when is_superuser is set to false ... ok
+test_superuser_cant_be_created_without_email (backend.tests.test_companion_api.test_models.ModelTestCases)
+Admin: Ensure superuser (Admin) cannot be created without an email ... ok
 test_doctor_can_get_patient_latest_status_when_n_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
 Status: Doctor can get their Patient latest status when there is n ... ok
 test_doctor_can_get_patient_latest_status_when_no_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
@@ -119,7 +127,7 @@ test_patient_can_get_all_status_when_one_status (backend.tests.test_companion_ap
 Status: Patient can get all their status when there is one ... ok
 
 ----------------------------------------------------------------------
-Ran 38 tests in 11.592s
+Ran 42 tests in 4.214s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

@@ -1,10 +1,12 @@
 from django.test import TestCase
 from companion_api.models import Person
+from accounts.models import UserManager, User
+from faker import Faker
 
 import datetime
 
 
-class PersonTestCase(TestCase):
+class ModelTestCases(TestCase):
     """This is a test case which tests that the attributes of the Person Model are properly set up."""
 
     def setUp(self):
@@ -20,6 +22,7 @@ class PersonTestCase(TestCase):
             email="john@gmail.com",
             date_of_birth=datetime.date(day=2, month=1, year=2001),
         )
+        self.fake = Faker()
 
     def test_person_attribute(self):
         """Check that the people are properly stored in the database"""
@@ -31,3 +34,32 @@ class PersonTestCase(TestCase):
         self.assertEqual(p2, p3)
         self.assertEqual(p1.email, "brandon@hotmail.com")
         self.assertEqual(p1, p4)
+    
+    def test_superuser_can_be_created(self):
+        """Admin: Ensure superuser (Admin) can properly be created with valid email and a password""" 
+        email = "admin@email.com"
+        superuser = User.objects.create_superuser(email,self.fake.password())
+        #Ensure that the superuser was created with the right email
+        self.assertEqual(superuser.email,email)
+    
+    def test_superuser_cant_be_created_without_email(self):
+        """Admin: Ensure superuser (Admin) cannot be created without an email""" 
+        email = None
+        #Ensure exception is thrown
+        with self.assertRaises(ValueError):
+            User.objects.create_superuser(email,self.fake.password())
+
+    def test_superuser_cant_be_created_with_is_staff_false(self):
+        """Admin: Ensure superuser (Admin) cannot be created when is_staff is set to false""" 
+        email = "admin@email.com"
+        #Ensure exception is thrown
+        with self.assertRaises(ValueError):
+            User.objects.create_superuser(email,self.fake.password(),is_staff=False)    
+
+    def test_superuser_cant_be_created_with_is_superuser_false(self):
+        """Admin: Ensure superuser (Admin) cannot be created when is_superuser is set to false""" 
+        email = "admin@email.com"
+        #Ensure exception is thrown
+        with self.assertRaises(ValueError):
+            User.objects.create_superuser(email,self.fake.password(),is_superuser=False)   
+
