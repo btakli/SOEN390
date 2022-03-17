@@ -6,6 +6,7 @@ import messageReducer from "./messageReducer";
 import authReducer from "./authReducer";
 import statusReducer from "./statusReducer";
 import notifReducer from "./notifReducer";
+import addressReducer from "./addressReducer";
 
 // Overwrite this redux element
 export default combineReducers({
@@ -15,5 +16,6 @@ export default combineReducers({
     messageReducer,
     authReducer,
     statusReducer,
-    notifReducer
+    notifReducer,
+    addressReducer
 });

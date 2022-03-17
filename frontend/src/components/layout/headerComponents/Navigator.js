@@ -88,6 +88,11 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
+    {
+      text: "Address Tracing",
+      icon: <PublicIcon />,
+      onClick: () => navigate(`${home}/addressTracing`),
+    },
     { text: "Appointment", icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },

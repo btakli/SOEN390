@@ -19,15 +19,15 @@ import DoctorSignUp from "./pages/auth/DoctorSignUp";
 
 // HOME
 import Home from "./pages/home/Home";
-import Dashboard from './pages/home/Dashboard';
+import Dashboard from "./pages/home/Dashboard";
 import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
+import AddressTracing from "./pages/home/AddressTracing";
 
 // import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
 
 function App() {
-
   const homePath = "/";
 
   return (
@@ -38,12 +38,16 @@ function App() {
         {/* <Route path="/r" element={<PatientListDisplay />} /> */}
 
           {/* Home Page and Outlets */}
-          <Route path={homePath} element={<PrivateRoute redirect={"/pre/login"} />}>
+          <Route
+            path={homePath}
+            element={<PrivateRoute redirect={"/pre/login"} />}
+          >
             <Route path="" element={<Home home={homePath} />}>
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="requests" element={<Requests />} />
               <Route path="status" element={<PatientStatus />} />
+              <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
               <Route path="doctor/appointments" element={<DoctorAppointment />} />
               <Route path="patient/appointments" element={<PatientAppointmentForm />} />
@@ -51,15 +55,29 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="/requestapplication"
-            element={<RequestApplicationTemplate />} />
+          <Route
+            path="/requestapplication"
+            element={<RequestApplicationTemplate />}
+          />
 
           {/* Login and Register Pages */}
           <Route path="/pre/login" element={<PreLogin />} />
-          <Route path="/patient/login" element={<PatientLogin redirect={homePath} />} />
-          <Route path="/doctor/login" element={<DoctorLogin redirect={homePath}/>} />
-          <Route path="/patient/signup" element={<PatientSignUp redirect={homePath} />} />
-          <Route path="/doctor/signup" element={<DoctorSignUp redirect={homePath} />} />
+          <Route
+            path="/patient/login"
+            element={<PatientLogin redirect={homePath} />}
+          />
+          <Route
+            path="/doctor/login"
+            element={<DoctorLogin redirect={homePath} />}
+          />
+          <Route
+            path="/patient/signup"
+            element={<PatientSignUp redirect={homePath} />}
+          />
+          <Route
+            path="/doctor/signup"
+            element={<DoctorSignUp redirect={homePath} />}
+          />
 
           
 
