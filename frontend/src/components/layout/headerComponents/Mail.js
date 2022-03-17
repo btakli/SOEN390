@@ -21,7 +21,7 @@ function Mail() {
   return (
     <Fragment>
       <ContactForm open={open} onClose={handleDialogClose} />
-      <Tooltip title="Message a Doctor">
+      <Tooltip title="Mails">
         <IconButton
           size="large"
           aria-label="emails"
@@ -31,12 +31,6 @@ function Mail() {
           <Badge color="error">
             <MailIcon />
           </Badge>
-        </IconButton>
-      </Tooltip>
-
-      <Tooltip title="Notifications">
-        <IconButton color="inherit">
-          <NotificationsIcon />
         </IconButton>
       </Tooltip>
     </Fragment>
