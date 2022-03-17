@@ -23,6 +23,19 @@ import Paper from "@mui/material/Paper";
 
 const theme = createTheme();
 
+function createData(
+  name,
+  streetNumber,
+  streetName,
+  city,
+  province,
+  postalCode
+) {
+  return { name, streetNumber, streetName, city, province, postalCode };
+}
+
+const rows = [createData("", "", "", "", "", "")];
+
 function AddressForm(props) {
   const emptyForm = {
     name: "",
