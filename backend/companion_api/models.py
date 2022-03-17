@@ -84,5 +84,5 @@ class Address(models.Model):
     province = models.CharField(max_length=30)
     postalCode = models.CharField(max_length=30)
     patient = models.ForeignKey(
-        Patient, related_name="addresses", on_delete=models.SET_NULL, null=True, blank=True
+        Patient, related_name="addresses", on_delete=models.CASCADE, null=True, blank=True
     )
