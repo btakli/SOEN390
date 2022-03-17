@@ -24,6 +24,8 @@ import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 
+// import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
+
 function App() {
 
   const homePath = "/";
@@ -32,6 +34,8 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+
+        {/* <Route path="/r" element={<PatientListDisplay />} /> */}
 
           {/* Home Page and Outlets */}
           <Route path={homePath} element={<PrivateRoute redirect={"/pre/login"} />}>
