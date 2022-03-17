@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { getPatients } from '../../redux/actions/patientActions';
 import StatusViewRequest from '../StatusViewRequest';
 
+import PriorityToggle from '../../refactor/patientTable/PriorityToggle';
+
 // MUI
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,6 +15,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+
 
 function PatientTable(props) {
   const [open, setOpen] = useState(false);
@@ -42,11 +45,12 @@ function PatientTable(props) {
               <TableCell>Last</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>DOB</TableCell>
-              <TableCell></TableCell>
+              <TableCell>View Status</TableCell>
+              <TableCell>Priority</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.patients.map((patient) => (
+            {props.patients.map((patient, i) => (
             <TableRow
                 key={patient.user}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -60,6 +64,7 @@ function PatientTable(props) {
                     See Status
                 </Button>
                 </TableCell>
+                <TableCell> <PriorityToggle initial={i % 3 == 0}/> </TableCell>
             </TableRow>
             ))}
           </TableBody>

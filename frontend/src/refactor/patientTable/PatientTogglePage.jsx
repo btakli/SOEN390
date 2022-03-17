@@ -1,6 +1,4 @@
 import { React } from "react";
-
-import PropTypes from "prop-types";
 import PatientListDisplay from "./PatientListDisplay";
 
 import {
@@ -10,7 +8,7 @@ import {
   } from "@mui/material";
 
 
-function PatientTogglePage(props){
+function PatientTogglePage(){
 
   return (
 
@@ -22,20 +20,8 @@ function PatientTogglePage(props){
             </Grid>
         </Grid>
         </CardContent>
-
-
     </Card>
-
-
-
-
   )
 }
-
-PatientTogglePage.propTypes = {
-    auth: PropTypes.object.isRequired,
-};
-
-
 
 export default (PatientTogglePage);

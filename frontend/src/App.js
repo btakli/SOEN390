@@ -9,7 +9,6 @@ import PrivateRoute from "./components/PrivateRoute";
 // REFACTOR
 import DoctorAppointment from "./refactor/appointment/DoctorAppointment";
 import PatientAppointmentForm from "./refactor/appointment/PatientAppointmentForm";
-import PatientTogglePage from "./refactor/patientTable/PatientTogglePage";
 
 // AUTH
 import PreLogin from "./pages/auth/PreLogin";
@@ -33,7 +32,6 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-        <Route path="/patientList" element={<PatientTogglePage/>} />
 
           {/* Home Page and Outlets */}
           <Route path={homePath} element={<PrivateRoute redirect={"/pre/login"} />}>
