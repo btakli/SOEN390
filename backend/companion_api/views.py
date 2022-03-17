@@ -131,7 +131,7 @@ class AddressView(viewsets.ModelViewSet):
         serializer.save(patient=self.request.user.patient)
 
 #returns all users who have a matching adres with current user
-class PatientsWithMatchingAddressView(viewsets.ModelViewSet):
+class PatientsWithMatchingAddressView(generics.ListAPIView):
     # only authenticated users can get access
     permission_classes = [
         permissions.IsAuthenticated

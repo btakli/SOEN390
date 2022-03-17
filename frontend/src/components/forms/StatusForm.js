@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { addStatus, getAllStatus } from '../../redux/actions/statusActions';
+import { getAtRiskPatients } from '../../redux/actions/addressActions';
 
 // MUI
 import Box from "@mui/material/Box";
@@ -112,6 +113,12 @@ function StatusForm(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     props.addStatus(state);
+
+    if(state.status == 'Infected'){
+      props.getAtRiskPatients();
+    }
+
+
     window.scrollTo(0, 0);
   };
 
@@ -208,4 +215,4 @@ const mapStateToProps = state => ({
   allStatus: state.statusReducer.allStatus
 });
 
-export default connect(mapStateToProps, { addStatus, getAllStatus })(StatusForm);
+export default connect(mapStateToProps, { addStatus, getAllStatus, getAtRiskPatients })(StatusForm);
