@@ -6,6 +6,7 @@ import Navigator from "./headerComponents/Navigator";
 import Mail from "./headerComponents/Mail";
 import ProfileMenu from "./headerComponents/ProfileMenu";
 import Notification from "./headerComponents/Notification";
+import Report from './headerComponents/Report';
 
 // MUI
 import Toolbar from "@mui/material/Toolbar";
@@ -47,6 +48,9 @@ function Header(props) {
           </Grid>
           <Grid item>
             <Notification />
+          </Grid>
+          <Grid item>
+            <Report /> 
           </Grid>
           <Grid item>
             <ProfileMenu />
