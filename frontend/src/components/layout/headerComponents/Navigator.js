@@ -69,7 +69,9 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
-    { text: "Template 3", icon: <PublicIcon /> },
+    { text: "Availabilities", icon: <PublicIcon />,
+      onClick: () => navigate(`${home}/doctor/appointments`),
+    },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
@@ -86,7 +88,9 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
-    { text: "Template 3", icon: <PublicIcon /> },
+    { text: "Appointment", icon: <PublicIcon />,
+      onClick: () => navigate(`${home}/patient/appointments`),
+    },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
