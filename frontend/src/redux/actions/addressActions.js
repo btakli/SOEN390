@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messageActions';
 import { tokenConfig } from './authActions';
-import { GET_ADDRESS, DELETE_ADDRESS, ADD_ADDRESS} from "./types.js";
+import { GET_ADDRESS, DELETE_ADDRESS, ADD_ADDRESS, ALERT_PATIENTS} from "./types.js";
 
 // GET ADDRESS API CALL
 export const getAddresses = () => (dispatch, getState) => {
@@ -46,6 +46,20 @@ export const addAddress = (address) => (dispatch, getState) => {
             }));
             dispatch({
                 type: ADD_ADDRESS,
+                payload: res.data
+            });
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+// GET AT RISK PATIENTS API CALL
+export const getAtRiskPatients = () => (dispatch, getState) => {
+
+    const config = tokenConfig(getState);
+
+    axios.get('http://localhost:8000/api/patients/at-risk/', config)
+        .then(res => {
+            dispatch({
+                type: ALERT_PATIENTS,
                 payload: res.data
             });
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));

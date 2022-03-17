@@ -1,7 +1,8 @@
-import { GET_ADDRESS, DELETE_ADDRESS, ADD_ADDRESS} from "../actions/types.js";
+import { GET_ADDRESS, DELETE_ADDRESS, ADD_ADDRESS, ALERT_PATIENTS} from "../actions/types.js";
 
 const initialState = {
-    addresses: []
+    addresses: [],
+    atRiskPatients: []
 };
 
 // Note: function has no name so we define ...
@@ -22,6 +23,11 @@ export default function(state=initialState, action){
             return {
                 ...state,
                 addresses: [...state.addresses, action.payload]
+            };
+        case ALERT_PATIENTS:
+            return {
+                ...state,
+                atRiskPatients: action.payload
             };
         default:
             return state;

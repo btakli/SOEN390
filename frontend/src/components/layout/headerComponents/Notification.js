@@ -5,6 +5,7 @@ import { getNotifications } from "../../../redux/actions/notifActions";
 
 // MUI
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import WarningIcon from '@mui/icons-material/Warning';
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import EventIcon from "@mui/icons-material/Event";
@@ -84,6 +85,8 @@ function Notification(props) {
                 <EmailIcon />
               ) : item.type === "Assignment" ? (
                 <PersonIcon />
+              ) : item.type === "InfectedAlert" ? (
+                <WarningIcon />
               ) : (
                 <EventIcon />
               )}{" "}
