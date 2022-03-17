@@ -22,15 +22,11 @@ const Report = (props) => {
 
   const ReportForm = () => {
     if (props.auth.user.is_patient) {
-      return (
-        <PatientReportForm open={open} onClose={handleDialogClose} />
-      );
+      return <PatientReportForm open={open} onClose={handleDialogClose} />;
     } else if (props.auth.user.is_doctor) {
-      return (
-        <DoctorReportForm open={open} onClose={handleDialogClose} />
-      );
+      return <DoctorReportForm open={open} onClose={handleDialogClose} />;
     } else {
-      return (null);  // Is this implicit?
+      return null; // Is this implicit?
     }
   };
 
@@ -44,9 +40,7 @@ const Report = (props) => {
           color="inherit"
           onClick={handleDialogOpen}
         >
-          <Badge color="error">
-            <ReportIcon />
-          </Badge>
+          <ReportIcon />
         </IconButton>
       </Tooltip>
     </Fragment>

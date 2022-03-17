@@ -27,9 +27,7 @@ function Mail() {
           color="inherit"
           onClick={handleDialogOpen}
         >
-          <Badge color="error">
-            <MailIcon />
-          </Badge>
+          <MailIcon />
         </IconButton>
       </Tooltip>
     </Fragment>
