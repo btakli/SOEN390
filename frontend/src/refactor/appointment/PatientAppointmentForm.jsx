@@ -1,40 +1,17 @@
+//needs to be dynamic to incorporate changes from doctor's availabilities
 import React, { Component } from "react";
 
 import { AppointmentPicker } from "react-appointment-picker";
 
-import Button from '@mui/material/Button';
 
-import Calendar from "./src/components/Calendar";
-
-
-
-
-export default class Appointment extends Component {
+export default class PatientAppointmentForm extends Component {
   state = {
     loading: false,
     continuousLoading: false,
   };
 
 
-
-  //to do
-  setRestrictions = ({restriction : { day, number, time, id }, addCb }) => {
-    this.setState(
-      {
-        isReserved: true
-      },
-      async () => {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        console.log(
-          `Added appointment ${number}, day ${day}, time ${time}, id ${id}`
-        );
-        addCb(day, number, time, id);
-        this.setState({ isReserved: true });
-      }
-    );
-
-  };
-
+  //allows patient to select an available slot appointment slot and makes it unavailable to be selected again
   addAppointmentCallback = ({
     addedAppointment: { day, number, time, id }, addCb }) => {
     this.setState(
@@ -52,6 +29,7 @@ export default class Appointment extends Component {
     );
   };
 
+  // allows user to deselect an appointment slot and makes the slot available again
   removeAppointmentCallback = ({ day, number, time, id }, removeCb) => {
     this.setState(
       {
@@ -68,8 +46,7 @@ export default class Appointment extends Component {
     );
   };
 
- 
-
+  // generates the days the doctor is available
   render() {
     const days = [
       [
@@ -126,22 +103,11 @@ export default class Appointment extends Component {
     const { loading, continuousLoading } = this.state;
     const timeHour = new Date();
     timeHour.setHours(9,0); 
-   
 
-
+    //displays the doctor's availabilties and implements the functions to book appointment
     return (
       <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', gap: 15}}>
         <h1>Appointment Availibilities</h1>
-
-        <h2>Set Week</h2> 
-        <div><Calendar/></div>
-      
- 
-
-          <Button variant="contained" onClick={() => {
-              this.setRestrictions(); 
-            }}>
-            Set Restrictions</Button>
       
         <AppointmentPicker
           addAppointmentCallback={this.addAppointmentCallback}
@@ -152,9 +118,8 @@ export default class Appointment extends Component {
           visible
           unitTime = {12 * 60 * 1000}
           selectedByDefault
-          loading={loading}>
-            </AppointmentPicker>
-        
+          loading={loading}
+        />
 
          
       </div>

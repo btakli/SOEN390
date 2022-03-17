@@ -9,10 +9,10 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from './src/components/layout/Title';
 
-import PriorityToggle  from './src/components/PriorityToggle';
-import SetDateTimeAppointment from "./components/SetDateTimeAppointment"; 
+import PriorityToggle from "./PriorityToggle";
+import SetDateTimeAppointment from "./SetDateTimeAppointment";
+import { Typography } from '@mui/material';
 
 
 // Generate patient data (status and symptoms)
@@ -103,7 +103,7 @@ function preventDefault(event) {
 export default function PatientListDisplay() {
   return (
     <React.Fragment>
-      <Title>Patient List</Title>
+      <Typography>Patient List</Typography>
       <Table size="small">
         <TableHead>
           <TableRow>
