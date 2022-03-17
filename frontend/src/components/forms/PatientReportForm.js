@@ -26,10 +26,11 @@ const PatientReportForm = (props) => {
 
   const emptyEmail = {
     // TODO : REDUX replace with random admin email
-    admin_email: "matteo.gisondi@gmail.com",
+    admin_email: "delispeter19@gmail.com",
     doctor: "",
     // doctor_id: "",
     message: "",
+    reason: "",
     patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     patient_id: props.auth.userData.user,
     patient_email: props.auth.user.email,
@@ -145,9 +146,7 @@ const PatientReportForm = (props) => {
                   <MenuItem value={"harassment"}>Harassment</MenuItem>
                   <MenuItem value={"procedural"}>Procedural Error</MenuItem>
                   <MenuItem value={"misinformation"}>Misinformation</MenuItem>
-                  <MenuItem value={"prescription"}>
-                    Harmful Prescription
-                  </MenuItem>
+                  <MenuItem value={"prescription"}>Harmful Prescription</MenuItem>
                   <MenuItem value={"professionalism"}>Professionalism</MenuItem>
                   <MenuItem value={"negligence"}>Negligence</MenuItem>
                   <MenuItem value={"misc"}>Other</MenuItem>
