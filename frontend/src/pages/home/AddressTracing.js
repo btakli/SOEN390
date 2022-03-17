@@ -2,9 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import AddressForm from "../../components/forms/AddressForm";
+import AddressTable from "../../components/tables/AddressTable";
 
 // MUI
-import { Card, CardContent, Typography, Divider } from "@mui/material";
+import { Card, CardContent, Typography, Grid, Divider } from "@mui/material";
 
 function AddressTracing(props) {
   return (
@@ -16,7 +17,16 @@ function AddressTracing(props) {
 
         <Divider />
 
-        <AddressForm />
+        <Grid container spacing={4} sx={{ mt: 3 }} justifyContent="center">
+
+          <AddressForm />
+
+          <Divider orientation="vertical" flexItem sx={{ ml: 4 }} />
+          
+          <AddressTable />
+
+        </Grid>
+        
       </CardContent>
     </Card>
   );

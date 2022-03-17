@@ -18,11 +18,11 @@ export const getAddresses = () => (dispatch, getState) => {
 }
 
 // DELETE ADDRESS API CALL
-export const deleteAddresses = (id) => (dispatch, getState) => {
+export const deleteAddress = (id) => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
-    axios.delete(`http://localhost:8000/api/address/`, config)
+    axios.delete(`http://localhost:8000/api/address/${id}/`, config)
         .then(res => {
             dispatch(createMessage({
                 deleteAddress: 'Address Deleted'
@@ -35,7 +35,7 @@ export const deleteAddresses = (id) => (dispatch, getState) => {
 }
 
 // POST ADDRESS API CALL
-export const addAddresses = (address) => (dispatch, getState) => {
+export const addAddress = (address) => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
