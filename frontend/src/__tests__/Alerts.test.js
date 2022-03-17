@@ -1,8 +1,9 @@
-import React from 'react';
-import { Provider } from 'react-redux'
-import { render } from "../test-utils";
+import React from "react";
+import { Provider } from "react-redux";
+import { render } from "@testing-library/react";
+import store from "../redux/store";
+
 import Alerts from "../components/layout/Alerts";
-import store from '../redux/store'
 
 test("does not render", () => {
   try {
@@ -11,8 +12,7 @@ test("does not render", () => {
         <Alerts />
       </Provider>
     );
-  }
-  catch(err) {
+  } catch (err) {
     // Should fail render
   }
 });

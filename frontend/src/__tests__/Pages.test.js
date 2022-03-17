@@ -6,17 +6,49 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 
-import DoctorLogin from "../pages/auth/DoctorLogin";
-import DoctorSignUp from "../pages/auth/DoctorSignUp";
-import PatientLogin from "../pages/auth/PatientLogin";
-import PatientSignUp from "../pages/auth/PatientSignUp";
-import PreLogin from "../pages/auth/PreLogin";
+import NoMatch from "../pages/NoMatch";
+import Patients from "../pages/Patients";
+import RequestApplicationTemplate from "../pages/RequestApplicationTemplate";
+import Requests from "../pages/Requests";
 
 test("renders without error", () => {
   render(
     <Provider store={store}>
       <Router>
-        <DoctorLogin />
+        <NoMatch />
+      </Router>
+    </Provider>
+  );
+});
+
+test("does not render without auth", () => {
+  try {
+    const auth = () => ({
+      userData: {
+        user: "1",
+        first_name: "user",
+        last_name: "name",
+        email: "user@email.com",
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <Router>
+          <Patients auth={auth} />
+        </Router>
+      </Provider>
+    );
+  } catch {
+    // Should not render without correct auth
+  }
+});
+
+test("renders without error", () => {
+  render(
+    <Provider store={store}>
+      <Router>
+        <RequestApplicationTemplate />
       </Router>
     </Provider>
   );
@@ -26,37 +58,7 @@ test("renders without error", () => {
   render(
     <Provider store={store}>
       <Router>
-        <DoctorSignUp />
-      </Router>
-    </Provider>
-  );
-});
-
-test("renders without error", () => {
-  render(
-    <Provider store={store}>
-      <Router>
-        <PatientLogin />
-      </Router>
-    </Provider>
-  );
-});
-
-test("renders without error", () => {
-  render(
-    <Provider store={store}>
-      <Router>
-        <PatientSignUp />
-      </Router>
-    </Provider>
-  );
-});
-
-test("renders without error", () => {
-  render(
-    <Provider store={store}>
-      <Router>
-        <PreLogin />
+        <Requests />
       </Router>
     </Provider>
   );
