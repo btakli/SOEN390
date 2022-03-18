@@ -1,6 +1,7 @@
 # SOEN390
 
 Repository for the team project of SOEN390 for Winter 2022.
+
 [![Django CI](https://github.com/btakli/SOEN390/actions/workflows/django.yml/badge.svg)](https://github.com/btakli/SOEN390/actions/workflows/django.yml)
 ## Prerequisites
 
