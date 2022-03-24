@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getPatients } from '../../redux/actions/patientActions';
 import StatusViewRequest from '../StatusViewRequest';
 
-import PriorityToggle from '../../refactor/patientTable/PriorityToggle';
+import PriorityToggle from '../PriorityToggle';
 
 // MUI
 import Table from '@mui/material/Table';

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { togglePriority } from '../../redux/actions/patientActions';
+import { togglePriority } from '../redux/actions/patientActions';
 
-import "./PriorityToggle.css";
+import "../styles/PriorityToggleStyles.css";
 
 function PriorityToggle(props){
 
