@@ -159,7 +159,7 @@ class PatientsWithMatchingAddressView(generics.ListAPIView):
 
         return patients
 
-#returns all users who have a matching adres with current user
+#returns all users who have a matching address with current user
 class TogglePriorityView(generics.UpdateAPIView):
     # only authenticated users can get access
     permission_classes = [
