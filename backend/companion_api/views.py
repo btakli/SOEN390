@@ -169,7 +169,8 @@ class TogglePriorityView(generics.UpdateAPIView):
     serializer_class = PatientSerializer
 
     def update(self, request, *args, **kwargs):
-        patient = self.request.user.patient
+        pid = self.kwargs['pk']
+        patient = self.request.user.doctor.patients.get(user_id=pid)
         priority = patient.is_priority
         patient.is_priority = not priority
         patient.save()
