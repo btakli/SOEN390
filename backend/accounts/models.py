@@ -91,6 +91,7 @@ class Patient(models.Model):
     address = models.CharField(max_length=20, null=True)
     city = models.CharField(max_length=20, null=True)
     postal_code = models.CharField(max_length=20, null=True)
+    is_priority = models.BooleanField(default=False, blank=True)
 
     doctor = models.ForeignKey(
         Doctor, related_name="patients", on_delete=models.SET_NULL, null=True, blank=True
