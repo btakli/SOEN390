@@ -102,8 +102,7 @@ class RegisterDoctorTestSerializer(serializers.ModelSerializer):
 class RegisterPatientSerializer(serializers.ModelSerializer):
     """Register Serializer"""
 
-    user = UserSerializer()   
-    # doctor = DoctorSerializer() 
+    user = UserSerializer()
 
     class Meta:
         """Requires Meta attribute"""

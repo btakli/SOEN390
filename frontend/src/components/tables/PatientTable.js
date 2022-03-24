@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getPatients } from '../../redux/actions/patientActions';
 import StatusViewRequest from '../StatusViewRequest';
 
-import PriorityToggle from '../../refactor/patientTable/PriorityToggle';
+import PriorityToggle from '../PriorityToggle';
 
 // MUI
 import Table from '@mui/material/Table';
@@ -50,7 +50,7 @@ function PatientTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.patients.map((patient, i) => (
+            {props.patients.map((patient) => (
             <TableRow
                 key={patient.user}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -64,7 +64,7 @@ function PatientTable(props) {
                     See Status
                 </Button>
                 </TableCell>
-                <TableCell> <PriorityToggle initial={i % 3 == 0}/> </TableCell>
+                <TableCell> <PriorityToggle value={patient.is_priority} id={patient.user}/> </TableCell>
             </TableRow>
             ))}
           </TableBody>

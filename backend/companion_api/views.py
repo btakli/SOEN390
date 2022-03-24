@@ -158,3 +158,30 @@ class PatientsWithMatchingAddressView(generics.ListAPIView):
             n.save()
 
         return patients
+
+#returns all users who have a matching address with current user
+class TogglePriorityView(generics.UpdateAPIView):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = PatientSerializer
+
+    def update(self, request, *args, **kwargs):
+        pid = self.kwargs['pk']
+        patient = self.request.user.doctor.patients.get(user_id=pid)
+        priority = patient.is_priority
+        patient.is_priority = not priority
+        patient.save()
+
+        return Response(
+            {
+                "msg": f'Patient priority is set to {not priority}.'
+            }
+        )
+        
+
+
+
+
