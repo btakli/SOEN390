@@ -1,21 +1,28 @@
-import { useState } from "react"; 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { togglePriority } from '../../redux/actions/patientActions';
 
 import "./PriorityToggle.css";
 
-function PriorityToggle({ initial }){
-  const [priority, setPriority] = useState(initial);
+function PriorityToggle(props){
 
-  const togglePriority = () => {
-    setPriority(!priority);
+  const { value, id } = props;
+
+  const handleClick = () => {
+    props.togglePriority(id);
   };
 
   return (
-    <div className="toggle-container" onClick={togglePriority}> 
-      <div className={`dialog-button ${priority ? "" : "disabled"}`}>
-        {priority ? "YES" : "NO"} 
+    <div className="toggle-container" onClick={handleClick}> 
+      <div className={`dialog-button ${value ? "" : "disabled"}`}>
+        {value ? "YES" : "NO"} 
       </div>
     </div>
   );
 }
 
-export default PriorityToggle;
+PriorityToggle.propTypes = {
+  togglePriority: PropTypes.func.isRequired
+};
+
+export default connect(null, { togglePriority })(PriorityToggle);
