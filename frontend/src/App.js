@@ -8,14 +8,17 @@ import PrivateRoute from "./components/PrivateRoute";
 
 // REFACTOR
 import DoctorAppointment from "./refactor/appointment/DoctorAppointment";
+import ImmigrationOfficerAppointment from "./refactor/appointment/ImmigrationOfficerAppointment";
 import PatientAppointmentForm from "./refactor/appointment/PatientAppointmentForm";
 
 // AUTH
 import PreLogin from "./pages/auth/PreLogin";
 import PatientLogin from "./pages/auth/PatientLogin";
 import DoctorLogin from "./pages/auth/DoctorLogin";
+import ImmigrationOfficerLogin from "./pages/auth/ImmigrationOfficerLogin";
 import PatientSignUp from "./pages/auth/PatientSignUp";
 import DoctorSignUp from "./pages/auth/DoctorSignUp";
+import ImmigrationOfficerSignUp from "./pages/auth/ImmigrationOfficerSignUp";
 
 // HOME
 import Home from "./pages/home/Home";
@@ -50,6 +53,7 @@ function App() {
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
               <Route path="doctor/appointments" element={<DoctorAppointment />} />
+              <Route path="immigration-officer/appointments" element={<ImmigrationOfficerAppointment />} />
               <Route path="patient/appointments" element={<PatientAppointmentForm />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
@@ -71,12 +75,20 @@ function App() {
             element={<DoctorLogin redirect={homePath} />}
           />
           <Route
+            path="/immigration-officer/login"
+            element={<ImmigrationOfficerLogin redirect={homePath} />}
+          />
+          <Route
             path="/patient/signup"
             element={<PatientSignUp redirect={homePath} />}
           />
           <Route
             path="/doctor/signup"
             element={<DoctorSignUp redirect={homePath} />}
+          />
+          <Route
+            path="/immigration-officer/signup"
+            element={<ImmigrationOfficerSignUp redirect={homePath} />}
           />
 
           
