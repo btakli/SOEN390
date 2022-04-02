@@ -56,6 +56,26 @@ class DoctorPatientView(generics.GenericAPIView):
 
         return Response(patients)
 
+# Get Immigrants of Officer View
+class OfficerImmigrantView(generics.GenericAPIView):
+    """Officer Immigrants View"""
+
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    # Making my own custom get
+    def get(self, request, *args, **kwargs):
+        immigrants = []
+
+        immigrants_query_set = self.request.user.immigrationofficer.immigrants.all()
+        for immigrant_model in immigrants_query_set:
+            immigrant = PatientSerializer(immigrant_model).data
+            immigrant['email'] = immigrant_model.user.email
+            immigrants.append(immigrant)
+
+        return Response(immigrants)
+
 # Update the Patient's status view
 class PatientStatusView(viewsets.ModelViewSet):
     # only authenticated users can get access
@@ -97,7 +117,9 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
         pid = self.kwargs['pk']
 
         try:
-            return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
+            if (self.request.user.is_doctor):
+                return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
+            return self.request.user.immigrationofficer.immigrants.get(user_id=pid).statuses.latest('date')
         except:
             pass
         
@@ -170,14 +192,25 @@ class TogglePriorityView(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         pid = self.kwargs['pk']
-        patient = self.request.user.doctor.patients.get(user_id=pid)
-        priority = patient.is_priority
-        patient.is_priority = not priority
-        patient.save()
+        if (self.request.user.is_doctor):  
+            patient = self.request.user.doctor.patients.get(user_id=pid)
+            priority = patient.is_priority
+            patient.is_priority = not priority
+            patient.save()
+
+            return Response(
+                {
+                    "msg": f'Patient priority is set to {not priority}.'
+                }
+            )
+        immigrant = self.request.user.immigrationofficer.immigrants.get(user_id=pid)
+        priority = immigrant.is_immigration_priority
+        immigrant.is_immigration_priority = not priority
+        immigrant.save()
 
         return Response(
             {
-                "msg": f'Patient priority is set to {not priority}.'
+                "msg": f'Immigrant priority is set to {not priority}.'
             }
         )
         

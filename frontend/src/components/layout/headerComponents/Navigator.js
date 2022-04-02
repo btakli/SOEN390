@@ -79,17 +79,14 @@ function Navigator(props) {
   const immigration_officer_pages = [
     { text: "Home", icon: <HomeIcon /> },
     {
-      text: "Patients",
+      text: "Immigrants",
       icon: <DnsRoundedIcon />,
-      onClick: () => navigate(`${home}/patients`),
+      onClick: () => navigate(`${home}/immigrants`),
     },
     {
       text: "Dashboard",
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
-    },
-    { text: "Availabilities", icon: <PublicIcon />,
-      onClick: () => navigate(`${home}/doctor/appointments`),
     },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },

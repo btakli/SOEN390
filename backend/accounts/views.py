@@ -239,6 +239,30 @@ class RegisterPatientView(generics.GenericAPIView):
             },
             status=status.HTTP_201_CREATED
         )
+        
+# Regiser Immigrant View
+class RegisterImmigrantView(generics.GenericAPIView):
+    serializer_class = RegisterImmigrantSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        patient = serializer.save()
+        user = patient.user
+        token = AuthToken.objects.create(user)[1]
+        return Response(
+            {
+                "user_data": PatientSerializer(
+                    patient, context=self.get_serializer_context()
+                ).data,
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
+            },
+            status=status.HTTP_201_CREATED
+        )
+
 
 # Login Doctor View
 class LoginDoctorView(generics.GenericAPIView):
@@ -340,7 +364,7 @@ class ImmigrationOfficerView(generics.RetrieveAPIView):
     serializer_class = ImmigrationOfficerSerializer
 
     def get_object(self):
-        return self.request.user.immigrationOfficer
+        return self.request.user.immigrationofficer
 
 # Get Patient View
 class PatientView(generics.RetrieveAPIView):

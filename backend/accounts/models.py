@@ -122,14 +122,17 @@ class Patient(models.Model):
     is_immigrant = models.BooleanField(default=False, blank=True)
     is_immigration_priority = models.BooleanField(default=False, blank=True)
     IMMIGRATION_STATUS = [
-        ('1', "Immigrant"),
-        ('2', "Non-permanent resident"),
-        ('3', "None")
+        ('Immigrant', "Immigrant"),
+        ('Non-permanent resident', "Non-permanent resident"),
+        ('None', "None")
     ]
-    immigration_status = models.CharField(max_length=1, choices=IMMIGRATION_STATUS, null=True)
+    immigration_status = models.CharField(max_length=50, choices=IMMIGRATION_STATUS, null=True)
 
     doctor = models.ForeignKey(
         Doctor, related_name="patients", on_delete=models.SET_NULL, null=True, blank=True
+    )
+    immigrationofficer = models.ForeignKey(
+        ImmigrationOfficer, related_name="immigrants", on_delete=models.SET_NULL, null=True, blank=True
     )
 
     def __str__(self):

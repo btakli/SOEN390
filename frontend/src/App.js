@@ -8,7 +8,6 @@ import PrivateRoute from "./components/PrivateRoute";
 
 // REFACTOR
 import DoctorAppointment from "./refactor/appointment/DoctorAppointment";
-import ImmigrationOfficerAppointment from "./refactor/appointment/ImmigrationOfficerAppointment";
 import PatientAppointmentForm from "./refactor/appointment/PatientAppointmentForm";
 
 // AUTH
@@ -26,6 +25,7 @@ import Dashboard from "./pages/home/Dashboard";
 import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
+import Immigrants from "./pages/Immigrants";
 import AddressTracing from "./pages/home/AddressTracing";
 
 // import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
@@ -52,8 +52,8 @@ function App() {
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
+              <Route path="immigrants" element={<Immigrants />} />
               <Route path="doctor/appointments" element={<DoctorAppointment />} />
-              <Route path="immigration-officer/appointments" element={<ImmigrationOfficerAppointment />} />
               <Route path="patient/appointments" element={<PatientAppointmentForm />} />
               <Route path="*" element={<NoMatch />} />
             </Route>

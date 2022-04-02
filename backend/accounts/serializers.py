@@ -129,7 +129,7 @@ class RegisterImmigrationOfficerSerializer(serializers.ModelSerializer):
         )
         user.is_immigration_officer = True
         user.is_pending_approval = True
-        user.is_active = False # DOCTOR USERS MUST BE APPROVED FIRST
+        user.is_active = False
         user.is_email_verified = False
         user.save() # update user change 
 
@@ -173,6 +173,40 @@ class RegisterPatientSerializer(serializers.ModelSerializer):
 
         return patient
 
+# Register Immigrant Serializer
+class RegisterImmigrantSerializer(serializers.ModelSerializer):
+    """Register Serializer"""
+
+    user = UserSerializer()
+
+    class Meta:
+        """Requires Meta attribute"""
+
+        model = Patient
+        fields = "__all__"
+
+    def create(self, validated_data):
+        user_data = validated_data.pop("user")
+        user = User.objects.create_user(
+            user_data['email'],
+            user_data['password']
+        )
+        user.is_patient = True
+        user.is_immigrant = True
+        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+        # user.is_pending = True
+        # user.is_active = False # DOCTOR USERS MUST BE APPROVED FIRST
+        # user.is_email_verified = False
+
+        user.save() # update user change 
+
+        patient = Patient.objects.create(
+            user = user,
+            **validated_data
+        )
+
+        return patient
+    
 # Generic Login Serializer 
 # SHOULD NOT BE MODEL SERIALIZER --> Not creating models, just validating!
 class LoginSerializer(serializers.Serializer):

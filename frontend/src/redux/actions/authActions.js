@@ -35,7 +35,7 @@ export const loadUser = () => (dispatch, getState) => {
                 payload: res.data
             });
             const userRole = res.data;
-            let userType = (userRole.is_doctor) ? "doctor" : ((userRole.is_patient) ? "patient" : null);
+            let userType = (userRole.is_doctor) ? "doctor" : ((userRole.is_patient) ? "patient" : ((userRole.is_immigration_officer) ? "immigration-officer" : null));
 
             axios.get(`http://localhost:8000/api/auth/users/${userType}`, config)
                 .then(res => {
@@ -106,6 +106,37 @@ export const registerPatient = ({
     });
 
     axios.post('http://localhost:8000/api/auth/register/patient', body, config)
+        .then(res => {
+            dispatch({
+                type: REGISTER_SUCCESS,
+                payload: res.data
+            });
+        }).catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({
+                type: REGISTER_FAIL
+            })
+        });
+}
+
+// REGISTER IMMIGRANT
+export const registerImmigrant = ({
+    email,
+    password,
+    ...data }) => dispatch => {
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const body = JSON.stringify({ 
+        "user": { email, password },
+        ...data
+    });
+
+    axios.post('http://localhost:8000/api/auth/register/immigrant', body, config)
         .then(res => {
             dispatch({
                 type: REGISTER_SUCCESS,
