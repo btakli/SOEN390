@@ -24,6 +24,8 @@ import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputCompone
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
+import HelpIcon from '@mui/icons-material/Help';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 
 import {
   backgroundColor,
@@ -96,6 +98,14 @@ function Navigator(props) {
     { text: "Appointment", icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
+    /////////////////////////////////////////////////////////////
+    { text: "US Covid19 Statistics", icon: <AnalyticsIcon />,
+      onClick: () => navigate(`${home}/patient/usaCovidAPI`),
+    },
+    { text: "Request Help", icon: <HelpIcon />,
+      onClick: () => navigate(`${home}/patient/requestHelp`),
+    },
+    /////////////////////////////////////////////////////////////
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
