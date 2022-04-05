@@ -10,6 +10,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import EventIcon from "@mui/icons-material/Event";
 import IconButton from "@mui/material/IconButton";
+import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import {
@@ -87,6 +88,8 @@ function Notification(props) {
                 <PersonIcon />
               ) : item.type === "InfectedAlert" ? (
                 <WarningIcon />
+              ) : item.type === "Emergency" ? (
+                  <CrisisAlertIcon/>
               ) : (
                 <EventIcon />
               )}{" "}
