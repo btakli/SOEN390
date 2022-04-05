@@ -19,6 +19,8 @@ import Container from "@mui/material/Container";
 import Select from "@mui/material/Select";
 import { MenuItem, InputLabel, FormControl } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 function Copyright(props) {
   return (
@@ -61,18 +63,26 @@ function PatientSignUp(props) {
     gender: "",
     address: "",
     city: "",
-    postal_code: ""
+    postal_code: "",
+    is_immigrant: false,
+    immigration_status: ""
   };
 
   // Store form data in state
   const [state, setState] = useState(emptyForm);
   
   // Change form data in state at each change
-  const handleChange = (e) =>
+  const handleChange = (e) =>(
     setState((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }));
+    })));
+
+  const handleCheckboxChange = (e) =>(
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.checked,
+    })));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +97,9 @@ function PatientSignUp(props) {
       gender,
       address,
       city,
-      postal_code
+      postal_code,
+      is_immigrant,
+      immigration_status
     } = state;
 
     if (password !== confirm_password) {
@@ -102,7 +114,9 @@ function PatientSignUp(props) {
         gender,
         address,
         city,
-        postal_code
+        postal_code,
+        is_immigrant,
+        immigration_status
       };
       props.registerPatient(newUser);
     }
@@ -253,6 +267,27 @@ function PatientSignUp(props) {
                   value={state.confirm_password}
                   onChange={handleChange}
                 />
+              </Grid>
+              <Grid item xs={12}>
+              <FormControlLabel id="is_immigrant" name="is_immigrant" control={<Checkbox/>} label="I am an immigrant" value={state.is_immigrant} onChange={handleCheckboxChange}/>
+              </Grid>
+               <Grid item xs={12}> {(state.is_immigrant) ? (
+                <FormControl fullWidth required >
+                  <InputLabel id="immigration_status">Immigration Status</InputLabel>
+                  <Select
+                    required
+                    fullWidth
+                    id="immigration_status"
+                    name="immigration_status"
+                    label="Immigration Status"
+                    value={state.immigration_status}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={"Immigrant"}>Immigrant</MenuItem>
+                    <MenuItem value={"Non-permanent resident"}>Non-permanent resident</MenuItem>
+                  </Select>
+                </FormControl>
+                ) : (null)}
               </Grid>
             </Grid>
             <Button
