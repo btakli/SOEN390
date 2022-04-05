@@ -24,6 +24,8 @@ import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 import AddressTracing from "./pages/home/AddressTracing";
+import CovidAPI from "./pages/CovidAPIs/CovidAPI";
+import RequestHelp from "./RequestHelpPage/ReguestHelp";
 
 // import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
 
@@ -51,6 +53,8 @@ function App() {
               <Route path="patients" element={<Patients />} />
               <Route path="doctor/appointments" element={<DoctorAppointment />} />
               <Route path="patient/appointments" element={<PatientAppointmentForm />} />
+              <Route path="patient/usaCovidAPI" element={<CovidAPI />} />
+              <Route path="patient/requestHelp" element={<RequestHelp />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
