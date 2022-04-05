@@ -98,7 +98,7 @@ function Navigator(props) {
     { text: "Appointment", icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////// newly added for sprint 4
     { text: "US Covid19 Statistics", icon: <AnalyticsIcon />,
       onClick: () => navigate(`${home}/patient/usaCovidAPI`),
     },

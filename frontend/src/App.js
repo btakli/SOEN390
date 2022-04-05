@@ -24,8 +24,8 @@ import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 import AddressTracing from "./pages/home/AddressTracing";
-import CovidAPI from "./pages/CovidAPIs/CovidAPI";
-import RequestHelp from "./RequestHelpPage/ReguestHelp";
+import CovidAPI from "./pages/home/CovidAPI";
+import RequestHelp from "./pages/home/RequestHelp";
 
 // import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
 
