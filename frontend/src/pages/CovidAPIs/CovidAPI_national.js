@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react';
 
-//MUI to display the data fetched from the API
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

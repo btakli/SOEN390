@@ -23,7 +23,7 @@ function RequestInformation () {
                 <CardMedia
                     component="img"
                     height="120"
-                    image={require('../media/CanadaGov.jpg')}
+                    image={require("../../media/CanadaGov.jpg")}
                     alt="canadagov"
                     
                 />
@@ -44,7 +44,7 @@ function RequestInformation () {
                 <CardMedia
                     component="img"
                     height="120"
-                    image={require('../mdia/WHO.jpg')}
+                    image={require("../../media/WHO.jpg")}
                     alt="canadagov"
                 />
                 <CardContent>
@@ -64,7 +64,7 @@ function RequestInformation () {
                 <CardMedia
                     component="img"
                     height="120"
-                    image={require('../media/CDC.jpg')}
+                    image={require("../../media/CDC.jpg")}
                     alt="canadagov"
                 />
                 <CardContent>

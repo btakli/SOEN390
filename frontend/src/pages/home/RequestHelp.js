@@ -1,8 +1,8 @@
 import React from 'react';
 
-import RequestGroceryHelp from "./pages/RequestHelpPage/RequestGroceryHelp";
-import RequestInformation from "./pages/RequestHelpPage/RequestInformation";
-import RequestbyInfected from "./pages/RequestHelpPage/RequestbyInfected";
+import RequestGroceryHelp from "../../pages/RequestHelpPage/RequestGroceryHelp";
+import RequestInformation from "../../pages/RequestHelpPage/RequestInformation";
+import RequestbyInfected from "../../pages/RequestHelpPage/RequestbyInfected";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 

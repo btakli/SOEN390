@@ -1,7 +1,7 @@
 import { React } from 'react';
 
-import CovidAPI_national from "./pages/CovidAPIs/CovidAPI_national";
-import CovidAPI_perState from ".pages/CovidAPIs/CovidAPI_perState"; 
+import CovidAPI_national from "../../pages/CovidAPIs/CovidAPI_national";
+import CovidAPI_perState from "../../pages/CovidAPIs/CovidAPI_perState"; 
 import Box from '@mui/material/Box';
 
 

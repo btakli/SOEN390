@@ -1,10 +1,10 @@
 import { React } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Image from '../media/UberEats.png'; 
-import Image2 from '../media/DoorDash.png'; 
-import Image3 from '../media/LufaFarms.jpg'; 
-import Image4 from '../media/HelloFresh.jpg'; 
+import Image from "../../media/UberEats.jpg"; 
+import Image2 from "../../media/DoorDash.jpg"; 
+import Image3 from "../../media/LufaFarms.jpg"; 
+import Image4 from "../../media/HelloFresh.jpg"; 
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
