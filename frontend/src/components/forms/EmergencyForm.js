@@ -18,6 +18,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import emailjs from "@emailjs/browser";
+import { toggleIsAway } from '../../redux/actions/authActions';
 
 const theme = createTheme();
 
@@ -26,8 +27,8 @@ const EmergencyForm = (props) => {
 
   const emptyEmail = {
     // TODO : REDUX replace with random admin email
-    admin_email: "matteo.gisondi@gmail.com",
-    patient: "",
+    admin_email: "agrosuliac@gmail.com",
+    // patient: "",
     // patient_id: "",
     message: "",
     start_date:"",
@@ -35,6 +36,7 @@ const EmergencyForm = (props) => {
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,
     doctor_email: props.auth.user.email,
+    reply_to: props.auth.user.email
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -43,16 +45,17 @@ const EmergencyForm = (props) => {
     e.preventDefault();
     emailjs
       .sendForm(
-        "service_yn5erhm",
-        "template_wzxbpkm",
+        "service_jpjr8bu",
+        "template_gdqysg2",
         e.target,
-        "OcJwqmp4t2RtcSozF"
+        "YHD2VxM943EwRufC4"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
       )
       .catch((error) => console.log("Email Send Failed...", error));
     setEmailData(emptyEmail);
+    props.toggleIsAway();
     onClose();
   };
 
@@ -160,7 +163,6 @@ const EmergencyForm = (props) => {
                 <TextField
                   name="message"
                   margin="normal"
-                  required
                   placeholder="Please provide any relevant additional information"
                   maxRows={4}
                   variant="standard"
@@ -193,4 +195,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps)(EmergencyForm);
+export default connect(mapStateToProps, {toggleIsAway})(EmergencyForm);

@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { toggleIsAway } from '../../redux/actions/authActions';
+import Image from '../../media/thinking_emoji.jpg';
 
 // MUI
 import {
@@ -14,29 +16,50 @@ import {
 
 
 function WelcomeBack(props) {
-  
+
+  const resetPatients = (e) => {
+    e.preventDefault();    
+    props.toggleIsAway();
+  };
 
   return (
     <Card>
       <CardContent>
-        <Box sx={{ width: "100%" }} pb={2}>
+        <Box sx={{ width: "100%" }} pb={4}>
           <Typography
-            variant="h5"
-            align="left"
+            variant="h2"
+            align="center"
             gutterBottom
             component="div"
           >
-            Welcome Back
-          </Typography>
+            Welcome Back Dr. {props.auth.userData.last_name}!
+            <br/>
+            <h6>
+            If you are ready to return to work and get your patients back,
+            please click on the button below.
+            </h6>
+          </Typography>     
+          <Box
+          component="img"
+          pb={3}
+          sx={{
+            maxHeight: { xs: 167, md: 233 },
+            maxWidth: { xs: 250, md: 350 },
+            }}
+            src={Image}/>     
           <Divider />
         </Box>
-        <Grid container spacing={3} fullwidth="true">                  
+        <Grid container spacing={3} fullwidth="true" mb={3}>    
           <Grid item xs={12}>
           <Button
+                type="submit"
+                size="large"
+                fullWidth={true}
+                onClick={resetPatients}
                 variant="contained"
-                style={{ backgroundColor: "#00bcd4" }}
+                style={{ backgroundColor: "#32CD32" }}
               >
-                Notify Admin
+                I am ready
               </Button>
           </Grid>
         </Grid>
@@ -53,4 +76,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps)(WelcomeBack);
+export default connect(mapStateToProps, {toggleIsAway})(WelcomeBack);

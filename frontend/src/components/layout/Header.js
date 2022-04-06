@@ -38,7 +38,7 @@ function Header(props) {
   };
 
   const EmergencyIfDoctor = () => {
-    if (props.auth.user.is_doctor) {
+    if (props.auth.user.is_doctor && !props.auth.userData.is_away) {
       return (
       <Fragment>
         <Emergency />

@@ -201,18 +201,68 @@ class ToggleAwayView(generics.UpdateAPIView):
 
     serializer_class = DoctorSerializer
 
-    def update(self):
+    def update(self, request, *args, **kwargs):
         doctor = self.request.user.doctor
         is_away = doctor.is_away
-        doctor.is_away = not is_away
-        doctor.save()
+
+        if(is_away):
+            doctor.is_away = False
+            doctor.save()            
+            patients = self.request.user.doctor.patients.all()
+            for patient in patients:
+                patient.temp_doctor = None
+                patient.save()
+        else:
+            doctor.is_away = True
+            doctor.save()
 
         return Response(
             {
                 "msg": f'Doctor is_away is set to {not is_away}.'
             }
         )
+
+class ReassignPatientsToTempDoctor(generics.GenericAPIView):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAdminUser
+    ]
+
+    #serializer_class = PatientSerializer
+
+    def put(self, request, *args, **kwargs):
+        did = self.kwargs['doc']
+        tdid = self.kwargs['tempdoc']
+        start_date = self.kwargs['startdate']
+        end_date = self.kwargs['enddate']
         
+        try:
+            tempDoctor = Doctor.objects.get(user_id=tdid)
+            doctor = Doctor.objects.get(user_id=did)
+            patients = doctor.patients.all()
+            for patient in patients:
+                patient.temp_doctor = tempDoctor
+                patient.save()
+                n = Notification(
+                    type = "Assignment", 
+                    user = patient.user, 
+                    subject = "New Temporary Doctor Assignment", 
+                    message = "Your doctor: Dr." + doctor.first_name + " " + doctor.last_name + " had an emergency leave. You have "+
+                    "been asssigned a new temporary doctor: Dr." + tempDoctor.first_name + " " + tempDoctor.last_name + " from " + start_date +
+                    " to " + end_date
+                )
+            n.save()
+
+        except:
+            pass
+        
+
+        return Response(
+            {
+                "msg": 'Patient priority is set to.'
+            }
+        )
+
 
 
 
