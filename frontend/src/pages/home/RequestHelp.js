@@ -5,6 +5,7 @@ import RequestInformation from "../../pages/RequestHelpPage/RequestInformation";
 import RequestbyInfected from "../../pages/RequestHelpPage/RequestbyInfected";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { Card } from '@mui/material';
 
 
 
@@ -12,7 +13,7 @@ function RequestHelp () {
 
     return (
     
-        <Box>       
+        <Card>       
 
             <Typography variant='h4'>
                 Alerting Your Doctor
@@ -35,7 +36,7 @@ function RequestHelp () {
             <RequestInformation/>
 
            
-        </Box>
+        </Card>
     );
 
 }

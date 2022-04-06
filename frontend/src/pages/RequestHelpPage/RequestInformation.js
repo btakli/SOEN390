@@ -29,7 +29,7 @@ function RequestInformation () {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                    Government of Canada
+                    Government of Canada Health Response
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary">
