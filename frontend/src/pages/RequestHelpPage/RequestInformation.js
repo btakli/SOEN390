@@ -22,7 +22,7 @@ function RequestInformation () {
             <CardActionArea a href = 'https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html'>
                 <CardMedia
                     component="img"
-                    height="120"
+                    height="100"
                     image={require("../../media/CanadaGov.jpg")}
                     alt="canadagov"
                     
@@ -33,7 +33,7 @@ function RequestInformation () {
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary">
-                    Canada's guide to Covid-19 pandemic
+                    Canada's guide and information on the Covid19 pandemic
                     </Typography>
                 </CardContent>
             </CardActionArea>
