@@ -29,7 +29,6 @@ import AddressTracing from "./pages/home/AddressTracing";
 
 function App() {
   const homePath = "/";
-
   return (
     <div className="App">
       <Router>

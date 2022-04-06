@@ -49,7 +49,13 @@ class DoctorPatientView(generics.GenericAPIView):
         patients = []
 
         patients_query_set = self.request.user.doctor.patients.all()
+        patients_query_set2 = self.request.user.doctor.temp_patients.all()
         for patient_model in patients_query_set:
+            patient = PatientSerializer(patient_model).data
+            patient['email'] = patient_model.user.email
+            patients.append(patient)
+        
+        for patient_model in patients_query_set2:
             patient = PatientSerializer(patient_model).data
             patient['email'] = patient_model.user.email
             patients.append(patient)
@@ -97,7 +103,10 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
         pid = self.kwargs['pk']
 
         try:
-            return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
+            try:
+                return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
+            except Patient.DoesNotExist:
+                return self.request.user.doctor.temp_patients.get(user_id=pid).statuses.latest('date')
         except:
             pass
         
@@ -170,7 +179,10 @@ class TogglePriorityView(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         pid = self.kwargs['pk']
-        patient = self.request.user.doctor.patients.get(user_id=pid)
+        try:
+            patient = self.request.user.doctor.patients.get(user_id=pid)
+        except Patient.DoesNotExist:
+            patient = self.request.user.doctor.temp_patients.get(user_id=pid)
         priority = patient.is_priority
         patient.is_priority = not priority
         patient.save()
@@ -178,6 +190,26 @@ class TogglePriorityView(generics.UpdateAPIView):
         return Response(
             {
                 "msg": f'Patient priority is set to {not priority}.'
+            }
+        )
+
+class ToggleAwayView(generics.UpdateAPIView):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = DoctorSerializer
+
+    def update(self):
+        doctor = self.request.user.doctor
+        is_away = doctor.is_away
+        doctor.is_away = not is_away
+        doctor.save()
+
+        return Response(
+            {
+                "msg": f'Doctor is_away is set to {not is_away}.'
             }
         )
         

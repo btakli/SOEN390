@@ -58,7 +58,9 @@ function Navigator(props) {
   const home = props.home === "/" ? "" : props.home;
 
   const doctor_pages = [
-    { text: "Home", icon: <HomeIcon /> },
+    { text: "Home",
+      icon: <HomeIcon />,
+      onClick: () => navigate(`${home}/`)},
     {
       text: "Patients",
       icon: <DnsRoundedIcon />,

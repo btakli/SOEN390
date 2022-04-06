@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import PatientTable from "../components/tables/PatientTable";
 
 // MUI
 import {
@@ -10,17 +9,13 @@ import {
   Card,
   CardContent,
   Divider,
+  Button
 } from "@mui/material";
-import WelcomeBack from "../components/layout/WelcomeBack";
 
 
-function Patients(props) {
-  if(props.auth.user.is_doctor && props.auth.userData.is_away){
+function WelcomeBack(props) {
+  
 
-    return <WelcomeBack/>
-
-}
-else{
   return (
     <Card>
       <CardContent>
@@ -31,21 +26,26 @@ else{
             gutterBottom
             component="div"
           >
-            Patients
+            Welcome Back
           </Typography>
           <Divider />
         </Box>
         <Grid container spacing={3} fullwidth="true">                  
           <Grid item xs={12}>
-            <PatientTable />
+          <Button
+                variant="contained"
+                style={{ backgroundColor: "#00bcd4" }}
+              >
+                Notify Admin
+              </Button>
           </Grid>
         </Grid>
       </CardContent>
     </Card>
-  )}
+  )
 }
 
-Patients.propTypes = {
+WelcomeBack.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -53,4 +53,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps)(Patients);
+export default connect(mapStateToProps)(WelcomeBack);
