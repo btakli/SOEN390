@@ -24,7 +24,8 @@ import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 import AddressTracing from "./pages/home/AddressTracing";
-import QRcode from "./pages/home/QRcode";
+import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
+import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 
 // import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
 
@@ -52,7 +53,8 @@ function App() {
               <Route path="patients" element={<Patients />} />
               <Route path="doctor/appointments" element={<DoctorAppointment />} />
               <Route path="patient/appointments" element={<PatientAppointmentForm />} />
-              <Route path="QRcode" element={<QRcode />} />
+              <Route path="qr-code" element={<QRCodeDisplay />} />
+              <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
@@ -81,7 +83,7 @@ function App() {
             element={<DoctorSignUp redirect={homePath} />}
           />
 
-          
+
 
           <Route path="*" element={<NoMatch />} />
         </Routes>

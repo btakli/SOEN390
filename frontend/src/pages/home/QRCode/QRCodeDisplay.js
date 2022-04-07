@@ -57,12 +57,8 @@ function QRCodeDisplay(props) {
         </Typography>
         <Divider />
         <Box m={3} pt={4}>
-          <QRCode id="QRCode" value={`${base_url}/patient_qr/${patient_uri}`} />
+          <QRCode id="QRCode" value={`${base_url}/qr_code/${patient_uri}`} />
         </Box>
-        {/* TODO : REMOVE */}
-        Link: {base_url}/patient_qr/{patient_uri}
-        <br />
-        Patient ID: {atob(atob(patient_uri))}
         <Divider />
         <Box m={3} pt={2}>
           <Button color="primary" variant="contained" onClick={onPDFDownload}>
