@@ -25,6 +25,7 @@ import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
 import SpeedIcon from "@mui/icons-material/Speed";
+import FlagIcon from '@mui/icons-material/Flag';
 
 import {
   backgroundColor,
@@ -118,6 +119,11 @@ function Navigator(props) {
       text: "Appointment",
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
+    },
+    {
+      text: "Canada Current Data",
+      icon: <FlagIcon />,
+      onClick: () => navigate(`${home}/patient/canadaAPI`),
     },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     {

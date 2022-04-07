@@ -25,6 +25,7 @@ import AddressTracing from "./pages/home/AddressTracing";
 import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 import PatientAppointment from "./pages/home/PatientAppointment";
+import CanadaAPI from "./pages/home/CanadaAPI";
 
 function App() {
   const homePath = "/";
@@ -49,6 +50,8 @@ function App() {
               <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />
               <Route path="doctor/appointments" element={<Dashboard />} />
+
+              <Route path="patient/canadaAPI" element={<CanadaAPI />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
