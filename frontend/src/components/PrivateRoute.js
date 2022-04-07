@@ -15,10 +15,10 @@ function PrivateRoute(props) {
       navigate(`${redirect}`);
     }
   });
-  
+
   if (props.auth.isLoading) {
     return <Spinner />;
-  } else if (!props.auth.isAuthenticated) {    
+  } else if (!props.auth.isAuthenticated) {
     return null;
   } else {
     return <Outlet />;

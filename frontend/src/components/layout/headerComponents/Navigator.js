@@ -74,7 +74,7 @@ function Navigator(props) {
     { text: "Availabilities", icon: <PublicIcon />,
       onClick: () => navigate(`${home}/doctor/appointments`),
     },
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "Template 4", icon: <SettingsEthernetIcon />},
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
@@ -98,7 +98,8 @@ function Navigator(props) {
     { text: "Appointment", icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "QR-Code", icon: <SettingsEthernetIcon />,
+    onClick: () => navigate(`${home}/qr-code`), },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 

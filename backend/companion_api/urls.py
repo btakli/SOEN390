@@ -23,6 +23,8 @@ router.register(r"api/person", PersonView, basename="person")
 router.register(r"api/patient/status", PatientStatusView, basename="status")
 router.register(r"api/notification", NotificationView, basename="notification")
 router.register(r"api/address", AddressView, basename="address")
+router.register(r"api/appointment", AppointmentView, basename="appointment")
+router.register(r"api/availability", AvailabilityView, basename="availability")
 
 urlpatterns = [
     path("api/patients/", DoctorPatientView.as_view(), name='doctor_patients'),

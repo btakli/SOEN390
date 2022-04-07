@@ -6,10 +6,6 @@ import NoMatch from "./pages/NoMatch";
 import RequestApplicationTemplate from "./pages/RequestApplicationTemplate";
 import PrivateRoute from "./components/PrivateRoute";
 
-// REFACTOR
-import DoctorAppointment from "./refactor/appointment/DoctorAppointment";
-import PatientAppointmentForm from "./refactor/appointment/PatientAppointmentForm";
-
 // AUTH
 import PreLogin from "./pages/auth/PreLogin";
 import PatientLogin from "./pages/auth/PatientLogin";
@@ -24,6 +20,9 @@ import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
 import AddressTracing from "./pages/home/AddressTracing";
+import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
+import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
+import PatientAppointment from "./pages/home/PatientAppointment";
 
 // import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
 
@@ -48,8 +47,9 @@ function App() {
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
-              <Route path="doctor/appointments" element={<DoctorAppointment />} />
-              <Route path="patient/appointments" element={<PatientAppointmentForm />} />
+              <Route path="qr-code" element={<QRCodeDisplay />} />
+              <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
+              <Route path="patient/appointments" element={<PatientAppointment />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
@@ -78,7 +78,7 @@ function App() {
             element={<DoctorSignUp redirect={homePath} />}
           />
 
-          
+
 
           <Route path="*" element={<NoMatch />} />
         </Routes>
