@@ -1,4 +1,4 @@
-import { GET_PATIENTS, GET_DOCTOR } from "../actions/types.js";
+import { GET_PATIENTS, GET_IMMIGRANTS, GET_DOCTOR } from "../actions/types.js";
 
 const initialState = {
   patients: [],
@@ -7,18 +7,23 @@ const initialState = {
 
 // Note: function has no name so we define ...
 // this reducers name in the index file when we import
-export default function (state = initialState, action) {
-  switch (action.type) {
-    case GET_PATIENTS:
-      return {
-        ...state,
-        patients: action.payload,
-      };
-    case GET_DOCTOR:
-      return {
-        ...state,
-        doctor: action.payload,
-      };
+export default function(state=initialState, action){
+    switch (action.type){
+        case GET_PATIENTS:
+            return {
+                ...state,
+                patients: action.payload
+            };
+        case GET_IMMIGRANTS:
+            return {
+                ...state,
+                patients: action.payload
+            };
+        case GET_DOCTOR:
+            return {
+                ...state,
+                doctor: action.payload,
+            };
     default:
       return state;
   }

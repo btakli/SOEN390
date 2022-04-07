@@ -20,8 +20,7 @@ class TestDoctorPatientViews(TestSetUp):
         """Doctor_Patient: Doctor can get their patients when there is one"""
 
         res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
-        # import pdb
-        # pdb.set_trace()
+        
         doctor_pk = res.data['user']['id']
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + res.data['token'])
 

@@ -1,7 +1,7 @@
 import { React, Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPatients } from '../../redux/actions/patientActions';
+import { getImmigrants } from '../../redux/actions/immigrantActions';
 import StatusViewRequest from '../StatusViewRequest';
 
 import PriorityToggle from '../PriorityToggle';
@@ -17,12 +17,12 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
 
-function PatientTable(props) {
+function ImmigrantTable(props) {
   const [open, setOpen] = useState(false);
-  const [patientId, setPatientId] = useState(0);
+  const [immigrantId, setImmigrantId] = useState(0);
 
   const handleDialogOpen = (id) => {
-    setPatientId(id);
+    setImmigrantId(id);
     setOpen(true);
   };
 
@@ -31,12 +31,12 @@ function PatientTable(props) {
   };
 
   useEffect(() => {
-    props.getPatients();
+    props.getImmigrants();
   }, []);
 
   return (
     <Fragment>
-      <StatusViewRequest open={open} onClose={handleDialogClose} patientId={patientId} />
+      <StatusViewRequest open={open} onClose={handleDialogClose} patientId={immigrantId} />
       <TableContainer component={Paper}  sx={{ width: 2/3, margin: 'auto'}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -45,26 +45,28 @@ function PatientTable(props) {
               <TableCell>Last</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>DOB</TableCell>
+              <TableCell>Immigrant Status</TableCell>
               <TableCell>View Status</TableCell>
               <TableCell>Priority</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.patients.map((patient) => (
+            {props.immigrants.map((immigrant) => (
             <TableRow
-                key={patient.user}
+                key={immigrant.user}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-                <TableCell>{patient.first_name}</TableCell>
-                <TableCell>{patient.last_name}</TableCell>
-                <TableCell>{patient.email}</TableCell>
-                <TableCell>{patient.date_of_birth}</TableCell>
+                <TableCell>{immigrant.first_name}</TableCell>
+                <TableCell>{immigrant.last_name}</TableCell>
+                <TableCell>{immigrant.email}</TableCell>
+                <TableCell>{immigrant.date_of_birth}</TableCell>
+                <TableCell>{immigrant.immigration_status}</TableCell>
                 <TableCell>                  
-                  <Button variant="contained" color="success" onClick={() => handleDialogOpen(patient.user)}>
+                  <Button variant="contained" color="success" onClick={() => handleDialogOpen(immigrant.user)}>
                       See Status
                   </Button>
                 </TableCell>
-                <TableCell> <PriorityToggle value={patient.is_priority} id={patient.user} is_immigrant={false}/> </TableCell>
+                <TableCell> <PriorityToggle value={immigrant.is_immigration_priority} id={immigrant.user} is_immigrant={true}/> </TableCell>
             </TableRow>
             ))}
           </TableBody>
@@ -74,12 +76,12 @@ function PatientTable(props) {
   );
 }
 
-PatientTable.propTypes = {
-  patients: PropTypes.array.isRequired
+ImmigrantTable.propTypes = {
+  immigrants: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
-  patients: state.patientReducer.patients
+  immigrants: state.patientReducer.patients
 });
 
-export default connect(mapStateToProps, { getPatients })(PatientTable);
+export default connect(mapStateToProps, { getImmigrants })(ImmigrantTable);

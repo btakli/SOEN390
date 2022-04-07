@@ -81,6 +81,22 @@ function Navigator(props) {
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
+  const immigration_officer_pages = [
+    { text: "Home", icon: <HomeIcon /> },
+    {
+      text: "Immigrants",
+      icon: <DnsRoundedIcon />,
+      onClick: () => navigate(`${home}/immigrants`),
+    },
+    {
+      text: "Dashboard",
+      icon: <PermMediaOutlinedIcon />,
+      onClick: () => navigate(`${home}/dashboard`),
+    },
+    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
+  ];
+
   const patient_pages = [
     { text: "Home", icon: <HomeIcon />, onClick: () => navigate(`${home}`) },
     {
@@ -114,9 +130,10 @@ function Navigator(props) {
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
-  categories[0]["children"] = props.auth.user.is_doctor
-    ? doctor_pages
-    : patient_pages;
+  categories[0]["children"] = (
+    props.auth.user.is_doctor ? doctor_pages
+    : (props.auth.user.is_immigration_officer ? immigration_officer_pages
+    : patient_pages));
 
   const [open, setOpen] = useState(false);
 

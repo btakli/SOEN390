@@ -10,8 +10,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import PreLogin from "./pages/auth/PreLogin";
 import PatientLogin from "./pages/auth/PatientLogin";
 import DoctorLogin from "./pages/auth/DoctorLogin";
+import ImmigrationOfficerLogin from "./pages/auth/ImmigrationOfficerLogin";
 import PatientSignUp from "./pages/auth/PatientSignUp";
 import DoctorSignUp from "./pages/auth/DoctorSignUp";
+import ImmigrationOfficerSignUp from "./pages/auth/ImmigrationOfficerSignUp";
 
 // HOME
 import Home from "./pages/home/Home";
@@ -20,6 +22,7 @@ import RapidTest from "./pages/home/RapidTest";
 import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
+import Immigrants from "./pages/Immigrants";
 import AddressTracing from "./pages/home/AddressTracing";
 import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
@@ -43,6 +46,7 @@ function App() {
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
+              <Route path="immigrants" element={<Immigrants />} />
               <Route path="rapid-test-result" element={<RapidTest />} />
               <Route path="qr-code" element={<QRCodeDisplay />} />
               <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
@@ -68,6 +72,10 @@ function App() {
             element={<DoctorLogin redirect={homePath} />}
           />
           <Route
+            path="/immigration-officer/login"
+            element={<ImmigrationOfficerLogin redirect={homePath} />}
+          />
+          <Route
             path="/patient/signup"
             element={<PatientSignUp redirect={homePath} />}
           />
@@ -75,6 +83,11 @@ function App() {
             path="/doctor/signup"
             element={<DoctorSignUp redirect={homePath} />}
           />
+          <Route
+            path="/immigration-officer/signup"
+            element={<ImmigrationOfficerSignUp redirect={homePath} />}
+          />
+
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </Router>

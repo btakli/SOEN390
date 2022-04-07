@@ -60,16 +60,17 @@ from .utils import generate_token
         
 #         return render(request, 'email/something_went_wrong.html')
 
-def send_admin_approval_email(admin, doctor, request):    
+def send_admin_approval_email(admin, position, request):    
     current_site = get_current_site(request)
-    email_subject = 'Approve Doctor Registration Request'
-    email_body = render_to_string('email/approve_doctor_email.html', {
+    email_subject = 'Approve Position Registration Request'
+    email_body = render_to_string('email/approve_position_email.html', {
         'admin': str(admin),
-        'doctor': str(doctor),
-        'doctor_email': str(doctor.user.email),
-        'doctor_proof': str(doctor.proof),
+        'position': str(position),
+        'position_email': str(position.user.email),
+        'position_proof': str(position.proof),
         'domain': current_site,
-        'user_id': urlsafe_base64_encode(force_bytes(doctor.user_id))
+        'user_id': urlsafe_base64_encode(force_bytes(position.user_id)),
+        'position_type': 'doctor' if position.user.is_doctor else 'immigration_officer'
     })
     
     email = EmailMessage(subject=email_subject, body=email_body,
@@ -100,8 +101,30 @@ class ApproveDoctorView(generics.GenericAPIView):
             )
         
         return render(request, 'email/something_went_wrong.html')
+    
+class ApproveImmigrationOfficerView(generics.GenericAPIView):
+    
+    def get(self, request, *args, **kwargs):
+        id = force_str(urlsafe_base64_decode(self.kwargs['user_id']))
 
-# Regiser Doctor View
+        user = User.objects.get(id=id)
+        immigrationOfficer = ImmigrationOfficer.objects.get(user_id=user.id)
+
+        if user and immigrationOfficer:
+            user.is_pending_approval = False
+            user.is_active = True
+            user.save()
+
+            return Response(
+                {
+                    "msg": str(immigrationOfficer)+' is approved!'
+                },
+                status=status.HTTP_200_OK
+            )
+        
+        return render(request, 'email/something_went_wrong.html')
+
+# Register Doctor View
 class RegisterDoctorView(generics.GenericAPIView):
     serializer_class = RegisterDoctorSerializer
 
@@ -114,7 +137,7 @@ class RegisterDoctorView(generics.GenericAPIView):
 
         send_admin_approval_email(
             admin=User.objects.filter(is_superuser=True).order_by('?').first(),
-            doctor=doctor,
+            position=doctor,
             request=request
             )
 
@@ -125,6 +148,37 @@ class RegisterDoctorView(generics.GenericAPIView):
             {
                 "user_data": DoctorSerializer(
                     doctor, context=self.get_serializer_context()
+                ).data,
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
+                "msg": 'An Email has been sent to an Admin to approve your request'
+            },
+            status=status.HTTP_201_CREATED
+        )
+
+# Register Immigration Officer View
+class RegisterImmigrationOfficerView(generics.GenericAPIView):
+    serializer_class = RegisterImmigrationOfficerSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        immigrationOfficer = serializer.save()
+        user = immigrationOfficer.user
+        token = AuthToken.objects.create(immigrationOfficer.user)[1]
+
+        send_admin_approval_email(
+            admin=User.objects.filter(is_superuser=True).order_by('?').first(),
+            position=immigrationOfficer,
+            request=request
+            )
+
+        return Response(
+            {
+                "user_data": ImmigrationOfficerSerializer(
+                    immigrationOfficer, context=self.get_serializer_context()
                 ).data,
                 "user": UserSerializer(
                     user, context=self.get_serializer_context()
@@ -209,6 +263,28 @@ class LoginDoctorView(generics.GenericAPIView):
             }
         )
 
+# Login Immigration Officer View
+class LoginImmigrationOfficerView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = User.objects.get(email=serializer.validated_data) 
+        immigrationOfficer = ImmigrationOfficer.objects.get(user_id=user.id)
+        token = AuthToken.objects.create(user)[1]
+        return Response(
+            {
+                "user_data": ImmigrationOfficerSerializer(
+                    immigrationOfficer, context=self.get_serializer_context()
+                ).data,
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
+            }
+        )
+
 # Login Patient View
 class LoginPatientView(generics.GenericAPIView):
     serializer_class = LoginSerializer
@@ -254,6 +330,18 @@ class DoctorView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user.doctor
+
+# Get Immigration Officer View
+class ImmigrationOfficerView(generics.RetrieveAPIView):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+
+    serializer_class = ImmigrationOfficerSerializer
+
+    def get_object(self):
+        return self.request.user.immigrationofficer
 
 # Get Patient View
 class PatientView(generics.RetrieveAPIView):
