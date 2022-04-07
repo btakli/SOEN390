@@ -232,11 +232,9 @@ class ToggleAwayView(generics.UpdateAPIView):
 
 class ReassignPatientsToTempDoctor(generics.GenericAPIView):
     # only authenticated users can get access
-    permission_classes = [
-        permissions.IsAdminUser
-    ]
-
-    #serializer_class = PatientSerializer
+    # permission_classes = [
+    #     permissions.IsAdminUser
+    # ]
 
     def put(self, request, *args, **kwargs):
         did = self.kwargs['doc']
@@ -267,7 +265,7 @@ class ReassignPatientsToTempDoctor(generics.GenericAPIView):
 
         return Response(
             {
-                "msg": 'Patient priority is set to.'
+                "msg": f"{tempDoctor} has been assigned to {doctor}'s patients."
             }
         )
 

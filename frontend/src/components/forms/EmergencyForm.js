@@ -27,7 +27,7 @@ const EmergencyForm = (props) => {
 
   const emptyEmail = {
     // TODO : REDUX replace with random admin email
-    admin_email: "agrosuliac@gmail.com",
+    admin_email: "delispeter19@gmail.com",
     // patient: "",
     // patient_id: "",
     message: "",

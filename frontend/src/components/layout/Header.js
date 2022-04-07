@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
@@ -8,7 +7,7 @@ import Mail from "./headerComponents/Mail";
 import ProfileMenu from "./headerComponents/ProfileMenu";
 import Notification from "./headerComponents/Notification";
 import Report from './headerComponents/Report';
-import EmergencyForm from "../forms/EmergencyForm";
+import EmergencyLeave from "./headerComponents/EmergencyLeave";
 
 // MUI
 import Toolbar from "@mui/material/Toolbar";
@@ -21,40 +20,6 @@ import AppBar from "@mui/material/AppBar";
 function Header(props) {
   const handleLogout = (e) => {
     props.logout();
-  };
-
-  const [open, setOpen] = useState(false);
-
-  const handleDialogOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setOpen(false);
-  };  
-
-  const Emergency = () => {    
-      return <EmergencyForm open={open} onClose={handleDialogClose}/> ;   
-  };
-
-  const EmergencyIfDoctor = () => {
-    if (props.auth.user.is_doctor && !props.auth.userData.is_away) {
-      return (
-      <Fragment>
-        <Emergency />
-        <Tooltip title="Emergency">
-        <Button
-          variant="contained"
-          onClick={handleDialogOpen}
-          style={{ backgroundColor: "#DC143C" }}
-        >
-            Emergency Leave
-          </Button>
-        </Tooltip>
-      </Fragment>);
-    } else {
-      return null; // Is this implicit?
-    }
   };
 
   return (
@@ -92,7 +57,7 @@ function Header(props) {
             <ProfileMenu />
           </Grid>
           <Grid item>
-            <EmergencyIfDoctor/>
+            <EmergencyLeave/>
           </Grid>
           <Grid item>
             <Tooltip title="Logout">
