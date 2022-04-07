@@ -50,6 +50,7 @@ function App() {
               <Route path="qr-code" element={<QRCodeDisplay />} />
               <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />
+              <Route path="doctor/appointments" element={<Dashboard />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
