@@ -56,6 +56,23 @@ class DoctorPatientView(generics.GenericAPIView):
 
         return Response(patients)
 
+class PatientDoctorView(generics.GenericAPIView):
+    """Patient Doctor View"""
+
+    # only authenticated doctors can see their patients
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    # Making my own custom get
+    def get(self, request, *args, **kwargs):
+
+        doctor_model = self.request.user.patient.doctor
+        doctor = DoctorSerializer(doctor_model).data
+        doctor['email'] = doctor_model.user.email     
+
+        return Response(doctor)
+
 # Update the Patient's status view
 class PatientStatusView(viewsets.ModelViewSet):
     # only authenticated users can get access

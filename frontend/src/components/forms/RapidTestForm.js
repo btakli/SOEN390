@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { getDoctor } from '../../redux/actions/patientActions';
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -33,7 +34,7 @@ const RapidTestForm = (props) => {
 
   const [emailData, setEmailData] = useState(emptyEmail);
   const [imageUrl, setImageUrl] = useState(null);
-
+  
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
@@ -68,6 +69,7 @@ const RapidTestForm = (props) => {
     if (emailData.result) {
       setImageUrl(URL.createObjectURL(emailData.result));
     }
+    props.getDoctor()
   }, [emailData.result]);
 
   return (
@@ -109,7 +111,7 @@ const RapidTestForm = (props) => {
                   sx={{ mt: 3 }}
                 />
               </Grid>
-              <Grid item xs={12} sm={12}>
+              {/* <Grid item xs={12} sm={12}>
                 <FormControl fullWidth required>
                   <Select
                     required
@@ -120,7 +122,7 @@ const RapidTestForm = (props) => {
                     value={emailData.email}
                     onChange={onChange}
                   >
-                    {/* TODO Redux : Populate with available doctors for patient */}
+                    {/* TODO Redux : Populate with available doctors for patient 
                     <MenuItem value={"danimacicasan@gmail.com"}>
                       Doctor 1
                     </MenuItem>
@@ -129,7 +131,7 @@ const RapidTestForm = (props) => {
                     </MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   id="message"
@@ -194,10 +196,12 @@ const RapidTestForm = (props) => {
 
 RapidTestForm.propTypes = {
   auth: PropTypes.object.isRequired,
+  //doctor: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
+  doctor: state.patientReducer.doctor
 });
 
-export default connect(mapStateToProps)(RapidTestForm);
+export default connect(mapStateToProps, {getDoctor})(RapidTestForm);

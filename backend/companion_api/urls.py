@@ -15,6 +15,7 @@ router.register(r"api/address", AddressView, basename="address")
 
 urlpatterns = [
     path("api/patients/", DoctorPatientView.as_view(), name='doctor_patients'),
+    path("api/doctor/", PatientDoctorView.as_view(), name='patient_doctor'),
     path("api/toggle/priority/<int:pk>/", TogglePriorityView.as_view(), name='toggle_priority'),
     # path("api/patient/status/latest/", LatestStatusView.as_view(), name='latest_status'), # Dont need this anymore
     path("api/doctor/patient/status/latest/<int:pk>/", SpecificLatestStatusView.as_view(), name='patient_latest_status'), 
