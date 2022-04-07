@@ -24,7 +24,10 @@ const theme = createTheme();
 const RapidTestForm = (props) => {
   const emptyEmail = {
     subject: `${props.auth.userData.first_name} ${props.auth.userData.last_name}'s Rapid Test Result`,
-    email: "",
+
+    //Put your email for DEMO
+    email: "danimacicasan@gmail.com",
+
     message: "",
     result: null,
     patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
@@ -97,6 +100,7 @@ const RapidTestForm = (props) => {
                 <TextField name="patient_name" value={emailData.patient_name} />
                 <TextField name="patient_id" value={emailData.patient_id} />
                 <TextField name="reply_to" value={emailData.reply_to} />
+                <TextField name="email" value={emailData.email} />
               </Box>
               <Grid item xs={12} sm={12}>
                 <TextField
