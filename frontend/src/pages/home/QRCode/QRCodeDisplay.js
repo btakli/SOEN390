@@ -14,6 +14,20 @@ import {
 } from "@mui/material";
 
 function QRCodeDisplay(props) {
+
+  if (!props.auth.user.is_patient) {
+    // history.pushState();
+    return (
+      <Card>
+        <CardContent>
+          <Typography variant="h5" align="left" gutterBottom component="div">
+            You must be logged in as a Patient to have a QR Code
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  }
+
   const base_url = location.protocol + "//" + location.host;
 
   const onPDFDownload = () => {

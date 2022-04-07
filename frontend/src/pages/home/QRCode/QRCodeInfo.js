@@ -20,11 +20,10 @@ import Paper from "@mui/material/Paper";
 import ErrorIcon from "@mui/icons-material/Error";
 
 function QRCodeInfo(props) {
-  let navigate = useNavigate();
+  // TODO : History management to redirect after login
+  // TODO : Swap if statement after immigration push\
 
-  // TODO : Swap if statement after immigration push
-
-  if (props.auth.userData.is_doctor) {
+  if (!props.auth.user.is_doctor) {
     // history.pushState();
     return (
       <Card>
@@ -37,11 +36,17 @@ function QRCodeInfo(props) {
     );
   }
 
-  // if (!props.auth.userData.is_doctor && !props.auth.userData.is_immigration) {
-  //   navigate
+  // if (!props.auth.user.is_doctor && !props.auth.user.is_immigration_officer) {
+  //   return (
+  //     <Card>
+  //       <CardContent>
+  //         <Typography variant="h5" align="left" gutterBottom component="div">
+  //           You must be logged in as a Doctor or Immigration Officer to view patient information
+  //         </Typography>
+  //       </CardContent>
+  //     </Card>
+  //   );
   // }
-
-  var patientId;
 
   useEffect(() => {
     props.getPatients();
@@ -49,8 +54,10 @@ function QRCodeInfo(props) {
   }, [patientId]);
 
   const { patient_uri } = useParams();
+
+  var patientId;
   try {
-    var patientId = atob(atob(patient_uri));
+    patientId = atob(atob(patient_uri));
     var patient = props.patients.find((patient) => patient.user == patientId);
 
     if (patient == undefined) {
@@ -97,7 +104,9 @@ function QRCodeInfo(props) {
                   <TableRow>
                     <TableCell>First</TableCell>
                     <TableCell>Last</TableCell>
+                    <TableCell>Gender</TableCell>
                     <TableCell>DOB</TableCell>
+                    <TableCell>Assigned Doctor ID</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -107,7 +116,9 @@ function QRCodeInfo(props) {
                   >
                     <TableCell>{patient.first_name}</TableCell>
                     <TableCell>{patient.last_name}</TableCell>
+                    <TableCell>{patient.gender}</TableCell>
                     <TableCell>{patient.date_of_birth}</TableCell>
+                    <TableCell>{patient.doctor}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
