@@ -1,7 +1,7 @@
 """Register your models here"""
 
 from django.contrib import admin
-from .models import Person, Status
+from .models import Notification, Person, Status
 from django.urls import reverse
 from django.utils.html import format_html
 
@@ -23,3 +23,4 @@ class StatusAdmin(admin.ModelAdmin):
 
 # admin.site.register(Person)
 admin.site.register(Status, StatusAdmin)
+admin.site.register(Notification)
