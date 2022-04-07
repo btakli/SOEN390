@@ -6,11 +6,6 @@ companion_api\urls.py - A
 companion_api\views.py - A
 companion_api\__init__.py - A
 companion_api\migrations\0001_initial.py - A
-companion_api\migrations\0002_status_caugh_status_chills_status_diffbreathing_and_more.py - A
-companion_api\migrations\0003_remove_status_caugh_alter_status_date.py - A
-companion_api\migrations\0004_alter_status_options_notification.py - A
-companion_api\migrations\0005_alter_notification_user.py - A
-companion_api\migrations\0006_alter_notification_user.py - A
 companion_api\migrations\__init__.py - A
 accounts\admin.py - A
 accounts\apps.py - A
@@ -21,6 +16,7 @@ accounts\utils.py - A
 accounts\views.py - A
 accounts\__init__.py - A
 accounts\migrations\0001_initial.py - A
+accounts\migrations\0002_patient_is_priority.py - A
 accounts\migrations\__init__.py - A
 accounts\templatetags\frontend_site_url.py - A
 core\asgi.py - A

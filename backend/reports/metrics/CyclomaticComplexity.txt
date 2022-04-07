@@ -8,38 +8,37 @@ companion_api\models.py
     C 11:0 Person - A
     M 58:4 Status.__str__ - A
     C 61:0 Notification - A
+    C 79:0 Address - A
 companion_api\serializers.py
     C 8:0 PersonSerializer - A
     C 17:0 StatusSerializer - A
     C 27:0 NotificationSerializer - A
+    C 37:0 AddressSerializer - A
 companion_api\views.py
-    C 38:0 DoctorPatientView - A
-    C 73:0 LatestStatusView - A
-    C 87:0 SpecificLatestStatusView - A
-    C 9:0 PersonView - A
-    M 47:4 DoctorPatientView.get - A
-    C 59:0 PatientStatusView - A
-    M 81:4 LatestStatusView.get_object - A
-    M 95:4 SpecificLatestStatusView.get_object - A
-    C 104:0 NotificationView - A
-    M 15:4 PersonView.get_queryset - A
-    M 20:4 PersonView.perform_create - A
-    M 67:4 PatientStatusView.get_queryset - A
-    M 70:4 PatientStatusView.perform_create - A
-    M 112:4 NotificationView.get_queryset - A
-    M 115:4 NotificationView.perform_create - A
+    C 134:0 PatientsWithMatchingAddressView - B
+    M 142:4 PatientsWithMatchingAddressView.get_queryset - A
+    C 39:0 DoctorPatientView - A
+    C 74:0 LatestStatusView - A
+    C 88:0 SpecificLatestStatusView - A
+    C 10:0 PersonView - A
+    M 48:4 DoctorPatientView.get - A
+    C 60:0 PatientStatusView - A
+    M 82:4 LatestStatusView.get_object - A
+    M 96:4 SpecificLatestStatusView.get_object - A
+    C 105:0 NotificationView - A
+    C 119:0 AddressView - A
+    C 163:0 TogglePriorityView - A
+    M 16:4 PersonView.get_queryset - A
+    M 21:4 PersonView.perform_create - A
+    M 68:4 PatientStatusView.get_queryset - A
+    M 71:4 PatientStatusView.perform_create - A
+    M 113:4 NotificationView.get_queryset - A
+    M 116:4 NotificationView.perform_create - A
+    M 127:4 AddressView.get_queryset - A
+    M 130:4 AddressView.perform_create - A
+    M 171:4 TogglePriorityView.update - A
 companion_api\migrations\0001_initial.py
     C 9:0 Migration - A
-companion_api\migrations\0002_status_caugh_status_chills_status_diffbreathing_and_more.py
-    C 7:0 Migration - A
-companion_api\migrations\0003_remove_status_caugh_alter_status_date.py
-    C 7:0 Migration - A
-companion_api\migrations\0004_alter_status_options_notification.py
-    C 8:0 Migration - A
-companion_api\migrations\0005_alter_notification_user.py
-    C 8:0 Migration - A
-companion_api\migrations\0006_alter_notification_user.py
-    C 8:0 Migration - A
 accounts\admin.py
     C 35:0 PatientAdmin - A
     C 15:0 DoctorAdmin - A
@@ -58,10 +57,10 @@ accounts\models.py
     C 32:0 User - A
     M 70:4 Doctor.upload_path - A
     M 76:4 Doctor.__str__ - A
-    M 99:4 Patient.__str__ - A
+    M 100:4 Patient.__str__ - A
 accounts\serializers.py
-    C 137:0 LoginSerializer - A
-    M 144:4 LoginSerializer.validate - A
+    C 136:0 LoginSerializer - A
+    M 143:4 LoginSerializer.validate - A
     C 33:0 RegisterDoctorSerializer - A
     C 69:0 RegisterDoctorTestSerializer - A
     C 102:0 RegisterPatientSerializer - A
@@ -70,7 +69,7 @@ accounts\serializers.py
     C 27:0 PatientSerializer - A
     M 48:4 RegisterDoctorSerializer.create - A
     M 84:4 RegisterDoctorTestSerializer.create - A
-    M 114:4 RegisterPatientSerializer.create - A
+    M 113:4 RegisterPatientSerializer.create - A
 accounts\utils.py
     C 4:0 TokenGen - A
     M 5:4 TokenGen._make_hash_value - A
@@ -96,5 +95,7 @@ accounts\views.py
     M 267:4 PatientView.get_object - A
 accounts\migrations\0001_initial.py
     C 10:0 Migration - A
+accounts\migrations\0002_patient_is_priority.py
+    C 6:0 Migration - A
 accounts\templatetags\frontend_site_url.py
     F 9:0 frontend_site_url - A

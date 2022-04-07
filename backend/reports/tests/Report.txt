@@ -22,15 +22,11 @@ Running migrations:
   Applying auth.0011_update_proxy_permissions... OK
   Applying auth.0012_alter_user_first_name_max_length... OK
   Applying accounts.0001_initial... OK
+  Applying accounts.0002_patient_is_priority... OK
   Applying admin.0001_initial... OK
   Applying admin.0002_logentry_remove_auto_add... OK
   Applying admin.0003_logentry_add_action_flag_choices... OK
   Applying companion_api.0001_initial... OK
-  Applying companion_api.0002_status_caugh_status_chills_status_diffbreathing_and_more... OK
-  Applying companion_api.0003_remove_status_caugh_alter_status_date... OK
-  Applying companion_api.0004_alter_status_options_notification... OK
-  Applying companion_api.0005_alter_notification_user... OK
-  Applying companion_api.0006_alter_notification_user... OK
   Applying knox.0001_initial... OK
   Applying knox.0002_auto_20150916_1425... OK
   Applying knox.0003_auto_20150916_1526... OK
@@ -127,7 +123,7 @@ test_patient_can_get_all_status_when_one_status (backend.tests.test_companion_ap
 Status: Patient can get all their status when there is one ... ok
 
 ----------------------------------------------------------------------
-Ran 42 tests in 4.214s
+Ran 42 tests in 14.307s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

@@ -1,31 +1,27 @@
-Name                                                                                        Stmts   Miss Branch BrPart  Cover   Missing
----------------------------------------------------------------------------------------------------------------------------------------
-__init__.py                                                                                     0      0      0      0   100%
-accounts\__init__.py                                                                            0      0      0      0   100%
-accounts\admin.py                                                                              38      9      6      0    75%   26-29, 32, 45-48, 51-57
-accounts\apps.py                                                                                4      0      2      0   100%
-accounts\migrations\0001_initial.py                                                             9      0      2      0   100%
-accounts\migrations\__init__.py                                                                 0      0      0      0   100%
-accounts\models.py                                                                             60      4     14      0    95%   71-72, 77, 100
-accounts\serializers.py                                                                        66     10     30      1    89%   49-65, 155
-accounts\templatetags\frontend_site_url.py                                                      6      2      0      0    67%   12-13
-accounts\urls.py                                                                                6      0      0      0   100%
-accounts\utils.py                                                                               5      1      2      0    86%   6
-accounts\views.py                                                                              92     22     20      0    79%   64-80, 85-102, 109-124, 244
-companion_api\__init__.py                                                                       0      0      0      0   100%
-companion_api\admin.py                                                                         16      4      4      0    70%   16-22
-companion_api\apps.py                                                                           4      0      2      0   100%
-companion_api\migrations\0001_initial.py                                                        8      0      2      0   100%
-companion_api\migrations\0002_status_caugh_status_chills_status_diffbreathing_and_more.py       5      0      2      0   100%
-companion_api\migrations\0003_remove_status_caugh_alter_status_date.py                          5      0      2      0   100%
-companion_api\migrations\0004_alter_status_options_notification.py                              6      0      2      0   100%
-companion_api\migrations\0005_alter_notification_user.py                                        6      0      2      0   100%
-companion_api\migrations\0006_alter_notification_user.py                                        6      0      2      0   100%
-companion_api\migrations\__init__.py                                                            0      0      0      0   100%
-companion_api\models.py                                                                        38      1      8      0    98%   59
-companion_api\serializers.py                                                                   17      0     12      0   100%
-companion_api\urls.py                                                                          11      0      0      0   100%
-companion_api\views.py                                                                         53      8     14      0    88%   16, 21, 82-85, 113, 116
-manage.py                                                                                      12      2      2      1    79%   12-13, 21->exit
----------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                         473     63    130      2    88%
+Name                                              Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------------------
+__init__.py                                           0      0      0      0   100%
+accounts\__init__.py                                  0      0      0      0   100%
+accounts\admin.py                                    38      9      6      0    75%   26-29, 32, 45-48, 51-57
+accounts\apps.py                                      4      0      2      0   100%
+accounts\migrations\0001_initial.py                   9      0      2      0   100%
+accounts\migrations\0002_patient_is_priority.py       4      0      2      0   100%
+accounts\migrations\__init__.py                       0      0      0      0   100%
+accounts\models.py                                   61      4     14      0    95%   71-72, 77, 101
+accounts\serializers.py                              66     10     30      1    89%   49-65, 154
+accounts\templatetags\frontend_site_url.py            6      2      0      0    67%   12-13
+accounts\urls.py                                      6      0      0      0   100%
+accounts\utils.py                                     5      1      2      0    86%   6
+accounts\views.py                                    92     22     20      0    79%   64-80, 85-102, 109-124, 244
+companion_api\__init__.py                             0      0      0      0   100%
+companion_api\admin.py                               16      4      4      0    70%   16-22
+companion_api\apps.py                                 4      0      2      0   100%
+companion_api\migrations\0001_initial.py              8      0      2      0   100%
+companion_api\migrations\__init__.py                  0      0      0      0   100%
+companion_api\models.py                              46      1     10      0    98%   59
+companion_api\serializers.py                         21      0     16      0   100%
+companion_api\urls.py                                12      0      0      0   100%
+companion_api\views.py                               85     26     26      0    71%   17, 22, 83-86, 114, 117, 128, 131, 143-160, 172-178
+manage.py                                            12      2      2      1    79%   12-13, 21->exit
+---------------------------------------------------------------------------------------------
+TOTAL                                               495     81    140      2    85%
