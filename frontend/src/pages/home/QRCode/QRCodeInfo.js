@@ -21,32 +21,32 @@ import ErrorIcon from "@mui/icons-material/Error";
 
 function QRCodeInfo(props) {
   // TODO : History management to redirect after login
-  // TODO : Swap if statement after immigration push\
+  // TODO : Swap if statement after immigration push
 
-  if (!props.auth.user.is_doctor) {
-    // history.pushState();
-    return (
-      <Card>
-        <CardContent>
-          <Typography variant="h5" align="left" gutterBottom component="div">
-            You must be logged in as a Doctor to view patient information
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  // if (!props.auth.user.is_doctor && !props.auth.user.is_immigration_officer) {
+  // if (!props.auth.user.is_doctor) {
+  //   // history.pushState();
   //   return (
   //     <Card>
   //       <CardContent>
   //         <Typography variant="h5" align="left" gutterBottom component="div">
-  //           You must be logged in as a Doctor or Immigration Officer to view patient information
+  //           You must be logged in as a Doctor to view patient information
   //         </Typography>
   //       </CardContent>
   //     </Card>
   //   );
   // }
+
+  if (!props.auth.user.is_doctor && !props.auth.user.is_immigration_officer) {
+    return (
+      <Card>
+        <CardContent>
+          <Typography variant="h5" align="left" gutterBottom component="div">
+            You must be logged in as a Doctor or Immigration Officer to view patient information
+          </Typography>
+        </CardContent>
+      </Card>
+    );
+  }
 
   useEffect(() => {
     props.getPatients();
