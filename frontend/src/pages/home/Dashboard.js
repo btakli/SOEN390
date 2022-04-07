@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import InfectionsPerWeekGraph from "../../components/graphs/InfectionsPerWeekGraph";
 import InfectionsPerTypeGraph from "../../components/graphs/InfectionsPerTypeGraph";
+import AppointmentTable from "../../components/tables/AppointmentTable";
+import AvailabilityForm from "../../components/forms/AvailabilityForm";
 
 import {
     Box,
@@ -30,14 +32,30 @@ function Dashboard(props){
             </Typography>
             <Divider />
         </Box>
-        <Grid container spacing={3}>
-            <Grid item xs={12} sm={8} md={8}>
-            <InfectionsPerWeekGraph />
+
+        { props.auth.user.is_doctor ?
+            <Grid 
+                container
+                alignItems="center"
+            >
+                <Grid item xs={6} md={6}>
+                    <AppointmentTable />
+                </Grid>
+
+                <Grid item xs={6} md={6}>
+                    <AvailabilityForm />
+                </Grid>
             </Grid>
-            <Grid item xs={12} sm={4} md={4}>
-            <InfectionsPerTypeGraph />
+            :
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6} md={6}>
+                    <InfectionsPerWeekGraph />
+                </Grid>
+                <Grid item xs={12} sm={6} md={6}>
+                    <InfectionsPerTypeGraph />
+                </Grid>
             </Grid>
-        </Grid>
+        }
         </CardContent>
     </Card>
   )
