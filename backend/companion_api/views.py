@@ -197,6 +197,39 @@ class TogglePriorityView(generics.UpdateAPIView):
                 "msg": f'Patient priority is set to {not priority}.'
             }
         )
+
+class AppointmentView(viewsets.ModelViewSet):
+    """Appointment View"""
+
+    # only authenticated users can see their patients
+    permission_classes = [permissions.IsAuthenticated]
+    
+    serializer_class = AppointmentSerializer
+    
+    def get_queryset(self):
+        try:
+            return self.request.user.patient.appointments.all()
+        except Patient.DoesNotExist:
+            return  self.request.user.doctor.appointments.all()
+
+class AvailabilityView(viewsets.ModelViewSet):
+    """Availability View"""
+
+    # only authenticated users can see their patients
+    permission_classes = [permissions.IsAuthenticated]
+    
+    serializer_class = AvailabilitySerializer
+    
+    def get_queryset(self):
+        try:
+            return self.request.user.patient.doctor.availabilities.all()
+        except Patient.DoesNotExist:
+            return self.request.user.doctor.availabilities.all()
+
+    def perform_create(self, serializer):
+        serializer.save(doctor=self.request.user.doctor)
+
+    
         
 
 

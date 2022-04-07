@@ -75,7 +75,7 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/doctor/appointments`),
     },
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "Template 4", icon: <SettingsEthernetIcon />},
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
@@ -107,6 +107,9 @@ function Navigator(props) {
       icon: <SpeedIcon />,
       onClick: () => navigate(`${home}/rapidTestResult`),
     },
+    { text: "QR-Code", icon: <SettingsEthernetIcon />,
+    onClick: () => navigate(`${home}/qr-code`), },
+    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
   categories[0]["children"] = props.auth.user.is_doctor
