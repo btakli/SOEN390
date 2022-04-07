@@ -47,6 +47,7 @@ function Alerts(props) {
             if (props.message.passwordsDoNotMatch) props.alert.error(props.message.passwordsDoNotMatch);
             if (props.message.addStatus) props.alert.success(props.message.addStatus);
             if (props.message.testMessage) props.alert.success(props.message.testMessage);
+            if (props.message.emailSent) props.alert.success(props.message.emailSent);
         }
 
     }, [props.message]);

@@ -28,6 +28,7 @@ router.register(r"api/availability", AvailabilityView, basename="availability")
 
 urlpatterns = [
     path("api/patients/", DoctorPatientView.as_view(), name='doctor_patients'),
+    path("api/doctor/", PatientDoctorView.as_view(), name='patient_doctor'),
     path("api/toggle/priority/<int:pk>/", TogglePriorityView.as_view(), name='toggle_priority'),
     path("api/toggle/is-away/", ToggleAwayView.as_view(), name='toggle_is_away'),
     # path("api/patient/status/latest/", LatestStatusView.as_view(), name='latest_status'), # Dont need this anymore

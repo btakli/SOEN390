@@ -16,6 +16,7 @@ import DoctorSignUp from "./pages/auth/DoctorSignUp";
 // HOME
 import Home from "./pages/home/Home";
 import Dashboard from "./pages/home/Dashboard";
+import RapidTest from "./pages/home/RapidTest";
 import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
@@ -24,17 +25,12 @@ import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 import PatientAppointment from "./pages/home/PatientAppointment";
 
-// import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
-
 function App() {
   const homePath = "/";
   return (
     <div className="App">
       <Router>
         <Routes>
-
-        {/* <Route path="/r" element={<PatientListDisplay />} /> */}
-
           {/* Home Page and Outlets */}
           <Route
             path={homePath}
@@ -47,6 +43,7 @@ function App() {
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
+              <Route path="rapid-test-result" element={<RapidTest />} />
               <Route path="qr-code" element={<QRCodeDisplay />} />
               <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />
@@ -78,9 +75,6 @@ function App() {
             path="/doctor/signup"
             element={<DoctorSignUp redirect={homePath} />}
           />
-
-
-
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </Router>
