@@ -137,8 +137,6 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
 
     # Try to get latest, if DNE, return null Status Model
     def get_object(self):
-        # import pdb
-        # pdb.set_trace()
         pid = self.kwargs['pk']
         
         try:
