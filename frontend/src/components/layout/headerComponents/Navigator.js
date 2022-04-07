@@ -26,6 +26,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
 import HelpIcon from '@mui/icons-material/Help';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
+import SpeedIcon from "@mui/icons-material/Speed";
 
 import {
   backgroundColor,
@@ -60,7 +61,9 @@ function Navigator(props) {
   const home = props.home === "/" ? "" : props.home;
 
   const doctor_pages = [
-    { text: "Home", icon: <HomeIcon /> },
+    { text: "Home",
+      icon: <HomeIcon />,
+      onClick: () => navigate(`${home}/`)},
     {
       text: "Patients",
       icon: <DnsRoundedIcon />,
@@ -71,8 +74,26 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
-    { text: "Availabilities", icon: <PublicIcon />,
+    {
+      text: "Availabilities",
+      icon: <PublicIcon />,
       onClick: () => navigate(`${home}/doctor/appointments`),
+    },
+    { text: "Template 4", icon: <SettingsEthernetIcon />},
+    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
+  ];
+
+  const immigration_officer_pages = [
+    { text: "Home", icon: <HomeIcon /> },
+    {
+      text: "Immigrants",
+      icon: <DnsRoundedIcon />,
+      onClick: () => navigate(`${home}/immigrants`),
+    },
+    {
+      text: "Dashboard",
+      icon: <PermMediaOutlinedIcon />,
+      onClick: () => navigate(`${home}/dashboard`),
     },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
@@ -95,7 +116,9 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/addressTracing`),
     },
-    { text: "Appointment", icon: <PublicIcon />,
+    {
+      text: "Appointment",
+      icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
     ///////////////////////////////////////////////////////////// newly added for sprint 4 remove commment later
@@ -107,12 +130,20 @@ function Navigator(props) {
     },
     /////////////////////////////////////////////////////////////
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    {
+      text: "Rapid Test Result",
+      icon: <SpeedIcon />,
+      onClick: () => navigate(`${home}/rapid-test-result`),
+    },
+    { text: "QR-Code", icon: <SettingsEthernetIcon />,
+    onClick: () => navigate(`${home}/qr-code`), },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
-  categories[0]["children"] = props.auth.user.is_doctor
-    ? doctor_pages
-    : patient_pages;
+  categories[0]["children"] = (
+    props.auth.user.is_doctor ? doctor_pages
+    : (props.auth.user.is_immigration_officer ? immigration_officer_pages
+    : patient_pages));
 
   const [open, setOpen] = useState(false);
 

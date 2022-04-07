@@ -1,47 +1,34 @@
 import axios from 'axios';
 import { returnErrors } from './messageActions';
 import { tokenConfig } from './authActions';
-import { GET_PATIENTS, UPDATE_PATIENT_PRIORITY, GET_DOCTOR } from './types';
+import { GET_IMMIGRANTS, UPDATE_IMMIGRANT_PRIORITY } from './types';
 
 // GET PERSONS API CALL
-export const getPatients = () => (dispatch, getState) => {
+export const getImmigrants = () => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
-    axios.get('http://localhost:8000/api/patients/', config)
+    axios.get('http://localhost:8000/api/immigrants/', config)
         .then(res => {
             dispatch({
-                type: GET_PATIENTS,
-                payload: res.data
-            });
-        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
-}
-
-export const getDoctor = () => (dispatch, getState) => {
-
-    const config = tokenConfig(getState);
-
-    axios.get('http://localhost:8000/api/doctor/', config)
-        .then(res => {
-            dispatch({
-                type: GET_DOCTOR,
+                type: GET_IMMIGRANTS,
                 payload: res.data
             });
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
 
-// UPDATE PATIENT PRIORITY API CALL
-export const togglePriority = (id) => (dispatch, getState) => {
+// UPDATE IMMIGRANT PRIORITY API CALL
+export const toggleImmigrantPriority = (id) => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
     axios.put(`http://localhost:8000/api/toggle/priority/${id}/`, null, config)
         .then(res => {
-            axios.get('http://localhost:8000/api/patients/', config)
+            axios.get('http://localhost:8000/api/immigrants/', config)
             .then(res => {
                 dispatch({
-                    type: GET_PATIENTS,
+                    type: GET_IMMIGRANTS,
                     payload: res.data
                 });
             }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));

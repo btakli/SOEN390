@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { registerPatient } from "../../redux/actions/authActions";
+import { registerImmigrationOfficer } from "../../redux/actions/authActions";
 import { createMessage } from "../../redux/actions/messageActions";
 import { useNavigate } from "react-router-dom";
 
@@ -13,14 +13,18 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Input from "@mui/material/Input";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Select from "@mui/material/Select";
-import { MenuItem, InputLabel, FormControl } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import {
+  Divider,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -42,7 +46,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function PatientSignUp(props) {
+function ImmigrationOfficerSignUp(props) {
   const { redirect } = props;
 
   let navigate = useNavigate();
@@ -64,25 +68,24 @@ function PatientSignUp(props) {
     address: "",
     city: "",
     postal_code: "",
-    is_immigrant: false,
-    immigration_status: ""
+    proof: ""
   };
 
   // Store form data in state
   const [state, setState] = useState(emptyForm);
-  
+
+  const handleFileChange = (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      proof: e.target.files[0],
+    }));
+  };
   // Change form data in state at each change
-  const handleChange = (e) =>(
+  const handleChange = (e) =>
     setState((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    })));
-
-  const handleCheckboxChange = (e) =>(
-    setState((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.checked,
-    })));
+    }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -98,13 +101,36 @@ function PatientSignUp(props) {
       address,
       city,
       postal_code,
-      is_immigrant,
-      immigration_status
+      proof
     } = state;
 
     if (password !== confirm_password) {
       props.createMessage({ passwordsDoNotMatch: "Passwords do not match" });
     } else {
+      // let user = new FormData();
+      // user.append('email', email);
+      // user.append('password', password);
+
+      // let new_user = new FormData();
+      // // new_user.append('user', user);
+      // new_user.append('first_name', first_name);
+      // new_user.append('last_name', last_name);
+      // new_user.append('date_of_birth', date_of_birth);
+      // new_user.append('gender', gender);
+      // new_user.append('address', address);
+      // new_user.append('city', city);
+      // new_user.append('postal_code', postal_code);
+      // new_user.append('proof', proof);
+
+      // var object1 = {};
+      // user.forEach((value, key) => object1[key] = value);
+
+      // var object = {
+      //   'user': object1
+      // };
+      // new_user.forEach((value, key) => object[key] = value);
+      // var json = JSON.stringify(object);
+
       const newUser = {
         email,
         password,
@@ -114,11 +140,10 @@ function PatientSignUp(props) {
         gender,
         address,
         city,
-        postal_code,
-        is_immigrant,
-        immigration_status
+        postal_code
       };
-      props.registerPatient(newUser);
+
+      props.registerImmigrationOfficer(newUser);
     }
   };
 
@@ -138,7 +163,7 @@ function PatientSignUp(props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Patient Sign up
+            Immigration Officer Sign up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -182,7 +207,7 @@ function PatientSignUp(props) {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth required >
+                <FormControl fullWidth required>
                   <InputLabel id="gender">Gender</InputLabel>
                   <Select
                     required
@@ -269,28 +294,26 @@ function PatientSignUp(props) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel id="is_immigrant" name="is_immigrant" control={<Checkbox/>} label="I am an immigrant" value={state.is_immigrant} onChange={handleCheckboxChange}/>
-              </Grid>
-
-              <Grid item xs={12}> {(state.is_immigrant) ? (
-                <FormControl fullWidth required >
-                  <InputLabel id="immigration_status">Immigration Status</InputLabel>
-                  <Select
-                    required
+                <label htmlFor="proof">
+                  <Input
+                    accept="image/*"
                     fullWidth
-                    id="immigration_status"
-                    name="immigration_status"
-                    label="Immigration Status"
-                    value={state.immigration_status}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={"Immigrant"}>Immigrant</MenuItem>
-                    <MenuItem value={"Non-permanent resident"}>Non-permanent resident</MenuItem>
-                  </Select>
-                </FormControl>
-                ) : (null)}
+                    id="proof"
+                    name="proof"
+                    onChange={handleFileChange}
+                    style={{ display: "none" }}
+                    type="file"
+                  />
+                  <Button variant="contained" component="span">
+                    Upload Proof
+                  </Button>
+                </label>
+                <Typography component="h1" variant="body1">
+                  {state.proof.name}
+                </Typography>
               </Grid>
             </Grid>
+            <Divider sx={{ pt: 3 }} />
             <Button
               type="submit"
               fullWidth
@@ -301,7 +324,7 @@ function PatientSignUp(props) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/patient/login" variant="body2">
+                <Link href="/immigration-officer/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -314,8 +337,8 @@ function PatientSignUp(props) {
   );
 }
 
-PatientSignUp.propTypes = {
-  registerPatient: PropTypes.func.isRequired,
+ImmigrationOfficerSignUp.propTypes = {
+  registerImmigrationOfficer: PropTypes.func.isRequired,
   createMessage: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
@@ -324,4 +347,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.authReducer.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { registerPatient, createMessage })(PatientSignUp);
+export default connect(mapStateToProps, { registerImmigrationOfficer, createMessage })(ImmigrationOfficerSignUp);

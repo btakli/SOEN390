@@ -46,8 +46,8 @@ export default function PreLogin() {
       navigate("/patient/login");
     } else if(data.get("doctor") === "doctor"){
       navigate("/doctor/login");
-    } else if(data.get("immigrationOfficer")){
-      navigate("/doctor/login");
+    } else if(data.get("immigrationOfficer")=== "immigrationOfficer"){
+      navigate("/immigration-officer/login");
     }
   };
 
