@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDoctor } from '../../redux/actions/patientActions';
+import { getDoctor } from "../../redux/actions/patientActions";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import emailjs from "@emailjs/browser";
-import { FormControl, Grid, Input, CardMedia, Divider } from "@mui/material";
+import { FormControl, Grid, Input, Divider } from "@mui/material";
 
 const theme = createTheme();
 
@@ -37,7 +37,7 @@ const RapidTestForm = (props) => {
 
   const [emailData, setEmailData] = useState(emptyEmail);
   const [imageUrl, setImageUrl] = useState(null);
-  
+
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
@@ -69,10 +69,11 @@ const RapidTestForm = (props) => {
   };
 
   useEffect(() => {
+    props.getDoctor();
+    console.log(props);
     if (emailData.result) {
       setImageUrl(URL.createObjectURL(emailData.result));
     }
-    props.getDoctor()
   }, [emailData.result]);
 
   return (
@@ -136,6 +137,7 @@ const RapidTestForm = (props) => {
                   </Select>
                 </FormControl>
               </Grid> */}
+
               <Grid item xs={12}>
                 <TextField
                   id="message"
@@ -182,6 +184,15 @@ const RapidTestForm = (props) => {
                   </Box>
                 </Grid>
               )}
+              <Grid item xs={12}>
+                <Typography
+                  component="h1"
+                  variant="h6"
+                  sx={{ color: "#757575" }}
+                >
+                  Send to Dr. {props.doctor.first_name} {props.doctor.last_name}
+                </Typography>
+              </Grid>
               <Button
                 type="submit"
                 fullWidth
@@ -200,12 +211,12 @@ const RapidTestForm = (props) => {
 
 RapidTestForm.propTypes = {
   auth: PropTypes.object.isRequired,
-  //doctor: PropTypes.object.isRequired
+  //doctor: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
-  doctor: state.patientReducer.doctor
+  doctor: state.patientReducer.doctor,
 });
 
-export default connect(mapStateToProps, {getDoctor})(RapidTestForm);
+export default connect(mapStateToProps, { getDoctor })(RapidTestForm);
