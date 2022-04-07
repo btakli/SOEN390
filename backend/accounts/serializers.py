@@ -86,11 +86,7 @@ class RegisterDoctorTestSerializer(serializers.ModelSerializer):
 
         model = Doctor
         fields = "__all__"
-        
-    # only real reason this is needed is cause we need to know for sure
-    # that the user data is a user and not some random dict of data.
-    # this would not need to be here if we were directly passing user objects
-    # to the serializer in the view (we are just using json instead)
+
     def create(self, validated_data):
         user_data = validated_data.pop("user")
         user = User.objects.create_user(
@@ -120,10 +116,6 @@ class RegisterImmigrationOfficerSerializer(serializers.ModelSerializer):
         model = ImmigrationOfficer
         fields = "__all__"
         
-    # only real reason this is needed is cause we need to know for sure
-    # that the user data is a user and not some random dict of data.
-    # this would not need to be here if we were directly passing user objects
-    # to the serializer in the view (we are just using json instead)
     def create(self, validated_data):
         user_data = validated_data.pop("user")
         user = User.objects.create_user(
@@ -162,9 +154,9 @@ class RegisterPatientSerializer(serializers.ModelSerializer):
             user_data['password']
         )
         user.is_patient = True
-        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
-        # user.is_pending = True
-        # user.is_active = False # DOCTOR USERS MUST BE APPROVED FIRST
+        # TO BE USED FOR EMAIL VERIFICATION
+        # user.is_pending_approval = True
+        # user.is_active = False
         # user.is_email_verified = False
 
         user.save() # update user change 
@@ -188,7 +180,7 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, data):
         user = authenticate(**data)
 
-        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+        # TO BE USED FOR EMAIL VERIFICATION
         # if not user.is_email_verified:
         #     raise serializers.ValidationError("Email is not verified, please check your inbox")
 

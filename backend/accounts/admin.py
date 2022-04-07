@@ -3,12 +3,11 @@ from django.utils.html import format_html
 from django.urls import reverse
 from .models import ImmigrationOfficer, User, Doctor, Patient
 
-from django.template.response import TemplateResponse
 from django.utils.translation import gettext_lazy
 
 ADMIN_NAME = "CovidTracker"
 
-# TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+# TO BE USED FOR EMAIL VERIFICATION
 # class UserAdmin(admin.ModelAdmin):
 #     list_filter = ("is_email_verified",)
 
@@ -73,8 +72,6 @@ class PatientAdmin(admin.ModelAdmin):
             return format_html(u'<a href="%s">%s</a>' % (link, obj.doctor))
         else:
             return None
-
-    # view_on_site = False
 
 
 # Set custom admin page titles

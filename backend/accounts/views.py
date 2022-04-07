@@ -14,26 +14,25 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from .utils import generate_token
 
-# # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
-# def send_verif_email(user_type, request):
+# # TO BE USED FOR EMAIL VERIFICATION
+# def send_verif_email(user, request):
 #     current_site = get_current_site(request)
 #     email_subject = 'Activate Covid-Tracker Account'
 #     email_body = render_to_string('email/activate_email.html', {
-#         'name': str(user_type),
+#         'name': str(user),
 #         'domain': current_site,
-#         'user_id': urlsafe_base64_encode(force_bytes(user_type.user_id)),
-#         'token': generate_token.make_token(user_type.user)
+#         'user_id': urlsafe_base64_encode(force_bytes(user.user_id)),
+#         'token': generate_token.make_token(user.user)
 #     })
     
 #     email = EmailMessage(subject=email_subject, body=email_body,
 #         from_email=settings.EMAIL_FROM_USER,
-#         to=[user_type.user.email]
+#         to=[user.user.email]
 #         )
 
 #     email.send()
-
     
-# TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+# TO BE USED FOR EMAIL VERIFICATION
 # class ActivateEmailView(generics.GenericAPIView):
 
 #     serializer_class = UserSerializer
@@ -141,7 +140,7 @@ class RegisterDoctorView(generics.GenericAPIView):
             request=request
             )
 
-        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+        # TO BE USED FOR EMAIL VERIFICATION
         # send_verif_email(user_type=doctor, request=request)
 
         return Response(
@@ -200,9 +199,6 @@ class RegisterDoctorTestView(generics.GenericAPIView):
         doctor = serializer.save()
         user = doctor.user
         token = AuthToken.objects.create(doctor.user)[1]
-
-        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
-        # send_verif_email(user_type=doctor, request=request)
 
         return Response(
             {

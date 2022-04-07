@@ -2,7 +2,7 @@ import { React, Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPatients } from '../../redux/actions/patientActions';
-import StatusViewRequest from '../StatusViewRequest';
+import StatusViewRequestForm from '../forms/StatusViewRequestForm';
 
 import PriorityToggle from '../PriorityToggle';
 
@@ -36,7 +36,7 @@ function PatientTable(props) {
 
   return (
     <Fragment>
-      <StatusViewRequest open={open} onClose={handleDialogClose} patientId={patientId} />
+      <StatusViewRequestForm open={open} onClose={handleDialogClose} patientId={patientId} />
       <TableContainer component={Paper}  sx={{ width: 2/3, margin: 'auto'}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

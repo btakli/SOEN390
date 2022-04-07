@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import NoMatch from "./pages/NoMatch";
-import RequestApplicationTemplate from "./pages/RequestApplicationTemplate";
 import PrivateRoute from "./components/PrivateRoute";
 
 // AUTH
@@ -20,9 +19,8 @@ import Home from "./pages/home/Home";
 import Dashboard from "./pages/home/Dashboard";
 import RapidTest from "./pages/home/RapidTest";
 import PatientStatus from "./pages/home/PatientStatus";
-import Requests from "./pages/Requests";
-import Patients from "./pages/Patients";
-import Immigrants from "./pages/Immigrants";
+import Patients from "./pages/home/Patients";
+import Immigrants from "./pages/home/Immigrants";
 import AddressTracing from "./pages/home/AddressTracing";
 import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
@@ -42,7 +40,6 @@ function App() {
             <Route path="" element={<Home home={homePath} />}>
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="requests" element={<Requests />} />
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
@@ -55,11 +52,6 @@ function App() {
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
-
-          <Route
-            path="/requestapplication"
-            element={<RequestApplicationTemplate />}
-          />
 
           {/* Login and Register Pages */}
           <Route path="/pre/login" element={<PreLogin />} />

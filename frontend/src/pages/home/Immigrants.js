@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import ImmigrantTable from "../components/tables/ImmigrantTable";
+import ImmigrantTable from "../../components/tables/ImmigrantTable";
 
 // MUI
 import {

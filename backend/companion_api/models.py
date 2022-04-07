@@ -5,9 +5,6 @@ from accounts.models import User, Patient, Doctor
 from django.utils import timezone
 from rest_framework import serializers
 
-# from django.contrib.auth.models import User
-# from django.utils import timezone
-
 # Keep this for now as a Generic Model for future reference
 class Person(models.Model):
     """Very generic Person table

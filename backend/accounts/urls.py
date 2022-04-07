@@ -21,7 +21,7 @@ urlpatterns = [
     path("api/auth/logout", knox_views.LogoutView.as_view(), name="knox_logout"),
     path("api/approve-doctor/<user_id>", ApproveDoctorView.as_view(), name='approve_doctor'),
     path("api/approve-immigration-officer/<user_id>", ApproveImmigrationOfficerView.as_view(), name='approve_immigration_officer'),
-    # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
+    # TO BE USED FOR EMAIL VERIFICATION
     # path("api/activate-email/<user_id>/<token>", ActivateEmailView.as_view(), name='activate_email'),
 ]
 

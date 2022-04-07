@@ -21,20 +21,6 @@ class PersonView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-# # Get Patients of Doctor View
-# class DoctorPatientView(viewsets.ModelViewSet):
-#     """Doctor Patients View"""
-
-#     # only authenticated doctors can see their patients
-#     permission_classes = [
-#         permissions.IsAuthenticated
-#     ]
-
-#     serializer_class = PatientSerializer
-
-#     def get_queryset(self):
-#         return self.request.user.doctor.patients.all()
-
 # Get Patients of Doctor View
 class DoctorPatientView(generics.GenericAPIView):
     """Doctor Patients View"""
@@ -140,16 +126,17 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
         pid = self.kwargs['pk']
         
         try:
+            # FOR DOCTORS
             try:
                 return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
             except Patient.DoesNotExist:
                 return self.request.user.doctor.temp_patients.get(user_id=pid).statuses.latest('date')
         except:
+            # FOR IMM. OFFICERS
             try:
                 return self.request.user.immigrationofficer.immigrants.get(user_id=pid).statuses.latest('date')
             except:
                 pass
-        # 
         
 # Update the Notification's status view
 class NotificationView(viewsets.ModelViewSet):
@@ -180,7 +167,7 @@ class AddressView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(patient=self.request.user.patient)
 
-#returns all users who have a matching adres with current user
+#returns all users who have a matching adress with current user
 class PatientsWithMatchingAddressView(generics.ListAPIView):
     # only authenticated users can get access
     permission_classes = [
@@ -209,7 +196,6 @@ class PatientsWithMatchingAddressView(generics.ListAPIView):
 
         return patients
 
-#returns all users who have a matching address with current user
 class TogglePriorityView(generics.UpdateAPIView):
     # only authenticated users can get access
     permission_classes = [
@@ -283,11 +269,12 @@ class ToggleAwayView(generics.UpdateAPIView):
             }
         )
 
-class ReassignPatientsToTempDoctor(generics.GenericAPIView):
-    # only authenticated users can get access
-    # permission_classes = [
-    #     permissions.IsAdminUser
-    # ]
+class ReassignPatientsToTempDoctorView(generics.GenericAPIView):
+    # only Admin users can get access
+
+    permission_classes = [
+        permissions.IsAdminUser
+    ]
 
     def put(self, request, *args, **kwargs):
         did = self.kwargs['doc']
@@ -350,8 +337,3 @@ class AvailabilityView(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(doctor=self.request.user.doctor)
-
-
-
-
-
