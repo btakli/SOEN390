@@ -130,11 +130,10 @@ function Navigator(props) {
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
-  categories[0]["children"] = (props.auth.user.is_doctor
-    ? doctor_pages
-    : (props.auth.user.is_immigration_officer 
-    ? immigration_officer_pages : 
-    patient_pages));
+  categories[0]["children"] = (
+    props.auth.user.is_doctor ? doctor_pages
+    : (props.auth.user.is_immigration_officer ? immigration_officer_pages
+    : patient_pages));
 
   const [open, setOpen] = useState(false);
 

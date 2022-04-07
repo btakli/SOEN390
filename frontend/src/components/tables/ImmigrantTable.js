@@ -36,7 +36,7 @@ function ImmigrantTable(props) {
 
   return (
     <Fragment>
-      <StatusViewRequest open={open} onClose={handleDialogClose} immigrantId={immigrantId} />
+      <StatusViewRequest open={open} onClose={handleDialogClose} patientId={immigrantId} />
       <TableContainer component={Paper}  sx={{ width: 2/3, margin: 'auto'}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -62,11 +62,11 @@ function ImmigrantTable(props) {
                 <TableCell>{immigrant.date_of_birth}</TableCell>
                 <TableCell>{immigrant.immigration_status}</TableCell>
                 <TableCell>                  
-                <Button variant="contained" color="success" onClick={() => handleDialogOpen(immigrant.user)}>
-                    See Status
-                </Button>
+                  <Button variant="contained" color="success" onClick={() => handleDialogOpen(immigrant.user)}>
+                      See Status
+                  </Button>
                 </TableCell>
-                <TableCell> <PriorityToggle value={immigrant.is_immigrant_priority} id={immigrant.user} is_immigrant={immigrant.is_immigrant}/> </TableCell>
+                <TableCell> <PriorityToggle value={immigrant.is_immigration_priority} id={immigrant.user} is_immigrant={true}/> </TableCell>
             </TableRow>
             ))}
           </TableBody>

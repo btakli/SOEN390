@@ -60,9 +60,9 @@ function PatientTable(props) {
                 <TableCell>{patient.email}</TableCell>
                 <TableCell>{patient.date_of_birth}</TableCell>
                 <TableCell>                  
-                <Button variant="contained" color="success" onClick={() => handleDialogOpen(patient.user)}>
-                    See Status
-                </Button>
+                  <Button variant="contained" color="success" onClick={() => handleDialogOpen(patient.user)}>
+                      See Status
+                  </Button>
                 </TableCell>
                 <TableCell> <PriorityToggle value={patient.is_priority} id={patient.user} is_immigrant={false}/> </TableCell>
             </TableRow>
