@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDoctor } from "../../redux/actions/patientActions";
+import { createMessage } from "../../redux/actions/messageActions";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -12,12 +13,10 @@ import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import emailjs from "@emailjs/browser";
-import { FormControl, Grid, Input, Divider } from "@mui/material";
+import { Grid, Input } from "@mui/material";
 
 const theme = createTheme();
 
@@ -26,7 +25,7 @@ const RapidTestForm = (props) => {
     subject: `${props.auth.userData.first_name} ${props.auth.userData.last_name}'s Rapid Test Result`,
 
     //Put your email for DEMO
-    email: "danimacicasan@gmail.com",
+    email: "delispeter19@gmail.com",
 
     message: "",
     result: null,
@@ -52,6 +51,7 @@ const RapidTestForm = (props) => {
       )
       .catch((error) => console.log("Email Send Failed...", error));
     setEmailData(emptyEmail);
+    props.createMessage({ emailSent: "Email Sent" });
   };
 
   const onChange = (e) => {
@@ -211,7 +211,8 @@ const RapidTestForm = (props) => {
 
 RapidTestForm.propTypes = {
   auth: PropTypes.object.isRequired,
-  //doctor: PropTypes.object.isRequired,
+  createMessage: PropTypes.func.isRequired,
+  doctor: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -219,4 +220,4 @@ const mapStateToProps = (state) => ({
   doctor: state.patientReducer.doctor,
 });
 
-export default connect(mapStateToProps, { getDoctor })(RapidTestForm);
+export default connect(mapStateToProps, { getDoctor, createMessage })(RapidTestForm);

@@ -25,16 +25,12 @@ import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 import PatientAppointment from "./pages/home/PatientAppointment";
 
-// import PatientListDisplay from "./refactor/patientTable/PatientListDisplay";
-
 function App() {
   const homePath = "/";
   return (
     <div className="App">
       <Router>
         <Routes>
-          {/* <Route path="/r" element={<PatientListDisplay />} /> */}
-
           {/* Home Page and Outlets */}
           <Route
             path={homePath}
@@ -47,15 +43,7 @@ function App() {
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
-              <Route
-                path="doctor/appointments"
-                element={<DoctorAppointment />}
-              />
-              <Route
-                path="patient/appointments"
-                element={<PatientAppointmentForm />}
-              />
-              <Route path="rapidTestResult" element={<RapidTest />} />
+              <Route path="rapid-test-result" element={<RapidTest />} />
               <Route path="qr-code" element={<QRCodeDisplay />} />
               <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />

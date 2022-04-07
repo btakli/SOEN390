@@ -2,7 +2,7 @@ import { GET_PATIENTS, GET_DOCTOR } from "../actions/types.js";
 
 const initialState = {
   patients: [],
-  doctor: [],
+  doctor: {},
 };
 
 // Note: function has no name so we define ...

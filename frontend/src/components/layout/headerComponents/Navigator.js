@@ -107,7 +107,7 @@ function Navigator(props) {
     {
       text: "Rapid Test Result",
       icon: <SpeedIcon />,
-      onClick: () => navigate(`${home}/rapidTestResult`),
+      onClick: () => navigate(`${home}/rapid-test-result`),
     },
     { text: "QR-Code", icon: <SettingsEthernetIcon />,
     onClick: () => navigate(`${home}/qr-code`), },
