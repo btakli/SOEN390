@@ -24,6 +24,8 @@ import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputCompone
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
+import HelpIcon from '@mui/icons-material/Help';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SpeedIcon from "@mui/icons-material/Speed";
 
 import {
@@ -119,6 +121,14 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
+    ///////////////////////////////////////////////////////////// newly added for sprint 4 remove commment later
+    { text: "US Covid19 Data", icon: <AnalyticsIcon />,
+      onClick: () => navigate(`${home}/patient/usaCovidAPI`),
+    },
+    { text: "Request Help", icon: <HelpIcon />,
+      onClick: () => navigate(`${home}/patient/requestHelp`),
+    },
+    /////////////////////////////////////////////////////////////
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
     {
       text: "Rapid Test Result",
