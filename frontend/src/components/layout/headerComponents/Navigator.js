@@ -79,8 +79,6 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/doctor/appointments`),
     },
-    { text: "Template 4", icon: <SettingsEthernetIcon />},
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
   const immigration_officer_pages = [
@@ -95,8 +93,6 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
   const patient_pages = [
@@ -121,15 +117,12 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
-    ///////////////////////////////////////////////////////////// newly added for sprint 4 remove commment later
     { text: "US Covid19 Data", icon: <AnalyticsIcon />,
       onClick: () => navigate(`${home}/patient/usaCovidAPI`),
     },
     { text: "Request Help", icon: <HelpIcon />,
       onClick: () => navigate(`${home}/patient/requestHelp`),
     },
-    /////////////////////////////////////////////////////////////
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
     {
       text: "Rapid Test Result",
       icon: <SpeedIcon />,
@@ -137,7 +130,6 @@ function Navigator(props) {
     },
     { text: "QR-Code", icon: <SettingsEthernetIcon />,
     onClick: () => navigate(`${home}/qr-code`), },
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
   categories[0]["children"] = (
