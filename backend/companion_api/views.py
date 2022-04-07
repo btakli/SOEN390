@@ -137,8 +137,8 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
 
     # Try to get latest, if DNE, return null Status Model
     def get_object(self):
-        import pdb
-        pdb.set_trace()
+        # import pdb
+        # pdb.set_trace()
         pid = self.kwargs['pk']
         
         try:
@@ -147,16 +147,11 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
             except Patient.DoesNotExist:
                 return self.request.user.doctor.temp_patients.get(user_id=pid).statuses.latest('date')
         except:
-            pass
-        # if (self.request.user.is_doctor):
-        #     try:
-        #         return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
-        #     except:
-        #         pass
-        # try:
-        #     return self.request.user.immigrationofficer.immigrants.get(user_id=pid).statuses.latest('date')
-        # except:
-        #     pass
+            try:
+                return self.request.user.immigrationofficer.immigrants.get(user_id=pid).statuses.latest('date')
+            except:
+                pass
+        # 
         
 # Update the Notification's status view
 class NotificationView(viewsets.ModelViewSet):

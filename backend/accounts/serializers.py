@@ -47,6 +47,9 @@ class RegisterDoctorSerializer(serializers.ModelSerializer):
 
         model = Doctor
         fields = "__all__"
+        extra_kwargs = {
+            'is_away':{'read_only':True}
+            }
         
     # only real reason this is needed is cause we need to know for sure
     # that the user data is a user and not some random dict of data.
@@ -159,40 +162,6 @@ class RegisterPatientSerializer(serializers.ModelSerializer):
             user_data['password']
         )
         user.is_patient = True
-        # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
-        # user.is_pending = True
-        # user.is_active = False # DOCTOR USERS MUST BE APPROVED FIRST
-        # user.is_email_verified = False
-
-        user.save() # update user change 
-
-        patient = Patient.objects.create(
-            user = user,
-            **validated_data
-        )
-
-        return patient
-
-# Register Immigrant Serializer
-class RegisterImmigrantSerializer(serializers.ModelSerializer):
-    """Register Serializer"""
-
-    user = UserSerializer()
-
-    class Meta:
-        """Requires Meta attribute"""
-
-        model = Patient
-        fields = "__all__"
-
-    def create(self, validated_data):
-        user_data = validated_data.pop("user")
-        user = User.objects.create_user(
-            user_data['email'],
-            user_data['password']
-        )
-        user.is_patient = True
-        user.is_immigrant = True
         # TO BE USED IN SPRINT 3 EMAIL VERIFICATION
         # user.is_pending = True
         # user.is_active = False # DOCTOR USERS MUST BE APPROVED FIRST

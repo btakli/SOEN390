@@ -10,7 +10,7 @@ function PriorityToggle(props){
   const { value, id, is_immigrant } = props;
 
   const handleClick = () => {
-    if (props.is_immigrant)
+    if (is_immigrant)
       props.toggleImmigrantPriority(id);
     else
       props.togglePriority(id);

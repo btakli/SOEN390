@@ -64,7 +64,7 @@ function PatientTable(props) {
                     See Status
                 </Button>
                 </TableCell>
-                <TableCell> <PriorityToggle value={patient.is_priority} id={patient.user} is_immigrant={immigrant.is_immigrant}/> </TableCell>
+                <TableCell> <PriorityToggle value={patient.is_priority} id={patient.user} is_immigrant={false}/> </TableCell>
             </TableRow>
             ))}
           </TableBody>

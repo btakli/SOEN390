@@ -269,9 +269,10 @@ function PatientSignUp(props) {
                 />
               </Grid>
               <Grid item xs={12}>
-              <FormControlLabel id="is_immigrant" name="is_immigrant" control={<Checkbox/>} label="I am an immigrant" value={state.is_immigrant} onChange={handleCheckboxChange}/>
+                <FormControlLabel id="is_immigrant" name="is_immigrant" control={<Checkbox/>} label="I am an immigrant" value={state.is_immigrant} onChange={handleCheckboxChange}/>
               </Grid>
-               <Grid item xs={12}> {(state.is_immigrant) ? (
+
+              <Grid item xs={12}> {(state.is_immigrant) ? (
                 <FormControl fullWidth required >
                   <InputLabel id="immigration_status">Immigration Status</InputLabel>
                   <Select

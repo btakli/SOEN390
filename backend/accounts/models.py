@@ -127,7 +127,7 @@ class Patient(models.Model):
         ('Non-permanent resident', "Non-permanent resident"),
         ('None', "None")
     ]
-    immigration_status = models.CharField(max_length=50, choices=IMMIGRATION_STATUS, null=True)
+    immigration_status = models.CharField(max_length=50, choices=IMMIGRATION_STATUS, null=True, blank=True)
 
     doctor = models.ForeignKey(
         Doctor, related_name="patients", on_delete=models.SET_NULL, null=True, blank=True

@@ -11,7 +11,6 @@ urlpatterns = [
     path("api/auth/register/doctor", RegisterDoctorView.as_view(), name='register_doctor'),
     path("api/auth/register/immigration-officer", RegisterImmigrationOfficerView.as_view(), name='register_immigration_officer'),
     path("api/auth/register/patient", RegisterPatientView.as_view(), name='register_patient'),
-    path("api/auth/register/immigrant", RegisterImmigrantView.as_view(), name='register_immigrant'),
     path("api/auth/login/doctor", LoginDoctorView.as_view(), name='login_doctor'),
     path("api/auth/login/immigration-officer", LoginImmigrationOfficerView.as_view(), name='login_immigration_officer'),
     path("api/auth/login/patient", LoginPatientView.as_view(), name='login_patient'),

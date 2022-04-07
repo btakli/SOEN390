@@ -48,7 +48,7 @@ class ImmigrationOfficerAdmin(admin.ModelAdmin):
         return format_html(u'<a href="%s">%s</a>' % (link, obj.user))
 
     def number_of_patients(self, obj):
-        return len(Patient.objects.filter(immigrationOfficer__user_id=obj.user_id))
+        return len(Patient.objects.filter(immigrationofficer__user_id=obj.user_id))
 
 class PatientAdmin(admin.ModelAdmin):
     """Patient Admin Model"""
