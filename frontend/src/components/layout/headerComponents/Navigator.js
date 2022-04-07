@@ -24,6 +24,7 @@ import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputCompone
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
+import SpeedIcon from "@mui/icons-material/Speed";
 
 import {
   backgroundColor,
@@ -69,7 +70,9 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
-    { text: "Availabilities", icon: <PublicIcon />,
+    {
+      text: "Availabilities",
+      icon: <PublicIcon />,
       onClick: () => navigate(`${home}/doctor/appointments`),
     },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
@@ -93,11 +96,17 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/addressTracing`),
     },
-    { text: "Appointment", icon: <PublicIcon />,
+    {
+      text: "Appointment",
+      icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
+    {
+      text: "Rapid Test Result",
+      icon: <SpeedIcon />,
+      onClick: () => navigate(`${home}/rapidTestResult`),
+    },
   ];
 
   categories[0]["children"] = props.auth.user.is_doctor

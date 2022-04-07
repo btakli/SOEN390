@@ -20,6 +20,7 @@ import DoctorSignUp from "./pages/auth/DoctorSignUp";
 // HOME
 import Home from "./pages/home/Home";
 import Dashboard from "./pages/home/Dashboard";
+import RapidTest from "./pages/home/RapidTest";
 import PatientStatus from "./pages/home/PatientStatus";
 import Requests from "./pages/Requests";
 import Patients from "./pages/Patients";
@@ -34,8 +35,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-
-        {/* <Route path="/r" element={<PatientListDisplay />} /> */}
+          {/* <Route path="/r" element={<PatientListDisplay />} /> */}
 
           {/* Home Page and Outlets */}
           <Route
@@ -49,8 +49,15 @@ function App() {
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="patients" element={<Patients />} />
-              <Route path="doctor/appointments" element={<DoctorAppointment />} />
-              <Route path="patient/appointments" element={<PatientAppointmentForm />} />
+              <Route
+                path="doctor/appointments"
+                element={<DoctorAppointment />}
+              />
+              <Route
+                path="patient/appointments"
+                element={<PatientAppointmentForm />}
+              />
+              <Route path="rapidTestResult" element={<RapidTest />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
@@ -78,8 +85,6 @@ function App() {
             path="/doctor/signup"
             element={<DoctorSignUp redirect={homePath} />}
           />
-
-          
 
           <Route path="*" element={<NoMatch />} />
         </Routes>
