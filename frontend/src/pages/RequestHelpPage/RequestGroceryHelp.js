@@ -9,9 +9,8 @@ import {
   Button,
   Box,
   Typography,
-  ImageList,
-  ImageListItem,
   Grid,
+  Card,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -44,45 +43,44 @@ function RequestGroceryHelp() {
       <Typography sx={{ m: 2 }} variant="h4">
         Grocery Assistance
       </Typography>
-      <ImageList cellHeight={160} cols={2}>
-        {tileData.map((tile) => (
-          <ImageListItem>
-            <Box
-              component="img"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 350,
-                maxWidth: { xs: 350, md: 250 },
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }}
-              alt={tile.alt}
-              src={tile.img}
+      <Box sx={{ p: 2 }}>
+        <Grid container rowSpacing={1} spacing={{ xs: 1, sm: 2, md: 3 }}>
+          {tileData.map((tile, i) => (
+            <Grid key={"_"+i} item xs={12} sm={12} md={6}>
+              <Card key={i} sx={{ p: 2 }}>
+                <Box
+                  key={i+"0"}
+                  component="img"
+                  sx={{
+                    maxHeight: { xs: 350, md: 250 },
+                  }}
+                  alt={tile.alt}
+                  src={tile.img}
 
-            />
-            <Typography
-              sx={{ m: 1 }}
-              variant="body2"
-              color="text.secondary"
-              position="right"
-            >
-              {tile.text}
-            </Typography>
+                />
+                <Typography
+                  key={i+"1"}
+                  sx={{ m: 1, py: 3, px: 20 }}
+                  color="text.secondary"
+                >
+                  {tile.text}
+                </Typography>
 
-            <Button
-              ariant="contained"
-              endIcon={<SendIcon />}
-              position="left"
-              color="success"
-              href={tile.href}
-            >
-              Go
-            </Button>
-          </ImageListItem>
-        ))}
-      </ImageList>
+                <Button
+                  key={i+"2"}
+                  ariant="contained"
+                  endIcon={<SendIcon />}
+                  color="success"
+                  target="_blank"
+                  href={tile.href}
+                >
+                  Go
+                </Button>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Fragment>
   );
 }
