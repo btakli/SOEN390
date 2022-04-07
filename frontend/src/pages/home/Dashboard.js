@@ -34,12 +34,15 @@ function Dashboard(props){
         </Box>
 
         { props.auth.user.is_doctor ?
-            <Grid container spacing={3}>
-                <Grid item xs={12} sm={4} md={4}>
+            <Grid 
+                container
+                alignItems="center"
+            >
+                <Grid item xs={6} md={6}>
                     <AppointmentTable />
                 </Grid>
 
-                <Grid item xs={12} sm={8} md={8}>
+                <Grid item xs={6} md={6}>
                     <AvailabilityForm />
                 </Grid>
             </Grid>
