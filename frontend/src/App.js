@@ -52,13 +52,9 @@ function App() {
               <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />
               <Route path="doctor/appointments" element={<Dashboard />} />
-<<<<<<< HEAD
-
               <Route path="patient/canadaAPI" element={<CanadaAPI />} />
-=======
               <Route path="patient/usaCovidAPI" element={<CovidAPI />} />
               <Route path="patient/requestHelp" element={<RequestHelp />} />
->>>>>>> 86c4ef33572b3a9d929d24fa10dcd51870059cbe
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
