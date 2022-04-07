@@ -212,6 +212,14 @@ class ToggleAwayView(generics.UpdateAPIView):
             for patient in patients:
                 patient.temp_doctor = None
                 patient.save()
+                n = Notification(
+                    type = "Assignment", 
+                    user = patient.user, 
+                    subject = "Your Doctor Is Back", 
+                    message = "Your doctor: Dr." + doctor.first_name + " " + doctor.last_name + " is back from his emergency leave. He is now again your "+
+                    "current doctor."
+                )
+                n.save()
         else:
             doctor.is_away = True
             doctor.save()
@@ -251,7 +259,7 @@ class ReassignPatientsToTempDoctor(generics.GenericAPIView):
                     "been asssigned a new temporary doctor: Dr." + tempDoctor.first_name + " " + tempDoctor.last_name + " from " + start_date +
                     " to " + end_date
                 )
-            n.save()
+                n.save()
 
         except:
             pass
