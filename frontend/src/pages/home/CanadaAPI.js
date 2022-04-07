@@ -36,9 +36,9 @@ function CanadaAPI () {
     return (
     <Card>
         <TableContainer component={Paper}  sx={{ width: 3/4, margin: 'auto', marginTop: 3,}}>
-            <h1>Canada's Current Covid Statistics Summary</h1>
+            <h1>Canada's Current Covid19 Summary</h1>
             <h3>http://api.opencovid.ca/summary</h3>
-            <Table sx={{ minWidth: 700 }} aria-label="simple table">
+            <Table sx={{ minWidth: 800 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         <TableCell>Province</TableCell>
