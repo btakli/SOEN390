@@ -183,3 +183,43 @@ export const logout = () => (dispatch, getState) => {
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 }
+
+export const toggleIsAway = () => (dispatch, getState) => {
+
+    const config = tokenConfig(getState);
+
+    axios.put('http://localhost:8000/api/toggle/is-away/', null, config)
+        .then(res => {
+            dispatch({ type: USER_LOADING });
+
+            axios.get('http://localhost:8000/api/auth/user', config)
+                .then(res => {
+                    dispatch({
+                        type: USER_LOADED,
+                        payload: res.data
+                    });
+                    const userRole = res.data;
+                    let userType = (userRole.is_doctor) ? "doctor" : ((userRole.is_patient) ? "patient" : null);
+
+                    axios.get(`http://localhost:8000/api/auth/users/${userType}`, config)
+                        .then(res => {
+                            dispatch({
+                                type: USER_DATA_LOADED,
+                                payload: res.data
+                            });
+                        }).catch(err => {
+                            dispatch(returnErrors(err.response.data, err.response.status));
+                            dispatch({
+                                type: AUTH_ERROR
+                            })
+                        });
+                }).catch(err => {
+                    dispatch(returnErrors(err.response.data, err.response.status));
+                    dispatch({
+                        type: AUTH_ERROR
+                    })
+                });    
+        }).catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
+}

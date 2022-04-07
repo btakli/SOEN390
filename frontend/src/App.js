@@ -28,7 +28,6 @@ import PatientAppointment from "./pages/home/PatientAppointment";
 
 function App() {
   const homePath = "/";
-
   return (
     <div className="App">
       <Router>

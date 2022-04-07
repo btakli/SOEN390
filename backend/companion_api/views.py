@@ -49,7 +49,13 @@ class DoctorPatientView(generics.GenericAPIView):
         patients = []
 
         patients_query_set = self.request.user.doctor.patients.all()
+        patients_query_set2 = self.request.user.doctor.temp_patients.all()
         for patient_model in patients_query_set:
+            patient = PatientSerializer(patient_model).data
+            patient['email'] = patient_model.user.email
+            patients.append(patient)
+        
+        for patient_model in patients_query_set2:
             patient = PatientSerializer(patient_model).data
             patient['email'] = patient_model.user.email
             patients.append(patient)
@@ -97,7 +103,10 @@ class SpecificLatestStatusView(generics.RetrieveAPIView):
         pid = self.kwargs['pk']
 
         try:
-            return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
+            try:
+                return self.request.user.doctor.patients.get(user_id=pid).statuses.latest('date')
+            except Patient.DoesNotExist:
+                return self.request.user.doctor.temp_patients.get(user_id=pid).statuses.latest('date')
         except:
             pass
         
@@ -170,7 +179,10 @@ class TogglePriorityView(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         pid = self.kwargs['pk']
-        patient = self.request.user.doctor.patients.get(user_id=pid)
+        try:
+            patient = self.request.user.doctor.patients.get(user_id=pid)
+        except Patient.DoesNotExist:
+            patient = self.request.user.doctor.temp_patients.get(user_id=pid)
         priority = patient.is_priority
         patient.is_priority = not priority
         patient.save()
@@ -180,7 +192,81 @@ class TogglePriorityView(generics.UpdateAPIView):
                 "msg": f'Patient priority is set to {not priority}.'
             }
         )
+        
+class ToggleAwayView(generics.UpdateAPIView):
+    # only authenticated users can get access
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
 
+    serializer_class = DoctorSerializer
+
+    def update(self, request, *args, **kwargs):
+        doctor = self.request.user.doctor
+        is_away = doctor.is_away
+
+        if(is_away):
+            doctor.is_away = False
+            doctor.save()            
+            patients = self.request.user.doctor.patients.all()
+            for patient in patients:
+                patient.temp_doctor = None
+                patient.save()
+                n = Notification(
+                    type = "Assignment", 
+                    user = patient.user, 
+                    subject = "Your Doctor Is Back", 
+                    message = "Your doctor: Dr." + doctor.first_name + " " + doctor.last_name + " is back from his emergency leave. He is now again your "+
+                    "current doctor."
+                )
+                n.save()
+        else:
+            doctor.is_away = True
+            doctor.save()
+
+        return Response(
+            {
+                "msg": f'Doctor is_away is set to {not is_away}.'
+            }
+        )
+
+class ReassignPatientsToTempDoctor(generics.GenericAPIView):
+    # only authenticated users can get access
+    # permission_classes = [
+    #     permissions.IsAdminUser
+    # ]
+
+    def put(self, request, *args, **kwargs):
+        did = self.kwargs['doc']
+        tdid = self.kwargs['tempdoc']
+        start_date = self.kwargs['startdate']
+        end_date = self.kwargs['enddate']
+        
+        try:
+            tempDoctor = Doctor.objects.get(user_id=tdid)
+            doctor = Doctor.objects.get(user_id=did)
+            patients = doctor.patients.all()
+            for patient in patients:
+                patient.temp_doctor = tempDoctor
+                patient.save()
+                n = Notification(
+                    type = "Assignment", 
+                    user = patient.user, 
+                    subject = "New Temporary Doctor Assignment", 
+                    message = "Your doctor: Dr." + doctor.first_name + " " + doctor.last_name + " had an emergency leave. You have "+
+                    "been asssigned a new temporary doctor: Dr." + tempDoctor.first_name + " " + tempDoctor.last_name + " from " + start_date +
+                    " to " + end_date
+                )
+                n.save()
+        except:
+            pass
+          
+        return Response(
+            {
+                "msg": f"{tempDoctor} has been assigned to {doctor}'s patients."
+            }
+        )
+      
 class AppointmentView(viewsets.ModelViewSet):
     """Appointment View"""
 
@@ -212,8 +298,6 @@ class AvailabilityView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(doctor=self.request.user.doctor)
 
-    
-        
 
 
 
