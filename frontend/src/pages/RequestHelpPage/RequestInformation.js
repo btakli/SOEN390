@@ -1,84 +1,66 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { Container } from '@mui/material';
+import { React, Fragment } from "react";
 
+import CanadaGov from "../../media/CanadaGov.jpg";
+import WHO from "../../media/WHO.jpg";
+import CDC from "../../media/CDC.jpg";
 
+import { Box, Typography, ImageList, ImageListItem, Grid } from "@mui/material";
 
-function RequestInformation () {
-    return (
-    <Container 
-        sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: 3,
-        }}  
-    > 
-        <Card sx={{ maxWidth: 345, px: 3, py: 3,}} >
-            <CardActionArea a href = 'https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html'>
-                <CardMedia
-                    component="img"
-                    height="100"
-                    image={require("../../media/CanadaGov.jpg")}
-                    alt="canadagov"
-                    
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                    Government of Canada Health Response
-                    </Typography>
+const tileData = [
+  {
+    img: CanadaGov,
+    href: "https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html",
+    body1: "Government of Canada Health Response",
+    body2: "Canada's guide and information on the Covid19 pandemic",
+  },
+  {
+    img: WHO,
+    href: "https://www.doordash.com/en-CA",
+    body1: "World Health Organization",
+    body2: "Global response to Covid19 health crisis",
+  },
+  {
+    img: CDC,
+    href: "https://montreal.lufa.com/en",
+    body1: "Center for Diseases Control",
+    body2: "Reliable information from medical experts",
+  },
+];
 
-                    <Typography variant="body2" color="text.secondary">
-                    Canada's guide and information on the Covid19 pandemic
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card>
-
-        <Card  sx={{ maxWidth: 345, px: 3, py: 3,}}>
-            <CardActionArea a href ='https://www.who.int/emergencies/diseases/novel-coronavirus-2019/technical-guidance'>
-                <CardMedia
-                    component="img"
-                    height="120"
-                    image={require("../../media/WHO.jpg")}
-                    alt="canadagov"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                    World Health Organization
-                    </Typography>
-
-                    <Typography variant="body2" color="text.secondary">
-                    Global response to Covid19 health crisis
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card>
-
-        <Card  sx={{ maxWidth: 345, px: 3, py: 3,}}>
-            <CardActionArea a href = 'https://www.cdc.gov/coronavirus/2019-ncov/if-you-are-sick/steps-when-sick.html'>
-                <CardMedia
-                    component="img"
-                    height="120"
-                    image={require("../../media/CDC.jpg")}
-                    alt="canadagov"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                    Centers for Diseases Control
-                    </Typography>
-
-                    <Typography variant="body2" color="text.secondary">
-                    Reliable information from medical experts
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card>
-      </Container>
-    );
+function RequestInformation() {
+  return (
+    <Fragment>
+      <Typography sx={{ m: 2 }} variant="h4">
+        Additional Information
+      </Typography>
+      <ImageList cellHeight={160} cols={3}>
+        {tileData.map((tile) => (
+          <ImageListItem>
+            <Box
+              component="img"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 350,
+                maxWidth: { xs: 350, md: 250 },
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }}
+              alt={tile.alt}
+              src={tile.img}
+              href={tile.href}
+            />
+            <Typography gutterBottom variant="h5" component="div">
+              {tile.body1}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {tile.body2}
+            </Typography>
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Fragment>
+  );
 }
-export default RequestInformation; 
+export default RequestInformation;
