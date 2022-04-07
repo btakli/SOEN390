@@ -24,6 +24,7 @@ import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputCompone
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
+import SpeedIcon from "@mui/icons-material/Speed";
 
 import {
   backgroundColor,
@@ -58,7 +59,9 @@ function Navigator(props) {
   const home = props.home === "/" ? "" : props.home;
 
   const doctor_pages = [
-    { text: "Home", icon: <HomeIcon /> },
+    { text: "Home",
+      icon: <HomeIcon />,
+      onClick: () => navigate(`${home}/`)},
     {
       text: "Patients",
       icon: <DnsRoundedIcon />,
@@ -69,10 +72,12 @@ function Navigator(props) {
       icon: <PermMediaOutlinedIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
-    { text: "Availabilities", icon: <PublicIcon />,
+    {
+      text: "Availabilities",
+      icon: <PublicIcon />,
       onClick: () => navigate(`${home}/doctor/appointments`),
     },
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    { text: "Template 4", icon: <SettingsEthernetIcon />},
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
@@ -109,10 +114,19 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/addressTracing`),
     },
-    { text: "Appointment", icon: <PublicIcon />,
+    {
+      text: "Appointment",
+      icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
     { text: "Template 4", icon: <SettingsEthernetIcon /> },
+    {
+      text: "Rapid Test Result",
+      icon: <SpeedIcon />,
+      onClick: () => navigate(`${home}/rapid-test-result`),
+    },
+    { text: "QR-Code", icon: <SettingsEthernetIcon />,
+    onClick: () => navigate(`${home}/qr-code`), },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 

@@ -1,7 +1,8 @@
-import { GET_PATIENTS, GET_IMMIGRANTS } from "../actions/types.js";
+import { GET_PATIENTS, GET_IMMIGRANTS, GET_DOCTOR } from "../actions/types.js";
 
 const initialState = {
-    patients: []
+  patients: [],
+  doctor: {},
 };
 
 // Note: function has no name so we define ...
@@ -18,7 +19,12 @@ export default function(state=initialState, action){
                 ...state,
                 patients: action.payload
             };
-        default:
-            return state;
-    }
+        case GET_DOCTOR:
+            return {
+                ...state,
+                doctor: action.payload,
+            };
+    default:
+      return state;
+  }
 }

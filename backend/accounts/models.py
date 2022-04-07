@@ -67,6 +67,7 @@ class Doctor(models.Model):
     address = models.CharField(max_length=20, null=True)
     city = models.CharField(max_length=20, null=True)
     postal_code = models.CharField(max_length=20, null=True)
+    is_away = models.BooleanField(default=False, blank=True)
 
     def upload_path(instance, filename):
         print(filename, instance)
@@ -133,6 +134,10 @@ class Patient(models.Model):
     )
     immigrationofficer = models.ForeignKey(
         ImmigrationOfficer, related_name="immigrants", on_delete=models.SET_NULL, null=True, blank=True
+    )
+
+    temp_doctor = models.ForeignKey(
+        Doctor, related_name="temp_patients", on_delete=models.SET_NULL, null=True, blank=True
     )
 
     def __str__(self):
