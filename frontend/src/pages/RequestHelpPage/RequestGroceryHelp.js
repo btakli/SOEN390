@@ -68,7 +68,7 @@ function RequestGroceryHelp() {
 
                 <Button
                   key={i+"2"}
-                  ariant="contained"
+                  variant="contained"
                   endIcon={<SendIcon />}
                   color="success"
                   target="_blank"
