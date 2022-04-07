@@ -29,7 +29,6 @@ function generateAppointmentList(appointments, patients) {
 
         aList.push(adata);
     }
-    console.log(aList);
     return aList;
 }
 

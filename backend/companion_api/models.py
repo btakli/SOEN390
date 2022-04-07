@@ -104,14 +104,14 @@ class Availability(models.Model):
         Doctor, related_name="availabilities", on_delete=models.CASCADE, blank=True
     )
 
-    from_date = models.DateTimeField()
-    to_date = models.DateTimeField()
+    start = models.DateTimeField()
+    end = models.DateTimeField()
 
     def _validate_start_end_dates(self):
-        if self.to_date < self.from_date:
+        if self.end < self.start:
             raise serializers.ValidationError("End date cannot be before start date.")
 
-        if (self.to_date - self.from_date).days >= 1:
+        if (self.end - self.start).days >= 1:
             raise serializers.ValidationError("Availabilities must be less than a day.")
 
     def save(self, *args, **kwargs):

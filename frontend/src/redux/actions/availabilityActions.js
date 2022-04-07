@@ -1,51 +1,51 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messageActions';
 import { tokenConfig } from './authActions';
-import { GET_APPOINTMENT, DELETE_APPOINTMENT, ADD_APPOINTMENT } from "./types.js";
+import { GET_AVAILABILITY, DELETE_AVAILABILITY, ADD_AVAILABILITY } from "./types.js";
 
 // GET ADDRESS API CALL
-export const getAppointments = () => (dispatch, getState) => {
+export const getAvailabilities = () => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
-    axios.get('http://localhost:8000/api/appointment/', config)
+    axios.get('http://localhost:8000/api/availability/', config)
         .then(res => {
             dispatch({
-                type: GET_APPOINTMENT,
+                type: GET_AVAILABILITY,
                 payload: res.data
             });
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
 // DELETE ADDRESS API CALL
-export const deleteAppointment = (id) => (dispatch, getState) => {
+export const deleteAvailability = (id) => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
-    axios.delete(`http://localhost:8000/api/appointment/${id}/`, config)
+    axios.delete(`http://localhost:8000/api/availability/${id}/`, config)
         .then(res => {
             dispatch(createMessage({
-                deleteAppointment: 'Appointment Deleted'
+                deleteAvailability: 'Availability Deleted'
             }));
             dispatch({
-                type: DELETE_APPOINTMENT,
+                type: DELETE_AVAILABILITY,
                 payload: id
             });
         }).catch(err => console.log(err));
 }
 
 // POST ADDRESS API CALL
-export const addAppointment = (appointment) => (dispatch, getState) => {
+export const addAvailability = (availability) => (dispatch, getState) => {
 
     const config = tokenConfig(getState);
 
-    axios.post('http://localhost:8000/api/appointment/', appointment, config)
+    axios.post('http://localhost:8000/api/availability/', availability, config)
         .then(res => {
             dispatch(createMessage({
-                addAppointment: 'Appointment Added'
+                addAvailability: 'Availability Added'
             }));
             dispatch({
-                type: ADD_APPOINTMENT,
+                type: ADD_AVAILABILITY,
                 payload: res.data
             });
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));

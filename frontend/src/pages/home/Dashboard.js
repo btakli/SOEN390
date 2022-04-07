@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import InfectionsPerWeekGraph from "../../components/graphs/InfectionsPerWeekGraph";
 import InfectionsPerTypeGraph from "../../components/graphs/InfectionsPerTypeGraph";
 import AppointmentTable from "../../components/tables/AppointmentTable";
+import AvailabilityForm from "../../components/forms/AvailabilityForm";
 
 import {
     Box,
@@ -14,7 +15,6 @@ import {
     CardContent,
     Divider,
   } from "@mui/material";
-
 
 function Dashboard(props){
 
@@ -32,18 +32,27 @@ function Dashboard(props){
             </Typography>
             <Divider />
         </Box>
-        <Grid container spacing={3}>
-            <Grid item xs={12} sm={4} md={4}>
-                <AppointmentTable />
-            </Grid>
 
-            <Grid item xs={12} sm={4} md={4}>
-                <InfectionsPerWeekGraph />
+        { props.auth.user.is_doctor ?
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={4} md={4}>
+                    <AppointmentTable />
+                </Grid>
+
+                <Grid item xs={12} sm={8} md={8}>
+                    <AvailabilityForm />
+                </Grid>
             </Grid>
-            <Grid item xs={12} sm={4} md={4}>
-                <InfectionsPerTypeGraph />
+            :
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6} md={6}>
+                    <InfectionsPerWeekGraph />
+                </Grid>
+                <Grid item xs={12} sm={6} md={6}>
+                    <InfectionsPerTypeGraph />
+                </Grid>
             </Grid>
-        </Grid>
+        }
         </CardContent>
     </Card>
   )
