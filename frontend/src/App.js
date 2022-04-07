@@ -23,7 +23,7 @@ import Patients from "./pages/home/Patients";
 import Immigrants from "./pages/home/Immigrants";
 import AddressTracing from "./pages/home/AddressTracing";
 import CovidAPI from "./pages/home/CovidAPI";
-import RequestHelp from "./pages/home/RequestHelp";
+import RequestHelp from "./pages/RequestHelpPage/RequestHelp";
 import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 import PatientAppointment from "./pages/home/PatientAppointment";

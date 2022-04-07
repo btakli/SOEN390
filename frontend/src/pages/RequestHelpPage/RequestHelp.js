@@ -1,8 +1,8 @@
 import React from "react";
 
-import RequestGroceryHelp from "../../pages/RequestHelpPage/RequestGroceryHelp";
-import RequestInformation from "../../pages/RequestHelpPage/RequestInformation";
-import RequestByInfected from "../../pages/RequestHelpPage/RequestByInfected";
+import RequestGroceryHelp from "./RequestGroceryHelp";
+import RequestInformation from "./RequestInformation";
+import RequestByInfected from "./RequestByInfected";
 import { Card } from "@mui/material";
 
 function RequestHelp() {
