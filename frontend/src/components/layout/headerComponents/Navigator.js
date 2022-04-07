@@ -97,7 +97,7 @@ function Navigator(props) {
       onClick: () => navigate(`${home}/patient/appointments`),
     },
     { text: "QR-Code", icon: <SettingsEthernetIcon />,
-    onClick: () => navigate(`${home}/QRcode`), },
+    onClick: () => navigate(`${home}/qr-code`), },
     { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 

@@ -67,11 +67,11 @@ function QRCodeDisplay(props) {
     <Card>
       <CardContent>
         <Typography variant="h5" align="left" gutterBottom component="div">
-          {props.auth.userData.first_name} {props.auth.userData.last_name}'s QR Code
+          {props.auth.userData.first_name}'s QR Code
         </Typography>
         <Divider />
         <Box m={3} pt={4}>
-          <QRCode id="QRCode" value={`${base_url}/qr_code/${patient_uri}`} />
+          <QRCode id="QRCode" value={`${base_url}/qr-code/${patient_uri}`} />
         </Box>
         <Divider />
         <Box m={3} pt={2}>
@@ -88,6 +88,8 @@ QRCodeDisplay.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({ auth: state.authReducer });
+const mapStateToProps = (state) => ({
+  auth: state.authReducer
+});
 
 export default connect(mapStateToProps)(QRCodeDisplay);
