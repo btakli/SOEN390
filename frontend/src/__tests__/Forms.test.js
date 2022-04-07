@@ -6,11 +6,22 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 
+import AddressForm from "../components/forms/AddressForm";
 import ContactForm from "../components/forms/ContactForm";
 import PersonForm from "../components/forms/PersonForm";
 import StatusForm from "../components/forms/StatusForm";
-import DoctorReportForm from "../components/forms/reports/DoctorReportForm";
-import PatientReportForm from "../components/forms/reports/PatientReportForm";
+import DoctorReportForm from "../components/forms/DoctorReportForm";
+import PatientReportForm from "../components/forms/PatientReportForm";
+
+test("renders without error", () => {
+    render(
+      <Provider store={store}>
+        <Router>
+          <AddressForm />
+        </Router>
+      </Provider>
+    );
+  });
 
 test("does not render without auth", () => {
   try {
