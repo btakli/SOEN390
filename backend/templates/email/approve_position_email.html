@@ -17,7 +17,7 @@ http://{{domain}}{% url 'media' path='error/no_proof.jpg' %}
 
 Please click on the following link to approve their account if appropriate.
 
-http://{{domain}}{% url 'accounts:approve_position' user_id=user_id %}
+http://{{domain}}{% url 'accounts:approve_{{position}}' user_id=user_id %}
 
 
 {% endautoescape %}
