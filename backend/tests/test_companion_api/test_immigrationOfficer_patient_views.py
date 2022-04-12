@@ -1,12 +1,12 @@
 from .test_setup import TestSetUp
 from accounts.models import Patient, Doctor
 
-class TestDoctorPatientViews(TestSetUp):
-    """Test suite for views related to Doctor Patients"""
+class TestImmigrationOfficerImmigrantViews(TestSetUp):
+    """Test suite for views related to Immigration Officer Immigrants"""
 
-    # DOCTOR PATIENT TESTS
-    def test_doctor_can_get_all_patients_when_no_patients(self):
-        """Doctor_Patient: Doctor can get their patients when there are none"""
+    # IMMIGRATION OFFICER IMMIGRANT TESTS
+    def test_immigrationofficer_can_get_all_immigrants_when_no_immigrants(self):
+        """ImmigrationOfficer_Immigrant: Immigration Officer can get their immigrants when there are none"""
 
         res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + res.data['token'])
@@ -16,8 +16,8 @@ class TestDoctorPatientViews(TestSetUp):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(res.data), 0)
 
-    def test_doctor_can_get_all_patients_when_one_patient(self):
-        """Doctor_Patient: Doctor can get their patients when there is one"""
+    def test_immigrationofficer_can_get_all_immigrants_when_one_immigrant(self):
+        """ImmigrationOfficer_Immigrant: Immigration Officer can get their immigrants when there is one"""
 
         res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
         
@@ -33,8 +33,8 @@ class TestDoctorPatientViews(TestSetUp):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(res.data), 1)
     
-    def test_doctor_can_get_all_patients_when_n_patients(self):
-        """Doctor_Patient: Doctor can get their patients when there are n"""
+    def test_immigrationofficer_can_get_all_immigrants_when_n_immigrants(self):
+        """ImmigrationOfficer_Immigrant: Immigration Officer can get their immigrants when there are n"""
 
         res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
         doctor_pk = res.data['user']['id']

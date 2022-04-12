@@ -309,8 +309,7 @@ class ReassignPatientsToTempDoctorView(generics.GenericAPIView):
       
 class AppointmentView(viewsets.ModelViewSet):
     """Appointment View"""
-
-    # only authenticated users can see their patients
+    
     permission_classes = [permissions.IsAuthenticated]
     
     serializer_class = AppointmentSerializer
@@ -324,7 +323,6 @@ class AppointmentView(viewsets.ModelViewSet):
 class AvailabilityView(viewsets.ModelViewSet):
     """Availability View"""
 
-    # only authenticated users can see their patients
     permission_classes = [permissions.IsAuthenticated]
     
     serializer_class = AvailabilitySerializer
