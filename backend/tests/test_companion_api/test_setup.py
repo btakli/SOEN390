@@ -68,7 +68,7 @@ class TestSetUp(APITestCase):
             "streetNumber": self.fake.building_number(),
             "streetName": self.fake.street_name(),
             "city": self.fake.city(),
-            "province": self.fake.country(),
+            "province": self.fake.word(ext_word_list=['Quebec', 'Alberta', 'Ontario', 'Saskatchewan']),
             "postalCode": self.fake.postcode()
         }
 
@@ -77,7 +77,7 @@ class TestSetUp(APITestCase):
             "streetNumber": self.fake.building_number(),
             "streetName": self.fake.street_name(),
             "city": self.fake.city(),
-            "province": self.fake.country(),
+            "province": self.fake.word(ext_word_list=['Quebec', 'Alberta', 'Ontario', 'Saskatchewan']),
             "postalCode": self.fake.postcode()
         }
 
@@ -86,7 +86,7 @@ class TestSetUp(APITestCase):
             "streetNumber": self.fake.building_number(),
             "streetName": self.fake.street_name(),
             "city": self.fake.city(),
-            "province": self.fake.country(),
+            "province": self.fake.word(ext_word_list=['Quebec', 'Alberta', 'Ontario', 'Saskatchewan']),
             "postalCode": self.fake.postcode()
         }
 
