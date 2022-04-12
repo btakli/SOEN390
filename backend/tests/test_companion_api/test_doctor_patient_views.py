@@ -56,3 +56,20 @@ class TestDoctorPatientViews(TestSetUp):
         
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(res.data), 3)
+
+    def test_patient_can_get_their_doctor(self):
+        """Doctor_Patient: Patient can get their doctor"""
+
+        res = self.client.post(self.register_patient_url, self.correct_patient_data, format='json')
+        
+        patient_pk = res.data['user']['id']
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + res.data['token'])
+
+        res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
+        doctor_pk = res.data['user']['id']
+        Doctor.objects.get(user_id=doctor_pk).patients.add(Patient.objects.get(user_id=patient_pk))
+
+        res = self.client.get(self.doctor_url)
+        
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data['first_name'], self.correct_doctor_data['first_name'])
