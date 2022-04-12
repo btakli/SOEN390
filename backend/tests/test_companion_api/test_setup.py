@@ -10,7 +10,7 @@ class TestSetUp(APITestCase):
 
     def setUp(self):
         self.register_doctor_url = reverse("accounts:register_doctor_test")
-        self.register_immigration_officer_url = reverse("accounts:register_immigration_officer")
+        self.register_immigration_officer_url = reverse("accounts:register_immigration_officer_test")
         self.register_patient_url = reverse("accounts:register_patient")
         self.login_doctor_url = reverse("accounts:login_doctor")
         self.login_immigration_officer_url = reverse("accounts:login_immigration_officer")
@@ -36,8 +36,6 @@ class TestSetUp(APITestCase):
         self.patients_url = reverse("companion_api:doctor_patients")
         self.doctor_url = reverse("companion_api:patient_doctor")
         self.officer_immigrants_url = reverse("companion_api:officer_immigrants")
-
-
 
         self.fake = Faker()
 
@@ -191,6 +189,16 @@ class TestSetUp(APITestCase):
         # DOCTOR DATA
 
         self.correct_doctor_data = {
+            'first_name': self.fake.first_name(),
+            'user': {
+               'email': self.fake.email(),
+                'password': self.fake.password() 
+            }
+        }
+
+        # IMMIGRATION OFFICER DATA
+
+        self.correct_immigration_officer_data = {
             'first_name': self.fake.first_name(),
             'user': {
                'email': self.fake.email(),
