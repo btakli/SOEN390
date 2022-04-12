@@ -3,7 +3,7 @@ from .test_setup import TestSetUp
 class TestAddressViews(TestSetUp):
     """Test suite for views related to Address"""
 
-    # ALL STATUS TESTS
+    # ALL ADDRESS TESTS
     def test_patient_cannot_get_addresses_when_no_address(self):
         """Address: Patient cannot get their addresses when there are none"""
 
@@ -39,6 +39,9 @@ class TestAddressViews(TestSetUp):
         self.client.post(self.create_address_url, self.address_data_3, format='json')
 
         res = self.client.get(self.list_address_url)
+
+        # import pdb
+        # pdb.set_trace()
         
         self.assertEqual(res.status_code, 200)
         self.assertEqual(len(res.data), 3)

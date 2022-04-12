@@ -5,8 +5,10 @@ from faker import Faker
 class TestSetUp(APITestCase):
 
     def patient_latest_status_url(self, pk):
-        # return f'/api/doctor/patient/status/latest/{pk}/'
         return reverse("companion_api:patient_latest_status", kwargs={'pk':pk})
+
+    def toggle_priority_url(self, pk):
+        return reverse("companion_api:toggle_priority", kwargs={'pk':pk})
 
     def setUp(self):
         self.register_doctor_url = reverse("accounts:register_doctor_test")
@@ -15,7 +17,6 @@ class TestSetUp(APITestCase):
         self.login_doctor_url = reverse("accounts:login_doctor")
         self.login_immigration_officer_url = reverse("accounts:login_immigration_officer")
         self.login_patient_url = reverse("accounts:login_patient")
-
 
         self.list_status_url = reverse("companion_api:status-list")
         self.create_status_url = reverse("companion_api:status-list")
@@ -26,7 +27,6 @@ class TestSetUp(APITestCase):
         self.list_availability_url = reverse("companion_api:availability-list")
         self.create_availability_url = reverse("companion_api:availability-list")
 
-
         self.list_notification_url = reverse("companion_api:notification-list")
         self.create_notification_url = reverse("companion_api:notification-list")
 
@@ -36,6 +36,8 @@ class TestSetUp(APITestCase):
         self.patients_url = reverse("companion_api:doctor_patients")
         self.doctor_url = reverse("companion_api:patient_doctor")
         self.officer_immigrants_url = reverse("companion_api:officer_immigrants")
+
+        self.toggle_doctor_is_away_url = reverse("companion_api:toggle_is_away")
 
         self.fake = Faker()
 
@@ -62,7 +64,7 @@ class TestSetUp(APITestCase):
         # ADDRESS DATA
 
         self.address_data_1 = {
-            "name": self.fake.company(),
+            "name": self.fake.word(ext_word_list=['Olimpico', 'IGA', 'Hospital', 'Park']),
             "streetNumber": self.fake.building_number(),
             "streetName": self.fake.street_name(),
             "city": self.fake.city(),
@@ -71,7 +73,7 @@ class TestSetUp(APITestCase):
         }
 
         self.address_data_2 = {
-            "name": self.fake.company(),
+            "name": self.fake.word(ext_word_list=['Olimpico', 'IGA', 'Hospital', 'Park']),
             "streetNumber": self.fake.building_number(),
             "streetName": self.fake.street_name(),
             "city": self.fake.city(),
@@ -80,7 +82,7 @@ class TestSetUp(APITestCase):
         }
 
         self.address_data_3 = {
-            "name": self.fake.company(),
+            "name": self.fake.word(ext_word_list=['Olimpico', 'IGA', 'Hospital', 'Park']),
             "streetNumber": self.fake.building_number(),
             "streetName": self.fake.street_name(),
             "city": self.fake.city(),

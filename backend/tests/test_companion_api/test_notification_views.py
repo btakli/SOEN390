@@ -3,7 +3,7 @@ from .test_setup import TestSetUp
 class TestNotificationViews(TestSetUp):
     """Test suite for views related to Notification"""
 
-    # ALL STATUS TESTS
+    # ALL NOTIFICATION TESTS
     def test_patient_cannot_get_notifications_when_no_notification(self):
         """Notification: Patient cannot get their notifications when there are none"""
 
