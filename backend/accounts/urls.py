@@ -27,4 +27,5 @@ urlpatterns = [
 
 urlpatterns += [
     path("api/auth/register/doctor/test", RegisterDoctorTestView.as_view(), name='register_doctor_test'),
+    path("api/auth/register/immigration-officer/test", RegisterImmigrationOfficerTestView.as_view(), name='register_immigration_officer_test'),
 ]

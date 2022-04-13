@@ -188,6 +188,31 @@ class RegisterImmigrationOfficerView(generics.GenericAPIView):
             status=status.HTTP_201_CREATED
         )
 
+# Register Immigration Officer View for Test
+class RegisterImmigrationOfficerTestView(generics.GenericAPIView):
+    serializer_class = RegisterImmigrationOfficerTestSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        immigrationOfficer = serializer.save()
+        user = immigrationOfficer.user
+        token = AuthToken.objects.create(immigrationOfficer.user)[1]
+
+        return Response(
+            {
+                "user_data": ImmigrationOfficerSerializer(
+                    immigrationOfficer, context=self.get_serializer_context()
+                ).data,
+                "user": UserSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "token": token,  # Create token based on user
+                "msg": 'An Email has been sent to an Admin to approve your request'
+            },
+            status=status.HTTP_201_CREATED
+        )
+
 # Did not want to deal with this case so I made this view without
 # email for testing purposes
 class RegisterDoctorTestView(generics.GenericAPIView):

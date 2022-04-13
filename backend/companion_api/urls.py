@@ -29,6 +29,7 @@ urlpatterns = [
 
     path("api/doctor/patient/status/latest/<int:pk>/", SpecificLatestStatusView.as_view(), name='patient_latest_status'), 
 
+    # Too annoying to test for now (if there is time do this)
     path("api/patients/at-risk/", PatientsWithMatchingAddressView.as_view(), name="patients_risk"),
     path("api/reassign/<int:doc>/<int:tempdoc>/<yyyy:startdate>/<yyyy:enddate>/", ReassignPatientsToTempDoctorView.as_view(), name="reassign_patients")
 ]
