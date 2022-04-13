@@ -1,11 +1,9 @@
-import { React } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import InfectionsPerWeekGraph from "../../components/graphs/InfectionsPerWeekGraph";
 import InfectionsPerTypeGraph from "../../components/graphs/InfectionsPerTypeGraph";
-
-import WelcomeBack from "../../components/layout/WelcomeBack";
 
 import AppointmentTable from "../../components/tables/AppointmentTable";
 import AvailabilityForm from "../../components/forms/AvailabilityForm";
@@ -21,10 +19,6 @@ import {
 
 function Dashboard(props){
 
-  if(props.auth.user.is_doctor && props.auth.userData.is_away){
-    return <WelcomeBack/>
-  }
-  else{
     return (
       <Card>
           <CardContent>
@@ -66,7 +60,6 @@ function Dashboard(props){
           </CardContent>
       </Card>
     )
-  }
 }
 
 Dashboard.propTypes = {

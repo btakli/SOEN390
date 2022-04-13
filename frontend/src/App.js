@@ -4,6 +4,7 @@ import "./App.css";
 
 import NoMatch from "./pages/NoMatch";
 import PrivateRoute from "./components/PrivateRoute";
+import DoctorIsAway from "./components/DoctorIsAway";
 
 // AUTH
 import PreLogin from "./pages/auth/PreLogin";
@@ -27,6 +28,7 @@ import RequestHelp from "./pages/RequestHelpPage/RequestHelp";
 import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 import PatientAppointment from "./pages/home/PatientAppointment";
+import WelcomeBack from "./pages/home/WelcomeBack";
 
 function App() {
   const homePath = "/";
@@ -40,17 +42,23 @@ function App() {
             element={<PrivateRoute redirect={"/pre/login"} />}
           >
             <Route path="" element={<Home home={homePath} />}>
-              <Route index element={<Dashboard />} />
-              <Route path="dashboard" element={<Dashboard />} />
+              <Route
+                path={homePath}
+                element={<DoctorIsAway redirect={"doctor/welcome-back"} />}
+              >
+                <Route index element={<Dashboard />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="patients" element={<Patients />} />
+                <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
+                <Route path="doctor/appointments" element={<Dashboard />} />
+              </Route>
+
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
-              <Route path="patients" element={<Patients />} />
               <Route path="immigrants" element={<Immigrants />} />
               <Route path="rapid-test-result" element={<RapidTest />} />
               <Route path="qr-code" element={<QRCodeDisplay />} />
-              <Route path="qr-code/:patient_uri" element={<QRCodeInfo />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />
-              <Route path="doctor/appointments" element={<Dashboard />} />
               <Route path="patient/usaCovidAPI" element={<CovidAPI />} />
               <Route path="patient/requestHelp" element={<RequestHelp />} />
               <Route path="*" element={<NoMatch />} />
