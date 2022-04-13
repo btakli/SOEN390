@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 import { loadUser } from "./redux/actions/authActions";
-import Alerts from "./components/layout/Alerts";
+import AuthAlerts from "./components/layout/AuthAlerts";
 
 function Root() {
   const alertOptions = {
@@ -27,8 +27,7 @@ function Root() {
     <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...alertOptions}>
         <React.StrictMode>
-          {/* For the alerts... have different alerts for here and then inside Home */}
-          {/* <Alerts /> */}
+          <AuthAlerts />
           <App />
         </React.StrictMode>
       </AlertProvider>

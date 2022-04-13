@@ -13,7 +13,7 @@ class TestSetUp(APITestCase):
     def setUp(self):
         self.register_doctor_url = reverse("accounts:register_doctor_test")
         self.register_immigration_officer_url = reverse("accounts:register_immigration_officer_test")
-        self.register_patient_url = reverse("accounts:register_patient")
+        self.register_patient_url = reverse("accounts:register_patient_test")
         self.login_doctor_url = reverse("accounts:login_doctor")
         self.login_immigration_officer_url = reverse("accounts:login_immigration_officer")
         self.login_patient_url = reverse("accounts:login_patient")
