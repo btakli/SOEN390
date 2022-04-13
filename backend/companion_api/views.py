@@ -276,11 +276,16 @@ class ReassignPatientsToTempDoctorView(generics.GenericAPIView):
         permissions.IsAdminUser
     ]
 
+    serializer_class = ReassignSerializer
+
     def put(self, request, *args, **kwargs):
-        did = self.kwargs['doc']
-        tdid = self.kwargs['tempdoc']
-        start_date = self.kwargs['startdate']
-        end_date = self.kwargs['enddate']
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        did = serializer.validated_data["doctor"]
+        tdid = serializer.validated_data["temp_doctor"]
+        start_date = str(serializer.validated_data['start_date'])
+        end_date = str(serializer.validated_data['end_date'])
         
         try:
             tempDoctor = Doctor.objects.get(user_id=tdid)
@@ -299,7 +304,11 @@ class ReassignPatientsToTempDoctorView(generics.GenericAPIView):
                 )
                 n.save()
         except:
-            pass
+            return Response(
+                {
+                    "msg": "Something went wrong"
+                }
+            )
           
         return Response(
             {
