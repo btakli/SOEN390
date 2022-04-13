@@ -154,7 +154,7 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, data):
         user = authenticate(**data) # checks if valid or active
 
-        if user:
+        if user and user.is_email_verified and not user.is_pending_approval:
             return user
         else:
             try:
