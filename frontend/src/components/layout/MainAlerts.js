@@ -51,6 +51,7 @@ function MainAlerts(props) {
             if (props.message.emailSent) props.alert.success(props.message.emailSent);
             if (props.message.emailSent) props.alert.success(props.message.emailSent);
             if (props.message.deleteNotif) props.alert.success(props.message.deleteNotif);
+            if (props.message.saveAvails) props.alert.success(props.message.saveAvails);
 
             props.removeMessages();
         }

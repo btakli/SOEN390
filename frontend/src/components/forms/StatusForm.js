@@ -5,8 +5,8 @@ import { addStatus, getAllStatus, getLatestStatus } from '../../redux/actions/st
 import { getAtRiskPatients } from '../../redux/actions/addressActions';
 
 // MUI
-import Box from "@mui/material/Box";
 import {
+  Box,
   Checkbox,
   Grid,
   Paper,

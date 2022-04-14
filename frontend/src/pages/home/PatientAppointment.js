@@ -2,12 +2,10 @@ import { React } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import AvailabilityForm from "../../components/forms/AvailabilityForm";
+import AppointmentForm from "../../components/forms/AppointmentForm";
 
 import {
-    Box,
     Typography,
-    Grid,
     Card,
     CardContent,
     Divider,
@@ -16,7 +14,7 @@ import {
 function PatientAppointment(props){
 
   return (
-    <Card>
+    <Card align="center">
         <CardContent>
             <Typography
             variant="h5"
@@ -29,7 +27,7 @@ function PatientAppointment(props){
 
             <Divider />
             
-            <AvailabilityForm />
+            <AppointmentForm />
         </CardContent>
     </Card>
   )
