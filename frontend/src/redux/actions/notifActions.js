@@ -24,9 +24,6 @@ export const deleteNotification = (id) => (dispatch, getState) => {
 
     axios.delete(`http://localhost:8000/api/notification/${id}/`, config)
         .then(res => {
-            dispatch(createMessage({
-                deleteNotif: 'Notification Deleted'
-            }));
             dispatch({
                 type: DELETE_NOTIF,
                 payload: id
