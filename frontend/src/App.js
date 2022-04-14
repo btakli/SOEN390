@@ -4,6 +4,7 @@ import "./App.css";
 
 import NoMatch from "./pages/NoMatch";
 import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 import DoctorIsAway from "./components/DoctorIsAway";
 
 // AUTH
@@ -28,7 +29,7 @@ import RequestHelp from "./pages/RequestHelpPage/RequestHelp";
 import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 import PatientAppointment from "./pages/home/PatientAppointment";
-import WelcomeBack from "./pages/home/WelcomeBack";
+
 
 function App() {
   const homePath = "/";
@@ -36,16 +37,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          {/* Home Page and Outlets */}
-          <Route
-            path={homePath}
-            element={<PrivateRoute redirect={"/pre/login"} />}
-          >
-            <Route path="" element={<Home home={homePath} />}>
-              <Route
-                path={homePath}
-                element={<DoctorIsAway redirect={"doctor/welcome-back"} />}
-              >
+          <Route path={homePath} element={<PrivateRoute redirect={"/pre/login"} />} >
+            <Route path="" element={<Home home={homePath} />} >
+              <Route path={homePath} element={<DoctorIsAway />} >
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="patients" element={<Patients />} />
@@ -66,32 +60,16 @@ function App() {
           </Route>
 
           {/* Login and Register Pages */}
-          <Route path="/pre/login" element={<PreLogin />} />
-          <Route
-            path="/patient/login"
-            element={<PatientLogin redirect={homePath} />}
-          />
-          <Route
-            path="/doctor/login"
-            element={<DoctorLogin redirect={homePath} />}
-          />
-          <Route
-            path="/immigration-officer/login"
-            element={<ImmigrationOfficerLogin redirect={homePath} />}
-          />
-          <Route
-            path="/patient/signup"
-            element={<PatientSignUp redirect={homePath} />}
-          />
-          <Route
-            path="/doctor/signup"
-            element={<DoctorSignUp redirect={homePath} />}
-          />
-          <Route
-            path="/immigration-officer/signup"
-            element={<ImmigrationOfficerSignUp redirect={homePath} />}
-          />
-
+          <Route path={homePath} element={<PublicRoute redirect={homePath} />} >
+            <Route path="pre/login" element={<PreLogin />} />
+            <Route path="patient/login" element={<PatientLogin />} />
+            <Route path="doctor/login" element={<DoctorLogin />} />
+            <Route path="immigration-officer/login" element={<ImmigrationOfficerLogin />} />
+            <Route path="patient/signup" element={<PatientSignUp />} />
+            <Route path="doctor/signup" element={<DoctorSignUp />} />
+            <Route path="immigration-officer/signup" element={<ImmigrationOfficerSignUp />} />
+          </Route>
+          
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </Router>
