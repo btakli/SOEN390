@@ -9,6 +9,7 @@ const initialState = {
 // this reducers name in the index file when we import
 export default function(state=initialState, action){
     switch (action.type){
+        case GET_PATIENT_LATEST_STATUS:
         case GET_LATEST_STATUS:
             return {
                 ...state,

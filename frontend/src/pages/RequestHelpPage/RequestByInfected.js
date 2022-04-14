@@ -2,9 +2,11 @@ import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser";
-import { getAllStatus } from "../../redux/actions/statusActions";
+import { getAllStatus, getLatestStatus } from "../../redux/actions/statusActions";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+// MUI
 import {
   Box,
   Button,
@@ -25,21 +27,6 @@ const theme = createTheme({
   },
 });
 
-function getLatestStatus(statusArr) {
-  let latestDate = new Date("2000");
-  let latestStatus = {};
-
-  statusArr.forEach((status) => {
-    const date = new Date(status.date);
-    if (date > latestDate) {
-      latestDate = date;
-      latestStatus = status;
-    }
-  });
-
-  return latestStatus;
-}
-
 function isEmpty(obj) {
   for (var prop in obj) {
     if (obj.hasOwnProperty(prop)) {
@@ -55,18 +42,16 @@ function RequestByInfected(props) {
 
   useEffect(() => {
     props.getAllStatus();
+    props.getLatestStatus();
   }, []);
 
   useEffect(() => {
-    if (props.allStatus.length != 0) {
-      const latestStatus = getLatestStatus(props.allStatus);
-      if (!isEmpty(latestStatus) && latestStatus.status === "Infected") {
-        setIsNotInfected(true); // when the patient is not infected then button is disabled
-      } else {
-        setIsNotInfected(false); // when the patient is infected then the button is disabled
-      }
+    if (!isEmpty(props.status.latestStatus) && props.status.latestStatus.status === "Infected"){
+      setIsNotInfected(true); // when the patient is not infected then button is disabled
+    } else {
+      setIsNotInfected(false); // when the patient is infected then the button is disabled
     }
-  }, [props.allStatus]);
+  }, [props.status.latestStatus]);
 
   const handleClose = () => {
     setOpen(false);
@@ -162,12 +147,12 @@ function RequestByInfected(props) {
 }
 
 RequestByInfected.propTypes = {
-  allStatus: PropTypes.array.isRequired,
+  status: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
-  allStatus: state.statusReducer.allStatus,
+  status: state.statusReducer,
 });
 
-export default connect(mapStateToProps, { getAllStatus })(RequestByInfected);
+export default connect(mapStateToProps, { getAllStatus, getLatestStatus })(RequestByInfected);

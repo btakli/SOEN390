@@ -23,6 +23,8 @@ urlpatterns = [
     path("api/toggle/priority/<int:pk>/", TogglePriorityView.as_view(), name='toggle_priority'),
     path("api/toggle/is-away/", ToggleAwayView.as_view(), name='toggle_is_away'),
 
+    # Not tested yet
+    path("api/patient/status/latest/", LatestStatusView.as_view(), name='latest_status'),
     path("api/doctor/patient/status/latest/<int:pk>/", SpecificLatestStatusView.as_view(), name='patient_latest_status'), 
 
     # Too annoying to test for now (if there is time do this)
