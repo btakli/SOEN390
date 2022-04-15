@@ -3,6 +3,8 @@ import { withAlert } from 'react-alert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { removeMessages, removeErrors } from "../../redux/actions/messageActions";
+
 function AuthAlerts(props) {
 
     const updateRef = useRef(true);
@@ -17,8 +19,14 @@ function AuthAlerts(props) {
             if (props.error.msg.non_field_errors) {
                 props.alert.error(props.error.msg.non_field_errors.join());
             }
+            if (props.error.msg.user) {
+                if (props.error.msg.user.email) {
+                    props.alert.error(props.error.msg.user.email.join());
+                }
+            }
             // Check if there is even an error to flag
             // if (props.error.status) props.alert.error("ERROR FOUND");
+            props.removeErrors();
         }
 
     }, [props.error]);
@@ -30,6 +38,8 @@ function AuthAlerts(props) {
             // actual update code
             // Check if the payloads are there
             if (props.message.passwordsDoNotMatch) props.alert.error(props.message.passwordsDoNotMatch);
+
+            props.removeMessages();
         }
 
     }, [props.message]);
@@ -50,4 +60,4 @@ const mapStateToProps = state => ({
     message: state.messageReducer
 });
 
-export default connect(mapStateToProps)(withAlert()(AuthAlerts));
+export default connect(mapStateToProps, { removeMessages, removeErrors })(withAlert()(AuthAlerts));

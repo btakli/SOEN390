@@ -65,9 +65,9 @@ function App() {
             <Route path="patient/login" element={<PatientLogin />} />
             <Route path="doctor/login" element={<DoctorLogin />} />
             <Route path="immigration-officer/login" element={<ImmigrationOfficerLogin />} />
-            <Route path="patient/signup" element={<PatientSignUp />} />
-            <Route path="doctor/signup" element={<DoctorSignUp />} />
-            <Route path="immigration-officer/signup" element={<ImmigrationOfficerSignUp />} />
+            <Route path="patient/signup" element={<PatientSignUp redirect={"/pre/login"} />} />
+            <Route path="doctor/signup" element={<DoctorSignUp redirect={"/pre/login"} />} />
+            <Route path="immigration-officer/signup" element={<ImmigrationOfficerSignUp redirect={"/pre/login"} />} />
           </Route>
           
           <Route path="*" element={<NoMatch />} />
