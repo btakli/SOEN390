@@ -112,19 +112,22 @@ class TestSetUp(APITestCase):
         self.appointment_data_1 = {
             "patient": 0,
             "doctor": 0,
-            "date": "2022-11-27 10:00"
+            "start": "2022-10-20 8:00",
+            "end": "2022-10-20 10:00"
         }
 
         self.appointment_data_2 = {
             "patient": 0,
             "doctor": 0,
-            "date": "2022-10-27 14:00"
+            "start": "2022-10-20 8:00",
+            "end": "2022-10-20 10:00"
         }
 
         self.appointment_data_3 = {
             "patient": 0,
             "doctor": 0,
-            "date": "2022-10-20 8:00"
+            "start": "2022-10-20 8:00",
+            "end": "2022-10-20 10:00"
         }
 
         # STATUS DATA

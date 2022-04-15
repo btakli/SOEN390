@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { returnErrors } from './messageActions';
 import { tokenConfig } from './authActions';
-import { GET_PATIENTS, UPDATE_PATIENT_PRIORITY, GET_DOCTOR } from './types';
+import { GET_PATIENTS, GET_DOCTOR } from './types';
 
 // GET PERSONS API CALL
 export const getPatients = () => (dispatch, getState) => {

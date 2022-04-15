@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { addStatus, getAllStatus } from '../../redux/actions/statusActions';
+import { addStatus, getAllStatus, getLatestStatus } from '../../redux/actions/statusActions';
 import { getAtRiskPatients } from '../../redux/actions/addressActions';
 
 // MUI
-import Box from "@mui/material/Box";
 import {
+  Box,
   Checkbox,
   Grid,
   Paper,
@@ -17,30 +17,32 @@ import {
   TableCell,
   TableBody,
   Button,
+  InputLabel,
+  MenuItem,
+  Select
 } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 
-function getLatestStatus(statusArr) {
-  let latestDate = new Date('2000');
-  let latestStatus = {};
+// Keeping this if needed in the future
+// function _getLatestStatus(statusArr) {
+//   let latestDate = new Date('2000');
+//   let latestStatus = {};
 
-  statusArr.forEach( status => {
-    const date = new Date(status.date);
-    if(date > latestDate){
-      latestDate = date;
-      latestStatus = status;
-    }
-  });
+//   statusArr.forEach( status => {
+//     const date = new Date(status.date);
+//     if(date > latestDate){
+//       latestDate = date;
+//       latestStatus = status;
+//     }
+//   });
 
-  return latestStatus;
-}
+//   return latestStatus;
+// }
 
 function isEmpty(obj) {
-  for(var prop in obj) {
-      if(obj.hasOwnProperty(prop))
-          return false;
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
+    }
   }
   return true;
 }
@@ -89,15 +91,15 @@ function StatusForm(props) {
   // When page loads get all the Status from backend
   useEffect(() => {
     props.getAllStatus();
+    props.getLatestStatus();
   }, []);
 
   // When latest status is loaded in, update the form to latest status
   useEffect(() => {
-    if (props.allStatus.length != 0){
-      const latestStatus = getLatestStatus(props.allStatus);
-      setState((!isEmpty(latestStatus)) ? latestStatus : emptyForm);
+    if (!isEmpty(props.status.latestStatus)){
+      setState(props.status.latestStatus);
     }
-  }, [props.allStatus]);
+  }, [props.status.latestStatus]);
 
   // Change form data in state at each change
   const handleChange = (e) => {
@@ -117,7 +119,6 @@ function StatusForm(props) {
     if(state.status == 'Infected'){
       props.getAtRiskPatients();
     }
-
 
     window.scrollTo(0, 0);
   };
@@ -200,19 +201,17 @@ function StatusForm(props) {
           SAVE
         </Button>
       </Box>
-    </Fragment>
-    
-        
+    </Fragment>   
   );
 }
 
 StatusForm.propTypes = {
   addStatus: PropTypes.func.isRequired,
-  allStatus: PropTypes.array.isRequired
+  status: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  allStatus: state.statusReducer.allStatus
+  status: state.statusReducer
 });
 
-export default connect(mapStateToProps, { addStatus, getAllStatus, getAtRiskPatients })(StatusForm);
+export default connect(mapStateToProps, { addStatus, getAllStatus, getLatestStatus, getAtRiskPatients })(StatusForm);

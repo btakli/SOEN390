@@ -3,6 +3,12 @@
 from rest_framework import serializers
 from .models import *
 
+class ReassignSerializer(serializers.Serializer):
+    doctor = serializers.IntegerField()
+    temp_doctor = serializers.IntegerField()
+    start_date = serializers.DateField()
+    end_date = serializers.DateField()
+
 
 class PersonSerializer(serializers.ModelSerializer):
     """Person Serializer"""

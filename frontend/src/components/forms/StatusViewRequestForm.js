@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import StatusTable from "../tables/StatusTable";
-import { getLatestStatus } from '../../redux/actions/statusActions';
+import { getPatientLatestStatus } from '../../redux/actions/statusActions';
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -29,7 +29,7 @@ const StatusViewRequestForm = (props) => {
 
   useEffect(() => {
     if(patientId && patientId != 0){
-      props.getLatestStatus(patientId);
+      props.getPatientLatestStatus(patientId);
       setPatient(currentPatient(patientId, props.patients));
     }
   }, [patientId]);
@@ -152,4 +152,4 @@ const mapStateToProps = (state) => ({
   patients: state.patientReducer.patients
 });
 
-export default connect(mapStateToProps, { getLatestStatus })(StatusViewRequestForm);
+export default connect(mapStateToProps, { getPatientLatestStatus })(StatusViewRequestForm);

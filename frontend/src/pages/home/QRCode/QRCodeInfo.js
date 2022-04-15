@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { getPatients } from "../../../redux/actions/patientActions";
-import { getLatestStatus } from "../../../redux/actions/statusActions";
+import { getPatientLatestStatus } from "../../../redux/actions/statusActions";
 
 import PropTypes from "prop-types";
 
@@ -50,7 +50,7 @@ function QRCodeInfo(props) {
 
   useEffect(() => {
     props.getPatients();
-    props.getLatestStatus(patientId);
+    props.getPatientLatestStatus(patientId);
   }, [patientId]);
 
   const { patient_uri } = useParams();
@@ -140,6 +140,6 @@ const mapStateToProps = (state) => ({
   status: state.statusReducer.latestStatus,
 });
 
-export default connect(mapStateToProps, { getPatients, getLatestStatus })(
+export default connect(mapStateToProps, { getPatients, getPatientLatestStatus })(
   QRCodeInfo
 );

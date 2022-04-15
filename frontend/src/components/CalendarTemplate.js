@@ -13,12 +13,7 @@ import {
 
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 
-const CalendarTemplate = ({
-  availability,
-  setAvailability,
-  startTime = "8:00",
-  endTime = "20:00",
-}) => {
+function CalendarTemplate({ availability, setAvailability, startTime = "8:00", endTime = "20:00", }){
 
   const useMonths = (year) => ({
     1: {
