@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import AppointmentForm from "../../components/forms/AppointmentForm";
+import PatientAppointmentTable from "../../components/tables/PatientAppointmentTable";
 
 import {
     Typography,
     Card,
     CardContent,
     Divider,
+    Grid
   } from "@mui/material";
 
 function PatientAppointment(props){
@@ -26,8 +28,21 @@ function PatientAppointment(props){
             </Typography>
 
             <Divider />
-            
-            <AppointmentForm />
+
+            <Grid 
+              container
+              sx={{pt: 3}}
+            >
+              
+              <Grid item xs={6} md={6}>
+                <AppointmentForm />
+              </Grid>
+
+              <Grid item xs={6} md={6}>
+                <PatientAppointmentTable />
+              </Grid>
+
+            </Grid>
         </CardContent>
     </Card>
   )

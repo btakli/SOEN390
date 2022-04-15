@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import InfectionsPerWeekGraph from "../../components/graphs/InfectionsPerWeekGraph";
 import InfectionsPerTypeGraph from "../../components/graphs/InfectionsPerTypeGraph";
 
-import AppointmentTable from "../../components/tables/AppointmentTable";
+import DoctorAppointmentTable from "../../components/tables/DoctorAppointmentTable";
 import AvailabilityForm from "../../components/forms/AvailabilityForm";
 
 import {
@@ -37,10 +37,9 @@ function Dashboard(props){
           { props.auth.user.is_doctor ?
               <Grid 
                   container
-                  alignItems="center"
               >
                   <Grid item xs={6} md={6}>
-                      <AppointmentTable />
+                      <DoctorAppointmentTable />
                   </Grid>
 
                   <Grid item xs={6} md={6}>

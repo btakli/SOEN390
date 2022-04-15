@@ -41,9 +41,12 @@ export const addNotification = (notif) => (dispatch, getState) => {
             dispatch(createMessage({
                 addNotif: 'Notification Added'
             }));
-            dispatch({
-                type: ADD_NOTIF,
-                payload: res.data
-            });
+            axios.get('http://localhost:8000/api/notification/', config)
+                .then(res => {
+                    dispatch({
+                        type: GET_NOTIFS,
+                        payload: res.data
+                    });
+                }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }

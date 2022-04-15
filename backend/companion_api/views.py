@@ -151,7 +151,10 @@ class NotificationView(viewsets.ModelViewSet):
         return self.request.user.notifications.all()
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        if ("user" in self.request.data):
+            serializer.save(user=User.objects.get(id=self.request.data["user"]))
+        else:
+            serializer.save(user=self.request.user)
 
 class AddressView(viewsets.ModelViewSet):
     # only authenticated users can get access

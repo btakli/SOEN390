@@ -52,6 +52,8 @@ function MainAlerts(props) {
             if (props.message.emailSent) props.alert.success(props.message.emailSent);
             if (props.message.deleteNotif) props.alert.success(props.message.deleteNotif);
             if (props.message.saveAvails) props.alert.success(props.message.saveAvails);
+            if (props.message.bookAppointment) props.alert.success(props.message.bookAppointment);
+            if (props.message.cancelAppointment) props.alert.success(props.message.cancelAppointment);
 
             props.removeMessages();
         }

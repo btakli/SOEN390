@@ -2,14 +2,15 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getAvailabilities } from "../../redux/actions/availabilityActions";
+import { getAppointments, addAppointment } from "../../redux/actions/appointmentActions";
+import { createMessage } from "../../redux/actions/messageActions";
+import { addNotification } from "../../redux/actions/notifActions";
 
 import moment from "moment";
 
 // MUI
 import {
     Box,
-    Checkbox,
-    Grid,
     Paper,
     Table,
     TableContainer,
@@ -18,9 +19,6 @@ import {
     TableCell,
     TableBody,
     Button,
-    InputLabel,
-    MenuItem,
-    Select
   } from "@mui/material";
 
   const convertAvailabilityFromDatabase = (availability) => {
@@ -191,107 +189,107 @@ import {
     })
   };
 
+  const getFormattedDate = (date) => {
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const time = `${date.getHours()}:${date.getMinutes() <= 9 ? '0' + date.getMinutes() : date.getMinutes()}`;
+
+    return (`${month} ${day}, ${year} @ ${time}`);
+  };
+
 function AppointmentForm(props){    
-      // Store form data in state
-      const [avail, setAvail] = useState([]);
+  // Store form data in state
+  const [avail, setAvail] = useState([]);
 
-      useEffect(() => {
-        props.getAvailabilities();
-      }, []);
-    
-      useEffect(() => {
-        setAvail(convertAvailabilityFromDatabase(props.avails));
-      }, [props.avails]);
+  useEffect(() => {
+    props.getAvailabilities();
+  }, []);
 
-    // Change form data in state at each change
-    const handleChange = (e) => {
-        //in order for the checkbox value to be recognized, this line is mandatory
-        // const value =
-        // e.target.type === "checkbox" ? e.target.checked : e.target.value;
-        // setState((prevState) => ({
-        // ...prevState,
-        // [e.target.name]: value,
-        // }));
-    };
+  useEffect(() => {
+    setAvail(convertAvailabilityFromDatabase(props.avails));
+  }, [props.avails]);
 
-    const onSubmit = (e) => {
-        // e.preventDefault();
-        // props.addStatus(state);
-    
-        // if(state.status == 'Infected'){
-        //   props.getAtRiskPatients();
-        // }
-    
-        // window.scrollTo(0, 0);
-      };
+  const bookAppointment = (month, day, year, time1, time2) => {
+    const month_n = new Date(`${month} ${day}, ${year} ${time1}`).getMonth()+1;
 
-      return (
-        <Fragment>
-            <h1>
-                Doctor Availabilites
-            </h1>
-            <Box
-                component="form"
-                onSubmit={onSubmit}
-                sx={{ width: "40%", pb: 10 }}
+    const appData =  {
+        "patient": props.auth.userData["user"],
+        "doctor": props.auth.userData["doctor"],
+        "start":`${year}-${month_n}-${day}T${time1}`,
+        "end":`${year}-${month_n}-${day}T${time2}`
+    }
+
+    props.addAppointment(appData);
+    props.getAppointments();
+    props.createMessage({ bookAppointment: "Appointment Booked" });
+    props.addNotification({
+      type: "Appointment",
+      user: props.auth.userData["doctor"],
+      subject: "New Appointment Request",
+      message: `[${getFormattedDate(new Date())}] Your patient ${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has made an appointment request.`
+    });
+  }
+
+  return (
+    <Fragment>
+        <h1>
+            Book Appointment
+        </h1>
+        <Box sx={{ width: "80%", pb: 10 }}>
+            <TableContainer component={Paper}>
+            <Table
+                size="small"
             >
-                <TableContainer component={Paper}>
-                <Table
-                    size="small"
-                >
-                    <TableHead sx={{ bgcolor: "#101F33", color: "#fff" }}>
-                        <TableRow>
-                            <TableCell sx={{ color: "#fff" }}>
-                                Day
-                            </TableCell>
-                            <TableCell sx={{ color: "#fff" }}>
-                                Time Slot
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {Object.entries(avail).map(([year, months]) => (
-                            Object.entries(months).map(([month, days]) => ( 
-                                Object.entries(days).map(([day, hours]) => (
-                                    hours.map((hour, i) => (
-                                        (hour.available) && 
-                                        <TableRow
-                                            key={`${month} ${day}, ${year} : ${hours[i].time}`}
-                                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                <TableHead sx={{ bgcolor: "#101F33", color: "#fff" }}>
+                    <TableRow>
+                        <TableCell sx={{ color: "#fff" }}>
+                            Day
+                        </TableCell>
+                        <TableCell sx={{ color: "#fff" }}>
+                            Time Slot
+                        </TableCell>
+                        <TableCell sx={{ color: "#fff" }}>
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {Object.entries(avail).map(([year, months]) => (
+                        Object.entries(months).map(([month, days]) => ( 
+                            Object.entries(days).map(([day, hours]) => (
+                                hours.map((hour, i) => (
+                                    (hour.available) && 
+                                    <TableRow
+                                        key={`${month} ${day}, ${year} : ${hours[i].time}`}
+                                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {`${month} ${day}, ${year}`}
+                                        </TableCell>
+                                        <TableCell>
+                                            {`${hours[i].time} - ${hours[i+1].time}`}
+                                        </TableCell>
+                                        <TableCell>
+                                        <Button 
+                                          size="small"
+                                          variant="contained" 
+                                          color="success" 
+                                          onClick={() => bookAppointment(month, day, year, hours[i].time, hours[i+1].time)}
                                         >
-                                            <TableCell component="th" scope="row">
-                                                {`${month} ${day}, ${year}`}
-                                            </TableCell>
-                                            <TableCell>
-                                                {`${hours[i].time} - ${hours[i+1].time}`}
-                                                {/* <Checkbox
-                                                labelid="checked"
-                                                id="checked"
-                                                name={symptoms.value}
-                                                checked={state[symptoms.value]}
-                                                onChange={handleChange}
-                                                ></Checkbox> */}
-                                            </TableCell>
-                                        </TableRow>
-                                    ))
+                                            Book Now
+                                        </Button>
+                                        </TableCell>
+                                    </TableRow>
                                 ))
                             ))
-                        ))}
-                    </TableBody>
-                </Table>
-                </TableContainer>
-
-                <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                >
-                SAVE
-                </Button>
-            </Box>
-        </Fragment> 
-    ); 
+                        ))
+                    ))}
+                </TableBody>
+            </Table>
+            </TableContainer>
+        </Box>
+    </Fragment> 
+  ); 
 }
 
 AppointmentForm.propTypes = {
@@ -304,4 +302,4 @@ const mapStateToProps = (state) => ({
     avails: state.availabilityReducer.availabilities
 });
 
-export default connect(mapStateToProps, { getAvailabilities })(AppointmentForm);
+export default connect(mapStateToProps, { getAvailabilities, getAppointments, addAppointment, createMessage, addNotification })(AppointmentForm);
