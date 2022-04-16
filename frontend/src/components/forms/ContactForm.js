@@ -1,7 +1,9 @@
 // Proof of concept for sending emails to
-import React, { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { getDoctor } from "../../redux/actions/patientActions";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -46,6 +48,15 @@ const marks = [
   },
 ];
 
+function isEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 const ContactForm = (props) => {
   const { open, onClose } = props;
 
@@ -60,6 +71,10 @@ const ContactForm = (props) => {
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
+
+  useEffect(() => {
+    props.getDoctor();
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -104,101 +119,116 @@ const ContactForm = (props) => {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent>
-          <Box component="form" onSubmit={sendEmail}>
-            <Container component="main" maxWidth="sm">
-              <CssBaseline />
-              <Box
-                sx={{
-                  marginTop: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                  <DraftsIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Contact Form
-                </Typography>
-                {/* Must provide fields in form */}
-                <Box sx={{ display: "none" }}>
+        <DialogContent 
+          sx={{ 
+            mt: 2,
+          }}
+          align="center"
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <DraftsIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Contact Form
+          </Typography>
+          {isEmpty(props.doctor) ?
+            <Fragment>
+              <Typography variant="h3">
+                No Doctor!
+              </Typography>
+              <Typography variant="h3">
+                Please wait to be assigned.
+              </Typography>
+            </Fragment>
+            
+            :
+                    
+            <Box component="form" onSubmit={sendEmail}>
+              <Container component="main" maxWidth="sm">
+                <CssBaseline />
+                <Box
+                  sx={{
+                    marginTop: 2,
+                    alignItems: "center"
+                  }}
+                >
+                  
+                  
+                  {/* Must provide fields in form */}
+                  <Box sx={{ display: "none" }}>
+                    <TextField
+                      name="patient_name"
+                      value={emailData.patient_name}
+                    />
+                    <TextField
+                      name="patient_id"
+                      value={emailData.patient_id}
+                    />
+                    <TextField
+                      name="reply_to"
+                      value={emailData.reply_to}
+                    />
+                  </Box>
                   <TextField
-                    name="patient_name"
-                    value={emailData.patient_name}
+                    margin="normal"
+                    required
+                    placeholder="Subject"
+                    name="subject"
+                    autoFocus
+                    fullWidth
+                    value={emailData.subject}
+                    onChange={onChange}
                   />
+                  <InputLabel>Urgency Scale</InputLabel>
+                  <Slider
+                    name="urgency"
+                    defaultValue={0}
+                    min={0}
+                    step={1}
+                    max={10}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    value={emailData.urgency}
+                    onChange={onChange}
+                    sx={{ mt: 3, mb: 2 }}
+                  />
+                  <Select
+                    required
+                    name="email"
+                    label="Doctor"
+                    fullWidth
+                    value={emailData.email}
+                    onChange={onChange}
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    <MenuItem value={props.doctor.email}>
+                      {`Dr. ${props.doctor.first_name} ${props.doctor.last_name}`}
+                    </MenuItem>
+                  </Select>
                   <TextField
-                    name="patient_id"
-                    value={emailData.patient_id}
+                    name="message"
+                    margin="normal"
+                    required
+                    placeholder="Message Text"
+                    maxRows={4}
+                    variant="standard"
+                    fullWidth
+                    value={emailData.message}
+                    onChange={onChange}
                   />
-                  <TextField
-                    name="reply_to"
-                    value={emailData.reply_to}
-                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Send
+                  </Button>
                 </Box>
-                <TextField
-                  margin="normal"
-                  required
-                  placeholder="Subject"
-                  name="subject"
-                  autoFocus
-                  fullWidth
-                  value={emailData.subject}
-                  onChange={onChange}
-                />
-                <InputLabel>Urgency Scale</InputLabel>
-                <Slider
-                  name="urgency"
-                  defaultValue={0}
-                  min={0}
-                  step={1}
-                  max={10}
-                  valueLabelDisplay="auto"
-                  marks={marks}
-                  value={emailData.urgency}
-                  onChange={onChange}
-                  sx={{ mt: 3, mb: 2 }}
-                />
-                <Select
-                  required
-                  name="email"
-                  label="Doctor"
-                  fullWidth
-                  value={emailData.email}
-                  onChange={onChange}
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  {/* TODO Redux : Populate with available doctors for patient */}
-                  <MenuItem value={"delispeter19@gmail.com"}>
-                    Doctor 1
-                  </MenuItem>
-                  <MenuItem value={"matteo.gisondi@yahoo.com"}>
-                    Doctor 2
-                  </MenuItem>
-                </Select>
-                <TextField
-                  name="message"
-                  margin="normal"
-                  required
-                  placeholder="Message Text"
-                  maxRows={4}
-                  variant="standard"
-                  fullWidth
-                  value={emailData.message}
-                  onChange={onChange}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Send
-                </Button>
-              </Box>
-            </Container>
-          </Box>
+              </Container>
+            </Box>
+          }
+          
         </DialogContent>
       </Dialog>
     </ThemeProvider>
@@ -207,10 +237,12 @@ const ContactForm = (props) => {
 
 ContactForm.propTypes = {
   auth: PropTypes.object.isRequired,
+  doctor: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
+  doctor: state.patientReducer.doctor
 });
 
-export default connect(mapStateToProps)(ContactForm);
+export default connect(mapStateToProps, { getDoctor })(ContactForm);
