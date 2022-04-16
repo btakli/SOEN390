@@ -24,9 +24,6 @@ export const deleteNotification = (id) => (dispatch, getState) => {
 
     axios.delete(`http://localhost:8000/api/notification/${id}/`, config)
         .then(res => {
-            dispatch(createMessage({
-                deleteNotif: 'Notification Deleted'
-            }));
             dispatch({
                 type: DELETE_NOTIF,
                 payload: id
@@ -44,9 +41,12 @@ export const addNotification = (notif) => (dispatch, getState) => {
             dispatch(createMessage({
                 addNotif: 'Notification Added'
             }));
-            dispatch({
-                type: ADD_NOTIF,
-                payload: res.data
-            });
+            axios.get('http://localhost:8000/api/notification/', config)
+                .then(res => {
+                    dispatch({
+                        type: GET_NOTIFS,
+                        payload: res.data
+                    });
+                }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }

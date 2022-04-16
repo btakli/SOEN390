@@ -1,8 +1,13 @@
 """Serializers"""
 
 from rest_framework import serializers
-from .models import Person, Status, Notification, Address
-from accounts.models import Patient
+from .models import *
+
+class ReassignSerializer(serializers.Serializer):
+    doctor = serializers.IntegerField()
+    temp_doctor = serializers.IntegerField()
+    start_date = serializers.DateField()
+    end_date = serializers.DateField()
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -42,3 +47,22 @@ class AddressSerializer(serializers.ModelSerializer):
         
         model = Address
         fields = "__all__"
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    """Appointment Serializer"""
+
+    class Meta:
+        """Requires Meta attribute"""
+        
+        model = Appointment
+        fields = "__all__"
+
+class AvailabilitySerializer(serializers.ModelSerializer):
+    """Availability Serializer"""
+
+    class Meta:
+        """Requires Meta attribute"""
+        
+        model = Availability
+        fields = "__all__"
+        extra_kwargs = {'doctor':{'read_only':True}}

@@ -8,7 +8,7 @@ import store from "../redux/store";
 import PriorityToggle from "../components/PriorityToggle";
 // import PrivateRoute from "../components/PrivateRoute";
 import Spinner from "../components/Spinner";
-import StatusViewRequest from "../components/StatusViewRequest";
+import StatusViewRequestForm from "../components/forms/StatusViewRequestForm";
 
 test("renders without error", () => {
   render(
@@ -48,7 +48,7 @@ test("does not render without auth", () => {
     render(
       <Provider store={store}>
         <Router>
-          <StatusViewRequest auth={auth} />
+          <StatusViewRequestForm auth={auth} />
         </Router>
       </Provider>
     );

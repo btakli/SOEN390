@@ -1,15 +1,19 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { togglePriority } from '../redux/actions/patientActions';
+import { toggleImmigrantPriority } from '../redux/actions/immigrantActions';
 
 import "../styles/PriorityToggleStyles.css";
 
 function PriorityToggle(props){
 
-  const { value, id } = props;
+  const { value, id, is_immigrant } = props;
 
   const handleClick = () => {
-    props.togglePriority(id);
+    if (is_immigrant)
+      props.toggleImmigrantPriority(id);
+    else
+      props.togglePriority(id);
   };
 
   return (
@@ -22,7 +26,8 @@ function PriorityToggle(props){
 }
 
 PriorityToggle.propTypes = {
-  togglePriority: PropTypes.func.isRequired
+  togglePriority: PropTypes.func.isRequired,
+  toggleImmigrantPriority: PropTypes.func.isRequired
 };
 
-export default connect(null, { togglePriority })(PriorityToggle);
+export default connect(null, { togglePriority, toggleImmigrantPriority })(PriorityToggle);

@@ -1,11 +1,9 @@
 """Create your models (db tables) here"""
 
 from django.db import models
-from accounts.models import User, Patient
+from accounts.models import User, Patient, Doctor
 from django.utils import timezone
-
-# from django.contrib.auth.models import User
-# from django.utils import timezone
+from rest_framework import serializers
 
 # Keep this for now as a Generic Model for future reference
 class Person(models.Model):
@@ -50,7 +48,7 @@ class Status(models.Model):
     stomachPain = models.BooleanField(default=False)
 
     patient = models.ForeignKey(
-        Patient, related_name="statuses", on_delete=models.SET_NULL, null=True, blank=True
+        Patient, related_name="statuses", on_delete=models.CASCADE, null=True, blank=True
     )
 
     date = models.DateTimeField(default=timezone.now)
@@ -86,3 +84,45 @@ class Address(models.Model):
     patient = models.ForeignKey(
         Patient, related_name="addresses", on_delete=models.CASCADE, null=True, blank=True
     )
+
+class Appointment(models.Model):
+    patient = models.ForeignKey(
+        Patient, related_name="appointments", on_delete=models.CASCADE
+    )
+
+    doctor = models.ForeignKey(
+        Doctor, related_name="appointments", on_delete=models.CASCADE
+    )
+
+    start = models.DateTimeField()
+    end = models.DateTimeField(null=True)
+
+    def _validate_start_end_dates(self):
+        if self.end < self.start:
+            raise serializers.ValidationError("End date cannot be before start date.")
+
+        if (self.end - self.start).days >= 1:
+            raise serializers.ValidationError("Availabilities must be less than a day.")
+
+    def save(self, *args, **kwargs):
+        self._validate_start_end_dates()
+        return super().save(*args, **kwargs)
+
+class Availability(models.Model):
+    doctor = models.ForeignKey(
+        Doctor, related_name="availabilities", on_delete=models.CASCADE, blank=True
+    )
+
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+
+    def _validate_start_end_dates(self):
+        if self.end < self.start:
+            raise serializers.ValidationError("End date cannot be before start date.")
+
+        if (self.end - self.start).days >= 1:
+            raise serializers.ValidationError("Availabilities must be less than a day.")
+
+    def save(self, *args, **kwargs):
+        self._validate_start_end_dates()
+        return super().save(*args, **kwargs)

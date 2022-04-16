@@ -1,6 +1,8 @@
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import PatientTable from "../components/tables/PatientTable";
+
+import PatientTable from "../../components/tables/PatientTable";
 
 // MUI
 import {
@@ -14,6 +16,7 @@ import {
 
 
 function Patients(props) {
+
   return (
     <Card>
       <CardContent>

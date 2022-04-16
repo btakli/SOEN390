@@ -35,7 +35,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function RequestApplicationForm() {
   const handleSignUp = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

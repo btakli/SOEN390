@@ -7,6 +7,7 @@ import Mail from "./headerComponents/Mail";
 import ProfileMenu from "./headerComponents/ProfileMenu";
 import Notification from "./headerComponents/Notification";
 import Report from './headerComponents/Report';
+import EmergencyLeave from "./headerComponents/EmergencyLeave";
 
 // MUI
 import Toolbar from "@mui/material/Toolbar";
@@ -54,6 +55,9 @@ function Header(props) {
           </Grid>
           <Grid item>
             <ProfileMenu />
+          </Grid>
+          <Grid item>
+            <EmergencyLeave/>
           </Grid>
           <Grid item>
             <Tooltip title="Logout">

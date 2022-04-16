@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { returnErrors } from './messageActions';
 import { tokenConfig } from './authActions';
-import { GET_PATIENTS, UPDATE_PATIENT_PRIORITY } from './types';
+import { GET_PATIENTS, GET_DOCTOR } from './types';
 
 // GET PERSONS API CALL
 export const getPatients = () => (dispatch, getState) => {
@@ -12,6 +12,19 @@ export const getPatients = () => (dispatch, getState) => {
         .then(res => {
             dispatch({
                 type: GET_PATIENTS,
+                payload: res.data
+            });
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+export const getDoctor = () => (dispatch, getState) => {
+
+    const config = tokenConfig(getState);
+
+    axios.get('http://localhost:8000/api/doctor/', config)
+        .then(res => {
+            dispatch({
+                type: GET_DOCTOR,
                 payload: res.data
             });
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
