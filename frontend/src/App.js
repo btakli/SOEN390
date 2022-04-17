@@ -2,6 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
+import Settings from "./pages/more/Settings";
+import TermsAndConditions from "./pages/more/TermsAndConditions";
+import About from "./pages/more/About";
+
 import NoMatch from "./pages/NoMatch";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -56,6 +60,11 @@ function App() {
               <Route path="patient/appointments" element={<PatientAppointment />} />
               <Route path="patient/usaCovidAPI" element={<CovidAPI />} />
               <Route path="patient/requestHelp" element={<RequestHelp />} />
+
+              <Route path="settings" element={<Settings />} />
+              <Route path="terms-conditions" element={<TermsAndConditions />} />
+              <Route path="about" element={<About />} />
+
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>

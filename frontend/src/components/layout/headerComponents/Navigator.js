@@ -36,29 +36,20 @@ import {
   drawerTitleStyle,
 } from "../../../styles/NavigatorStyles";
 
-// To add links to other pages
-// https://www.youtube.com/watch?v=CjFWbEOcq-Y
-
-const common = {
-  text: "More",
-  children: [
-    { text: "Settings", icon: <SettingsIcon /> },
-    { text: "Terms & Conditions", icon: <TimerIcon /> },
-    { text: "About", icon: <PhonelinkSetupIcon /> },
-  ],
-};
-
-let categories = [
-  {
-    text: "Pages",
-    children: [],
-  },
-  common,
-];
-
 function Navigator(props) {
+
   let navigate = useNavigate();
+
   const home = props.home === "/" ? "" : props.home;
+
+  const common = {
+    text: "More",
+    children: [
+      { text: "Settings", icon: <SettingsIcon />, onClick: () => navigate(`${home}/settings`), },
+      { text: "Terms & Conditions", icon: <TimerIcon />, onClick: () => navigate(`${home}/terms-conditions`), },
+      { text: "About", icon: <PhonelinkSetupIcon />, onClick: () => navigate(`${home}/about`), },
+    ],
+  };
 
   const doctor_pages = [
     { text: "Home",
@@ -129,6 +120,14 @@ function Navigator(props) {
     onClick: () => navigate(`${home}/qr-code`), },
   ];
 
+  let categories = [
+    {
+      text: "Pages",
+      children: [],
+    },
+    common,
+  ];
+
   categories[0]["children"] = (
     props.auth.user.is_doctor ? doctor_pages
     : (props.auth.user.is_immigration_officer ? immigration_officer_pages
@@ -153,10 +152,6 @@ function Navigator(props) {
           aria-label="open drawer"
           onClick={handleDrawerOpen}
           edge="start"
-          // sx={{ mr: 2,
-          //     // to make the button disapear when not open
-          //     //  ...(open && { display: 'none' })
-          //      }}
         >
           <MenuIcon />
         </IconButton>
@@ -195,8 +190,6 @@ function Navigator(props) {
                     </ListItemButton>
                   </ListItem>
                 ))}
-
-                {/* <Divider sx={{ mt: 3 }} color="#fff" /> */}
               </Box>
             ))}
           </List>
