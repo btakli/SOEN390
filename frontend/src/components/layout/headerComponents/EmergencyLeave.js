@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import EmergencyForm from "../../forms/EmergencyForm";
+import EmergencyAbsenceForm from "../../forms/EmergencyAbsenceForm";
 
 // MUI
 import Tooltip from "@mui/material/Tooltip";
@@ -23,7 +23,7 @@ function EmergencyLeave(props) {
     return (
       <Fragment>
 
-        <EmergencyForm open={open} onClose={handleDialogClose}/>
+        <EmergencyAbsenceForm open={open} onClose={handleDialogClose} admin_email={props.admin_email}/>
 
         <Tooltip title="Emergency">
 

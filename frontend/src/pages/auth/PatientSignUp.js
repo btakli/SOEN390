@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+
 import { registerPatient } from "../../redux/actions/authActions";
 import { createMessage } from "../../redux/actions/messageActions";
 
@@ -42,6 +44,11 @@ function Copyright(props) {
 const theme = createTheme();
 
 function PatientSignUp(props) {
+
+  const { redirect } = props;
+
+  let navigate = useNavigate();
+
   const emptyForm = {
     email: "",
     password: "",
@@ -108,6 +115,7 @@ function PatientSignUp(props) {
         immigration_status
       };
       props.registerPatient(newUser);
+      navigate(`${redirect}`);
     }
   };
 
@@ -306,11 +314,6 @@ function PatientSignUp(props) {
 PatientSignUp.propTypes = {
   registerPatient: PropTypes.func.isRequired,
   createMessage: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { registerPatient, createMessage })(PatientSignUp);
+export default connect(null, { registerPatient, createMessage })(PatientSignUp);

@@ -31,7 +31,6 @@ export default function(state=initialState, action){
                 userData: action.payload
             };
         case LOGIN_SUCCESS:
-        case REGISTER_SUCCESS:
             localStorage.setItem("token", action.payload.token);
             return {
                 ...state,
@@ -54,6 +53,7 @@ export default function(state=initialState, action){
                 user: null,
                 userData: null
             };
+        case REGISTER_SUCCESS:
         default:
             return state;
     }

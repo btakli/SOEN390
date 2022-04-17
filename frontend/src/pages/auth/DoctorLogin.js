@@ -135,11 +135,6 @@ function DoctorLogin(props) {
 
 DoctorLogin.propTypes = {
   loginDoctor: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { loginDoctor })(DoctorLogin);
+export default connect(null, { loginDoctor })(DoctorLogin);

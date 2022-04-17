@@ -136,11 +136,6 @@ function ImmigrationOfficerLogin(props) {
 
 ImmigrationOfficerLogin.propTypes = {
   loginImmigrationOfficer: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { loginImmigrationOfficer })(ImmigrationOfficerLogin);
+export default connect(null, { loginImmigrationOfficer })(ImmigrationOfficerLogin);

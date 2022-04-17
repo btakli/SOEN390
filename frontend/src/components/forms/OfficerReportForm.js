@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -23,26 +23,17 @@ import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
 
-function isEmpty(obj) {
-  for (var prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function PatientReportForm(props) {
+function OfficerReportForm(props) {
   const { open, onClose, admin_email } = props;
 
   const emptyEmail = {
     admin_email: admin_email,
-    doctor_name: "",
+    patient_name: "",
     message: "",
     reason: "",
-    patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
-    patient_id: props.auth.userData.user,
-    reply_to: props.auth.user.email,
+    doctor_name: `Officer ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    doctor_id: props.auth.userData.user,
+    reply_to: props.auth.user.email
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -52,7 +43,7 @@ function PatientReportForm(props) {
     emailjs
       .send(
         "service_7fml1kh",
-        "template_ypf730n",
+        "template_abog2jk",
         emailData,
         "LRUKM9mZ4TnU7IgU9"
       )
@@ -79,7 +70,7 @@ function PatientReportForm(props) {
     <ThemeProvider theme={theme}>
       <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
         <DialogTitle sx={{ bgcolor: "#101F33", color: "#fff" }}>
-          File a Report Against a Doctor
+          File a Report Against an Immigrant
           <IconButton
             edge="start"
             color="inherit"
@@ -112,46 +103,45 @@ function PatientReportForm(props) {
                 <Typography component="h1" variant="h5">
                   Report Form
                 </Typography>
-                {(isEmpty(props.doctor)) ?
+                {(props.patients.length == 0) ?
                   <Fragment>
                     <Typography variant="h3">
-                      No Doctor!
+                      No Immigrants!
                     </Typography>
                     <Typography variant="h4">
-                      Please wait to be assigned.
+                      Please wait to be assigned immigrants.
                     </Typography>
                   </Fragment>
                   :
                   <Fragment>
                     <Box sx={{ display: "none" }}>
+                      <TextField name="doctor_name" value={emailData.doctor_name} />
+                      <TextField name="doctor_id" value={emailData.doctor_id} />
                       <TextField
-                        name="patient_name"
-                        value={emailData.patient_name}
-                      />
-                      <TextField name="patient_id" value={emailData.patient_id} />
-                      <TextField
-                        name="patient_email"
-                        value={emailData.patient_email}
+                        name="doctor_email"
+                        value={emailData.doctor_email}
                       />
                       <TextField name="reply_to" value={emailData.reply_to} />
                       <TextField name="admin_email" value={emailData.admin_email} />
                     </Box>
-                    <InputLabel id="doctor-label">
-                      Doctor Involved in Incident
+                    <InputLabel id="patient-label">
+                      Immigrant Involved in Incident
                     </InputLabel>
                     <Select
                       required
-                      labelId="doctor-label"
-                      name="doctor_name"
-                      label="Doctor"
+                      labelId="patient-label"
+                      name="patient_name"
+                      label="Patient"
                       fullWidth
-                      value={emailData.doctor_name}
+                      value={emailData.patient_name}
                       onChange={onChange}
                       sx={{ mt: 0, mb: 3 }}
                     >
-                      <MenuItem value={`Dr. ${props.doctor.first_name} ${props.doctor.last_name} (${props.doctor.user})`}>
-                        {`Dr. ${props.doctor.first_name} ${props.doctor.last_name}`}
-                      </MenuItem>
+                      {props.patients.map((patient, i) => (
+                        <MenuItem key={i} value={`${patient.first_name} ${patient.last_name} (${patient.user})`}>
+                          {`${patient.first_name} ${patient.last_name}`}
+                        </MenuItem>
+                      ))}
                     </Select>
                     <InputLabel id="reason-label">Reason for Report</InputLabel>
                     <Select
@@ -166,11 +156,9 @@ function PatientReportForm(props) {
                     >
                       <MenuItem value={"Misconduct"}>Misconduct</MenuItem>
                       <MenuItem value={"Harassment"}>Harassment</MenuItem>
-                      <MenuItem value={"Procedural"}>Procedural Error</MenuItem>
-                      <MenuItem value={"Misinformation"}>Misinformation</MenuItem>
-                      <MenuItem value={"Prescription"}>Harmful Prescription</MenuItem>
                       <MenuItem value={"Professionalism"}>Professionalism</MenuItem>
-                      <MenuItem value={"Negligence"}>Negligence</MenuItem>
+                      <MenuItem value={"Drug Abuse"}>Drug Abuse</MenuItem>
+                      <MenuItem value={"Defamation"}>Defamation</MenuItem>
                       <MenuItem value={"Misc"}>Other</MenuItem>
                     </Select>
                     <TextField
@@ -183,9 +171,6 @@ function PatientReportForm(props) {
                       fullWidth
                       value={emailData.message}
                       onChange={onChange}
-                      inputProps={{
-                        minLength: 20,
-                      }}
                     />
                     <Button
                       type="submit"
@@ -206,14 +191,14 @@ function PatientReportForm(props) {
   );
 };
 
-PatientReportForm.propTypes = {
+OfficerReportForm.propTypes = {
   auth: PropTypes.object.isRequired,
-  doctor: PropTypes.object.isRequired
+  patients: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
-  doctor: state.patientReducer.doctor
+  patients: state.patientReducer.patients
 });
 
-export default connect(mapStateToProps, { createMessage })(PatientReportForm);
+export default connect(mapStateToProps, { createMessage })(OfficerReportForm);

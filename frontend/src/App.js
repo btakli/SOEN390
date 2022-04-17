@@ -2,6 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
+import Settings from "./pages/more/Settings";
+import TermsAndConditions from "./pages/more/TermsAndConditions";
+import About from "./pages/more/About";
+
 import NoMatch from "./pages/NoMatch";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -18,6 +22,7 @@ import ImmigrationOfficerSignUp from "./pages/auth/ImmigrationOfficerSignUp";
 
 // HOME
 import Home from "./pages/home/Home";
+import Profile from "./pages/home/Profile";
 import Dashboard from "./pages/home/Dashboard";
 import RapidTest from "./pages/home/RapidTest";
 import PatientStatus from "./pages/home/PatientStatus";
@@ -33,12 +38,13 @@ import PatientAppointment from "./pages/home/PatientAppointment";
 
 function App() {
   const homePath = "/";
+  const admin_email = "delispeter19@gmail.com"
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route path={homePath} element={<PrivateRoute redirect={"/pre/login"} />} >
-            <Route path="" element={<Home home={homePath} />} >
+            <Route path="" element={<Home home={homePath} admin_email={admin_email} />} >
               <Route path={homePath} element={<DoctorIsAway />} >
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
@@ -47,6 +53,7 @@ function App() {
                 <Route path="doctor/appointments" element={<Dashboard />} />
               </Route>
 
+              <Route path="profile" element={<Profile />} />
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="immigrants" element={<Immigrants />} />
@@ -55,6 +62,11 @@ function App() {
               <Route path="patient/appointments" element={<PatientAppointment />} />
               <Route path="patient/usaCovidAPI" element={<CovidAPI />} />
               <Route path="patient/requestHelp" element={<RequestHelp />} />
+
+              <Route path="settings" element={<Settings />} />
+              <Route path="terms-conditions" element={<TermsAndConditions />} />
+              <Route path="about" element={<About />} />
+
               <Route path="*" element={<NoMatch />} />
             </Route>
           </Route>
@@ -65,9 +77,9 @@ function App() {
             <Route path="patient/login" element={<PatientLogin />} />
             <Route path="doctor/login" element={<DoctorLogin />} />
             <Route path="immigration-officer/login" element={<ImmigrationOfficerLogin />} />
-            <Route path="patient/signup" element={<PatientSignUp />} />
-            <Route path="doctor/signup" element={<DoctorSignUp />} />
-            <Route path="immigration-officer/signup" element={<ImmigrationOfficerSignUp />} />
+            <Route path="patient/signup" element={<PatientSignUp redirect={"/pre/login"} />} />
+            <Route path="doctor/signup" element={<DoctorSignUp redirect={"/pre/login"} />} />
+            <Route path="immigration-officer/signup" element={<ImmigrationOfficerSignUp redirect={"/pre/login"} />} />
           </Route>
           
           <Route path="*" element={<NoMatch />} />
