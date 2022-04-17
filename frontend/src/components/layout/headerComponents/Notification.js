@@ -146,7 +146,7 @@ function Notification(props) {
             </ListItemButton>
           </ListItem> }
 
-        {props.notifs.map((item, i) => (
+        {props.notifs.slice(0).reverse().map((item, i) => (
           <ListItem
             key={i}
             divider

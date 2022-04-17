@@ -1,4 +1,3 @@
-// Proof of concept for sending emails to
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -22,7 +21,7 @@ function currentPatient(id, patients){
   return patients.find(({ user }) => id === user );
 }
 
-const StatusViewRequestForm = (props) => {
+function StatusViewRequestForm(props) {
   const { open, onClose, patientId } = props;
 
   const [patient, setPatient] = useState({});
@@ -40,8 +39,7 @@ const StatusViewRequestForm = (props) => {
 
   const defaultStatusRequest = {
     subject: "Patient Symptom Status Update",
-    email: "delispeter19@gmail.com", // just for demo
-    // email: patient.email,
+    email: patient.email,
     message: `Hi ${patient.first_name}, this is your doctor, please update your status!`,
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,

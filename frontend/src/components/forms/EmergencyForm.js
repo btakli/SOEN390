@@ -4,16 +4,12 @@ import { connect } from "react-redux";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
-import ReportIcon from "@mui/icons-material/Report";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
@@ -22,14 +18,12 @@ import { toggleIsAway } from '../../redux/actions/authActions';
 
 const theme = createTheme();
 
-const EmergencyForm = (props) => {
+function EmergencyForm(props) {
   const { open, onClose } = props;
 
   const emptyEmail = {
     // TODO : REDUX replace with random admin email
     admin_email: "delispeter19@gmail.com",
-    // patient: "",
-    // patient_id: "",
     message: "",
     start_date:"",
     end_date:"",
@@ -97,13 +91,10 @@ const EmergencyForm = (props) => {
                   alignItems: "center",
                 }}
               >
-                {/*<Avatar sx={{ mt: 0, mb: 3, bgcolor: "secondary.main" }}>
-                  <ReportIcon />
-              </Avatar>*/}
                 <Typography component="h1" variant="h5" sx={{pb : 5}}>
                   Select Absence Date
                 </Typography>
-                {/* Must provide fields in form */}
+
                 <Box sx={{ display: "none" }}>
                   <TextField name="doctor_name" value={emailData.doctor_name} />
                   <TextField name="doctor_id" value={emailData.doctor_id} />
@@ -131,20 +122,6 @@ const EmergencyForm = (props) => {
                   value={emailData.start_date}
                   onChange={onChange}
                 />
-                {/*<Select
-                  required
-                  labelId="patient-label"
-                  name="patient"
-                  label="Patient"
-                  fullWidth
-                  value={emailData.patient}
-                  onChange={onChange}
-                  sx={{ mt: 0, mb: 3 }}
-                >                  
-                  <MenuItem value={"Patient 1"}>Patient 1</MenuItem>
-                  <MenuItem value={"Patient 2"}>Patient 2</MenuItem>
-                  <MenuItem value={"Patient 3"}>Patient 3</MenuItem>
-                </Select>*/}
                 <InputLabel id="reason-label" >End Date</InputLabel>
                 <TextField
                   sx={{pb : 5}}

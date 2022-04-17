@@ -49,7 +49,6 @@ function MainAlerts(props) {
             if (props.message.addStatus) props.alert.success(props.message.addStatus);
             if (props.message.testMessage) props.alert.success(props.message.testMessage);
             if (props.message.emailSent) props.alert.success(props.message.emailSent);
-            if (props.message.emailSent) props.alert.success(props.message.emailSent);
             if (props.message.deleteNotif) props.alert.success(props.message.deleteNotif);
             if (props.message.saveAvails) props.alert.success(props.message.saveAvails);
             if (props.message.bookAppointment) props.alert.success(props.message.bookAppointment);

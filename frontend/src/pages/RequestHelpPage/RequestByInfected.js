@@ -2,9 +2,11 @@ import React, { useState, useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import emailjs from "@emailjs/browser";
-import { getAllStatus, getLatestStatus } from "../../redux/actions/statusActions";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { getDoctor } from "../../redux/actions/patientActions";
+import { getAllStatus, getLatestStatus } from "../../redux/actions/statusActions";
+import { createMessage } from "../../redux/actions/messageActions";
+import { addNotification } from "../../redux/actions/notifActions";
 
 // MUI
 import {
@@ -17,6 +19,7 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
@@ -26,6 +29,15 @@ const theme = createTheme({
     },
   },
 });
+
+const getFormattedDate = (date) => {
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const time = `${date.getHours()}:${date.getMinutes() <= 9 ? '0' + date.getMinutes() : date.getMinutes()}`;
+
+  return (`${month} ${day}, ${year} @ ${time}`);
+};
 
 function isEmpty(obj) {
   for (var prop in obj) {
@@ -37,13 +49,35 @@ function isEmpty(obj) {
 }
 
 function RequestByInfected(props) {
+
+  const emptyEmail = {
+    subject: "Emergency Alert",
+    urgency: 10,
+    email: "",
+    message: "Please contact me! I am infected.",
+    doctor_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    doctor_id: props.auth.userData.user,
+    reply_to: props.auth.user.email
+  };
+
+  const [emailData, setEmailData] = useState(emptyEmail);
+
   const [isNotInfected, setIsNotInfected] = useState(false);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     props.getAllStatus();
     props.getLatestStatus();
+    props.getDoctor();
   }, []);
+
+  useEffect(() => {
+    if (!isEmpty(props.doctor)){
+      setEmailData((prevEmailData) => ({
+        ...prevEmailData,
+        ["email"]: props.doctor.email,
+      }));
+    }
+  }, [props.doctor]);
 
   useEffect(() => {
     if (!isEmpty(props.status.latestStatus) && props.status.latestStatus.status === "Infected"){
@@ -53,41 +87,27 @@ function RequestByInfected(props) {
     }
   }, [props.status.latestStatus]);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleClick = (e) => {
-    setOpen(true);
-
+  const sendEmail = (e) => {
     e.preventDefault();
-
-    //need to populate params with redux
     emailjs
       .send(
         "service_7fjr35n",
         "template_6z43fbi",
-        {
-          patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
-          reply_to: `${props.auth.userData.email}`,
-        }, //params
+        emailData, //params
         "2kKwY7XTMZzK4SSte"
       )
-      .then(
-        function (response) {
-          console.log(
-            "An email has been sent on your behalf notifying your doctor.",
-            response.status,
-            response.text
-          );
-        },
-        function (error) {
-          console.log(
-            "Your emergency was not emailed to your doctor. Good luck, dude",
-            error
-          );
-        }
-      );
+      .then((result) =>
+        console.log("Email Sent Successfully", result.status, result.text)
+      ).catch((error) => console.log("Email Send Failed...", error));
+
+    props.createMessage({ emailSent: "Alert Sent Successfully" });
+
+    props.addNotification({
+      type: "InfectedAlert",
+      user: props.doctor.user,
+      subject: "Message Sent",
+      message: `[${getFormattedDate(new Date())}] ${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you an alert. Please check your email.`
+    });
   };
 
   return (
@@ -109,7 +129,7 @@ function RequestByInfected(props) {
           </Typography>
           <Button
             variant="contained"
-            onClick={handleClick}
+            onClick={sendEmail}
             color="alertEmergency"
             sx={{
               m: 1,
@@ -119,40 +139,20 @@ function RequestByInfected(props) {
           </Button>
         </Box>
       )}
-
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="emergency-title"
-        aria-describedby="emergency-description"
-      >
-        <DialogTitle id="emergency-title">
-          {"Emergency Alert Confirmation"}
-        </DialogTitle>
-
-        <DialogContent>
-          <DialogContentText id="emergency-description">
-            Your request has been processed.
-          </DialogContentText>
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
     </ThemeProvider>
   );
 }
 
 RequestByInfected.propTypes = {
+  auth: PropTypes.object.isRequired,
   status: PropTypes.object.isRequired,
+  doctor: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
   status: state.statusReducer,
+  doctor: state.patientReducer.doctor,
 });
 
-export default connect(mapStateToProps, { getAllStatus, getLatestStatus })(RequestByInfected);
+export default connect(mapStateToProps, { getAllStatus, getLatestStatus, getDoctor, createMessage, addNotification })(RequestByInfected);

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { createMessage } from "../../redux/actions/messageActions";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -21,14 +23,22 @@ import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
 
-const PatientReportForm = (props) => {
+function isEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function PatientReportForm(props) {
   const { open, onClose } = props;
 
   const emptyEmail = {
     // TODO : REDUX replace with random admin email
     admin_email: "delispeter19@gmail.com",
     doctor: "",
-    // doctor_id: "",
     message: "",
     reason: "",
     patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
@@ -51,7 +61,11 @@ const PatientReportForm = (props) => {
         console.log("Email Sent Successfully", result.status, result.text)
       )
       .catch((error) => console.log("Email Send Failed...", error));
+
     setEmailData(emptyEmail);
+
+    props.createMessage({ emailSent: "Message Sent Successfully" });
+
     onClose();
   };
 
@@ -99,80 +113,92 @@ const PatientReportForm = (props) => {
                 <Typography component="h1" variant="h5">
                   Report Form
                 </Typography>
-                {/* Must provide fields in form */}
-                <Box sx={{ display: "none" }}>
-                  <TextField
-                    name="patient_name"
-                    value={emailData.patient_name}
-                  />
-                  <TextField name="patient_id" value={emailData.patient_id} />
-                  <TextField
-                    name="patient_email"
-                    value={emailData.patient_email}
-                  />
-                  <TextField name="reply_to" value={emailData.reply_to} />
-                  <TextField name="admin_email" value={emailData.admin_email} />
-                </Box>
-                <InputLabel id="doctor-label">
-                  Doctor Involved in Incident
-                </InputLabel>
-                <Select
-                  required
-                  labelId="doctor-label"
-                  name="doctor"
-                  label="Doctor"
-                  fullWidth
-                  value={emailData.doctor}
-                  onChange={onChange}
-                  sx={{ mt: 0, mb: 3 }}
-                >
-                  {/* TODO Redux : Populate with doctor objects/id/... */}
-                  <MenuItem value={"Doctor 1"}>Doctor 1</MenuItem>
-                  <MenuItem value={"Doctor 2"}>Doctor 2</MenuItem>
-                  <MenuItem value={"Doctor 3"}>Doctor 3</MenuItem>
-                </Select>
-                <InputLabel id="reason-label">Reason for Report</InputLabel>
-                <Select
-                  required
-                  labelId="reason-label"
-                  name="reason"
-                  label="Reason"
-                  fullWidth
-                  value={emailData.reason}
-                  onChange={onChange}
-                  sx={{ mt: 0, mb: 3 }}
-                >
-                  <MenuItem value={"misconduct"}>Misconduct</MenuItem>
-                  <MenuItem value={"harassment"}>Harassment</MenuItem>
-                  <MenuItem value={"procedural"}>Procedural Error</MenuItem>
-                  <MenuItem value={"misinformation"}>Misinformation</MenuItem>
-                  <MenuItem value={"prescription"}>Harmful Prescription</MenuItem>
-                  <MenuItem value={"professionalism"}>Professionalism</MenuItem>
-                  <MenuItem value={"negligence"}>Negligence</MenuItem>
-                  <MenuItem value={"misc"}>Other</MenuItem>
-                </Select>
-                <TextField
-                  name="message"
-                  margin="normal"
-                  required
-                  placeholder="Please provide any relevant additional information"
-                  maxRows={4}
-                  variant="standard"
-                  fullWidth
-                  value={emailData.message}
-                  onChange={onChange}
-                  inputProps={{
-                    minLength: 20,
-                  }}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 0, mb: 3 }}
-                >
-                  File Report With Administrator
-                </Button>
+                {(isEmpty(props.doctor)) ?
+                  <Fragment>
+                    <Typography variant="h3">
+                      No Doctor!
+                    </Typography>
+                    <Typography variant="h4">
+                      Please wait to be assigned.
+                    </Typography>
+                  </Fragment>
+                  :
+                  <Fragment>
+                    <Box sx={{ display: "none" }}>
+                      <TextField
+                        name="patient_name"
+                        value={emailData.patient_name}
+                      />
+                      <TextField name="patient_id" value={emailData.patient_id} />
+                      <TextField
+                        name="patient_email"
+                        value={emailData.patient_email}
+                      />
+                      <TextField name="reply_to" value={emailData.reply_to} />
+                      <TextField name="admin_email" value={emailData.admin_email} />
+                    </Box>
+                    <InputLabel id="doctor-label">
+                      Doctor Involved in Incident
+                    </InputLabel>
+                    <Select
+                      required
+                      labelId="doctor-label"
+                      name="doctor"
+                      label="Doctor"
+                      fullWidth
+                      value={emailData.doctor}
+                      onChange={onChange}
+                      sx={{ mt: 0, mb: 3 }}
+                    >
+                      {/* TODO Redux : Populate with doctor objects/id/... */}
+                      <MenuItem value={props.doctor.email}>
+                        {`Dr. ${props.doctor.first_name} ${props.doctor.last_name}`}
+                      </MenuItem>
+                    </Select>
+                    <InputLabel id="reason-label">Reason for Report</InputLabel>
+                    <Select
+                      required
+                      labelId="reason-label"
+                      name="reason"
+                      label="Reason"
+                      fullWidth
+                      value={emailData.reason}
+                      onChange={onChange}
+                      sx={{ mt: 0, mb: 3 }}
+                    >
+                      <MenuItem value={"Misconduct"}>Misconduct</MenuItem>
+                      <MenuItem value={"Harassment"}>Harassment</MenuItem>
+                      <MenuItem value={"Procedural"}>Procedural Error</MenuItem>
+                      <MenuItem value={"Misinformation"}>Misinformation</MenuItem>
+                      <MenuItem value={"Prescription"}>Harmful Prescription</MenuItem>
+                      <MenuItem value={"Professionalism"}>Professionalism</MenuItem>
+                      <MenuItem value={"Negligence"}>Negligence</MenuItem>
+                      <MenuItem value={"Misc"}>Other</MenuItem>
+                    </Select>
+                    <TextField
+                      name="message"
+                      margin="normal"
+                      required
+                      placeholder="Please provide any relevant additional information"
+                      maxRows={4}
+                      variant="standard"
+                      fullWidth
+                      value={emailData.message}
+                      onChange={onChange}
+                      inputProps={{
+                        minLength: 20,
+                      }}
+                    />
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 0, mb: 3 }}
+                    >
+                      File Report With Administrator
+                    </Button>
+                  </Fragment>
+                }
               </Box>
             </Container>
           </Box>
@@ -184,10 +210,12 @@ const PatientReportForm = (props) => {
 
 PatientReportForm.propTypes = {
   auth: PropTypes.object.isRequired,
+  doctor: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
+  doctor: state.patientReducer.doctor
 });
 
-export default connect(mapStateToProps)(PatientReportForm);
+export default connect(mapStateToProps, { createMessage })(PatientReportForm);
