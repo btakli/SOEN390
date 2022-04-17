@@ -49,7 +49,7 @@ function StatusViewRequestForm(props) {
     urgency: 8,
     email: "",
     message: "",
-    sender_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    sender_name: `${(props.auth.user.is_doctor)? "Dr.":"Officer"} ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     sender_id: props.auth.userData.user,
     reply_to: props.auth.user.email
   };
@@ -70,7 +70,7 @@ function StatusViewRequestForm(props) {
       setEmailData(prevEmailData => ({
         ...prevEmailData,
         ["email"]: patient.email,
-        ["message"]: `Hi ${patient.first_name}, this is your doctor, please update your status!`
+        ["message"]: `Hi ${patient.first_name}, this is your ${(props.auth.user.is_doctor)? "Doctor":"Officer"}, please update your status!`
       }));
     }
   }, [patient]);
@@ -95,7 +95,7 @@ function StatusViewRequestForm(props) {
       type: "Email",
       user: patient.user,
       subject: "Status Request",
-      message: `[${getFormattedDate(new Date())}] ${(props.auth.user.is_doctor)? "Dr. ":""}${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you a request. Please check your email.`
+      message: `[${getFormattedDate(new Date())}] ${(props.auth.user.is_doctor)? "Dr. ":"Officer "}${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you a request. Please check your email.`
     });
     
     onClose();

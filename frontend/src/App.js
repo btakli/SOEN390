@@ -33,12 +33,13 @@ import PatientAppointment from "./pages/home/PatientAppointment";
 
 function App() {
   const homePath = "/";
+  const admin_email = "delispeter19@gmail.com"
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route path={homePath} element={<PrivateRoute redirect={"/pre/login"} />} >
-            <Route path="" element={<Home home={homePath} />} >
+            <Route path="" element={<Home home={homePath} admin_email={admin_email} />} >
               <Route path={homePath} element={<DoctorIsAway />} >
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />

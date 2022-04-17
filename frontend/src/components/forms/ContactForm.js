@@ -72,6 +72,19 @@ function isEmpty(obj) {
   return true;
 }
 
+function getUserTitle(user){
+  if(user.is_doctor){
+    return "Dr. ";
+  } 
+
+  if(user.is_immigration_officer){
+    return "Officer ";
+  } 
+
+  return "";
+
+}
+
 function ContactForm(props) {
   const { open, onClose } = props;
 
@@ -80,7 +93,7 @@ function ContactForm(props) {
     urgency: 0,
     email: "",
     message: "",
-    sender_name: `${(props.auth.user.is_doctor)? "Dr. ":""}${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    sender_name: `${getUserTitle(props.auth.user)}${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     sender_id: props.auth.userData.user,
     reply_to: props.auth.user.email
   };
@@ -96,7 +109,7 @@ function ContactForm(props) {
   const sendFilter = (e) => {
     if (props.auth.user.is_patient){
       sendEmail(e, props.doctor.user);
-    } else if (props.auth.user.is_doctor){
+    } else if (props.auth.user.is_doctor || props.auth.user.is_immigration_officer){
       sendEmail(e, getPatientId(emailData.email, props.patients));
     }
   };

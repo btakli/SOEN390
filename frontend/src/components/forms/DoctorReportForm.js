@@ -24,10 +24,10 @@ import emailjs from "@emailjs/browser";
 const theme = createTheme();
 
 function DoctorReportForm(props) {
-  const { open, onClose } = props;
+  const { open, onClose, admin_email } = props;
 
   const emptyEmail = {
-    admin_email: "delispeter19@gmail.com",
+    admin_email: admin_email,
     patient_name: "",
     message: "",
     reason: "",

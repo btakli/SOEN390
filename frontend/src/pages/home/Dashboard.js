@@ -6,6 +6,7 @@ import InfectionsPerWeekGraph from "../../components/graphs/InfectionsPerWeekGra
 import InfectionsPerTypeGraph from "../../components/graphs/InfectionsPerTypeGraph";
 
 import DoctorAppointmentTable from "../../components/tables/DoctorAppointmentTable";
+import ImmigrantTable from "../../components/tables/ImmigrantTable";
 import AvailabilityForm from "../../components/forms/AvailabilityForm";
 
 import {
@@ -16,6 +17,8 @@ import {
     CardContent,
     Divider    
   } from "@mui/material";
+
+
 
 function Dashboard(props){
 
@@ -34,7 +37,7 @@ function Dashboard(props){
               <Divider />
           </Box>
 
-          { props.auth.user.is_doctor ?
+            {props.auth.user.is_doctor &&
               <Grid 
                   container
               >
@@ -46,7 +49,17 @@ function Dashboard(props){
                       <AvailabilityForm />
                   </Grid>
               </Grid>
-              :
+            }
+
+            {props.auth.user.is_immigration_officer &&
+              <Grid container spacing={3}>
+                  <Grid item xs={12} sm={12} md={12}>
+                      <ImmigrantTable />
+                  </Grid>
+              </Grid>
+            }
+
+            {props.auth.user.is_patient &&
               <Grid container spacing={3}>
                   <Grid item xs={12} sm={6} md={6}>
                       <InfectionsPerWeekGraph />
@@ -55,7 +68,7 @@ function Dashboard(props){
                       <InfectionsPerTypeGraph />
                   </Grid>
               </Grid>
-          }
+            }
           </CardContent>
       </Card>
     )

@@ -23,7 +23,7 @@ function EmergencyLeave(props) {
     return (
       <Fragment>
 
-        <EmergencyAbsenceForm open={open} onClose={handleDialogClose}/>
+        <EmergencyAbsenceForm open={open} onClose={handleDialogClose} admin_email={props.admin_email}/>
 
         <Tooltip title="Emergency">
 

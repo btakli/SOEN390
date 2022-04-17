@@ -19,10 +19,10 @@ import { toggleIsAway } from '../../redux/actions/authActions';
 const theme = createTheme();
 
 function EmergencyAbsenceForm(props) {
-  const { open, onClose } = props;
+  const { open, onClose, admin_email } = props;
 
   const emptyEmail = {
-    admin_email: "delispeter19@gmail.com",
+    admin_email: admin_email,
     message: "",
     start_date:"",
     end_date:"",

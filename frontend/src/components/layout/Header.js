@@ -51,13 +51,13 @@ function Header(props) {
             <Notification />
           </Grid>
           <Grid item>
-            <Report /> 
+            <Report admin_email={props.admin_email} /> 
           </Grid>
           <Grid item>
             <ProfileMenu />
           </Grid>
           <Grid item>
-            <EmergencyLeave/>
+            <EmergencyLeave admin_email={props.admin_email} />
           </Grid>
           <Grid item>
             <Tooltip title="Logout">

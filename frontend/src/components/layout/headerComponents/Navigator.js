@@ -82,16 +82,13 @@ function Navigator(props) {
   ];
 
   const immigration_officer_pages = [
-    { text: "Home", icon: <HomeIcon /> },
+    { text: "Home", icon: <HomeIcon />,
+      onClick: () => navigate(`${home}/dashboard`),
+    },
     {
       text: "Immigrants",
       icon: <DnsRoundedIcon />,
       onClick: () => navigate(`${home}/immigrants`),
-    },
-    {
-      text: "Dashboard",
-      icon: <PermMediaOutlinedIcon />,
-      onClick: () => navigate(`${home}/dashboard`),
     },
   ];
 
