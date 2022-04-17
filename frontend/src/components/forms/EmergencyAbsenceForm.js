@@ -18,18 +18,16 @@ import { toggleIsAway } from '../../redux/actions/authActions';
 
 const theme = createTheme();
 
-function EmergencyForm(props) {
+function EmergencyAbsenceForm(props) {
   const { open, onClose } = props;
 
   const emptyEmail = {
-    // TODO : REDUX replace with random admin email
     admin_email: "delispeter19@gmail.com",
     message: "",
     start_date:"",
     end_date:"",
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,
-    doctor_email: props.auth.user.email,
     reply_to: props.auth.user.email
   };
 
@@ -38,11 +36,11 @@ function EmergencyForm(props) {
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
-      .sendForm(
-        "service_jpjr8bu",
-        "template_gdqysg2",
-        e.target,
-        "YHD2VxM943EwRufC4"
+      .send(
+        "service_7fml1kh",
+        "template_zld2w6m",
+        emailData,
+        "LRUKM9mZ4TnU7IgU9"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
@@ -164,7 +162,7 @@ function EmergencyForm(props) {
   );
 };
 
-EmergencyForm.propTypes = {
+EmergencyAbsenceForm.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -172,4 +170,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps, {toggleIsAway})(EmergencyForm);
+export default connect(mapStateToProps, {toggleIsAway})(EmergencyAbsenceForm);

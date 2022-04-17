@@ -38,12 +38,12 @@ function PatientReportForm(props) {
   const emptyEmail = {
     // TODO : REDUX replace with random admin email
     admin_email: "delispeter19@gmail.com",
-    doctor: "",
+    doctor_name: "",
     message: "",
     reason: "",
     patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     patient_id: props.auth.userData.user,
-    patient_email: props.auth.user.email,
+    reply_to: props.auth.user.email,
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -51,11 +51,11 @@ function PatientReportForm(props) {
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
-      .sendForm(
-        "service_yn5erhm",
-        "template_0uo2b7o",
-        e.target,
-        "OcJwqmp4t2RtcSozF"
+      .send(
+        "service_7fml1kh",
+        "template_ypf730n",
+        emailData,
+        "LRUKM9mZ4TnU7IgU9"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
@@ -143,15 +143,14 @@ function PatientReportForm(props) {
                     <Select
                       required
                       labelId="doctor-label"
-                      name="doctor"
+                      name="doctor_name"
                       label="Doctor"
                       fullWidth
-                      value={emailData.doctor}
+                      value={emailData.doctor_name}
                       onChange={onChange}
                       sx={{ mt: 0, mb: 3 }}
                     >
-                      {/* TODO Redux : Populate with doctor objects/id/... */}
-                      <MenuItem value={props.doctor.email}>
+                      <MenuItem value={`Dr. ${props.doctor.first_name} ${props.doctor.last_name} (${props.doctor.user})`}>
                         {`Dr. ${props.doctor.first_name} ${props.doctor.last_name}`}
                       </MenuItem>
                     </Select>

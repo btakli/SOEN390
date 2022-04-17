@@ -55,8 +55,8 @@ function RequestByInfected(props) {
     urgency: 10,
     email: "",
     message: "Please contact me! I am infected.",
-    doctor_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
-    doctor_id: props.auth.userData.user,
+    sender_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    sender_id: props.auth.userData.user,
     reply_to: props.auth.user.email
   };
 
@@ -91,10 +91,10 @@ function RequestByInfected(props) {
     e.preventDefault();
     emailjs
       .send(
-        "service_7fjr35n",
-        "template_6z43fbi",
-        emailData, //params
-        "2kKwY7XTMZzK4SSte"
+        "service_7fml1kh",
+        "template_2rbv5nq",
+        emailData,
+        "LRUKM9mZ4TnU7IgU9"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)

@@ -80,8 +80,8 @@ function ContactForm(props) {
     urgency: 0,
     email: "",
     message: "",
-    doctor_name: `${(props.auth.user.is_doctor)? "Dr. ":""}${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
-    doctor_id: props.auth.userData.user,
+    sender_name: `${(props.auth.user.is_doctor)? "Dr. ":""}${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    sender_id: props.auth.userData.user,
     reply_to: props.auth.user.email
   };
 
@@ -91,7 +91,6 @@ function ContactForm(props) {
     if (props.auth.user.is_patient){
       props.getDoctor();
     }
-    
   }, []);
 
   const sendFilter = (e) => {
@@ -105,11 +104,11 @@ function ContactForm(props) {
   const sendEmail = (e, notifId) => {
     e.preventDefault();
     emailjs
-      .sendForm(
-        "service_o5sf8uk",
-        "template_v5kh4dw",
-        e.target,
-        "user_vnRqkOKsChMYAMYL7GxKC"
+      .send(
+        "service_7fml1kh",
+        "template_2rbv5nq",
+        emailData,
+        "LRUKM9mZ4TnU7IgU9"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
@@ -189,12 +188,12 @@ function ContactForm(props) {
                 >
                   <Box sx={{ display: "none" }}>
                     <TextField
-                      name="doctor_name"
-                      value={emailData.doctor_name}
+                      name="sender_name"
+                      value={emailData.sender_name}
                     />
                     <TextField
-                      name="doctor_id"
-                      value={emailData.doctor_id}
+                      name="sender_id"
+                      value={emailData.sender_id}
                     />
                     <TextField
                       name="reply_to"

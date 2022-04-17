@@ -28,12 +28,12 @@ function DoctorReportForm(props) {
 
   const emptyEmail = {
     admin_email: "delispeter19@gmail.com",
-    patient: "",
+    patient_name: "",
     message: "",
     reason: "",
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,
-    doctor_email: props.auth.user.email,
+    reply_to: props.auth.user.email
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -41,11 +41,11 @@ function DoctorReportForm(props) {
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
-      .sendForm(
-        "service_yn5erhm",
-        "template_wzxbpkm",
-        e.target,
-        "OcJwqmp4t2RtcSozF"
+      .send(
+        "service_7fml1kh",
+        "template_abog2jk",
+        emailData,
+        "LRUKM9mZ4TnU7IgU9"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
@@ -130,15 +130,15 @@ function DoctorReportForm(props) {
                     <Select
                       required
                       labelId="patient-label"
-                      name="patient"
+                      name="patient_name"
                       label="Patient"
                       fullWidth
-                      value={emailData.patient}
+                      value={emailData.patient_name}
                       onChange={onChange}
                       sx={{ mt: 0, mb: 3 }}
                     >
                       {props.patients.map((patient, i) => (
-                        <MenuItem key={i} value={patient.email}>
+                        <MenuItem key={i} value={`${patient.first_name} ${patient.last_name} (${patient.user})`}>
                           {`${patient.first_name} ${patient.last_name}`}
                         </MenuItem>
                       ))}
