@@ -22,6 +22,7 @@ import ImmigrationOfficerSignUp from "./pages/auth/ImmigrationOfficerSignUp";
 
 // HOME
 import Home from "./pages/home/Home";
+import Profile from "./pages/home/Profile";
 import Dashboard from "./pages/home/Dashboard";
 import RapidTest from "./pages/home/RapidTest";
 import PatientStatus from "./pages/home/PatientStatus";
@@ -52,6 +53,7 @@ function App() {
                 <Route path="doctor/appointments" element={<Dashboard />} />
               </Route>
 
+              <Route path="profile" element={<Profile />} />
               <Route path="status" element={<PatientStatus />} />
               <Route path="addressTracing" element={<AddressTracing />} />
               <Route path="immigrants" element={<Immigrants />} />

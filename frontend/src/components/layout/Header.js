@@ -54,7 +54,7 @@ function Header(props) {
             <Report admin_email={props.admin_email} /> 
           </Grid>
           <Grid item>
-            <ProfileMenu />
+            <ProfileMenu home={props.home} />
           </Grid>
           <Grid item>
             <EmergencyLeave admin_email={props.admin_email} />

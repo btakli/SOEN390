@@ -82,7 +82,6 @@ function getUserTitle(user){
   } 
 
   return "";
-
 }
 
 function ContactForm(props) {
@@ -136,7 +135,7 @@ function ContactForm(props) {
       type: "Email",
       user: notifId,
       subject: "Message Sent",
-      message: `[${getFormattedDate(new Date())}] ${(props.auth.user.is_doctor)? "Dr. ":""}${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you a message. Please check your email.`
+      message: `[${getFormattedDate(new Date())}] ${getUserTitle(props.auth.user)}${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you a message. Please check your email.`
     });
 
     onClose();

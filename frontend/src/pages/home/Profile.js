@@ -1,4 +1,6 @@
-import { Fragment } from "react";
+import * as React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import {
     Box,
@@ -21,10 +23,29 @@ function createData(name, value) {
     return { name, value };
 }
 
-const rows = [
-    createData('Version', "1.0"),
-    createData('Color Scheme', "Light"),
-];
+function getUserTitle(user){
+    if(user.is_doctor){
+      return "Dr. ";
+    } 
+  
+    if(user.is_immigration_officer){
+      return "Officer ";
+    } 
+  
+    return "";
+}
+
+function getUserType(user){
+    if(user.is_doctor){
+      return "Doctor";
+    } 
+  
+    if(user.is_immigration_officer){
+      return "Immigration Officer";
+    } 
+  
+    return "Patient";
+}
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,7 +53,19 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 
-function Settings(){
+function Profile(props){
+
+    const rows = [
+        createData('Name', `${getUserTitle(props.auth.user)}${props.auth.userData.first_name} ${props.auth.userData.last_name}`),
+        createData('User Type', `${getUserType(props.auth.user)}`),
+        createData('Email', `${props.auth.user.email}`),
+        createData('Date of Birth', `${props.auth.userData.date_of_birth}`),
+        createData('Gender', `${props.auth.userData.gender}`),
+        createData('Address', `${props.auth.userData.address}`),
+        createData('City', `${props.auth.userData.city}`),
+        createData('Postal Code', `${props.auth.userData.postal_code}`),
+    ];
+
     return (
         <Card align="center">
             <CardContent>
@@ -43,16 +76,16 @@ function Settings(){
                     gutterBottom
                     component="div"
                     >
-                        Settings
+                        Profile
                     </Typography>
                     <Divider />
                 </Box>
 
                 <TableContainer component={Paper} sx={{ width: "40%" }}>
-                    <Table aria-label="a dense table">
+                    <Table aria-label="table">
                         <TableHead sx={{ bgcolor: "#2196f3" }}>
                             <TableRow>
-                                <StyledTableCell><b>Setting</b></StyledTableCell>
+                                <StyledTableCell><b>Information</b></StyledTableCell>
                                 <StyledTableCell align="right"><b>Value</b></StyledTableCell>
                             </TableRow>
                         </TableHead>
@@ -78,4 +111,12 @@ function Settings(){
     )
 }
 
-export default Settings;
+Profile.propTypes = {
+    auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+    auth: state.authReducer,
+});
+
+export default connect(mapStateToProps)(Profile);
