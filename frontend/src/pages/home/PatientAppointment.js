@@ -2,21 +2,21 @@ import { React } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import AvailabilityForm from "../../components/forms/AvailabilityForm";
+import AppointmentForm from "../../components/forms/AppointmentForm";
+import PatientAppointmentTable from "../../components/tables/PatientAppointmentTable";
 
 import {
-    Box,
     Typography,
-    Grid,
     Card,
     CardContent,
     Divider,
+    Grid
   } from "@mui/material";
 
 function PatientAppointment(props){
 
   return (
-    <Card>
+    <Card align="center">
         <CardContent>
             <Typography
             variant="h5"
@@ -28,8 +28,21 @@ function PatientAppointment(props){
             </Typography>
 
             <Divider />
-            
-            <AvailabilityForm />
+
+            <Grid 
+              container
+              sx={{pt: 3}}
+            >
+              
+              <Grid item xs={6} md={6}>
+                <AppointmentForm />
+              </Grid>
+
+              <Grid item xs={6} md={6}>
+                <PatientAppointmentTable />
+              </Grid>
+
+            </Grid>
         </CardContent>
     </Card>
   )

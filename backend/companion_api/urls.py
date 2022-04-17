@@ -3,11 +3,7 @@
 from rest_framework.routers import DefaultRouter
 from .models import *
 from .views import *
-from django.urls import path, register_converter
-from .utils import DateConverter
-
-
-register_converter(DateConverter, 'yyyy')
+from django.urls import path
 
 app_name = "companion_api"
 
@@ -27,10 +23,13 @@ urlpatterns = [
     path("api/toggle/priority/<int:pk>/", TogglePriorityView.as_view(), name='toggle_priority'),
     path("api/toggle/is-away/", ToggleAwayView.as_view(), name='toggle_is_away'),
 
+    # Not tested yet
+    path("api/patient/status/latest/", LatestStatusView.as_view(), name='latest_status'),
     path("api/doctor/patient/status/latest/<int:pk>/", SpecificLatestStatusView.as_view(), name='patient_latest_status'), 
 
+    # Too annoying to test for now (if there is time do this)
     path("api/patients/at-risk/", PatientsWithMatchingAddressView.as_view(), name="patients_risk"),
-    path("api/reassign/<int:doc>/<int:tempdoc>/<yyyy:startdate>/<yyyy:enddate>/", ReassignPatientsToTempDoctorView.as_view(), name="reassign_patients")
+    path("api/reassign/", ReassignPatientsToTempDoctorView.as_view(), name="reassign_patients")
 ]
 
 urlpatterns += router.urls

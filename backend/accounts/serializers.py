@@ -73,36 +73,6 @@ class RegisterDoctorSerializer(serializers.ModelSerializer):
         )
 
         return doctor
-
-# Did not want to deal with this case so I made this ser without
-# email verif for testing purposes
-class RegisterDoctorTestSerializer(serializers.ModelSerializer):
-    """Register Serializer"""
-
-    user = UserSerializer()    
-
-    class Meta:
-        """Requires Meta attribute"""
-
-        model = Doctor
-        fields = "__all__"
-
-    def create(self, validated_data):
-        user_data = validated_data.pop("user")
-        user = User.objects.create_user(
-            user_data['email'],
-            user_data['password']
-        )
-        user.is_doctor = True
-        user.is_email_verified = False
-        user.save() # update user change 
-
-        doctor = Doctor.objects.create(
-            user = user,
-            **validated_data
-        )
-
-        return doctor
     
 # Register Immigration Officer Serializer
 class RegisterImmigrationOfficerSerializer(serializers.ModelSerializer):
@@ -146,6 +116,10 @@ class RegisterPatientSerializer(serializers.ModelSerializer):
 
         model = Patient
         fields = "__all__"
+        extra_kwargs = {
+            'is_priority':{'read_only':True},
+            'is_immigration_priority':{'read_only':True}
+            }
 
     def create(self, validated_data):
         user_data = validated_data.pop("user")
@@ -154,10 +128,10 @@ class RegisterPatientSerializer(serializers.ModelSerializer):
             user_data['password']
         )
         user.is_patient = True
-        # TO BE USED FOR EMAIL VERIFICATION
-        # user.is_pending_approval = True
-        # user.is_active = False
-        # user.is_email_verified = False
+        # EMAIL VERIFICATION
+        user.is_pending_approval = True
+        user.is_active = False
+        user.is_email_verified = False
 
         user.save() # update user change 
 
@@ -178,17 +152,24 @@ class LoginSerializer(serializers.Serializer):
 
     # This is where the login auth happens in the whole app!
     def validate(self, data):
-        user = authenticate(**data)
+        user = authenticate(**data) # checks if valid or active
 
-        # TO BE USED FOR EMAIL VERIFICATION
-        # if not user.is_email_verified:
-        #     raise serializers.ValidationError("Email is not verified, please check your inbox")
+        if user and user.is_email_verified and not user.is_pending_approval:
+            return user
+        else:
+            try:
+                user = User.objects.get(email=data['email'])
+            except User.DoesNotExist:
+                raise serializers.ValidationError("Invalid Credentials")
+            
+            if not user.is_email_verified:
+                raise serializers.ValidationError("Email is not verified - Please check your inbox")
 
-        if user:
-            if user.is_active:
-                return user
-            else:
-                raise serializers.ValidationError("User is not Active!")
+            if not user.is_active:
+                raise serializers.ValidationError("Not Active - Admin is approving your account")
+
+            # Display this as error response if bad login
+            raise serializers.ValidationError("Invalid Credentials")
         
-        # Display this as error response if bad login
-        raise serializers.ValidationError("Invalid Credentials")
+        
+        

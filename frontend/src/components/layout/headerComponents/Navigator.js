@@ -37,29 +37,20 @@ import {
   drawerTitleStyle,
 } from "../../../styles/NavigatorStyles";
 
-// To add links to other pages
-// https://www.youtube.com/watch?v=CjFWbEOcq-Y
-
-const common = {
-  text: "More",
-  children: [
-    { text: "Settings", icon: <SettingsIcon /> },
-    { text: "Terms & Conditions", icon: <TimerIcon /> },
-    { text: "About", icon: <PhonelinkSetupIcon /> },
-  ],
-};
-
-let categories = [
-  {
-    text: "Pages",
-    children: [],
-  },
-  common,
-];
-
 function Navigator(props) {
+
   let navigate = useNavigate();
+
   const home = props.home === "/" ? "" : props.home;
+
+  const common = {
+    text: "More",
+    children: [
+      { text: "Settings", icon: <SettingsIcon />, onClick: () => navigate(`${home}/settings`), },
+      { text: "Terms & Conditions", icon: <TimerIcon />, onClick: () => navigate(`${home}/terms-conditions`), },
+      { text: "About", icon: <PhonelinkSetupIcon />, onClick: () => navigate(`${home}/about`), },
+    ],
+  };
 
   const doctor_pages = [
     { text: "Home",
@@ -80,24 +71,17 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/doctor/appointments`),
     },
-    { text: "Template 4", icon: <SettingsEthernetIcon />},
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
   const immigration_officer_pages = [
-    { text: "Home", icon: <HomeIcon /> },
+    { text: "Home", icon: <HomeIcon />,
+      onClick: () => navigate(`${home}/dashboard`),
+    },
     {
       text: "Immigrants",
       icon: <DnsRoundedIcon />,
       onClick: () => navigate(`${home}/immigrants`),
     },
-    {
-      text: "Dashboard",
-      icon: <PermMediaOutlinedIcon />,
-      onClick: () => navigate(`${home}/dashboard`),
-    },
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
   ];
 
   const patient_pages = [
@@ -127,15 +111,12 @@ function Navigator(props) {
       icon: <FlagIcon />,
       onClick: () => navigate(`${home}/patient/canadaAPI`),
     },
-
     { text: "US Covid19 Data", icon: <AnalyticsIcon />,
       onClick: () => navigate(`${home}/patient/usaCovidAPI`),
     },
     { text: "Request Help", icon: <HelpIcon />,
       onClick: () => navigate(`${home}/patient/requestHelp`),
     },
-
-    { text: "Template 4", icon: <SettingsEthernetIcon /> },
     {
       text: "Rapid Test Result",
       icon: <SpeedIcon />,
@@ -143,7 +124,14 @@ function Navigator(props) {
     },
     { text: "QR-Code", icon: <SettingsEthernetIcon />,
     onClick: () => navigate(`${home}/qr-code`), },
-    { text: "Template 5", icon: <SettingsInputComponentIcon /> },
+  ];
+
+  let categories = [
+    {
+      text: "Pages",
+      children: [],
+    },
+    common,
   ];
 
   categories[0]["children"] = (
@@ -170,10 +158,6 @@ function Navigator(props) {
           aria-label="open drawer"
           onClick={handleDrawerOpen}
           edge="start"
-          // sx={{ mr: 2,
-          //     // to make the button disapear when not open
-          //     //  ...(open && { display: 'none' })
-          //      }}
         >
           <MenuIcon />
         </IconButton>
@@ -212,8 +196,6 @@ function Navigator(props) {
                     </ListItemButton>
                   </ListItem>
                 ))}
-
-                {/* <Divider sx={{ mt: 3 }} color="#fff" /> */}
               </Box>
             ))}
           </List>

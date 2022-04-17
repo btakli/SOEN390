@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDoctor } from "../../redux/actions/patientActions";
 import { createMessage } from "../../redux/actions/messageActions";
+import { addNotification } from "../../redux/actions/notifActions";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -20,13 +21,28 @@ import { Grid, Input } from "@mui/material";
 
 const theme = createTheme();
 
-const RapidTestForm = (props) => {
+const getFormattedDate = (date) => {
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const time = `${date.getHours()}:${date.getMinutes() <= 9 ? '0' + date.getMinutes() : date.getMinutes()}`;
+
+  return (`${month} ${day}, ${year} @ ${time}`);
+};
+
+function isEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function RapidTestForm(props) {
   const emptyEmail = {
     subject: `${props.auth.userData.first_name} ${props.auth.userData.last_name}'s Rapid Test Result`,
-
-    //Put your email for DEMO
-    email: "delispeter19@gmail.com",
-
+    email: "",
     message: "",
     result: null,
     patient_name: `${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
@@ -36,6 +52,25 @@ const RapidTestForm = (props) => {
 
   const [emailData, setEmailData] = useState(emptyEmail);
   const [imageUrl, setImageUrl] = useState(null);
+
+  useEffect(() => {
+    props.getDoctor();
+  }, []);
+
+  useEffect(() => {
+    if (emailData.result) {
+      setImageUrl(URL.createObjectURL(emailData.result));
+    }
+  }, [emailData.result]);
+
+  useEffect(() => {
+    if (!isEmpty(props.doctor)){
+      setEmailData((prevEmailData) => ({
+        ...prevEmailData,
+        ["email"]: props.doctor.email,
+      }));
+    }
+  }, [props.doctor]);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -50,8 +85,17 @@ const RapidTestForm = (props) => {
         console.log("Email Sent Successfully", result.status, result.text)
       )
       .catch((error) => console.log("Email Send Failed...", error));
+
     setEmailData(emptyEmail);
-    props.createMessage({ emailSent: "Email Sent" });
+
+    props.createMessage({ emailSent: "Rapid Test Sent Successfully" });
+
+    props.addNotification({
+      type: "Email",
+      user: props.doctor.user,
+      subject: "Rapid Test Sent",
+      message: `[${getFormattedDate(new Date())}] ${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent a rapid test result. Please check your email.`
+    });
   };
 
   const onChange = (e) => {
@@ -67,14 +111,6 @@ const RapidTestForm = (props) => {
       result: e.target.files[0],
     }));
   };
-
-  useEffect(() => {
-    props.getDoctor();
-    console.log(props);
-    if (emailData.result) {
-      setImageUrl(URL.createObjectURL(emailData.result));
-    }
-  }, [emailData.result]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -116,28 +152,6 @@ const RapidTestForm = (props) => {
                   sx={{ mt: 3 }}
                 />
               </Grid>
-              {/* <Grid item xs={12} sm={12}>
-                <FormControl fullWidth required>
-                  <Select
-                    required
-                    name="email"
-                    label="Doctor"
-                    id="email"
-                    fullWidth
-                    value={emailData.email}
-                    onChange={onChange}
-                  >
-                    {/* TODO Redux : Populate with available doctors for patient 
-                    <MenuItem value={"danimacicasan@gmail.com"}>
-                      Doctor 1
-                    </MenuItem>
-                    <MenuItem value={"matteo.gisondi@yahoo.com"}>
-                      Doctor 2
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid> */}
-
               <Grid item xs={12}>
                 <TextField
                   id="message"
@@ -220,4 +234,4 @@ const mapStateToProps = (state) => ({
   doctor: state.patientReducer.doctor,
 });
 
-export default connect(mapStateToProps, { getDoctor, createMessage })(RapidTestForm);
+export default connect(mapStateToProps, { getDoctor, createMessage, addNotification })(RapidTestForm);

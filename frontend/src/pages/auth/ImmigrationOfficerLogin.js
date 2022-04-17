@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginImmigrationOfficer } from "../../redux/actions/authActions";
@@ -39,17 +39,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function ImmigrationOfficerLogin(props) {  
-  const { redirect } = props;
-
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (props.isAuthenticated) {
-      navigate(`${redirect}`);
-    }
-  });
-   
+function ImmigrationOfficerLogin(props) {
   const emptyForm = {
     email: "",
     password: "",
@@ -146,11 +136,6 @@ function ImmigrationOfficerLogin(props) {
 
 ImmigrationOfficerLogin.propTypes = {
   loginImmigrationOfficer: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { loginImmigrationOfficer })(ImmigrationOfficerLogin);
+export default connect(null, { loginImmigrationOfficer })(ImmigrationOfficerLogin);

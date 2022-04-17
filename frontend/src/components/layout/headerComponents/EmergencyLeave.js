@@ -1,8 +1,7 @@
-import * as React from "react";
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import EmergencyForm from "../../forms/EmergencyForm";
+import EmergencyAbsenceForm from "../../forms/EmergencyAbsenceForm";
 
 // MUI
 import Tooltip from "@mui/material/Tooltip";
@@ -10,21 +9,21 @@ import Button from "@mui/material/Button";
 
 function EmergencyLeave(props) {
 
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-    const handleDialogOpen = () => {
-        setOpen(true);
-    };
+  const handleDialogOpen = () => {
+      setOpen(true);
+  };
 
-    const handleDialogClose = () => {
-        setOpen(false);
-    };
+  const handleDialogClose = () => {
+      setOpen(false);
+  };
 
-    if (props.auth.user.is_doctor && !props.auth.userData.is_away) {
-      return (
+  if (props.auth.user.is_doctor && !props.auth.userData.is_away) {
+    return (
       <Fragment>
 
-        <EmergencyForm open={open} onClose={handleDialogClose}/>
+        <EmergencyAbsenceForm open={open} onClose={handleDialogClose} admin_email={props.admin_email}/>
 
         <Tooltip title="Emergency">
 
@@ -35,11 +34,14 @@ function EmergencyLeave(props) {
         >
             Emergency Leave
           </Button>
+
         </Tooltip>
-      </Fragment>);
-    } else {
-      return null; // Is this implicit?
-    }
+        
+      </Fragment>
+    );
+  } else {
+    return null;
+  }
 }
 
 EmergencyLeave.propTypes = {

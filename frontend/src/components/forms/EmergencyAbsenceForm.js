@@ -4,16 +4,12 @@ import { connect } from "react-redux";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
-import ReportIcon from "@mui/icons-material/Report";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
@@ -22,20 +18,16 @@ import { toggleIsAway } from '../../redux/actions/authActions';
 
 const theme = createTheme();
 
-const EmergencyForm = (props) => {
-  const { open, onClose } = props;
+function EmergencyAbsenceForm(props) {
+  const { open, onClose, admin_email } = props;
 
   const emptyEmail = {
-    // TODO : REDUX replace with random admin email
-    admin_email: "delispeter19@gmail.com",
-    // patient: "",
-    // patient_id: "",
+    admin_email: admin_email,
     message: "",
     start_date:"",
     end_date:"",
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,
-    doctor_email: props.auth.user.email,
     reply_to: props.auth.user.email
   };
 
@@ -44,11 +36,11 @@ const EmergencyForm = (props) => {
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
-      .sendForm(
-        "service_jpjr8bu",
-        "template_gdqysg2",
-        e.target,
-        "YHD2VxM943EwRufC4"
+      .send(
+        "service_7fml1kh",
+        "template_zld2w6m",
+        emailData,
+        "LRUKM9mZ4TnU7IgU9"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
@@ -97,13 +89,10 @@ const EmergencyForm = (props) => {
                   alignItems: "center",
                 }}
               >
-                {/*<Avatar sx={{ mt: 0, mb: 3, bgcolor: "secondary.main" }}>
-                  <ReportIcon />
-              </Avatar>*/}
                 <Typography component="h1" variant="h5" sx={{pb : 5}}>
                   Select Absence Date
                 </Typography>
-                {/* Must provide fields in form */}
+
                 <Box sx={{ display: "none" }}>
                   <TextField name="doctor_name" value={emailData.doctor_name} />
                   <TextField name="doctor_id" value={emailData.doctor_id} />
@@ -131,20 +120,6 @@ const EmergencyForm = (props) => {
                   value={emailData.start_date}
                   onChange={onChange}
                 />
-                {/*<Select
-                  required
-                  labelId="patient-label"
-                  name="patient"
-                  label="Patient"
-                  fullWidth
-                  value={emailData.patient}
-                  onChange={onChange}
-                  sx={{ mt: 0, mb: 3 }}
-                >                  
-                  <MenuItem value={"Patient 1"}>Patient 1</MenuItem>
-                  <MenuItem value={"Patient 2"}>Patient 2</MenuItem>
-                  <MenuItem value={"Patient 3"}>Patient 3</MenuItem>
-                </Select>*/}
                 <InputLabel id="reason-label" >End Date</InputLabel>
                 <TextField
                   sx={{pb : 5}}
@@ -187,7 +162,7 @@ const EmergencyForm = (props) => {
   );
 };
 
-EmergencyForm.propTypes = {
+EmergencyAbsenceForm.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -195,4 +170,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps, {toggleIsAway})(EmergencyForm);
+export default connect(mapStateToProps, {toggleIsAway})(EmergencyAbsenceForm);

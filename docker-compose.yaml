@@ -1,4 +1,4 @@
-version: "latest"
+version: '3'
 services:
   backend:
     restart: always
@@ -23,4 +23,4 @@ services:
       - "3000:3000"
     stdin_open: true
     depends_on:
-      - project
+      - backend

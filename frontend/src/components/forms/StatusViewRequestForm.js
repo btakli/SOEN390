@@ -1,9 +1,10 @@
-// Proof of concept for sending emails to
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import StatusTable from "../tables/StatusTable";
-import { getLatestStatus } from '../../redux/actions/statusActions';
+import { getPatientLatestStatus } from '../../redux/actions/statusActions';
+import { createMessage } from "../../redux/actions/messageActions";
+import { addNotification } from "../../redux/actions/notifActions";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -22,47 +23,81 @@ function currentPatient(id, patients){
   return patients.find(({ user }) => id === user );
 }
 
-const StatusViewRequestForm = (props) => {
-  const { open, onClose, patientId } = props;
+const getFormattedDate = (date) => {
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const time = `${date.getHours()}:${date.getMinutes() <= 9 ? '0' + date.getMinutes() : date.getMinutes()}`;
 
-  const [patient, setPatient] = useState({});
+  return (`${month} ${day}, ${year} @ ${time}`);
+};
 
-  useEffect(() => {
-    if(patientId && patientId != 0){
-      props.getLatestStatus(patientId);
-      setPatient(currentPatient(patientId, props.patients));
+function isEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      return false;
     }
-  }, [patientId]);
+  }
+  return true;
+}
 
-  useEffect(() => {
-    setEmailData(defaultStatusRequest);
-  }, [patient]);
+function StatusViewRequestForm(props) {
+  const { open, onClose, patientId } = props;
 
   const defaultStatusRequest = {
     subject: "Patient Symptom Status Update",
-    email: "delispeter19@gmail.com", // just for demo
-    // email: patient.email,
-    message: `Hi ${patient.first_name}, this is your doctor, please update your status!`,
-    doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
-    doctor_id: props.auth.userData.user,
+    urgency: 8,
+    email: "",
+    message: "",
+    sender_name: `${(props.auth.user.is_doctor)? "Dr.":"Officer"} ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    sender_id: props.auth.userData.user,
     reply_to: props.auth.user.email
   };
 
   const [emailData, setEmailData] = useState(defaultStatusRequest);
 
+  const [patient, setPatient] = useState({});
+
+  useEffect(() => {
+    if(patientId && patientId != 0){
+      props.getPatientLatestStatus(patientId);
+      setPatient(currentPatient(patientId, props.patients));
+    }
+  }, [patientId]);
+
+  useEffect(() => {
+    if (!isEmpty(patient)){
+      setEmailData(prevEmailData => ({
+        ...prevEmailData,
+        ["email"]: patient.email,
+        ["message"]: `Hi ${patient.first_name}, this is your ${(props.auth.user.is_doctor)? "Doctor":"Officer"}, please update your status!`
+      }));
+    }
+  }, [patient]);
+
   const sendStatusUpdateEmail = (e) => {
     e.preventDefault();
     emailjs
-      .sendForm(
-        "service_o5sf8uk",
-        "template_v5kh4dw",
-        e.target,
-        "user_vnRqkOKsChMYAMYL7GxKC"
+      .send(
+        "service_7fml1kh",
+        "template_2rbv5nq",
+        emailData,
+        "LRUKM9mZ4TnU7IgU9"
       )
       .then((result) =>
         console.log("Email Sent Successfully", result.status, result.text)
       )
       .catch((error) => console.log("Email Send Failed...", error));
+
+    props.createMessage({ emailSent: "Request Sent Successfully" });
+
+    props.addNotification({
+      type: "Email",
+      user: patient.user,
+      subject: "Status Request",
+      message: `[${getFormattedDate(new Date())}] ${(props.auth.user.is_doctor)? "Dr. ":"Officer "}${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you a request. Please check your email.`
+    });
+    
     onClose();
   };
 
@@ -101,12 +136,12 @@ const StatusViewRequestForm = (props) => {
                 {/* Must provide fields in form */}
                 <Box sx={{ display: "none" }}>
                   <TextField
-                    name="patient_name"
-                    value={emailData.doctor_name}
+                    name="sender_name"
+                    value={emailData.sender_name}
                   />
                   <TextField
-                    name="patient_id"
-                    value={emailData.doctor_id}
+                    name="sender_id"
+                    value={emailData.sender_id}
                   />
                   <TextField
                     name="reply_to"
@@ -152,4 +187,4 @@ const mapStateToProps = (state) => ({
   patients: state.patientReducer.patients
 });
 
-export default connect(mapStateToProps, { getLatestStatus })(StatusViewRequestForm);
+export default connect(mapStateToProps, { getPatientLatestStatus, createMessage, addNotification })(StatusViewRequestForm);

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+
 import { registerImmigrationOfficer } from "../../redux/actions/authActions";
 import { createMessage } from "../../redux/actions/messageActions";
-import { useNavigate } from "react-router-dom";
 
 // MUI
 import Avatar from "@mui/material/Avatar";
@@ -47,15 +48,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 function ImmigrationOfficerSignUp(props) {
+  
   const { redirect } = props;
 
   let navigate = useNavigate();
-
-  useEffect(() => {
-    if (props.isAuthenticated) {
-      navigate(`${redirect}`);
-    }
-  });
 
   const emptyForm = {
     email: "",
@@ -144,6 +140,7 @@ function ImmigrationOfficerSignUp(props) {
       };
 
       props.registerImmigrationOfficer(newUser);
+      navigate(`${redirect}`);
     }
   };
 
@@ -340,11 +337,6 @@ function ImmigrationOfficerSignUp(props) {
 ImmigrationOfficerSignUp.propTypes = {
   registerImmigrationOfficer: PropTypes.func.isRequired,
   createMessage: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { registerImmigrationOfficer, createMessage })(ImmigrationOfficerSignUp);
+export default connect(null, { registerImmigrationOfficer, createMessage })(ImmigrationOfficerSignUp);

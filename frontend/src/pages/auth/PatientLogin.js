@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginPatient } from "../../redux/actions/authActions";
-import { useNavigate } from "react-router-dom";
 
 // MUI
 import Avatar from "@mui/material/Avatar";
@@ -40,16 +39,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 function PatientLogin(props) {
-  const { redirect } = props;
-  
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (props.isAuthenticated) {
-      navigate(`${redirect}`);
-    }
-  });
-
   const emptyForm = {
     email: "",
     password: "",
@@ -146,11 +135,6 @@ function PatientLogin(props) {
 
 PatientLogin.propTypes = {
   loginPatient: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { loginPatient })(PatientLogin);
+export default connect(null, { loginPatient })(PatientLogin);

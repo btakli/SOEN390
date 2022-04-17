@@ -1,6 +1,9 @@
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
 import { toggleIsAway } from '../../redux/actions/authActions';
+
 import Image from '../../media/thinking_emoji.jpg';
 
 // MUI
@@ -13,7 +16,6 @@ import {
   Divider,
   Button
 } from "@mui/material";
-
 
 function WelcomeBack(props) {
 

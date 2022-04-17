@@ -151,7 +151,10 @@ class NotificationView(viewsets.ModelViewSet):
         return self.request.user.notifications.all()
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        if ("user" in self.request.data):
+            serializer.save(user=User.objects.get(id=self.request.data["user"]))
+        else:
+            serializer.save(user=self.request.user)
 
 class AddressView(viewsets.ModelViewSet):
     # only authenticated users can get access
@@ -276,11 +279,16 @@ class ReassignPatientsToTempDoctorView(generics.GenericAPIView):
         permissions.IsAdminUser
     ]
 
+    serializer_class = ReassignSerializer
+
     def put(self, request, *args, **kwargs):
-        did = self.kwargs['doc']
-        tdid = self.kwargs['tempdoc']
-        start_date = self.kwargs['startdate']
-        end_date = self.kwargs['enddate']
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        did = serializer.validated_data["doctor"]
+        tdid = serializer.validated_data["temp_doctor"]
+        start_date = str(serializer.validated_data['start_date'])
+        end_date = str(serializer.validated_data['end_date'])
         
         try:
             tempDoctor = Doctor.objects.get(user_id=tdid)
@@ -299,7 +307,11 @@ class ReassignPatientsToTempDoctorView(generics.GenericAPIView):
                 )
                 n.save()
         except:
-            pass
+            return Response(
+                {
+                    "msg": "Something went wrong"
+                }
+            )
           
         return Response(
             {
@@ -309,8 +321,7 @@ class ReassignPatientsToTempDoctorView(generics.GenericAPIView):
       
 class AppointmentView(viewsets.ModelViewSet):
     """Appointment View"""
-
-    # only authenticated users can see their patients
+    
     permission_classes = [permissions.IsAuthenticated]
     
     serializer_class = AppointmentSerializer
@@ -324,7 +335,6 @@ class AppointmentView(viewsets.ModelViewSet):
 class AvailabilityView(viewsets.ModelViewSet):
     """Availability View"""
 
-    # only authenticated users can see their patients
     permission_classes = [permissions.IsAuthenticated]
     
     serializer_class = AvailabilitySerializer
