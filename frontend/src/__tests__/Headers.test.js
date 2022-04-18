@@ -7,6 +7,7 @@ import store from "../redux/store";
 
 import Mail from "../components/layout/headerComponents/Mail";
 import Navigator from "../components/layout/headerComponents/Navigator";
+import Notification from "../components/layout/headerComponents/Notification";
 import ProfileMenu from "../components/layout/headerComponents/ProfileMenu";
 import Report from "../components/layout/headerComponents/Report";
 
@@ -46,6 +47,20 @@ test("does not render without auth", () => {
     // Should not render without correct auth
   }
 });
+
+test("does not render without auth", () => {
+    try {
+      render(
+        <Provider store={store}>
+          <Router>
+            <Notification auth={auth} />
+          </Router>
+        </Provider>
+      );
+    } catch {
+      // Should not render without correct auth
+    }
+  });
 
 test("does not render without auth", () => {
   try {

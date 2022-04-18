@@ -4,96 +4,149 @@ companion_api\admin.py
 companion_api\apps.py
     C 6:0 CompanionApiConfig - A
 companion_api\models.py
-    C 24:0 Status - A
-    C 11:0 Person - A
-    M 58:4 Status.__str__ - A
-    C 61:0 Notification - A
+    C 88:0 Appointment - A
+    M 100:4 Appointment._validate_start_end_dates - A
+    C 111:0 Availability - A
+    M 119:4 Availability._validate_start_end_dates - A
+    C 22:0 Status - A
+    C 9:0 Person - A
+    M 56:4 Status.__str__ - A
+    C 59:0 Notification - A
+    C 77:0 Address - A
+    M 107:4 Appointment.save - A
+    M 126:4 Availability.save - A
 companion_api\serializers.py
-    C 8:0 PersonSerializer - A
-    C 17:0 StatusSerializer - A
-    C 27:0 NotificationSerializer - A
+    C 6:0 ReassignSerializer - A
+    C 13:0 PersonSerializer - A
+    C 22:0 StatusSerializer - A
+    C 32:0 NotificationSerializer - A
+    C 42:0 AddressSerializer - A
+    C 51:0 AppointmentSerializer - A
+    C 60:0 AvailabilitySerializer - A
 companion_api\views.py
-    C 38:0 DoctorPatientView - A
-    C 73:0 LatestStatusView - A
-    C 87:0 SpecificLatestStatusView - A
-    C 9:0 PersonView - A
-    M 47:4 DoctorPatientView.get - A
-    C 59:0 PatientStatusView - A
-    M 81:4 LatestStatusView.get_object - A
-    M 95:4 SpecificLatestStatusView.get_object - A
-    C 104:0 NotificationView - A
-    M 15:4 PersonView.get_queryset - A
-    M 20:4 PersonView.perform_create - A
-    M 67:4 PatientStatusView.get_queryset - A
-    M 70:4 PatientStatusView.perform_create - A
-    M 112:4 NotificationView.get_queryset - A
-    M 115:4 NotificationView.perform_create - A
+    C 174:0 PatientsWithMatchingAddressView - B
+    C 117:0 SpecificLatestStatusView - A
+    M 182:4 PatientsWithMatchingAddressView.get_queryset - A
+    C 25:0 DoctorPatientView - A
+    M 125:4 SpecificLatestStatusView.get_object - A
+    C 202:0 TogglePriorityView - A
+    C 238:0 ToggleAwayView - A
+    C 275:0 ReassignPatientsToTempDoctorView - A
+    M 34:4 DoctorPatientView.get - A
+    C 69:0 OfficerImmigrantView - A
+    C 103:0 LatestStatusView - A
+    C 142:0 NotificationView - A
+    M 210:4 TogglePriorityView.update - A
+    M 246:4 ToggleAwayView.update - A
+    M 284:4 ReassignPatientsToTempDoctorView.put - A
+    C 322:0 AppointmentView - A
+    C 335:0 AvailabilityView - A
+    C 10:0 PersonView - A
+    C 51:0 PatientDoctorView - A
+    M 77:4 OfficerImmigrantView.get - A
+    C 89:0 PatientStatusView - A
+    M 111:4 LatestStatusView.get_object - A
+    M 153:4 NotificationView.perform_create - A
+    C 159:0 AddressView - A
+    M 329:4 AppointmentView.get_queryset - A
+    M 342:4 AvailabilityView.get_queryset - A
+    M 16:4 PersonView.get_queryset - A
+    M 21:4 PersonView.perform_create - A
+    M 60:4 PatientDoctorView.get - A
+    M 97:4 PatientStatusView.get_queryset - A
+    M 100:4 PatientStatusView.perform_create - A
+    M 150:4 NotificationView.get_queryset - A
+    M 167:4 AddressView.get_queryset - A
+    M 170:4 AddressView.perform_create - A
+    M 348:4 AvailabilityView.perform_create - A
 companion_api\migrations\0001_initial.py
     C 9:0 Migration - A
-companion_api\migrations\0002_status_caugh_status_chills_status_diffbreathing_and_more.py
-    C 7:0 Migration - A
-companion_api\migrations\0003_remove_status_caugh_alter_status_date.py
-    C 7:0 Migration - A
-companion_api\migrations\0004_alter_status_options_notification.py
-    C 8:0 Migration - A
-companion_api\migrations\0005_alter_notification_user.py
-    C 8:0 Migration - A
-companion_api\migrations\0006_alter_notification_user.py
-    C 8:0 Migration - A
+companion_api\migrations\0002_rename_date_appointment_start_appointment_end.py
+    C 6:0 Migration - A
 accounts\admin.py
-    C 35:0 PatientAdmin - A
-    C 15:0 DoctorAdmin - A
-    M 50:4 PatientAdmin.doctor_ - A
-    M 25:4 DoctorAdmin.user_ - A
-    M 31:4 DoctorAdmin.number_of_patients - A
-    M 44:4 PatientAdmin.user_ - A
+    C 52:0 PatientAdmin - A
+    C 14:0 DoctorAdmin - A
+    C 33:0 ImmigrationOfficerAdmin - A
+    M 67:4 PatientAdmin.doctor_ - A
+    M 24:4 DoctorAdmin.user_ - A
+    M 30:4 DoctorAdmin.number_of_patients - A
+    M 43:4 ImmigrationOfficerAdmin.user_ - A
+    M 49:4 ImmigrationOfficerAdmin.number_of_patients - A
+    M 61:4 PatientAdmin.user_ - A
 accounts\apps.py
     C 4:0 AccountsConfig - A
 accounts\models.py
     C 6:0 UserManager - A
     M 21:4 UserManager.create_superuser - A
     M 8:4 UserManager.create_user - A
-    C 53:0 Doctor - A
-    C 79:0 Patient - A
+    C 54:0 Doctor - A
+    C 81:0 ImmigrationOfficer - A
+    C 107:0 Patient - A
     C 32:0 User - A
-    M 70:4 Doctor.upload_path - A
-    M 76:4 Doctor.__str__ - A
-    M 99:4 Patient.__str__ - A
+    M 72:4 Doctor.upload_path - A
+    M 78:4 Doctor.__str__ - A
+    M 98:4 ImmigrationOfficer.upload_path - A
+    M 104:4 ImmigrationOfficer.__str__ - A
+    M 143:4 Patient.__str__ - A
+accounts\no_permission_serializers.py
+    C 7:0 RegisterDoctorTestSerializer - A
+    C 36:0 RegisterImmigrationOfficerTestSerializer - A
+    C 65:0 RegisterPatientTestSerializer - A
+    M 18:4 RegisterDoctorTestSerializer.create - A
+    M 47:4 RegisterImmigrationOfficerTestSerializer.create - A
+    M 76:4 RegisterPatientTestSerializer.create - A
+accounts\no_permission_views.py
+    C 10:0 RegisterImmigrationOfficerTestView - A
+    C 36:0 RegisterDoctorTestView - A
+    C 62:0 RegisterPatientTestView - A
+    M 13:4 RegisterImmigrationOfficerTestView.post - A
+    M 39:4 RegisterDoctorTestView.post - A
+    M 65:4 RegisterPatientTestView.post - A
 accounts\serializers.py
-    C 137:0 LoginSerializer - A
-    M 144:4 LoginSerializer.validate - A
-    C 33:0 RegisterDoctorSerializer - A
-    C 69:0 RegisterDoctorTestSerializer - A
-    C 102:0 RegisterPatientSerializer - A
+    C 147:0 LoginSerializer - B
+    M 154:4 LoginSerializer.validate - B
+    C 40:0 RegisterDoctorSerializer - A
+    C 78:0 RegisterImmigrationOfficerSerializer - A
+    C 109:0 RegisterPatientSerializer - A
     C 6:0 UserSerializer - A
-    C 21:0 DoctorSerializer - A
-    C 27:0 PatientSerializer - A
-    M 48:4 RegisterDoctorSerializer.create - A
-    M 84:4 RegisterDoctorTestSerializer.create - A
-    M 114:4 RegisterPatientSerializer.create - A
+    C 22:0 DoctorSerializer - A
+    C 28:0 ImmigrationOfficerSerializer - A
+    C 34:0 PatientSerializer - A
+    M 58:4 RegisterDoctorSerializer.create - A
+    M 89:4 RegisterImmigrationOfficerSerializer.create - A
+    M 124:4 RegisterPatientSerializer.create - A
 accounts\utils.py
-    C 4:0 TokenGen - A
-    M 5:4 TokenGen._make_hash_value - A
+    F 16:0 send_admin_approval_email - A
+    C 10:0 TokenGen - A
+    F 37:0 send_verif_email - A
+    M 11:4 TokenGen._make_hash_value - A
 accounts\views.py
-    C 82:0 ApproveDoctorView - A
-    M 84:4 ApproveDoctorView.get - A
-    C 105:0 RegisterDoctorView - A
-    C 140:0 RegisterDoctorTestView - A
-    C 168:0 RegisterPatientView - A
-    C 191:0 LoginDoctorView - A
-    C 213:0 LoginPatientView - A
-    C 235:0 UserView - A
-    C 247:0 DoctorView - A
-    C 259:0 PatientView - A
-    F 63:0 send_admin_approval_email - A
-    M 108:4 RegisterDoctorView.post - A
-    M 143:4 RegisterDoctorTestView.post - A
-    M 171:4 RegisterPatientView.post - A
-    M 194:4 LoginDoctorView.post - A
-    M 216:4 LoginPatientView.post - A
-    M 243:4 UserView.get_object - A
-    M 255:4 DoctorView.get_object - A
-    M 267:4 PatientView.get_object - A
+    C 263:0 ActivateEmailView - A
+    C 219:0 ApproveDoctorView - A
+    C 241:0 ApproveImmigrationOfficerView - A
+    M 267:4 ActivateEmailView.get - A
+    M 221:4 ApproveDoctorView.get - A
+    M 243:4 ApproveImmigrationOfficerView.get - A
+    C 13:0 RegisterDoctorView - A
+    C 46:0 RegisterImmigrationOfficerView - A
+    C 79:0 RegisterPatientView - A
+    C 106:0 LoginDoctorView - A
+    C 128:0 LoginImmigrationOfficerView - A
+    C 150:0 LoginPatientView - A
+    C 172:0 UserView - A
+    C 184:0 DoctorView - A
+    C 196:0 ImmigrationOfficerView - A
+    C 208:0 PatientView - A
+    M 16:4 RegisterDoctorView.post - A
+    M 49:4 RegisterImmigrationOfficerView.post - A
+    M 82:4 RegisterPatientView.post - A
+    M 109:4 LoginDoctorView.post - A
+    M 131:4 LoginImmigrationOfficerView.post - A
+    M 153:4 LoginPatientView.post - A
+    M 180:4 UserView.get_object - A
+    M 192:4 DoctorView.get_object - A
+    M 204:4 ImmigrationOfficerView.get_object - A
+    M 216:4 PatientView.get_object - A
 accounts\migrations\0001_initial.py
     C 10:0 Migration - A
 accounts\templatetags\frontend_site_url.py
