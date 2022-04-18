@@ -27,6 +27,7 @@ import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
 import HelpIcon from '@mui/icons-material/Help';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import SpeedIcon from "@mui/icons-material/Speed";
+import FlagIcon from '@mui/icons-material/Flag';
 
 import {
   backgroundColor,
@@ -105,8 +106,13 @@ function Navigator(props) {
       icon: <PublicIcon />,
       onClick: () => navigate(`${home}/patient/appointments`),
     },
-    { text: "US Covid19 Data", icon: <AnalyticsIcon />,
-      onClick: () => navigate(`${home}/patient/usaCovidAPI`),
+    {
+      text: "CAN Covid19 Data",
+      icon: <AnalyticsIcon />,
+      onClick: () => navigate(`${home}/patient/canada-CovidAPI`),
+    },
+    { text: "USA Covid19 Data", icon: <AnalyticsIcon />,
+      onClick: () => navigate(`${home}/patient/usa-CovidAPI`),
     },
     { text: "Request Help", icon: <HelpIcon />,
       onClick: () => navigate(`${home}/patient/requestHelp`),

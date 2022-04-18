@@ -29,11 +29,12 @@ import PatientStatus from "./pages/home/PatientStatus";
 import Patients from "./pages/home/Patients";
 import Immigrants from "./pages/home/Immigrants";
 import AddressTracing from "./pages/home/AddressTracing";
-import CovidAPI from "./pages/home/CovidAPI";
 import RequestHelp from "./pages/RequestHelpPage/RequestHelp";
 import QRCodeDisplay from "./pages/home/QRCode/QRCodeDisplay";
 import QRCodeInfo from "./pages/home/QRCode/QRCodeInfo";
 import PatientAppointment from "./pages/home/PatientAppointment";
+import USACovidAPI from "./pages/home/USACovidAPI";
+import CANCovidAPI from "./pages/home/CANCovidAPI";
 
 
 function App() {
@@ -60,7 +61,9 @@ function App() {
               <Route path="rapid-test-result" element={<RapidTest />} />
               <Route path="qr-code" element={<QRCodeDisplay />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />
-              <Route path="patient/usaCovidAPI" element={<CovidAPI />} />
+              
+              <Route path="patient/canada-CovidAPI" element={<CANCovidAPI />} />
+              <Route path="patient/usa-CovidAPI" element={<USACovidAPI />} />
               <Route path="patient/requestHelp" element={<RequestHelp />} />
 
               <Route path="settings" element={<Settings />} />
