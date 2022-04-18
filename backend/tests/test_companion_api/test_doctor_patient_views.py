@@ -73,3 +73,20 @@ class TestDoctorPatientViews(TestSetUp):
         
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res.data['first_name'], self.correct_doctor_data['first_name'])
+
+    def test_doctor_can_get_all_patients_when_one_temp_patient(self):
+        """Doctor_Patient: Doctor can get their temp patients when there is one"""
+
+        res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
+        
+        doctor_pk = res.data['user']['id']
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + res.data['token'])
+
+        res = self.client.post(self.register_patient_url, self.correct_patient_data, format='json')
+        patient_pk = res.data['user']['id']
+        Doctor.objects.get(user_id=doctor_pk).temp_patients.add(Patient.objects.get(user_id=patient_pk))
+
+        res = self.client.get(self.patients_url)
+        
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.data), 1)

@@ -1,7 +1,10 @@
+from django.urls import reverse
 from companion_api.models import Person
-from accounts.models import User
+from accounts.models import Doctor, Patient, User
 from faker import Faker
 from .test_setup import TestSetUp
+from knox.models import AuthToken
+
 
 
 import datetime
@@ -11,6 +14,7 @@ class ModelTestCases(TestSetUp):
     """This is a test case which tests that the attributes of the Person Model are properly set up."""
 
     def setUp(self):
+        super(ModelTestCases, self).setUp()
         Person.objects.create(
             first_name="Brandon",
             last_name="Takli",
@@ -63,3 +67,36 @@ class ModelTestCases(TestSetUp):
         #Ensure exception is thrown
         with self.assertRaises(ValueError):
             User.objects.create_superuser(email,self.fake.password(),is_superuser=False)
+
+    def test_superuser_can_access_ReassignPatientsToTempDoctorView(self):
+        """Admin: Ensure superuser (Admin) can access ReassignPatientsToTempDoctorView""" 
+        #Create 2 doctors
+        resDoc1 = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
+        resDoc2 = self.client.post(self.register_doctor_url, self.correct_doctor_data2, format='json')
+
+        id1 = resDoc1.data['user']['id']
+        id2 = resDoc2.data['user']['id']
+
+        #Create a patient
+        res = self.client.post(self.register_patient_url, self.correct_patient_data, format='json')
+        patient_pk = res.data['user']['id']
+        Doctor.objects.get(user_id=id1).patients.add(Patient.objects.get(user_id=patient_pk))
+
+        email = "admin@email.com"
+        password = self.fake.password()
+        
+        json_data = {
+            "doctor": id1,
+            "temp_doctor": id2,
+            "start_date": "2022-04-11",
+            "end_date": "2022-04-15"
+        }
+
+        superuser = User.objects.create_superuser(email,password)
+        token = AuthToken.objects.create(superuser)[1]
+        #self.client.login(email=email,password=password)
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + token)
+        res1 = self.client.put(reverse("companion_api:reassign_patients"),json_data)
+
+        self.assertEqual(res1.status_code,200)
+        
