@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { registerImmigrationOfficer } from "../../redux/actions/authActions";
 import { createMessage } from "../../redux/actions/messageActions";
-import Copyright from "../../components/layout/Copyright";
+import CopyrightAuth from "../../components/layout/CopyrightAuth";
 
 // MUI
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -310,7 +310,7 @@ function ImmigrationOfficerSignUp(props) {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <CopyrightAuth sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

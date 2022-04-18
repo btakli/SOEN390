@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-import Copyright from "../../components/layout/Copyright";
+import CopyrightAuth from "../../components/layout/CopyrightAuth";
 
 // MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -120,7 +120,7 @@ export default function PreLogin() {
               >
                 Next
               </Button>
-              <Copyright sx={{ mt: 5 }} />
+              <CopyrightAuth sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>

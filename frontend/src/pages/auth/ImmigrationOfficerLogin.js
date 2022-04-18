@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginImmigrationOfficer } from "../../redux/actions/authActions";
-import Copyright from "../../components/layout/Copyright";
+import CopyrightAuth from "../../components/layout/CopyrightAuth";
 
 // MUI
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
@@ -112,7 +112,7 @@ function ImmigrationOfficerLogin(props) {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <CopyrightAuth sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

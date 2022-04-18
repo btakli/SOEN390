@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginDoctor } from "../../redux/actions/authActions";
-import Copyright from "../../components/layout/Copyright";
+import CopyrightAuth from "../../components/layout/CopyrightAuth";
 
 // MUI
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
@@ -113,7 +113,7 @@ function DoctorLogin(props) {
           </Box>
         </Box>
       </Container>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
+      <CopyrightAuth sx={{ mt: 8, mb: 4 }} />
     </ThemeProvider>
   );
 }
