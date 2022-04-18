@@ -1,27 +1,29 @@
-Name                                              Stmts   Miss Branch BrPart  Cover   Missing
----------------------------------------------------------------------------------------------
-__init__.py                                           0      0      0      0   100%
-accounts\__init__.py                                  0      0      0      0   100%
-accounts\admin.py                                    38      9      6      0    75%   26-29, 32, 45-48, 51-57
-accounts\apps.py                                      4      0      2      0   100%
-accounts\migrations\0001_initial.py                   9      0      2      0   100%
-accounts\migrations\0002_patient_is_priority.py       4      0      2      0   100%
-accounts\migrations\__init__.py                       0      0      0      0   100%
-accounts\models.py                                   61      4     14      0    95%   71-72, 77, 101
-accounts\serializers.py                              66     10     30      1    89%   49-65, 154
-accounts\templatetags\frontend_site_url.py            6      2      0      0    67%   12-13
-accounts\urls.py                                      6      0      0      0   100%
-accounts\utils.py                                     5      1      2      0    86%   6
-accounts\views.py                                    92     22     20      0    79%   64-80, 85-102, 109-124, 244
-companion_api\__init__.py                             0      0      0      0   100%
-companion_api\admin.py                               16      4      4      0    70%   16-22
-companion_api\apps.py                                 4      0      2      0   100%
-companion_api\migrations\0001_initial.py              8      0      2      0   100%
-companion_api\migrations\__init__.py                  0      0      0      0   100%
-companion_api\models.py                              46      1     10      0    98%   59
-companion_api\serializers.py                         21      0     16      0   100%
-companion_api\urls.py                                12      0      0      0   100%
-companion_api\views.py                               85     26     26      0    71%   17, 22, 83-86, 114, 117, 128, 131, 143-160, 172-178
-manage.py                                            12      2      2      1    79%   12-13, 21->exit
----------------------------------------------------------------------------------------------
-TOTAL                                               495     81    140      2    85%
+Name                                                                             Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------------------------------------------
+__init__.py                                                                          0      0      0      0   100%
+accounts\__init__.py                                                                 0      0      0      0   100%
+accounts\admin.py                                                                   49     12      8      0    75%   25-28, 31, 44-47, 50, 62-65, 68-74
+accounts\apps.py                                                                     4      0      2      0   100%
+accounts\migrations\0001_initial.py                                                  9      0      2      0   100%
+accounts\migrations\__init__.py                                                      0      0      0      0   100%
+accounts\models.py                                                                  85      5     16      0    95%   73-74, 99-100, 144
+accounts\no_permission_serializers.py                                               42      0     12      0   100%
+accounts\no_permission_views.py                                                     33      0      6      0   100%
+accounts\serializers.py                                                             83     32     36      0    70%   59-75, 90-106, 125-143, 165-172
+accounts\templatetags\frontend_site_url.py                                           6      2      0      0    67%   12-13
+accounts\urls.py                                                                     7      0      0      0   100%
+accounts\utils.py                                                                   23     10      2      0    60%   17-34, 38-52
+accounts\views.py                                                                  124     28     34      4    80%   17-31, 50-64, 83-91, 181, 205, 239, 261, 275->278, 290
+companion_api\__init__.py                                                            0      0      0      0   100%
+companion_api\admin.py                                                              17      4      4      0    71%   16-22
+companion_api\apps.py                                                                4      0      2      0   100%
+companion_api\migrations\0001_initial.py                                             8      0      2      0   100%
+companion_api\migrations\0002_rename_date_appointment_start_appointment_end.py       4      0      2      0   100%
+companion_api\migrations\__init__.py                                                 0      0      0      0   100%
+companion_api\models.py                                                             72      5     22      4    90%   57, 102, 105, 121, 124
+companion_api\serializers.py                                                        34      0     26      0   100%
+companion_api\urls.py                                                               14      0      0      0   100%
+companion_api\views.py                                                             182     43     52      5    77%   17, 22, 45-47, 112-115, 133, 155, 188-189, 192-198, 215-216, 251-264, 285-316
+manage.py                                                                           12      2      2      1    79%   12-13, 21->exit
+----------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                              812    143    230     14    84%
