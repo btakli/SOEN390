@@ -1,7 +1,5 @@
 import { React, Fragment, useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import { Badge } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 
 import ContactForm from "../../forms/ContactForm";

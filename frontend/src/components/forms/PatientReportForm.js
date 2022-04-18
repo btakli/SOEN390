@@ -5,20 +5,25 @@ import { connect } from "react-redux";
 import { createMessage } from "../../redux/actions/messageActions";
 
 // MUI
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
 import ReportIcon from "@mui/icons-material/Report";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
-import InputLabel from "@mui/material/InputLabel";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Avatar,
+  Typography,
+  CssBaseline,
+  InputLabel,
+  TextField,
+  Box,
+  Select,
+  MenuItem,
+  Container,
+  Button,
+} from "@mui/material";
 import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
@@ -112,29 +117,33 @@ function PatientReportForm(props) {
                 <Typography component="h1" variant="h5">
                   Report Form
                 </Typography>
-                {(isEmpty(props.doctor)) ?
+                {isEmpty(props.doctor) ? (
                   <Fragment>
-                    <Typography variant="h3">
-                      No Doctor!
-                    </Typography>
+                    <Typography variant="h3">No Doctor!</Typography>
                     <Typography variant="h4">
                       Please wait to be assigned.
                     </Typography>
                   </Fragment>
-                  :
+                ) : (
                   <Fragment>
                     <Box sx={{ display: "none" }}>
                       <TextField
                         name="patient_name"
                         value={emailData.patient_name}
                       />
-                      <TextField name="patient_id" value={emailData.patient_id} />
+                      <TextField
+                        name="patient_id"
+                        value={emailData.patient_id}
+                      />
                       <TextField
                         name="patient_email"
                         value={emailData.patient_email}
                       />
                       <TextField name="reply_to" value={emailData.reply_to} />
-                      <TextField name="admin_email" value={emailData.admin_email} />
+                      <TextField
+                        name="admin_email"
+                        value={emailData.admin_email}
+                      />
                     </Box>
                     <InputLabel id="doctor-label">
                       Doctor Involved in Incident
@@ -149,7 +158,9 @@ function PatientReportForm(props) {
                       onChange={onChange}
                       sx={{ mt: 0, mb: 3 }}
                     >
-                      <MenuItem value={`Dr. ${props.doctor.first_name} ${props.doctor.last_name} (${props.doctor.user})`}>
+                      <MenuItem
+                        value={`Dr. ${props.doctor.first_name} ${props.doctor.last_name} (${props.doctor.user})`}
+                      >
                         {`Dr. ${props.doctor.first_name} ${props.doctor.last_name}`}
                       </MenuItem>
                     </Select>
@@ -167,9 +178,15 @@ function PatientReportForm(props) {
                       <MenuItem value={"Misconduct"}>Misconduct</MenuItem>
                       <MenuItem value={"Harassment"}>Harassment</MenuItem>
                       <MenuItem value={"Procedural"}>Procedural Error</MenuItem>
-                      <MenuItem value={"Misinformation"}>Misinformation</MenuItem>
-                      <MenuItem value={"Prescription"}>Harmful Prescription</MenuItem>
-                      <MenuItem value={"Professionalism"}>Professionalism</MenuItem>
+                      <MenuItem value={"Misinformation"}>
+                        Misinformation
+                      </MenuItem>
+                      <MenuItem value={"Prescription"}>
+                        Harmful Prescription
+                      </MenuItem>
+                      <MenuItem value={"Professionalism"}>
+                        Professionalism
+                      </MenuItem>
                       <MenuItem value={"Negligence"}>Negligence</MenuItem>
                       <MenuItem value={"Misc"}>Other</MenuItem>
                     </Select>
@@ -196,7 +213,7 @@ function PatientReportForm(props) {
                       File Report With Administrator
                     </Button>
                   </Fragment>
-                }
+                )}
               </Box>
             </Container>
           </Box>
@@ -204,16 +221,16 @@ function PatientReportForm(props) {
       </Dialog>
     </ThemeProvider>
   );
-};
+}
 
 PatientReportForm.propTypes = {
   auth: PropTypes.object.isRequired,
-  doctor: PropTypes.object.isRequired
+  doctor: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
-  doctor: state.patientReducer.doctor
+  doctor: state.patientReducer.doctor,
 });
 
 export default connect(mapStateToProps, { createMessage })(PatientReportForm);

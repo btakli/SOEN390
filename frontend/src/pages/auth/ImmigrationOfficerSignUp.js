@@ -5,19 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 import { registerImmigrationOfficer } from "../../redux/actions/authActions";
 import { createMessage } from "../../redux/actions/messageActions";
+import Copyright from "../../components/layout/Copyright";
 
 // MUI
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Divider,
@@ -25,30 +16,21 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Input,
+  Typography,
+  Container,
 } from "@mui/material";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://youtu.be/dQw4w9WgXcQ">
-        CovidTracker
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
 function ImmigrationOfficerSignUp(props) {
-  
   const { redirect } = props;
 
   let navigate = useNavigate();
@@ -64,7 +46,7 @@ function ImmigrationOfficerSignUp(props) {
     address: "",
     city: "",
     postal_code: "",
-    proof: ""
+    proof: "",
   };
 
   // Store form data in state
@@ -97,7 +79,7 @@ function ImmigrationOfficerSignUp(props) {
       address,
       city,
       postal_code,
-      proof
+      proof,
     } = state;
 
     if (password !== confirm_password) {
@@ -136,7 +118,7 @@ function ImmigrationOfficerSignUp(props) {
         gender,
         address,
         city,
-        postal_code
+        postal_code,
       };
 
       props.registerImmigrationOfficer(newUser);
@@ -339,4 +321,6 @@ ImmigrationOfficerSignUp.propTypes = {
   createMessage: PropTypes.func.isRequired,
 };
 
-export default connect(null, { registerImmigrationOfficer, createMessage })(ImmigrationOfficerSignUp);
+export default connect(null, { registerImmigrationOfficer, createMessage })(
+  ImmigrationOfficerSignUp
+);

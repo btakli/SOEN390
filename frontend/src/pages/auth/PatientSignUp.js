@@ -5,46 +5,32 @@ import { useNavigate } from "react-router-dom";
 
 import { registerPatient } from "../../redux/actions/authActions";
 import { createMessage } from "../../redux/actions/messageActions";
+import Copyright from "../../components/layout/Copyright";
 
 // MUI
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Select from "@mui/material/Select";
-import { MenuItem, InputLabel, FormControl } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://youtu.be/dQw4w9WgXcQ">
-        CovidTracker
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import {
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Select,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 
 const theme = createTheme();
 
 function PatientSignUp(props) {
-
   const { redirect } = props;
 
   let navigate = useNavigate();
@@ -61,24 +47,24 @@ function PatientSignUp(props) {
     city: "",
     postal_code: "",
     is_immigrant: false,
-    immigration_status: ""
+    immigration_status: "",
   };
 
   // Store form data in state
   const [state, setState] = useState(emptyForm);
-  
+
   // Change form data in state at each change
-  const handleChange = (e) =>(
+  const handleChange = (e) =>
     setState((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    })));
+    }));
 
-  const handleCheckboxChange = (e) =>(
+  const handleCheckboxChange = (e) =>
     setState((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.checked,
-    })));
+    }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,7 +81,7 @@ function PatientSignUp(props) {
       city,
       postal_code,
       is_immigrant,
-      immigration_status
+      immigration_status,
     } = state;
 
     if (password !== confirm_password) {
@@ -112,7 +98,7 @@ function PatientSignUp(props) {
         city,
         postal_code,
         is_immigrant,
-        immigration_status
+        immigration_status,
       };
       props.registerPatient(newUser);
       navigate(`${redirect}`);
@@ -179,7 +165,7 @@ function PatientSignUp(props) {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth required >
+                <FormControl fullWidth required>
                   <InputLabel id="gender">Gender</InputLabel>
                   <Select
                     required
@@ -266,26 +252,39 @@ function PatientSignUp(props) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel id="is_immigrant" name="is_immigrant" control={<Checkbox/>} label="I am an immigrant" value={state.is_immigrant} onChange={handleCheckboxChange}/>
+                <FormControlLabel
+                  id="is_immigrant"
+                  name="is_immigrant"
+                  control={<Checkbox />}
+                  label="I am an immigrant"
+                  value={state.is_immigrant}
+                  onChange={handleCheckboxChange}
+                />
               </Grid>
 
-              <Grid item xs={12}> {(state.is_immigrant) ? (
-                <FormControl fullWidth required >
-                  <InputLabel id="immigration_status">Immigration Status</InputLabel>
-                  <Select
-                    required
-                    fullWidth
-                    id="immigration_status"
-                    name="immigration_status"
-                    label="Immigration Status"
-                    value={state.immigration_status}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={"Immigrant"}>Immigrant</MenuItem>
-                    <MenuItem value={"Non-permanent resident"}>Non-permanent resident</MenuItem>
-                  </Select>
-                </FormControl>
-                ) : (null)}
+              <Grid item xs={12}>
+                {" "}
+                {state.is_immigrant ? (
+                  <FormControl fullWidth required>
+                    <InputLabel id="immigration_status">
+                      Immigration Status
+                    </InputLabel>
+                    <Select
+                      required
+                      fullWidth
+                      id="immigration_status"
+                      name="immigration_status"
+                      label="Immigration Status"
+                      value={state.immigration_status}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={"Immigrant"}>Immigrant</MenuItem>
+                      <MenuItem value={"Non-permanent resident"}>
+                        Non-permanent resident
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                ) : null}
               </Grid>
             </Grid>
             <Button

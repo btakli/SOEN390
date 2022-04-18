@@ -1,5 +1,5 @@
 import { React, Fragment, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { getPatients } from "../../../redux/actions/patientActions";
@@ -8,16 +8,20 @@ import { getPatientLatestStatus } from "../../../redux/actions/statusActions";
 import PropTypes from "prop-types";
 
 // MUI
-import { Typography, Card, CardContent, Divider } from "@mui/material";
-
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import ErrorIcon from "@mui/icons-material/Error";
+import {
+  Typography,
+  Card,
+  CardContent,
+  Divider,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 function QRCodeInfo(props) {
   // TODO : History management to redirect after login
@@ -41,7 +45,8 @@ function QRCodeInfo(props) {
       <Card>
         <CardContent>
           <Typography variant="h5" align="left" gutterBottom component="div">
-            You must be logged in as a Doctor or Immigration Officer to view patient information
+            You must be logged in as a Doctor or Immigration Officer to view
+            patient information
           </Typography>
         </CardContent>
       </Card>
@@ -140,6 +145,7 @@ const mapStateToProps = (state) => ({
   status: state.statusReducer.latestStatus,
 });
 
-export default connect(mapStateToProps, { getPatients, getPatientLatestStatus })(
-  QRCodeInfo
-);
+export default connect(mapStateToProps, {
+  getPatients,
+  getPatientLatestStatus,
+})(QRCodeInfo);

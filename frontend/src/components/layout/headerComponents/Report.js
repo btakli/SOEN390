@@ -1,8 +1,7 @@
 import { React, Fragment, useState } from "react";
 import { connect } from "react-redux";
 
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+import { IconButton, Tooltip } from "@mui/material";
 import ReportIcon from "@mui/icons-material/Report";
 
 import DoctorReportForm from "../../forms/DoctorReportForm";
@@ -22,11 +21,29 @@ const Report = (props) => {
 
   const ReportForm = () => {
     if (props.auth.user.is_patient) {
-      return <PatientReportForm open={open} onClose={handleDialogClose} admin_email={props.admin_email} />;
+      return (
+        <PatientReportForm
+          open={open}
+          onClose={handleDialogClose}
+          admin_email={props.admin_email}
+        />
+      );
     } else if (props.auth.user.is_doctor) {
-      return <DoctorReportForm open={open} onClose={handleDialogClose} admin_email={props.admin_email} />;
+      return (
+        <DoctorReportForm
+          open={open}
+          onClose={handleDialogClose}
+          admin_email={props.admin_email}
+        />
+      );
     } else if (props.auth.user.is_immigration_officer) {
-      return <OfficerReportForm open={open} onClose={handleDialogClose} admin_email={props.admin_email} />;
+      return (
+        <OfficerReportForm
+          open={open}
+          onClose={handleDialogClose}
+          admin_email={props.admin_email}
+        />
+      );
     } else {
       return null;
     }

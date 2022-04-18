@@ -1,52 +1,39 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
+import Copyright from "../../components/layout/Copyright";
+
 // MUI
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import { Divider, FormControl, Radio, RadioGroup } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Divider,
+  FormControl,
+  Radio,
+  RadioGroup,
+  Button,
+  CssBaseline,
+  FormControlLabel,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+} from "@mui/material";
 
-import Image from '../../media/preLoginImage.jpg';
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://youtu.be/dQw4w9WgXcQ">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Image from "../../media/preLoginImage.jpg";
 
 const theme = createTheme();
 
 export default function PreLogin() {
-
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if(data.get("patient") === "patient"){
+    if (data.get("patient") === "patient") {
       navigate("/patient/login");
-    } else if(data.get("doctor") === "doctor"){
+    } else if (data.get("doctor") === "doctor") {
       navigate("/doctor/login");
-    } else if(data.get("immigrationOfficer")=== "immigrationOfficer"){
+    } else if (data.get("immigrationOfficer") === "immigrationOfficer") {
       navigate("/immigration-officer/login");
     }
   };

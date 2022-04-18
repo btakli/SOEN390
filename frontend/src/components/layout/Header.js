@@ -6,16 +6,18 @@ import Navigator from "./headerComponents/Navigator";
 import Mail from "./headerComponents/Mail";
 import ProfileMenu from "./headerComponents/ProfileMenu";
 import Notification from "./headerComponents/Notification";
-import Report from './headerComponents/Report';
+import Report from "./headerComponents/Report";
 import EmergencyLeave from "./headerComponents/EmergencyLeave";
 
 // MUI
-import Toolbar from "@mui/material/Toolbar";
-import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
+import {
+  Grid,
+  Toolbar,
+  Tooltip,
+  Button,
+  Typography,
+  AppBar,
+} from "@mui/material";
 
 function Header(props) {
   const handleLogout = (e) => {
@@ -51,7 +53,7 @@ function Header(props) {
             <Notification />
           </Grid>
           <Grid item>
-            <Report admin_email={props.admin_email} /> 
+            <Report admin_email={props.admin_email} />
           </Grid>
           <Grid item>
             <ProfileMenu home={props.home} />

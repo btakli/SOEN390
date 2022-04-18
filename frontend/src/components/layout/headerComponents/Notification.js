@@ -1,19 +1,20 @@
 import { React, Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getNotifications, deleteNotification } from "../../../redux/actions/notifActions";
+import {
+  getNotifications,
+  deleteNotification,
+} from "../../../redux/actions/notifActions";
 import { createMessage } from "../../../redux/actions/messageActions";
 
 // MUI
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import WarningIcon from '@mui/icons-material/Warning';
+import WarningIcon from "@mui/icons-material/Warning";
 import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import EventIcon from "@mui/icons-material/Event";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
-import MarkunreadIcon from '@mui/icons-material/Markunread';
+import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
+import MarkunreadIcon from "@mui/icons-material/Markunread";
 import {
   Menu,
   ListItem,
@@ -21,7 +22,9 @@ import {
   ListItemText,
   Stack,
   IconButton,
-  Badge
+  Badge,
+  Tooltip,
+  Typography,
 } from "@mui/material";
 
 function Notification(props) {
@@ -42,7 +45,7 @@ function Notification(props) {
 
   const handleClick = (id) => {
     let newSet = new Set(readNotifIds);
-    if (newSet.has(id)){
+    if (newSet.has(id)) {
       newSet.delete(id);
     } else {
       newSet.add(id);
@@ -56,7 +59,7 @@ function Notification(props) {
         props.deleteNotification(id);
       });
       props.createMessage({
-        deleteNotif: 'Notifications Marked as Read'
+        deleteNotif: "Notifications Marked as Read",
       });
       setReadNotifIds(new Set());
       props.getNotifications();
@@ -66,14 +69,17 @@ function Notification(props) {
   return (
     <Fragment>
       <Tooltip title="Notifications">
-      
-        <IconButton 
+        <IconButton
           size="large"
           aria-label="notifs"
           color="inherit"
           onClick={handleOpenNotif}
         >
-          <Badge badgeContent={props.notifs.length} color="error" sx={{right: 7}}>
+          <Badge
+            badgeContent={props.notifs.length}
+            color="error"
+            sx={{ right: 7 }}
+          >
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -97,7 +103,13 @@ function Notification(props) {
       >
         <Stack direction="row">
           <Typography
-            sx={{ px: "20px", py: "5px", bgcolor: "#101F33", color: "#fff", width: "50%"}}
+            sx={{
+              px: "20px",
+              py: "5px",
+              bgcolor: "#101F33",
+              color: "#fff",
+              width: "50%",
+            }}
             textAlign="left"
             variant="h6"
             component="div"
@@ -106,31 +118,36 @@ function Notification(props) {
           </Typography>
 
           <Typography
-            sx={{ px: "20px", py: "5px", bgcolor: "#101F33", color: "#fff", width: "40%"}}
+            sx={{
+              px: "20px",
+              py: "5px",
+              bgcolor: "#101F33",
+              color: "#fff",
+              width: "40%",
+            }}
             textAlign="right"
             variant="h6"
             component="div"
           >
             Read ({readNotifIds.size})
-            
           </Typography>
           <Typography
-            sx={{ pl: "5px", bgcolor: "#101F33", color: "#fff", width: "10%"}}
+            sx={{ pl: "5px", bgcolor: "#101F33", color: "#fff", width: "10%" }}
             textAlign="left"
             variant="h6"
             component="div"
           >
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={submitReadNotifs}
-            >
-              { (readNotifIds.size > 0) ? <MarkEmailReadIcon /> : <MarkunreadIcon /> }
+            <IconButton edge="start" color="inherit" onClick={submitReadNotifs}>
+              {readNotifIds.size > 0 ? (
+                <MarkEmailReadIcon />
+              ) : (
+                <MarkunreadIcon />
+              )}
             </IconButton>
           </Typography>
         </Stack>
-        
-        { (props.notifs.length == 0) && 
+
+        {props.notifs.length == 0 && (
           <ListItem
             divider
             disablePadding
@@ -144,33 +161,41 @@ function Notification(props) {
                 sx={{ pl: "20px" }}
               />
             </ListItemButton>
-          </ListItem> }
-
-        {props.notifs.slice(0).reverse().map((item, i) => (
-          <ListItem
-            key={i}
-            divider
-            disablePadding
-            sx={{ minWidth: "400px", maxWidth: "400px", bgcolor: `${(readNotifIds.has(item.id))? "#dce9fa": "white"}` }}
-          >
-            <ListItemButton onClick={() => handleClick(item.id)}>
-              {item.type === "Email" ? (
-                <EmailIcon />
-              ) : item.type === "Assignment" ? (
-                <PersonIcon />
-              ) : item.type === "InfectedAlert" ? (
-                <WarningIcon />
-              ) : (
-                <EventIcon />
-              )}
-              <ListItemText
-                primary={item.subject}
-                secondary={item.message}
-                sx={{ pl: "20px" }}
-              />
-            </ListItemButton>
           </ListItem>
-        ))}
+        )}
+
+        {props.notifs
+          .slice(0)
+          .reverse()
+          .map((item, i) => (
+            <ListItem
+              key={i}
+              divider
+              disablePadding
+              sx={{
+                minWidth: "400px",
+                maxWidth: "400px",
+                bgcolor: `${readNotifIds.has(item.id) ? "#dce9fa" : "white"}`,
+              }}
+            >
+              <ListItemButton onClick={() => handleClick(item.id)}>
+                {item.type === "Email" ? (
+                  <EmailIcon />
+                ) : item.type === "Assignment" ? (
+                  <PersonIcon />
+                ) : item.type === "InfectedAlert" ? (
+                  <WarningIcon />
+                ) : (
+                  <EventIcon />
+                )}
+                <ListItemText
+                  primary={item.subject}
+                  secondary={item.message}
+                  sx={{ pl: "20px" }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
       </Menu>
     </Fragment>
   );
@@ -184,4 +209,8 @@ const mapStateToProps = (state) => ({
   notifs: state.notifReducer.notifications,
 });
 
-export default connect(mapStateToProps, { getNotifications, deleteNotification, createMessage })(Notification);
+export default connect(mapStateToProps, {
+  getNotifications,
+  deleteNotification,
+  createMessage,
+})(Notification);
