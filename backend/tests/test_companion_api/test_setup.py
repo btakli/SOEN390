@@ -201,6 +201,14 @@ class TestSetUp(APITestCase):
             }
         }
 
+        self.correct_doctor_data2 = {
+            'first_name': self.fake.first_name(),
+            'user': {
+               'email': self.fake.email(),
+                'password': self.fake.password() 
+            }
+        }
+
         # IMMIGRATION OFFICER DATA
 
         self.correct_immigration_officer_data = {
