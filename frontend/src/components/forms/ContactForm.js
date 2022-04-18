@@ -8,21 +8,26 @@ import { createMessage } from "../../redux/actions/messageActions";
 import { addNotification } from "../../redux/actions/notifActions";
 
 // MUI
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
 import DraftsIcon from "@mui/icons-material/Drafts";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
-import InputLabel from "@mui/material/InputLabel";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Slider from "@mui/material/Slider";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Avatar,
+  Typography,
+  CssBaseline,
+  InputLabel,
+  TextField,
+  Box,
+  Select,
+  MenuItem,
+  Slider,
+  Container,
+  Button,
+} from "@mui/material";
 import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
@@ -53,15 +58,17 @@ const marks = [
 const getFormattedDate = (date) => {
   const day = date.getDate();
   const year = date.getFullYear();
-  const month = date.toLocaleString('default', { month: 'long' });
-  const time = `${date.getHours()}:${date.getMinutes() <= 9 ? '0' + date.getMinutes() : date.getMinutes()}`;
+  const month = date.toLocaleString("default", { month: "long" });
+  const time = `${date.getHours()}:${
+    date.getMinutes() <= 9 ? "0" + date.getMinutes() : date.getMinutes()
+  }`;
 
-  return (`${month} ${day}, ${year} @ ${time}`);
+  return `${month} ${day}, ${year} @ ${time}`;
 };
 
 const getPatientId = (e, patients) => {
-  return patients.find(({ email }) => e === email ).user;
-};  
+  return patients.find(({ email }) => e === email).user;
+};
 
 function isEmpty(obj) {
   for (var prop in obj) {
@@ -72,14 +79,14 @@ function isEmpty(obj) {
   return true;
 }
 
-function getUserTitle(user){
-  if(user.is_doctor){
+function getUserTitle(user) {
+  if (user.is_doctor) {
     return "Dr. ";
-  } 
+  }
 
-  if(user.is_immigration_officer){
+  if (user.is_immigration_officer) {
     return "Officer ";
-  } 
+  }
 
   return "";
 }
@@ -92,23 +99,28 @@ function ContactForm(props) {
     urgency: 0,
     email: "",
     message: "",
-    sender_name: `${getUserTitle(props.auth.user)}${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    sender_name: `${getUserTitle(props.auth.user)}${
+      props.auth.userData.first_name
+    } ${props.auth.userData.last_name}`,
     sender_id: props.auth.userData.user,
-    reply_to: props.auth.user.email
+    reply_to: props.auth.user.email,
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
 
   useEffect(() => {
-    if (props.auth.user.is_patient){
+    if (props.auth.user.is_patient) {
       props.getDoctor();
     }
   }, []);
 
   const sendFilter = (e) => {
-    if (props.auth.user.is_patient){
+    if (props.auth.user.is_patient) {
       sendEmail(e, props.doctor.user);
-    } else if (props.auth.user.is_doctor || props.auth.user.is_immigration_officer){
+    } else if (
+      props.auth.user.is_doctor ||
+      props.auth.user.is_immigration_officer
+    ) {
       sendEmail(e, getPatientId(emailData.email, props.patients));
     }
   };
@@ -135,16 +147,20 @@ function ContactForm(props) {
       type: "Email",
       user: notifId,
       subject: "Message Sent",
-      message: `[${getFormattedDate(new Date())}] ${getUserTitle(props.auth.user)}${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you a message. Please check your email.`
+      message: `[${getFormattedDate(new Date())}] ${getUserTitle(
+        props.auth.user
+      )}${props.auth.userData["first_name"]} ${
+        props.auth.userData["last_name"]
+      } has sent you a message. Please check your email.`,
     });
 
     onClose();
   };
 
   const onChange = (e) => {
-    setEmailData(prevEmailData => ({
-        ...prevEmailData,
-        [e.target.name]: e.target.value
+    setEmailData((prevEmailData) => ({
+      ...prevEmailData,
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -167,8 +183,8 @@ function ContactForm(props) {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent 
-          sx={{ 
+        <DialogContent
+          sx={{
             mt: 2,
           }}
           align="center"
@@ -179,23 +195,24 @@ function ContactForm(props) {
           <Typography component="h1" variant="h5">
             Contact Form
           </Typography>
-          {(isEmpty(props.doctor) && props.patients.length == 0) ?
+          {isEmpty(props.doctor) && props.patients.length == 0 ? (
             <Fragment>
               <Typography variant="h3">
-                No {(props.auth.user.is_doctor)? "Patients":"Doctor"}!
+                No {props.auth.user.is_doctor ? "Patients" : "Doctor"}!
               </Typography>
               <Typography variant="h4">
-                Please wait to be assigned{(props.auth.user.is_doctor)? " patients":""}.
+                Please wait to be assigned
+                {props.auth.user.is_doctor ? " patients" : ""}.
               </Typography>
             </Fragment>
-            :
+          ) : (
             <Box component="form" onSubmit={sendFilter}>
               <Container component="main" maxWidth="sm">
                 <CssBaseline />
                 <Box
                   sx={{
                     marginTop: 2,
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                 >
                   <Box sx={{ display: "none" }}>
@@ -203,14 +220,8 @@ function ContactForm(props) {
                       name="sender_name"
                       value={emailData.sender_name}
                     />
-                    <TextField
-                      name="sender_id"
-                      value={emailData.sender_id}
-                    />
-                    <TextField
-                      name="reply_to"
-                      value={emailData.reply_to}
-                    />
+                    <TextField name="sender_id" value={emailData.sender_id} />
+                    <TextField name="reply_to" value={emailData.reply_to} />
                   </Box>
                   <TextField
                     margin="normal"
@@ -244,16 +255,17 @@ function ContactForm(props) {
                     onChange={onChange}
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    {(props.auth.user.is_patient) ?
+                    {props.auth.user.is_patient ? (
                       <MenuItem value={props.doctor.email}>
                         {`Dr. ${props.doctor.first_name} ${props.doctor.last_name}`}
                       </MenuItem>
-                      :
+                    ) : (
                       props.patients.map((patient, i) => (
                         <MenuItem key={i} value={patient.email}>
                           {`${patient.first_name} ${patient.last_name}`}
                         </MenuItem>
-                    ))}
+                      ))
+                    )}
                   </Select>
                   <TextField
                     name="message"
@@ -277,13 +289,12 @@ function ContactForm(props) {
                 </Box>
               </Container>
             </Box>
-          }
-          
+          )}
         </DialogContent>
       </Dialog>
     </ThemeProvider>
   );
-};
+}
 
 ContactForm.propTypes = {
   auth: PropTypes.object.isRequired,
@@ -294,7 +305,11 @@ ContactForm.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
   doctor: state.patientReducer.doctor,
-  patients: state.patientReducer.patients
+  patients: state.patientReducer.patients,
 });
 
-export default connect(mapStateToProps, { getDoctor, createMessage, addNotification })(ContactForm);
+export default connect(mapStateToProps, {
+  getDoctor,
+  createMessage,
+  addNotification,
+})(ContactForm);

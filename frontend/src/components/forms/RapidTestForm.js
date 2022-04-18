@@ -7,27 +7,32 @@ import { createMessage } from "../../redux/actions/messageActions";
 import { addNotification } from "../../redux/actions/notifActions";
 
 // MUI
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
 import DraftsIcon from "@mui/icons-material/Drafts";
-import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import emailjs from "@emailjs/browser";
-import { Grid, Input } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Grid,
+  Input,
+  Avatar,
+  Typography,
+  CssBaseline,
+  TextField,
+  Box,
+  Container,
+  Button,
+} from "@mui/material";
 
 const theme = createTheme();
 
 const getFormattedDate = (date) => {
   const day = date.getDate();
   const year = date.getFullYear();
-  const month = date.toLocaleString('default', { month: 'long' });
-  const time = `${date.getHours()}:${date.getMinutes() <= 9 ? '0' + date.getMinutes() : date.getMinutes()}`;
+  const month = date.toLocaleString("default", { month: "long" });
+  const time = `${date.getHours()}:${
+    date.getMinutes() <= 9 ? "0" + date.getMinutes() : date.getMinutes()
+  }`;
 
-  return (`${month} ${day}, ${year} @ ${time}`);
+  return `${month} ${day}, ${year} @ ${time}`;
 };
 
 function isEmpty(obj) {
@@ -64,7 +69,7 @@ function RapidTestForm(props) {
   }, [emailData.result]);
 
   useEffect(() => {
-    if (!isEmpty(props.doctor)){
+    if (!isEmpty(props.doctor)) {
       setEmailData((prevEmailData) => ({
         ...prevEmailData,
         ["email"]: props.doctor.email,
@@ -94,7 +99,11 @@ function RapidTestForm(props) {
       type: "Email",
       user: props.doctor.user,
       subject: "Rapid Test Sent",
-      message: `[${getFormattedDate(new Date())}] ${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent a rapid test result. Please check your email.`
+      message: `[${getFormattedDate(new Date())}] ${
+        props.auth.userData["first_name"]
+      } ${
+        props.auth.userData["last_name"]
+      } has sent a rapid test result. Please check your email.`,
     });
   };
 
@@ -221,7 +230,7 @@ function RapidTestForm(props) {
       </Container>
     </ThemeProvider>
   );
-};
+}
 
 RapidTestForm.propTypes = {
   auth: PropTypes.object.isRequired,
@@ -234,4 +243,8 @@ const mapStateToProps = (state) => ({
   doctor: state.patientReducer.doctor,
 });
 
-export default connect(mapStateToProps, { getDoctor, createMessage, addNotification })(RapidTestForm);
+export default connect(mapStateToProps, {
+  getDoctor,
+  createMessage,
+  addNotification,
+})(RapidTestForm);

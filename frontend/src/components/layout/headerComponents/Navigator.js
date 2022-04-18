@@ -4,30 +4,31 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 // MUI
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import Tooltip from "@mui/material/Tooltip";
-import List from "@mui/material/List";
-import IconButton from "@mui/material/IconButton";
+import {
+  Box,
+  Drawer,
+  CssBaseline,
+  Tooltip,
+  List,
+  IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+
 import MenuIcon from "@mui/icons-material/Menu";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
 import PermMediaOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActual";
 import PublicIcon from "@mui/icons-material/Public";
 import SettingsEthernetIcon from "@mui/icons-material/SettingsEthernet";
-import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
 import TimerIcon from "@mui/icons-material/Timer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PhonelinkSetupIcon from "@mui/icons-material/PhonelinkSetup";
-import HelpIcon from '@mui/icons-material/Help';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
+import HelpIcon from "@mui/icons-material/Help";
+import AnalyticsIcon from "@mui/icons-material/Analytics";
 import SpeedIcon from "@mui/icons-material/Speed";
-import FlagIcon from '@mui/icons-material/Flag';
 
 import {
   backgroundColor,
@@ -38,7 +39,6 @@ import {
 } from "../../../styles/NavigatorStyles";
 
 function Navigator(props) {
-
   let navigate = useNavigate();
 
   const home = props.home === "/" ? "" : props.home;
@@ -46,16 +46,26 @@ function Navigator(props) {
   const common = {
     text: "More",
     children: [
-      { text: "Settings", icon: <SettingsIcon />, onClick: () => navigate(`${home}/settings`), },
-      { text: "Terms & Conditions", icon: <TimerIcon />, onClick: () => navigate(`${home}/terms-conditions`), },
-      { text: "About", icon: <PhonelinkSetupIcon />, onClick: () => navigate(`${home}/about`), },
+      {
+        text: "Settings",
+        icon: <SettingsIcon />,
+        onClick: () => navigate(`${home}/settings`),
+      },
+      {
+        text: "Terms & Conditions",
+        icon: <TimerIcon />,
+        onClick: () => navigate(`${home}/terms-conditions`),
+      },
+      {
+        text: "About",
+        icon: <PhonelinkSetupIcon />,
+        onClick: () => navigate(`${home}/about`),
+      },
     ],
   };
 
   const doctor_pages = [
-    { text: "Home",
-      icon: <HomeIcon />,
-      onClick: () => navigate(`${home}/`)},
+    { text: "Home", icon: <HomeIcon />, onClick: () => navigate(`${home}/`) },
     {
       text: "Patients",
       icon: <DnsRoundedIcon />,
@@ -74,7 +84,9 @@ function Navigator(props) {
   ];
 
   const immigration_officer_pages = [
-    { text: "Home", icon: <HomeIcon />,
+    {
+      text: "Home",
+      icon: <HomeIcon />,
       onClick: () => navigate(`${home}/dashboard`),
     },
     {
@@ -111,10 +123,14 @@ function Navigator(props) {
       icon: <AnalyticsIcon />,
       onClick: () => navigate(`${home}/patient/canada-CovidAPI`),
     },
-    { text: "USA Covid19 Data", icon: <AnalyticsIcon />,
+    {
+      text: "USA Covid19 Data",
+      icon: <AnalyticsIcon />,
       onClick: () => navigate(`${home}/patient/usa-CovidAPI`),
     },
-    { text: "Request Help", icon: <HelpIcon />,
+    {
+      text: "Request Help",
+      icon: <HelpIcon />,
       onClick: () => navigate(`${home}/patient/requestHelp`),
     },
     {
@@ -122,8 +138,11 @@ function Navigator(props) {
       icon: <SpeedIcon />,
       onClick: () => navigate(`${home}/rapid-test-result`),
     },
-    { text: "QR-Code", icon: <SettingsEthernetIcon />,
-    onClick: () => navigate(`${home}/qr-code`), },
+    {
+      text: "QR-Code",
+      icon: <SettingsEthernetIcon />,
+      onClick: () => navigate(`${home}/qr-code`),
+    },
   ];
 
   let categories = [
@@ -134,10 +153,11 @@ function Navigator(props) {
     common,
   ];
 
-  categories[0]["children"] = (
-    props.auth.user.is_doctor ? doctor_pages
-    : (props.auth.user.is_immigration_officer ? immigration_officer_pages
-    : patient_pages));
+  categories[0]["children"] = props.auth.user.is_doctor
+    ? doctor_pages
+    : props.auth.user.is_immigration_officer
+    ? immigration_officer_pages
+    : patient_pages;
 
   const [open, setOpen] = useState(false);
 

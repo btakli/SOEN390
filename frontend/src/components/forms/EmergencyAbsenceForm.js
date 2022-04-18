@@ -3,18 +3,23 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 // MUI
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
-import InputLabel from "@mui/material/InputLabel";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Typography,
+  CssBaseline,
+  InputLabel,
+  TextField,
+  Box,
+  Container,
+  Button,
+} from "@mui/material";
 import emailjs from "@emailjs/browser";
-import { toggleIsAway } from '../../redux/actions/authActions';
+import { toggleIsAway } from "../../redux/actions/authActions";
 
 const theme = createTheme();
 
@@ -24,11 +29,11 @@ function EmergencyAbsenceForm(props) {
   const emptyEmail = {
     admin_email: admin_email,
     message: "",
-    start_date:"",
-    end_date:"",
+    start_date: "",
+    end_date: "",
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,
-    reply_to: props.auth.user.email
+    reply_to: props.auth.user.email,
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -89,7 +94,7 @@ function EmergencyAbsenceForm(props) {
                   alignItems: "center",
                 }}
               >
-                <Typography component="h1" variant="h5" sx={{pb : 5}}>
+                <Typography component="h1" variant="h5" sx={{ pb: 5 }}>
                   Select Absence Date
                 </Typography>
 
@@ -103,11 +108,9 @@ function EmergencyAbsenceForm(props) {
                   <TextField name="reply_to" value={emailData.reply_to} />
                   <TextField name="admin_email" value={emailData.admin_email} />
                 </Box>
-                <InputLabel id="patient-label">
-                  StartDate
-                </InputLabel>
+                <InputLabel id="patient-label">StartDate</InputLabel>
                 <TextField
-                  sx={{pb : 5}}
+                  sx={{ pb: 5 }}
                   id="start_date"
                   name="start_date"
                   label="Start Date"
@@ -120,9 +123,9 @@ function EmergencyAbsenceForm(props) {
                   value={emailData.start_date}
                   onChange={onChange}
                 />
-                <InputLabel id="reason-label" >End Date</InputLabel>
+                <InputLabel id="reason-label">End Date</InputLabel>
                 <TextField
-                  sx={{pb : 5}}
+                  sx={{ pb: 5 }}
                   id="end_date"
                   name="end_date"
                   label="End Date"
@@ -160,7 +163,7 @@ function EmergencyAbsenceForm(props) {
       </Dialog>
     </ThemeProvider>
   );
-};
+}
 
 EmergencyAbsenceForm.propTypes = {
   auth: PropTypes.object.isRequired,
@@ -170,4 +173,4 @@ const mapStateToProps = (state) => ({
   auth: state.authReducer,
 });
 
-export default connect(mapStateToProps, {toggleIsAway})(EmergencyAbsenceForm);
+export default connect(mapStateToProps, { toggleIsAway })(EmergencyAbsenceForm);

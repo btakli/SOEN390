@@ -2,34 +2,41 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import StatusTable from "../tables/StatusTable";
-import { getPatientLatestStatus } from '../../redux/actions/statusActions';
+import { getPatientLatestStatus } from "../../redux/actions/statusActions";
 import { createMessage } from "../../redux/actions/messageActions";
 import { addNotification } from "../../redux/actions/notifActions";
 
 // MUI
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  CssBaseline,
+  TextField,
+  Box,
+  Container,
+  Button,
+} from "@mui/material";
 import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
 
-function currentPatient(id, patients){
-  return patients.find(({ user }) => id === user );
+function currentPatient(id, patients) {
+  return patients.find(({ user }) => id === user);
 }
 
 const getFormattedDate = (date) => {
   const day = date.getDate();
   const year = date.getFullYear();
-  const month = date.toLocaleString('default', { month: 'long' });
-  const time = `${date.getHours()}:${date.getMinutes() <= 9 ? '0' + date.getMinutes() : date.getMinutes()}`;
+  const month = date.toLocaleString("default", { month: "long" });
+  const time = `${date.getHours()}:${
+    date.getMinutes() <= 9 ? "0" + date.getMinutes() : date.getMinutes()
+  }`;
 
-  return (`${month} ${day}, ${year} @ ${time}`);
+  return `${month} ${day}, ${year} @ ${time}`;
 };
 
 function isEmpty(obj) {
@@ -49,9 +56,11 @@ function StatusViewRequestForm(props) {
     urgency: 8,
     email: "",
     message: "",
-    sender_name: `${(props.auth.user.is_doctor)? "Dr.":"Officer"} ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
+    sender_name: `${props.auth.user.is_doctor ? "Dr." : "Officer"} ${
+      props.auth.userData.first_name
+    } ${props.auth.userData.last_name}`,
     sender_id: props.auth.userData.user,
-    reply_to: props.auth.user.email
+    reply_to: props.auth.user.email,
   };
 
   const [emailData, setEmailData] = useState(defaultStatusRequest);
@@ -59,18 +68,20 @@ function StatusViewRequestForm(props) {
   const [patient, setPatient] = useState({});
 
   useEffect(() => {
-    if(patientId && patientId != 0){
+    if (patientId && patientId != 0) {
       props.getPatientLatestStatus(patientId);
       setPatient(currentPatient(patientId, props.patients));
     }
   }, [patientId]);
 
   useEffect(() => {
-    if (!isEmpty(patient)){
-      setEmailData(prevEmailData => ({
+    if (!isEmpty(patient)) {
+      setEmailData((prevEmailData) => ({
         ...prevEmailData,
         ["email"]: patient.email,
-        ["message"]: `Hi ${patient.first_name}, this is your ${(props.auth.user.is_doctor)? "Doctor":"Officer"}, please update your status!`
+        ["message"]: `Hi ${patient.first_name}, this is your ${
+          props.auth.user.is_doctor ? "Doctor" : "Officer"
+        }, please update your status!`,
       }));
     }
   }, [patient]);
@@ -95,9 +106,13 @@ function StatusViewRequestForm(props) {
       type: "Email",
       user: patient.user,
       subject: "Status Request",
-      message: `[${getFormattedDate(new Date())}] ${(props.auth.user.is_doctor)? "Dr. ":"Officer "}${props.auth.userData["first_name"]} ${props.auth.userData["last_name"]} has sent you a request. Please check your email.`
+      message: `[${getFormattedDate(new Date())}] ${
+        props.auth.user.is_doctor ? "Dr. " : "Officer "
+      }${props.auth.userData["first_name"]} ${
+        props.auth.userData["last_name"]
+      } has sent you a request. Please check your email.`,
     });
-    
+
     onClose();
   };
 
@@ -122,7 +137,7 @@ function StatusViewRequestForm(props) {
         </DialogTitle>
         <DialogContent>
           <Box component="form" onSubmit={sendStatusUpdateEmail}>
-            <Container component="main" >
+            <Container component="main">
               <CssBaseline />
               <StatusTable />
               <Box
@@ -135,30 +150,12 @@ function StatusViewRequestForm(props) {
               >
                 {/* Must provide fields in form */}
                 <Box sx={{ display: "none" }}>
-                  <TextField
-                    name="sender_name"
-                    value={emailData.sender_name}
-                  />
-                  <TextField
-                    name="sender_id"
-                    value={emailData.sender_id}
-                  />
-                  <TextField
-                    name="reply_to"
-                    value={emailData.reply_to}
-                  />
-                  <TextField
-                    name="subject"
-                    value={emailData.subject}
-                  />
-                  <TextField
-                    name="email"
-                    value={emailData.email}
-                  />
-                  <TextField
-                    name="message"
-                    value={emailData.message}
-                  />
+                  <TextField name="sender_name" value={emailData.sender_name} />
+                  <TextField name="sender_id" value={emailData.sender_id} />
+                  <TextField name="reply_to" value={emailData.reply_to} />
+                  <TextField name="subject" value={emailData.subject} />
+                  <TextField name="email" value={emailData.email} />
+                  <TextField name="message" value={emailData.message} />
                 </Box>
                 <Button
                   type="submit"
@@ -175,16 +172,20 @@ function StatusViewRequestForm(props) {
       </Dialog>
     </ThemeProvider>
   );
-};
+}
 
 StatusViewRequestForm.propTypes = {
   auth: PropTypes.object.isRequired,
-  patients: PropTypes.array.isRequired
+  patients: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
-  patients: state.patientReducer.patients
+  patients: state.patientReducer.patients,
 });
 
-export default connect(mapStateToProps, { getPatientLatestStatus, createMessage, addNotification })(StatusViewRequestForm);
+export default connect(mapStateToProps, {
+  getPatientLatestStatus,
+  createMessage,
+  addNotification,
+})(StatusViewRequestForm);

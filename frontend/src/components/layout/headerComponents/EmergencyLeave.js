@@ -4,39 +4,37 @@ import { connect } from "react-redux";
 import EmergencyAbsenceForm from "../../forms/EmergencyAbsenceForm";
 
 // MUI
-import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
+import { Tooltip, Button } from "@mui/material";
 
 function EmergencyLeave(props) {
-
   const [open, setOpen] = useState(false);
 
   const handleDialogOpen = () => {
-      setOpen(true);
+    setOpen(true);
   };
 
   const handleDialogClose = () => {
-      setOpen(false);
+    setOpen(false);
   };
 
   if (props.auth.user.is_doctor && !props.auth.userData.is_away) {
     return (
       <Fragment>
-
-        <EmergencyAbsenceForm open={open} onClose={handleDialogClose} admin_email={props.admin_email}/>
+        <EmergencyAbsenceForm
+          open={open}
+          onClose={handleDialogClose}
+          admin_email={props.admin_email}
+        />
 
         <Tooltip title="Emergency">
-
-        <Button
-          variant="contained"
-          onClick={handleDialogOpen}
-          style={{ backgroundColor: "#DC143C" }}
-        >
+          <Button
+            variant="contained"
+            onClick={handleDialogOpen}
+            style={{ backgroundColor: "#DC143C" }}
+          >
             Emergency Leave
           </Button>
-
         </Tooltip>
-        
       </Fragment>
     );
   } else {

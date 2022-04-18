@@ -4,17 +4,12 @@ import PropTypes from "prop-types";
 import { addAddress } from "../../redux/actions/addressActions";
 
 // MUI
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Button, TextField, Grid, Box, Typography } from "@mui/material";
 
 const theme = createTheme();
 
 function AddressForm(props) {
-
   const emptyForm = {
     name: "",
     streetNumber: "",
@@ -142,7 +137,7 @@ function AddressForm(props) {
 }
 
 AddressForm.propTypes = {
-  addAddress: PropTypes.func.isRequired
+  addAddress: PropTypes.func.isRequired,
 };
 
 export default connect(null, { addAddress })(AddressForm);

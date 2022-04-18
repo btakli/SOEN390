@@ -1,29 +1,16 @@
-import { React } from "react";
-import {
-    Box,
-    Typography,
-    Link
-} from "@mui/material";
+import React from "react";
+import Copyright from "../../components/layout/Copyright";
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center">
-        {"Copyright © "}
-        <Link color="inherit" href="https://youtu.be/dQw4w9WgXcQ">
-          Your Website
-        </Link>{" "}
-        {new Date().getFullYear()}.
-      </Typography>
-    );
-  }
+// MUI
+import { Box, Divider } from "@mui/material";
 
-function Footer(){
-
+function Footer() {
   return (
-    <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
-        <Copyright />
+    <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }} >
+      <Divider sx={{"width": "100%", mb: 2}} />
+      <Copyright />
     </Box>
-  )
+  );
 }
 
 export default Footer;

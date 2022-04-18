@@ -61,7 +61,7 @@ function App() {
               <Route path="rapid-test-result" element={<RapidTest />} />
               <Route path="qr-code" element={<QRCodeDisplay />} />
               <Route path="patient/appointments" element={<PatientAppointment />} />
-              
+
               <Route path="patient/canada-CovidAPI" element={<CANCovidAPI />} />
               <Route path="patient/usa-CovidAPI" element={<USACovidAPI />} />
               <Route path="patient/requestHelp" element={<RequestHelp />} />
@@ -84,7 +84,7 @@ function App() {
             <Route path="doctor/signup" element={<DoctorSignUp redirect={"/pre/login"} />} />
             <Route path="immigration-officer/signup" element={<ImmigrationOfficerSignUp redirect={"/pre/login"} />} />
           </Route>
-          
+
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </Router>

@@ -5,20 +5,25 @@ import { connect } from "react-redux";
 import { createMessage } from "../../redux/actions/messageActions";
 
 // MUI
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
 import ReportIcon from "@mui/icons-material/Report";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import CssBaseline from "@mui/material/CssBaseline";
-import InputLabel from "@mui/material/InputLabel";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Avatar,
+  Typography,
+  CssBaseline,
+  InputLabel,
+  TextField,
+  Box,
+  Select,
+  MenuItem,
+  Container,
+  Button,
+} from "@mui/material";
 import emailjs from "@emailjs/browser";
 
 const theme = createTheme();
@@ -33,7 +38,7 @@ function DoctorReportForm(props) {
     reason: "",
     doctor_name: `Dr. ${props.auth.userData.first_name} ${props.auth.userData.last_name}`,
     doctor_id: props.auth.userData.user,
-    reply_to: props.auth.user.email
+    reply_to: props.auth.user.email,
   };
 
   const [emailData, setEmailData] = useState(emptyEmail);
@@ -103,26 +108,30 @@ function DoctorReportForm(props) {
                 <Typography component="h1" variant="h5">
                   Report Form
                 </Typography>
-                {(props.patients.length == 0) ?
+                {props.patients.length == 0 ? (
                   <Fragment>
-                    <Typography variant="h3">
-                      No Patients!
-                    </Typography>
+                    <Typography variant="h3">No Patients!</Typography>
                     <Typography variant="h4">
                       Please wait to be assigned patients.
                     </Typography>
                   </Fragment>
-                  :
+                ) : (
                   <Fragment>
                     <Box sx={{ display: "none" }}>
-                      <TextField name="doctor_name" value={emailData.doctor_name} />
+                      <TextField
+                        name="doctor_name"
+                        value={emailData.doctor_name}
+                      />
                       <TextField name="doctor_id" value={emailData.doctor_id} />
                       <TextField
                         name="doctor_email"
                         value={emailData.doctor_email}
                       />
                       <TextField name="reply_to" value={emailData.reply_to} />
-                      <TextField name="admin_email" value={emailData.admin_email} />
+                      <TextField
+                        name="admin_email"
+                        value={emailData.admin_email}
+                      />
                     </Box>
                     <InputLabel id="patient-label">
                       Patient Involved in Incident
@@ -138,7 +147,10 @@ function DoctorReportForm(props) {
                       sx={{ mt: 0, mb: 3 }}
                     >
                       {props.patients.map((patient, i) => (
-                        <MenuItem key={i} value={`${patient.first_name} ${patient.last_name} (${patient.user})`}>
+                        <MenuItem
+                          key={i}
+                          value={`${patient.first_name} ${patient.last_name} (${patient.user})`}
+                        >
                           {`${patient.first_name} ${patient.last_name}`}
                         </MenuItem>
                       ))}
@@ -156,7 +168,9 @@ function DoctorReportForm(props) {
                     >
                       <MenuItem value={"Misconduct"}>Misconduct</MenuItem>
                       <MenuItem value={"Harassment"}>Harassment</MenuItem>
-                      <MenuItem value={"Professionalism"}>Professionalism</MenuItem>
+                      <MenuItem value={"Professionalism"}>
+                        Professionalism
+                      </MenuItem>
                       <MenuItem value={"Drug Abuse"}>Drug Abuse</MenuItem>
                       <MenuItem value={"Defamation"}>Defamation</MenuItem>
                       <MenuItem value={"Misc"}>Other</MenuItem>
@@ -181,7 +195,7 @@ function DoctorReportForm(props) {
                       File Report With Administrator
                     </Button>
                   </Fragment>
-                }
+                )}
               </Box>
             </Container>
           </Box>
@@ -189,16 +203,16 @@ function DoctorReportForm(props) {
       </Dialog>
     </ThemeProvider>
   );
-};
+}
 
 DoctorReportForm.propTypes = {
   auth: PropTypes.object.isRequired,
-  patients: PropTypes.array.isRequired
+  patients: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.authReducer,
-  patients: state.patientReducer.patients
+  patients: state.patientReducer.patients,
 });
 
 export default connect(mapStateToProps, { createMessage })(DoctorReportForm);
