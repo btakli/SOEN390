@@ -6,8 +6,10 @@ class TestSetUp(APITestCase):
     def setUp(self):
         self.register_doctor_url = reverse("accounts:register_doctor_test")
         self.register_patient_url = reverse("accounts:register_patient_test")
+        self.register_immigration_officer_url = reverse("accounts:register_immigration_officer_test")
         self.login_doctor_url = reverse("accounts:login_doctor")
         self.login_patient_url = reverse("accounts:login_patient")
+        self.login_immigration_officer_url = reverse("accounts:login_immigration_officer")
         self.users_doctor_url = reverse("accounts:users_doctor")
         self.users_patient_url = reverse("accounts:users_patient")
         self.logout_url = reverse("accounts:knox_logout")
@@ -19,7 +21,6 @@ class TestSetUp(APITestCase):
             'email': 'a@gmail.com',
             'password': '12345678'
         }
-
         self.correct_user_data = {
             'email': self.fake.email(),
             'password': self.fake.password()
@@ -103,6 +104,15 @@ class TestSetUp(APITestCase):
         self.no_password_patient_data = {
             'first_name': self.fake.first_name(),
             'user': self.no_password_user_data
+        }
+         # IMMIGRATION OFFICER DATA
+
+        self.correct_immigration_officer_data = {
+            'first_name': self.fake.first_name(),
+            'user': {
+               'email': self.fake.email(),
+                'password': self.fake.password() 
+            }
         }
 
         return super().setUp()

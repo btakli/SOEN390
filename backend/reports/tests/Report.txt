@@ -1,4 +1,4 @@
-Found 42 test(s).
+Found 68 test(s).
 Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
 Operations to perform:
   Synchronize unmigrated apps: corsheaders, messages, rest_framework, staticfiles
@@ -26,11 +26,7 @@ Running migrations:
   Applying admin.0002_logentry_remove_auto_add... OK
   Applying admin.0003_logentry_add_action_flag_choices... OK
   Applying companion_api.0001_initial... OK
-  Applying companion_api.0002_status_caugh_status_chills_status_diffbreathing_and_more... OK
-  Applying companion_api.0003_remove_status_caugh_alter_status_date... OK
-  Applying companion_api.0004_alter_status_options_notification... OK
-  Applying companion_api.0005_alter_notification_user... OK
-  Applying companion_api.0006_alter_notification_user... OK
+  Applying companion_api.0002_rename_date_appointment_start_appointment_end... OK
   Applying knox.0001_initial... OK
   Applying knox.0002_auto_20150916_1425... OK
   Applying knox.0003_auto_20150916_1526... OK
@@ -41,6 +37,12 @@ Running migrations:
   Applying knox.0008_remove_authtoken_salt... OK
   Applying sessions.0001_initial... OK
 System check identified no issues (0 silenced).
+test_activate_email_view (backend.tests.test_accounts.test_approval.TestApprovalViews)
+Approval: Testing activate email view to ensure a patient's email can be verified ... ok
+test_approve_doctor_view (backend.tests.test_accounts.test_approval.TestApprovalViews)
+Approval: Testing approve doctor view ... ok
+test_approve_immigration_officer_view (backend.tests.test_accounts.test_approval.TestApprovalViews)
+Approval: Testing approve immigration officer view ... ok
 test_doctor_can_login_when_registered (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
 Login: Doctor can login once registered ... ok
 test_doctor_can_logout_with_valid_token_authorized (backend.tests.test_accounts.test_doctor_views.TestDoctorViews)
@@ -97,12 +99,44 @@ test_return_patient_no_token_unauthorized (backend.tests.test_accounts.test_pati
 User View: If no token for the Patient, we are unauthorized ... ok
 test_return_patient_valid_token_authorized (backend.tests.test_accounts.test_patient_views.TestPatientViews)
 User View: Return a valid token for the Patient when authorized ... ok
+test_patient_can_get_all_addresses_when_n_address (backend.tests.test_companion_api.test_address_views.TestAddressViews)
+Address: Patient can get all their availabilities when there is n ... ok
+test_patient_can_get_all_addresses_when_one_address (backend.tests.test_companion_api.test_address_views.TestAddressViews)
+Address: Patient can get all their addresses when there is one ... ok
+test_patient_cannot_get_addresses_when_no_address (backend.tests.test_companion_api.test_address_views.TestAddressViews)
+Address: Patient cannot get their addresses when there are none ... ok
+test_doctor_can_get_all_appointments_when_n_appointment (backend.tests.test_companion_api.test_appointment_views.TestAppointmentViews)
+Appointment: Doctor can get all their appointments when there is n ... ok
+test_doctor_can_get_all_appointments_when_one_appointment (backend.tests.test_companion_api.test_appointment_views.TestAppointmentViews)
+Appointment: Doctor can get all their appointments when there is one ... ok
+test_doctor_cannot_get_appointments_when_no_appointment (backend.tests.test_companion_api.test_appointment_views.TestAppointmentViews)
+Appointment: Doctor cannot get their appointments when there are none ... ok
+test_patient_can_get_all_appointments_when_n_appointment (backend.tests.test_companion_api.test_appointment_views.TestAppointmentViews)
+Appointment: Patient can get all their appointments when there is n ... ok
+test_patient_can_get_all_appointments_when_one_appointment (backend.tests.test_companion_api.test_appointment_views.TestAppointmentViews)
+Appointment: Patient can get all their appointments when there is one ... ok
+test_patient_cannot_get_appointments_when_no_appointment (backend.tests.test_companion_api.test_appointment_views.TestAppointmentViews)
+Appointment: Patient cannot get their appointments when there are none ... ok
+test_doctor_can_get_all_availabilities_when_n_availability (backend.tests.test_companion_api.test_availability_views.TestAvailabilityViews)
+Availability: Doctor can get all their availabilities when there is n ... ok
+test_doctor_can_get_all_availabilities_when_one_availability (backend.tests.test_companion_api.test_availability_views.TestAvailabilityViews)
+Availability: Doctor can get all their availabilities when there is one ... ok
+test_doctor_cannot_get_availabilities_when_no_availability (backend.tests.test_companion_api.test_availability_views.TestAvailabilityViews)
+Availability: Doctor cannot get their availabilities when there are none ... ok
 test_doctor_can_get_all_patients_when_n_patients (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
 Doctor_Patient: Doctor can get their patients when there are n ... ok
 test_doctor_can_get_all_patients_when_no_patients (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
 Doctor_Patient: Doctor can get their patients when there are none ... ok
 test_doctor_can_get_all_patients_when_one_patient (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
 Doctor_Patient: Doctor can get their patients when there is one ... ok
+test_patient_can_get_their_doctor (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
+Doctor_Patient: Patient can get their doctor ... ok
+test_immigrationofficer_can_get_all_immigrants_when_n_immigrants (backend.tests.test_companion_api.test_immigrationOfficer_patient_views.TestImmigrationOfficerImmigrantViews)
+ImmigrationOfficer_Immigrant: Immigration Officer can get their immigrants when there are n ... ok
+test_immigrationofficer_can_get_all_immigrants_when_no_immigrants (backend.tests.test_companion_api.test_immigrationOfficer_patient_views.TestImmigrationOfficerImmigrantViews)
+ImmigrationOfficer_Immigrant: Immigration Officer can get their immigrants when there are none ... ok
+test_immigrationofficer_can_get_all_immigrants_when_one_immigrant (backend.tests.test_companion_api.test_immigrationOfficer_patient_views.TestImmigrationOfficerImmigrantViews)
+ImmigrationOfficer_Immigrant: Immigration Officer can get their immigrants when there is one ... ok
 test_person_attribute (backend.tests.test_companion_api.test_models.ModelTestCases)
 Check that the people are properly stored in the database ... ok
 test_superuser_can_be_created (backend.tests.test_companion_api.test_models.ModelTestCases)
@@ -113,6 +147,14 @@ test_superuser_cant_be_created_with_is_superuser_false (backend.tests.test_compa
 Admin: Ensure superuser (Admin) cannot be created when is_superuser is set to false ... ok
 test_superuser_cant_be_created_without_email (backend.tests.test_companion_api.test_models.ModelTestCases)
 Admin: Ensure superuser (Admin) cannot be created without an email ... ok
+test_patient_can_get_all_notifications_when_n_notification (backend.tests.test_companion_api.test_notification_views.TestNotificationViews)
+Notification: Patient can get all their availabilities when there is n ... ok
+test_patient_can_get_all_notifications_when_one_notification (backend.tests.test_companion_api.test_notification_views.TestNotificationViews)
+Notification: Patient can get all their notifications when there is one ... ok
+test_patient_cannot_get_notifications_when_no_notification (backend.tests.test_companion_api.test_notification_views.TestNotificationViews)
+Notification: Patient cannot get their notifications when there are none ... ok
+test_PatientsWithMatchingAddressView_queryset (backend.tests.test_companion_api.test_queryset.TestQuerySet)
+query_set: Testing query set of PatientsWithMatchingAddressView is successfully called when patient is authenticated ... ok
 test_doctor_can_get_patient_latest_status_when_n_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
 Status: Doctor can get their Patient latest status when there is n ... ok
 test_doctor_can_get_patient_latest_status_when_no_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
@@ -125,9 +167,15 @@ test_patient_can_get_all_status_when_no_status (backend.tests.test_companion_api
 Status: Patient can get their status when there are none ... ok
 test_patient_can_get_all_status_when_one_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
 Status: Patient can get all their status when there is one ... ok
+test_doctor_can_toggle_is_away (backend.tests.test_companion_api.test_toggle_views.TestToggleViews)
+Toggle Doctor Is Away: Doctor can toggle if they are away ... ok
+test_doctor_can_toggle_patient_priority (backend.tests.test_companion_api.test_toggle_views.TestToggleViews)
+Toggle Patient Priority: Doctor can toggle their patient priority ... ok
+test_immigration_officer_can_toggle_immigrant_priority (backend.tests.test_companion_api.test_toggle_views.TestToggleViews)
+Toggle Immigration Priority: Immigration Officer can toggle their immigrant priority ... ok
 
 ----------------------------------------------------------------------
-Ran 42 tests in 4.214s
+Ran 68 tests in 25.096s
 
 OK
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
