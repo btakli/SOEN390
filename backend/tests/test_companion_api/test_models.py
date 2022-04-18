@@ -1,12 +1,13 @@
-from django.test import TestCase
 from companion_api.models import Person
-from accounts.models import UserManager, User
+from accounts.models import User
 from faker import Faker
+from .test_setup import TestSetUp
+
 
 import datetime
 
 
-class ModelTestCases(TestCase):
+class ModelTestCases(TestSetUp):
     """This is a test case which tests that the attributes of the Person Model are properly set up."""
 
     def setUp(self):
@@ -61,5 +62,4 @@ class ModelTestCases(TestCase):
         email = "admin@email.com"
         #Ensure exception is thrown
         with self.assertRaises(ValueError):
-            User.objects.create_superuser(email,self.fake.password(),is_superuser=False)   
-
+            User.objects.create_superuser(email,self.fake.password(),is_superuser=False)

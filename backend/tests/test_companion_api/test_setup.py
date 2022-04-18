@@ -183,7 +183,7 @@ class TestSetUp(APITestCase):
             "headache": False,
             "stomachPain": False
         }
-
+        
         # USER DATA
 
         self.correct_user_data = {

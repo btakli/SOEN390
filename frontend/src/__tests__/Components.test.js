@@ -5,8 +5,26 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 
+import PriorityToggle from "../components/PriorityToggle";
+// import PrivateRoute from "../components/PrivateRoute";
 import Spinner from "../components/Spinner";
 import StatusViewRequestForm from "../components/forms/StatusViewRequestForm";
+
+test("renders without error", () => {
+  render(
+    <Provider store={store}>
+      <PriorityToggle />
+    </Provider>
+  );
+});
+
+// test("renders without error", () => {
+//   render(
+//     <Provider store={store}>
+//       <PrivateRoute />
+//     </Provider>
+//   );
+// });
 
 test("renders without error", () => {
   render(
