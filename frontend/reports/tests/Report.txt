@@ -2,10 +2,10 @@
 > frontend@0.1.0 test
 > react-scripts test "--coverage" "--watchAll=false"
 
-PASS src/__tests__/Graphs.test.js (8.883 s)
-PASS src/__tests__/Components.test.js (9.081 s)
-PASS src/__tests__/Headers.test.js (9.139 s)
-PASS src/__tests__/Tables.test.js (9.688 s)
+PASS src/__tests__/Graphs.test.js (8.717 s)
+PASS src/__tests__/Components.test.js (9.057 s)
+PASS src/__tests__/Headers.test.js (9.102 s)
+PASS src/__tests__/Tables.test.js (9.705 s)
   ● Console
 
     console.error
@@ -94,7 +94,7 @@ PASS src/__tests__/Tables.test.js (9.688 s)
       at HTMLUnknownElement.callCallback (E:\Documents (Data Drive)../../../../../../../Concordia/Semester 6/SOEN 390 Software Engineering Team Design Project/Repo/SOEN390/frontend/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
       at HTMLUnknownElement.callTheUserObjectsOperation (E:\Documents (Data Drive)../../../../../../../Concordia/Semester 6/SOEN 390 Software Engineering Team Design Project/Repo/SOEN390/frontend/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
 
-PASS src/__tests__/Home.test.js (9.976 s)
+PASS src/__tests__/Home.test.js (10.138 s)
   ● Console
 
     console.error
@@ -730,7 +730,8 @@ FAIL src/__tests__/Refactor.test.js
       at Resolver.resolveModule (E:\Documents (Data Drive)../../../../../../../Concordia/Semester 6/SOEN 390 Software Engineering Team Design Project/Repo/SOEN390/frontend/node_modules/jest-resolve/build/resolver.js:324:11)
       at Object.<anonymous> (E:\Documents (Data Drive)../../../../../../../Concordia/Semester 6/SOEN 390 Software Engineering Team Design Project/Repo/SOEN390/frontend/src/__tests__/Refactor.test.js:11:1)
 
-PASS src/__tests__/Forms.test.js (10.21 s)
+PASS src/__tests__/Auth.test.js (10.533 s)
+PASS src/__tests__/Forms.test.js (10.525 s)
   ● Console
 
     console.error
@@ -1010,7 +1011,6 @@ FAIL src/__tests__/Pages.test.js
       at Resolver.resolveModule (E:\Documents (Data Drive)../../../../../../../Concordia/Semester 6/SOEN 390 Software Engineering Team Design Project/Repo/SOEN390/frontend/node_modules/jest-resolve/build/resolver.js:324:11)
       at Object.<anonymous> (E:\Documents (Data Drive)../../../../../../../Concordia/Semester 6/SOEN 390 Software Engineering Team Design Project/Repo/SOEN390/frontend/src/__tests__/Pages.test.js:10:1)
 
-PASS src/__tests__/Auth.test.js (10.462 s)
 FAIL src/__tests__/Alerts.test.js
   ● Test suite failed to run
 
@@ -1141,5 +1141,5 @@ All files                               |   19.65 |     3.57 |   17.02 |   19.51
 Test Suites: 4 failed, 7 passed, 11 total
 Tests:       24 passed, 24 total
 Snapshots:   0 total
-Time:        17.122 s
+Time:        17.349 s
 Ran all test suites.

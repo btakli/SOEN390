@@ -1,4 +1,4 @@
-Found 68 test(s).
+Found 70 test(s).
 Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
 Operations to perform:
   Synchronize unmigrated apps: corsheaders, messages, rest_framework, staticfiles
@@ -129,6 +129,8 @@ test_doctor_can_get_all_patients_when_no_patients (backend.tests.test_companion_
 Doctor_Patient: Doctor can get their patients when there are none ... ok
 test_doctor_can_get_all_patients_when_one_patient (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
 Doctor_Patient: Doctor can get their patients when there is one ... ok
+test_doctor_can_get_all_patients_when_one_temp_patient (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
+Doctor_Patient: Doctor can get their temp patients when there is one ... ok
 test_patient_can_get_their_doctor (backend.tests.test_companion_api.test_doctor_patient_views.TestDoctorPatientViews)
 Doctor_Patient: Patient can get their doctor ... ok
 test_immigrationofficer_can_get_all_immigrants_when_n_immigrants (backend.tests.test_companion_api.test_immigrationOfficer_patient_views.TestImmigrationOfficerImmigrantViews)
@@ -139,6 +141,8 @@ test_immigrationofficer_can_get_all_immigrants_when_one_immigrant (backend.tests
 ImmigrationOfficer_Immigrant: Immigration Officer can get their immigrants when there is one ... ok
 test_person_attribute (backend.tests.test_companion_api.test_models.ModelTestCases)
 Check that the people are properly stored in the database ... ok
+test_superuser_can_access_ReassignPatientsToTempDoctorView (backend.tests.test_companion_api.test_models.ModelTestCases)
+Admin: Ensure superuser (Admin) can access ReassignPatientsToTempDoctorView ... ok
 test_superuser_can_be_created (backend.tests.test_companion_api.test_models.ModelTestCases)
 Admin: Ensure superuser (Admin) can properly be created with valid email and a password ... ok
 test_superuser_cant_be_created_with_is_staff_false (backend.tests.test_companion_api.test_models.ModelTestCases)
@@ -168,14 +172,23 @@ Status: Patient can get their status when there are none ... ok
 test_patient_can_get_all_status_when_one_status (backend.tests.test_companion_api.test_status_views.TestStatusViews)
 Status: Patient can get all their status when there is one ... ok
 test_doctor_can_toggle_is_away (backend.tests.test_companion_api.test_toggle_views.TestToggleViews)
-Toggle Doctor Is Away: Doctor can toggle if they are away ... ok
+Toggle Doctor Is Away: Doctor can toggle if they are away ... ERROR
 test_doctor_can_toggle_patient_priority (backend.tests.test_companion_api.test_toggle_views.TestToggleViews)
 Toggle Patient Priority: Doctor can toggle their patient priority ... ok
 test_immigration_officer_can_toggle_immigrant_priority (backend.tests.test_companion_api.test_toggle_views.TestToggleViews)
 Toggle Immigration Priority: Immigration Officer can toggle their immigrant priority ... ok
 
+======================================================================
+ERROR: test_doctor_can_toggle_is_away (backend.tests.test_companion_api.test_toggle_views.TestToggleViews)
+Toggle Doctor Is Away: Doctor can toggle if they are away
 ----------------------------------------------------------------------
-Ran 68 tests in 25.096s
+Traceback (most recent call last):
+  File "E:\Documents (Data Drive)\Concordia\Semester 6\SOEN 390 Software Engineering Team Design Project\Repo\SOEN390\backend\tests\test_companion_api\test_toggle_views.py", line 60, in test_doctor_can_toggle_is_away
+    Patient.objects.get(user_id=patient_pk).doctor.add(Doctor.objects.get(user_id=doctor_pk))
+AttributeError: 'Doctor' object has no attribute 'add'
 
-OK
+----------------------------------------------------------------------
+Ran 70 tests in 26.078s
+
+FAILED (errors=1)
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

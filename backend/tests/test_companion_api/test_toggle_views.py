@@ -52,6 +52,7 @@ class TestToggleViews(TestSetUp):
 
         res = self.client.post(self.register_doctor_url, self.correct_doctor_data, format='json')
         doctor_pk = res.data['user']['id']
+
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + res.data['token'])
 
         is_away_before = Doctor.objects.get(user_id=doctor_pk).is_away
@@ -62,5 +63,14 @@ class TestToggleViews(TestSetUp):
         
         self.assertEqual(res.status_code, 200)
         self.assertNotEqual(is_away_before, is_away_after)
+        
+        #Now toggling other way
+        is_away_before = Doctor.objects.get(user_id=doctor_pk).is_away
 
+        res = self.client.put(self.toggle_doctor_is_away_url)
+
+        is_away_after = Doctor.objects.get(user_id=doctor_pk).is_away
+
+        self.assertEqual(res.status_code, 200)
+        self.assertNotEqual(is_away_before, is_away_after)
     
