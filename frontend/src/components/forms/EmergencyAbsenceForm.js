@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 // MUI
 import CloseIcon from "@mui/icons-material/Close";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Dialog,
   DialogContent,
