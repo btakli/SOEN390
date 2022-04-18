@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../../components/layout/Header";
-import Copyright from "../../components/layout/Copyright";
+import Footer from "../../components/layout/Footer";
 import MainAlerts from "../../components/layout/MainAlerts";
 
 // MUI
@@ -20,9 +20,7 @@ function Home(props) {
         >
           <Outlet />
         </Box>
-        <Box component="footer" sx={{ p: 2, bgcolor: "#eaeff1" }}>
-          <Copyright />
-        </Box>
+        <Footer />
       </Box>
     </Box>
   );
