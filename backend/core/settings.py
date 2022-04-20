@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-j^wina_7ln97309ds%hm^y8dwurhqz_y7iv0krmca*r6(t&tan
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.1.53", "covidtracker.duckdns.org"]
 
 
 # Application definition
